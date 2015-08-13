@@ -1,0 +1,39 @@
+.header > .navbar {
+    margin-bottom: 0px;
+}
+
+.header .col-xs-4{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.sgpfc-jumbotron{
+   background-color: steelblue;
+}
+
+.sgpfc-jumbotron h1 {
+    color: #ffffff;
+    font-size: 50px;
+    padding: 0px;
+    margin-left: 30px;
+}
+
+.header img{
+    height: 60px;
+}
+
+.sgpfc-header-links-left{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.sgpfc-header-links-right{
+    font-size: 16px;
+    font-weight: bold;
+    float: right;
+    width: 126px;
+}
+
+.header .nav li{
+    margin-top: 10px;
+}
