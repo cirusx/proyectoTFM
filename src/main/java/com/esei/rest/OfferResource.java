@@ -70,12 +70,12 @@ public class OfferResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createOffer(Offer offer){
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        String out;
+        
         try {
             em.getTransaction().begin();
             em.persist(offer);
             em.getTransaction().commit();
-            out = "Oferta creada correctamente";
+           
         }finally{
         	em.close();
         }

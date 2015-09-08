@@ -1,34 +1,35 @@
 (function(){
-	var app = angular.module('sgpfc', []);
-	
+	var app = angular.module('sgpfc', ['smart-table']);
+
 //	'ngResource'
-	
+
 	app.controller('sgpfcCtrl', function($scope, $http){
-		$scope.getOffers = function() {
+		/*$scope.getOffers = function() {
 			
-			console.log("ok");
-			$http.get('http://localhost:8080/proyectoTFM/rest/offers').succes(function(offerList) {
-					console.log(offerList);
-					$scope.offers= offerList;
-				})
-				.
-				error(function(data, status, heaers, config) {
-					
-				});
-		}
+			$http({
+				method: 'GET',
+				url: 'http://localhost:8080/proyectoTFM/rest/offers',
+			});
 		
-$scope.createOffer = function() {
-			
-			console.log("ok");
-			
-			$http.post('http://localhost:8080/proyectoTFM/rest/offers/create',$scope.offer).succes(function(offer) {
-			console.log(offer);
-					
-				})
-				.
-				error(function(data, status, heaers, config) {
-					
-				});
+		}*/
+		$scope.getOffers = function() {
+			  $http.get('http://localhost:8080/proyectoTFM/rest/offers').then(function(offers) {
+			    $scope.offerList = offers.data;
+			  }, function(err) {
+			    console.error('ERR', err);
+			    // err.status will contain the status code
+			})
+		
+		}
+	
+
+		$scope.createOffer = function() {
+
+			$http({
+				method: 'POST',
+				url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
+				data: $scope.offer,
+			});
 		}
 	});
 })();

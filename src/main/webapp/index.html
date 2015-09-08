@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html ng-app="sgpfc">
 <head lang="en">
 <meta charset="UTF-8">
@@ -9,6 +9,7 @@
 <link href="./resources/css/bootstrap-datetimepicker.min.css"
 	rel="stylesheet">
 <link href="./resources/css/sgpfc.css" rel="stylesheet">
+<!--  <link rel="styleSheet" href="./resources/bower_components/angular-ui-grid/ui-grid.css"/>   -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
@@ -168,6 +169,33 @@ function toggleStatus() {
 		</div>
 		<button type="submit" class="btn btn-primary">Crear oferta</button>
 	</form>
+<!--  <div ui-grid="{ data: $scope.offerList }" class="offerGrid"></div>  -->
+
+ <table st-table="displayOfferList" st-safe-src="offerList" class="table table-striped">
+	    <thead>
+	      <tr>
+		      <th>Id</th>
+		      <th>Nombre</th>
+		      <th>Descripción</th>
+		      <th>Profesor</th>
+	      	  <th>Oferta con Limite de tiempo</th>
+	      	  <th>Tiempo Limite</th>
+      	</tr>
+    	</thead>
+    	<tbody>
+      	<tr ng-repeat="offer in displayOfferList">
+      		<td>{{offer.offerId}}</td>
+        	<td>{{offer.offerName}}</td>
+      		<td>{{offer.offerDescription}}</td>
+      		<td>{{offer.teacher}}</td>
+    	  	<td>{{offer.offerWithLimit}}</td>
+      		<td>{{offer.offerTimeLimit | date:'shortDate'}}</td>
+       	</tr>
+	    </tbody>
+    </table> 
+
+
+
 
 	<script src="./resources/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript"
@@ -184,6 +212,10 @@ function toggleStatus() {
 		src="./resources/js/angular/angular.min.js"></script>
 	<script type="text/javascript"
 		src="./resources/js/angular/sgpfc.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/angular-smart-table/dist/smart-table.js"></script>
+ <!-- 	<script type="text/javascript"
+		src="./resources/bower_components/angular-ui-grid/ui-grid.js"></script>  -->
 
 </body>
 </html>
