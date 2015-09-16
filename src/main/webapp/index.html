@@ -1,4 +1,5 @@
-  <!DOCTYPE html>
+
+<!DOCTYPE html>
 <html ng-app="sgpfc">
 <head lang="en">
 <meta charset="UTF-8">
@@ -9,21 +10,24 @@
 <link href="./resources/css/bootstrap-datetimepicker.min.css"
 	rel="stylesheet">
 <link href="./resources/css/sgpfc.css" rel="stylesheet">
-<!--  <link rel="styleSheet" href="./resources/bower_components/angular-ui-grid/ui-grid.css"/>   -->
+<link rel="styleSheet"
+	href="./resources/bower_components/angular-ui-grid/ui-grid.css" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <script type="text/javascript">
+	function toggleStatus() {
+		if ($('#offerWithLimit').is(':checked')) {
+			$('#dt :input').removeAttr('disabled');
+		} else {
+			$('#dt :input').attr('disabled', true);
+		}
+	}
 
-
-function toggleStatus() {
-    if ($('#offerWithLimit').is(':checked')) {
-    	$('#dt :input').removeAttr('disabled');
-    } else {
-    	$('#dt :input').attr('disabled', true);
-    }   
-}
-
+	function launchModal() {
+		$('#loginModal').appendTo("body")
+		$('#registerModal').appendTo("body")
+	}
 </script>
 </head>
 <body ng-controller="sgpfcCtrl">
@@ -37,43 +41,81 @@ function toggleStatus() {
 					<ul class="nav col-xs-5">
 						<!--<li class="divider-vertical"></li>-->
 						<li class="active col-xs-4"><a
-							class="sgpfc-header-links-left" href="index.html"><i
-								class="glyphicon glyphicon-home"></i> Inicio</a></li>
+							class="sgpfc-header-links-left" href="index.html"> <i
+								class="glyphicon glyphicon-home"></i> Inicio
+						</a></li>
 						<!--<li class="divider-vertical"></li>-->
-						<li class="dropdown col-xs-4" style="visibility: hidden"><a
-							href="#" class="dropdown-toggle sgpfc-header-links-left"
-							data-toggle="dropdown"> <i
+						<!-- 						style="visibility: hidden" -->
+						<li class="dropdown col-xs-4"><a href="#"
+							class="dropdown-toggle sgpfc-header-links-left"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false"> <i
 								class="glyphicon glyphicon-folder-open"></i> Proyectos <b
 								class="caret"></b>
-						</a></li>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Buscar Proyectos</a></li>
+								<li><a href="#">Crear Proyecto</a></li>
+							</ul></li>
 						<!--<li class="divider-vertical"></li>-->
-						<li class="dropdown col-xs-4" style="visibility: hidden"><a
-							href="#" class="dropdown-toggle sgpfc-header-links-left"
-							data-toggle="dropdown"> <i
+						<li class="dropdown col-xs-4"><a href="#"
+							class="dropdown-toggle sgpfc-header-links-left"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false"> <i
 								class="glyphicon glyphicon-bullhorn"></i> Ofertas <b
 								class="caret"></b>
-						</a></li>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Buscar Ofertas</a></li>
+								<li><a href="#">Crear Oferta</a></li>
+							</ul>
+						</li>
+<!-- 						</li> -->
 						<!--<li class="divider-vertical"></li>-->
 					</ul>
 					<ul class="nav col-xs-4">
 						<!--<li class="divider-vertical"></li>-->
-						<li class="col-xs-offset-4 col-xs-4"><a
-							class="sgpfc-header-links-right" href="index.html"> Login</a></li>
+						<li class="col-xs-4"><a class="sgpfc-header-links-right"
+							data-toggle="modal" data-target="#loginModal"
+							onClick="launchModal()"> Login</a></li>
 						<!--<li class="divider-vertical"></li>-->
 						<li class="col-xs-4"><a class="sgpfc-header-links-right"
-							data-toggle="modal" data-target="#myModal"> Registro</a></li>
+							data-toggle="modal" data-target="#registerModal"
+							onClick="launchModal()"> Registro</a></li>
 						<!--<li class="divider-vertical"></li>-->
 					</ul>
-					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-						aria-labelledby="myModalLabel" aria-hidden="true">
-						<div class="modal-dialog">
+					<div class=" modal fade" id="loginModal" tabindex="-1"
+						role="dialog" aria-labelledby="loginModalLabel">
+						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-									<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+									<h4 class="modal-title" id="loginModalLabel">Modal title</h4>
+								</div>
+								<div class="modal-body">...</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save
+										changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class=" modal fade" id="registerModal" tabindex="-1"
+						role="dialog" aria-labelledby="registerModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title" id="registerModalLabel">Modal
+										title</h4>
 								</div>
 								<div class="modal-body">...</div>
 								<div class="modal-footer">
@@ -89,13 +131,101 @@ function toggleStatus() {
 			</div>
 		</div>
 	</header>
+
 	<div class="sgpfc-jumbotron jumbotron">
 		<div class="container">
 			<h1>Sistema de Gestión de Proyectos Universitarios</h1>
 		</div>
 	</div>
 
-	<form class="container"  ng-submit="getOffers()">
+	<button type="button" class="btn btn-primary" data-toggle="modal"
+		data-target="#createOfferModal" onClick="launchModal()">Crear
+		oferta</button>
+
+	<div class=" modal fade" id="createOfferModal" tabindex="-1"
+		role="dialog" aria-labelledby="createOfferModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="createOfferModalLabel">Formulario
+						de creación de ofertas</h4>
+				</div>
+				<div class="modal-body">
+					<form class="container" ng-submit="createOffer()">
+						<div class="form-group">
+							<div class="col-xs-6">
+								<input type="text"
+									class="form-control sgpfc-createofferform-nameinput"
+									aria-label="..." placeholder="Nombre"
+									ng-model="offer.offerName" required>
+								<textarea class="form-control" placeholder="Descripción"
+									ng-model="offer.offerDescription" required></textarea>
+								<div class="checkbox">
+									<label> <input id="offerWithLimit"
+										ng-model="offer.offerWhithLimit" type="checkbox"
+										onchange="toggleStatus()"> Oferta con límite de tiempo
+									</label>
+								</div>
+
+								<div
+									class="input-group date sgpfc-createofferform-datelimitinput"
+									id="dt">
+									<span class="input-group-addon"> <span
+										class="glyphicon glyphicon-calendar"></span>
+									</span> <input type="text" class="form-control"
+										ng-model="offer.offerTimeLimit" disabled="disabled" />
+								</div>
+
+								<script type="text/javascript">
+									$(function() {
+										$('#dt').datetimepicker({
+											locale : 'es'
+										});
+									});
+								</script>
+								<button type="submit"
+									class="btn btn-primary sgpfc-createofferform-createofferbutton">Crear
+									Oferta</button>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div ui-grid="{ data: offerList }" class="offerGrid table"></div>
+
+	<table st-table="displayOfferList" st-safe-src="offerList"
+		class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nombre</th>
+				<th>Descripción</th>
+				<th>Profesor</th>
+				<th>Oferta con Limite de tiempo</th>
+				<th>Tiempo Limite</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="offer in displayOfferList">
+				<td>{{offer.offerId}}</td>
+				<td>{{offer.offerName}}</td>
+				<td>{{offer.offerDescription}}</td>
+				<td>{{offer.teacher}}</td>
+				<td>{{offer.offerWithLimit}}</td>
+				<td>{{offer.offerTimeLimit | date:'shortDate'}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<form class="container" ng-submit="getOffers()">
 		<div class="form-group">
 			<div class="col-xs-offset-3 col-xs-6">
 				<div class="input-group">
@@ -109,13 +239,12 @@ function toggleStatus() {
 							<li><a href="#">Oferta</a></li>
 						</ul>
 					</div>
-					<!-- /btn-group -->
-					<input type="text" class="form-control" aria-label="..."
+					/btn-group <input type="text" class="form-control" aria-label="..."
 						placeholder="Buscar por nombre">
 				</div>
-				<!-- /input-group -->
+				/input-group
 			</div>
-			<!-- /.col-xs-6 -->
+			/.col-xs-6
 			<div class="col-xs-12">
 				<button type="button" class="btn btn-primary col-xs-2">Añadir
 					Subcategoría</button>
@@ -139,69 +268,10 @@ function toggleStatus() {
 		<button type="submit" class="btn btn-default">Buscar</button>
 	</form>
 
-	<form class="container" ng-submit="createOffer()">
-		<div class="form-group">
-			<div class="col-xs-offset-3 col-xs-6">
-				<input type="text" class="form-control" aria-label="..."
-					placeholder="Nombre" ng-model="offer.offerName"  required>
-				<textarea class="form-control" placeholder="Descripción" ng-model="offer.offerDescription" required></textarea>
-				<div class="checkbox">
-					<label> <input id="offerWithLimit" ng-model="offer.offerWhithLimit" type="checkbox"
-						onchange="toggleStatus()"> Oferta con límite de tiempo
-					</label>
-				</div>
-
-				<div class="input-group date" id="dt">
-					<span class="input-group-addon"> <span
-						class="glyphicon glyphicon-calendar"></span>
-					</span> <input type="text" class="form-control" ng-model="offer.offerTimeLimit" disabled="disabled" />
-				</div>
-
-				<script type="text/javascript">
-            $(function () {
-                $('#dt').datetimepicker({
-                    locale: 'es'
-                });
-            });
-        </script>
-
-			</div>
-		</div>
-		<button type="submit" class="btn btn-primary">Crear oferta</button>
-	</form>
-<!--  <div ui-grid="{ data: $scope.offerList }" class="offerGrid"></div>  -->
-
- <table st-table="displayOfferList" st-safe-src="offerList" class="table table-striped">
-	    <thead>
-	      <tr>
-		      <th>Id</th>
-		      <th>Nombre</th>
-		      <th>Descripción</th>
-		      <th>Profesor</th>
-	      	  <th>Oferta con Limite de tiempo</th>
-	      	  <th>Tiempo Limite</th>
-      	</tr>
-    	</thead>
-    	<tbody>
-      	<tr ng-repeat="offer in displayOfferList">
-      		<td>{{offer.offerId}}</td>
-        	<td>{{offer.offerName}}</td>
-      		<td>{{offer.offerDescription}}</td>
-      		<td>{{offer.teacher}}</td>
-    	  	<td>{{offer.offerWithLimit}}</td>
-      		<td>{{offer.offerTimeLimit | date:'shortDate'}}</td>
-       	</tr>
-	    </tbody>
-    </table> 
-
-
-
-
 	<script src="./resources/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript"
 		src="./resources/js/moment/moment.min.js"></script>
-	<script type="text/javascript"
-		src="./resources/js/moment/locale/es.js"></script>
+	<script type="text/javascript" src="./resources/js/moment/locale/es.js"></script>
 	<script type="text/javascript"
 		src="./resources/js/bootstrap/transition.js"></script>
 	<script type="text/javascript"
@@ -210,12 +280,11 @@ function toggleStatus() {
 		src="./resources/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript"
 		src="./resources/js/angular/angular.min.js"></script>
-	<script type="text/javascript"
-		src="./resources/js/angular/sgpfc.js"></script>
+	<script type="text/javascript" src="./resources/js/angular/sgpfc.js"></script>
 	<script type="text/javascript"
 		src="./resources/bower_components/angular-smart-table/dist/smart-table.js"></script>
- <!-- 	<script type="text/javascript"
-		src="./resources/bower_components/angular-ui-grid/ui-grid.js"></script>  -->
+	<script type="text/javascript"
+		src="./resources/bower_components/angular-ui-grid/ui-grid.js"></script>
 
 </body>
 </html>

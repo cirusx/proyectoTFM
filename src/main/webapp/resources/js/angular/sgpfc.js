@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('sgpfc', ['smart-table']);
+	var app = angular.module('sgpfc', ['smart-table', 'ui.grid']);
 
 //	'ngResource'
 

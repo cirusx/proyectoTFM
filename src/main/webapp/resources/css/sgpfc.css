@@ -2,12 +2,20 @@
     margin-bottom: 0px;
 }
 
-.header .col-xs-4{
+.header .col-xs-4 {
     padding-left: 0px;
     padding-right: 0px;
 }
 
-.sgpfc-jumbotron{
+.header .nav li {
+    margin-top: 10px;
+}
+
+.header img {
+    height: 60px;
+}
+
+.sgpfc-jumbotron {
    background-color: steelblue;
 }
 
@@ -18,22 +26,27 @@
     margin-left: 30px;
 }
 
-.header img{
-    height: 60px;
-}
-
-.sgpfc-header-links-left{
+.sgpfc-header-links-left {
     font-size: 16px;
     font-weight: bold;
 }
 
-.sgpfc-header-links-right{
+.sgpfc-header-links-right {
     font-size: 16px;
     font-weight: bold;
     float: right;
     width: 126px;
 }
 
-.header .nav li{
-    margin-top: 10px;
+.sgpfc-createofferform-nameinput {
+    margin-bottom: 15px;
 }
+
+.sgpfc-createofferform-datelimitinput {
+    margin-bottom: 15px;
+}
+
+.sgpfc-createofferform-createofferbutton {
+    float: right;
+}
+
