@@ -25,11 +25,6 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getOffers() {
 		try{
-		/*List<Offer> offers = new ArrayList<Offer>();
-		Offer offer = new Offer();
-		offer.setOfferName("proyecto interesante");
-		offers.add(offer);
-		return offers;*/
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		List<Offer> offers;
 		try{

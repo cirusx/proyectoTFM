@@ -32,10 +32,13 @@ public class Offer implements Serializable{
 	private Long 				offerId;
 	private String 				offerName;
 	private String				offerDescription;
-	private boolean             offerWhitLimit;
+	private String				offerImage;
+	private boolean             offerWithLimit;
 	private Date                offerTimeLimit;
 	private List<Student>		offerRegistrationList;
+	private List<Subcategory>	offerSubcategoryList;
 	private boolean				offerClose;
+	private boolean				offerRecommended;
 	private Date 				savedTime;
 	private Date 				creationTime;
 	private Long				version; 
@@ -72,13 +75,21 @@ public class Offer implements Serializable{
 	public void setOfferDescription(String offerDescription) {
 		this.offerDescription = offerDescription;
 	}
-
-	public boolean isOfferWhitLimit() {
-		return offerWhitLimit;
+	
+	public String getOfferImage() {
+		return offerImage;
 	}
 
-	public void setOfferWhitLimit(boolean offerWhitLimit) {
-		this.offerWhitLimit = offerWhitLimit;
+	public void setOfferImage(String offerImage) {
+		this.offerImage = offerImage;
+	}
+
+	public boolean isOfferWithLimit() {
+		return offerWithLimit;
+	}
+
+	public void setOfferWithLimit(boolean offerWithLimit) {
+		this.offerWithLimit = offerWithLimit;
 	}
 
 	public Date getOfferTimeLimit() {
@@ -102,6 +113,19 @@ public class Offer implements Serializable{
 		this.offerRegistrationList = offerRegistrationList;
 	}
 	
+	@ManyToMany(cascade = ALL, fetch=FetchType.EAGER)
+	@JoinTable(
+	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
+	      inverseJoinColumns={@JoinColumn(name = "offerSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
+	@OrderBy
+	public List<Subcategory> getOfferSubcategoryList() {
+		return offerSubcategoryList;
+	}
+
+	public void setOfferSubcategoryList(List<Subcategory> offerSubcategoryList) {
+		this.offerSubcategoryList = offerSubcategoryList;
+	}
+	
 	@Column(nullable=false, columnDefinition="boolean default false")
 	public boolean isOfferClose() {
 		return offerClose;
@@ -109,6 +133,15 @@ public class Offer implements Serializable{
 
 	public void setOfferClose(boolean offerClose) {
 		this.offerClose = offerClose;
+	}
+	
+	@Column(nullable=false, columnDefinition="boolean default false")
+	public boolean isOfferRecommended() {
+		return offerRecommended;
+	}
+
+	public void setOfferRecommended(boolean offerRecommended) {
+		this.offerRecommended = offerRecommended;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

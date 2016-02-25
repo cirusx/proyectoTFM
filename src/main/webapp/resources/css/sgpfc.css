@@ -50,3 +50,84 @@
     float: right;
 }
 
+ .st-sort-ascent:before {
+    content: '\25B2';
+  }
+
+  .st-sort-descent:before {
+    content: '\25BC';
+  }
+  
+  .sgpfc-container-cards {
+    max-width: 1040px;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+  }
+  
+  .sgpfc-card-tall-big {
+    background-color: #ffffff;
+    border: solid 1px #D9D9DE;
+    border-radius: 6px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    position: relative;
+    font-size: 12px;
+}
+
+@media (min-width: 641px)
+.sgpfc-card-tall-big {
+    height: 458px;
+}
+
+.sgpfc-card-wrap {
+    clear: both;
+}
+
+.sgpfc-card-thumbnail {
+    border-radius: 6px 6px 0 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.sgpfc-card-thumbnail-img {
+    display: block;
+}
+
+.sgpfc-card-content {
+    padding: 10px;
+}
+
+.sgpfc-card-title {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.sgpfc-card-title a {
+    color: #0F2105;
+}
+
+.sgpfc-card-byline {
+    margin-bottom: 10px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sgpfc-card-blurb {
+    margin-bottom: 0;
+}
+
+@media (min-width: 641px)
+.project-card-footer {
+    position: absolute;
+    padding-top: 45px;
+}
+
+.project-card-footer {
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #fff 26%);
+    border-radius: 0 0 6px 6px;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+}

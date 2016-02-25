@@ -19,6 +19,7 @@ public class Subcategory implements Serializable {
 	
 	private Long 				subcategoryId;
 	private String 				subcategoryName;
+	private String 				subcategoryIcon;
 	//private Category   			category;
 	private Date 				savedTime;
 	private Date 				creationTime;
@@ -44,6 +45,14 @@ public class Subcategory implements Serializable {
 
 	public void setSubcategoryName(String subcategoryName) {
 		this.subcategoryName = subcategoryName;
+	}
+	
+	public String getSubcategoryIcon() {
+		return subcategoryIcon;
+	}
+
+	public void setSubcategoryIcon(String subcategoryIcon) {
+		this.subcategoryIcon = subcategoryIcon;
 	}
 	
 	@Temporal(TemporalType.TIMESTAMP)
