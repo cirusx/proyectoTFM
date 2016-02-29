@@ -21,6 +21,16 @@
 			})
 		
 		}
+		
+		$scope.getActiveOffers = function() {
+			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/activeoffers').then(function(activeOffers) {
+			    $scope.activeOfferList = activeOffers.data;
+			  }, function(err) {
+			    console.error('ERR', err);
+			    // err.status will contain the status code
+			})
+		
+		}
 	
 
 		$scope.createOffer = function() {

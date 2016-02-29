@@ -29,7 +29,7 @@ public class OfferResource {
 		List<Offer> offers;
 		try{
 			em.getTransaction().begin();;
-			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o", Offer.class);
+			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o ", Offer.class);
 			offers = query.getResultList();
 			System.out.println("ofertas " + offers);
 			em.getTransaction().commit();
@@ -37,6 +37,29 @@ public class OfferResource {
 				em.close();
 			}
 		return offers;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
+	@Path("activeoffers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Offer> getActiveOffers() {
+		try{
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		List<Offer> activeOffers;
+		try{
+			em.getTransaction().begin();;
+			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o WHERE o.offerClose = false", Offer.class);
+			activeOffers = query.getResultList();
+			System.out.println("ofertas " + activeOffers);
+			em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+		return activeOffers;
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;

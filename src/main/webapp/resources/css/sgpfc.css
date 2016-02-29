@@ -16,7 +16,7 @@
 }
 
 .sgpfc-jumbotron {
-   background-color: steelblue;
+   background-color: SteelBlue;
 }
 
 .sgpfc-jumbotron h1 {
@@ -63,6 +63,7 @@
     margin-right: auto;
     margin-left: auto;
     position: relative;
+ 
   }
   
   .sgpfc-card-tall-big {
@@ -73,6 +74,7 @@
     margin-bottom: 10px;
     position: relative;
     font-size: 12px;
+    height: 400px;
 }
 
 @media (min-width: 641px)
@@ -94,27 +96,40 @@
     display: block;
 }
 
+.sgpfc-card-thumbnail-img img {
+    display: block;
+    height: 150px;
+}
+
 .sgpfc-card-content {
     padding: 10px;
 }
 
 .sgpfc-card-title {
-    font-size: 12px;
-    font-weight: bold;
+  /*   font-size: 12px;
+    font-weight: bold; */
+    font-size: 14px;
+    font-weight: 550;
 }
 
 .sgpfc-card-title a {
     color: #0F2105;
 }
 
-.sgpfc-card-byline {
+.sgpfc-card-title a:hover {
+    color: #0F2105;
+    text-decoration: none;
+}
+
+.sgpfc-card-teacher {
     margin-bottom: 10px;
+    webkit-text-overflow: ellipsis;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
 
-.sgpfc-card-blurb {
+.sgpfc-card-description {
     margin-bottom: 0;
 }
 
