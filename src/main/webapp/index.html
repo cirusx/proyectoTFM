@@ -12,14 +12,20 @@
 <link href="./resources/css/sgpfc.css" rel="stylesheet">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <! - Este es el código javascript de ag-Grid ->
- <script src = "./resources/bower_components/ag-grid/dist/ag-grid.js"> </script>
- <! - Este es el css núcleo requerido para ag-Grid, gestiona el diseño ->
- <link rel = "stylesheet" type = "text / css" href = "./resources/bower_components/ag-grid/dist/ag-grid.css">
-  <! - Este es el estilo (no básicos) parte de la CSS, incluir el tema que desea, o crear su propio tema en lugar ->
- <link rel = "stylesheet" type = "text / css" href = "./resources/bower_components/ag-grid/dist/tema-fresh.css">
- <link rel = "stylesheet" type = "text / css" href = "./resources/bower_components/ag-grid/dist/pathToGrid / tema-dark.css">
- <link rel = "stylesheet" type = "text / css" href = "./resources/bower_components/ag-grid/dist/pathToGrid / tema-blue.css"> 
+<! - Este es el código javascript de ag-Grid ->
+<script src="./resources/bower_components/ag-grid/dist/ag-grid.js">
+	
+</script>
+<! - Este es el css núcleo requerido para ag-Grid, gestiona el diseño ->
+<link rel="stylesheet" type="text / css"
+	href="./resources/bower_components/ag-grid/dist/ag-grid.css">
+<! - Este es el estilo (no básicos) parte de la CSS, incluir el tema que desea, o crear su propio tema en lugar ->
+<link rel="stylesheet" type="text / css"
+	href="./resources/bower_components/ag-grid/dist/tema-fresh.css">
+<link rel="stylesheet" type="text / css"
+	href="./resources/bower_components/ag-grid/dist/pathToGrid / tema-dark.css">
+<link rel="stylesheet" type="text / css"
+	href="./resources/bower_components/ag-grid/dist/pathToGrid / tema-blue.css">
 
 <script type="text/javascript">
 	function toggleStatus() {
@@ -38,249 +44,11 @@
 </script>
 
 </head>
-<body ng-controller="sgpfcCtrl" ng-init= getActiveOffers()>
-	<header class="header">
-		<div class="navbar navbar-static-top">
-			<div class="navbar-inner">
-				<div class="container-fluid">
-					<a class="brand col-xs-2" href="index.html"> <img
-						class="logo-header" src="./resources/img/logoESEI.gif">
-					</a>
-					<ul class="nav col-xs-5">
-						<!--<li class="divider-vertical"></li>-->
-						<li class="active col-xs-3"><a
-							class="sgpfc-header-links-left" href="index.html"> <i
-								class="glyphicon glyphicon-home"></i> Inicio
-						</a></li>
-						<li class="dropdown col-xs-3">
-							<a href="#"
-							class="dropdown-toggle sgpfc-header-links-left"
-							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false"> 
-							<i class="glyphicon glyphicon-bullhorn"></i> Ofertas <b class="caret"></b>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Buscar Ofertas</a></li>
-								<li><a data-toggle="modal" data-target="#createOfferModal"
-									onClick="launchModal()" href="#">Crear Oferta</a></li>
-							</ul>
-							
-						</li>
-						<!--<li class="divider-vertical"></li>-->
-						
-						<li class="dropdown col-xs-6"><a href="#"
-							class="dropdown-toggle sgpfc-header-links-left"
-							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false"> <i
-								class="glyphicon glyphicon-folder-open"></i> Base de Datos Proyectos <b
-								class="caret"></b>
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Buscar Proyectos</a></li>
-								<li><a href="#">Crear Proyecto</a></li>
-							</ul></li>
-						
-						<div class=" modal fade" id="createOfferModal" tabindex="-1"
-		role="dialog" aria-labelledby="createOfferModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="createOfferModalLabel">Formulario
-						de creación de ofertas</h4>
-				</div>
-				<div class="modal-body">
-					<form class="container" ng-submit="createOffer()">
-						<div class="form-group">
-							<div class="col-xs-6">
-								<input type="text"
-									class="form-control sgpfc-createofferform-nameinput"
-									aria-label="..." placeholder="Nombre"
-									ng-model="offer.offerName" required>
-								<textarea class="form-control" placeholder="Descripción"
-									ng-model="offer.offerDescription" required></textarea>
-								<div class="checkbox">
-									<label> <input id="offerWithLimit"
-										ng-model="offer.offerWithLimit" type="checkbox"
-										onchange="toggleStatus()"> Oferta con límite de tiempo
-									</label>
-								</div>
+<body ng-controller="sgpfcCtrl" ng-init=getActiveOffers()>
+	<div ng-include src="'./resources/views/header.html'"></div>
+	<div ng-include src="'./resources/views/welcome.html'"></div>
 
-								<div
-									class="input-group date sgpfc-createofferform-datelimitinput"
-									id="dt">
-									<span class="input-group-addon"> <span
-										class="glyphicon glyphicon-calendar"></span>
-									</span> <input type="text" class="form-control"
-										ng-model="offer.offerTimeLimit" disabled="disabled" />
-								</div>
-
-								<script type="text/javascript">
-									$(function() {
-										$('#dt').datetimepicker({
-											locale : 'es'
-										});
-									});
-								</script>
-								<button type="submit"
-									class="btn btn-primary sgpfc-createofferform-createofferbutton">Crear
-									Oferta</button>
-							</div>
-						</div>
-
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-						
-					</ul>
-					<ul class="nav col-xs-2 col-xs-offset-3">
-						<!--<li class="divider-vertical"></li>-->
-						<li class="col-xs-6"><a class="sgpfc-header-links-right"
-							data-toggle="modal" data-target="#loginModal"
-							onClick="launchModal()"> Login</a></li>
-						<!--<li class="divider-vertical"></li>-->
-						<li class="col-xs-6"><a class="sgpfc-header-links-right"
-							data-toggle="modal" data-target="#registerModal"
-							onClick="launchModal()"> Registro</a></li>
-						<!--<li class="divider-vertical"></li>-->
-					</ul>
-					<div class=" modal fade" id="loginModal" tabindex="-1"
-						role="dialog" aria-labelledby="loginModalLabel">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<h4 class="modal-title" id="loginModalLabel">Modal title</h4>
-								</div>
-								<div class="modal-body">...</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save
-										changes</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class=" modal fade" id="registerModal" tabindex="-1"
-						role="dialog" aria-labelledby="registerModalLabel">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<h4 class="modal-title" id="registerModalLabel">Modal
-										title</h4>
-								</div>
-								<div class="modal-body">...</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default"
-										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save
-										changes</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-
-	<div class="sgpfc-jumbotron jumbotron">
-		<div class="container">
-			<h1>Sistema de Gestión de Proyectos Universitarios</h1>
-		</div>
-	</div>
-
-	 <div class="row sgpfc-container-cards .sgpfc-card-wrap">
-	   <div class="col-xs-3 img-responsive" ng-repeat="offer in activeOfferList">
-        <div class="panel panel-default sgpfc-card-tall-big">
-          <div class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img"><img src="{{offer.offerImage}}" class="img-responsive"></div>
-          <div class="panel-body sgpfc-card-content">
-          <div class="panel-body sgpfc-card-content">
-            <p class="sgpfc-card-title"><a class="sgpfc-card-title a">{{offer.offerName}}</a></p>
-            <p class="lead sgpfc-card-teacher"><a class="sgpfc-card-teacher">{{offer.offerTeacher}}</a></p>
-            <p class="sgpfc-card-description">{{offer.offerDescription}}</p>
-            <p class="" >
-              <img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
-            </p>
-          </div>
-        </div>
-      </div>
-     </div>
-
-<div class="container-fluid col-xs-offset-1 col-xs-10">
-	<table st-table="displayOfferList" st-safe-src="offerList"
-		st-set-filter="myStrictFilter" class="table table-striped">
-		<thead>
-			<tr>
-				<th st-sort="offerId">Id</th>
-				<th st-sort="offerName">Nombre</th>
-				<th st-sort="offerDescription">Descripción</th>
-				<th st-sort="teacher">Profesor</th>
-				<th st-sort="offerClose">Oferta Cerrada</th>
-				<th st-sort="offerWithLimit">Oferta con Fecha Limite</th>
-				<th st-sort="offerTimeLimit">Fecha Limite</th>
-				<!-- 				<th st-sort="offerRegistrationList">Lista de interesados</th> -->
-			</tr>
-			<tr>
-				<th></th>
-				<th><input st-search="offerName"
-					placeholder="buscar por nombre" class="input-sm form-control"
-					type="search" /></th>
-				<th><input st-search="offerDescription"
-					placeholder="buscar por descripción" class="input-sm form-control"
-					type="search" /></th>
-				<th><input st-search="teacher"
-					placeholder="buscar por profesor" class="input-sm form-control"
-					type="search" /></th>
-				<th><select st-search="offerClose">
-						<option value="">Todos</option>
-						<option ng-repeat="offer in offerList | unique:'offerClose'"
-							value="{{offer.offerClose}}">{{offer.offerClose}}</option>
-				</select></th>
-				<th><select st-search="offerWithLimit">
-						<option value="">Todos</option>
-						<option ng-repeat="offer in offerList | unique:'offerWithLimit'"
-							value="{{offer.offerWithLimit}}">{{offer.offerWithLimit}}</option>
-				</select></th>
-				<th><input st-search="offerTimeLimit"
-					placeholder="buscar por fecha límite" class="input-sm form-control"
-					type="search" /></th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr
-				ng-repeat="offer in displayOfferList | filter:offerCloseFilter.filter">
-				<td>{{offer.offerId}}</td>
-				<td>{{offer.offerName}}</td>
-				<td>{{offer.offerDescription}}</td>
-				<td>{{offer.teacher}}</td>
-				<td>{{offer.offerClose}}</td>
-				<td>{{offer.offerWithLimit}}</td>
-				<td>{{offer.offerTimeLimit | date}}</td>
-				<!-- 				<td>{{offer.offerRegistrationList}}</td> -->
-			</tr>
-		</tbody>
-	</table>
-	</div>
-
-	<form class="container" ng-submit="getOffers()">
-		<button type="submit" class="btn btn-default col-xs-12">Buscar</button>
-	</form>
-
+	
 	<script src="./resources/js/bootstrap/bootstrap.min.js"></script>
 	<script type="text/javascript"
 		src="./resources/js/moment/moment.min.js"></script>
@@ -293,11 +61,12 @@
 		src="./resources/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript"
 		src="./resources/js/angular/angular.min.js"></script>
+	<script
+		src="./resources/bower_components/angular-route/angular-route.js"></script>
 	<script type="text/javascript" src="./resources/js/angular/sgpfc.js"></script>
 	<script type="text/javascript"
 		src="./resources/bower_components/angular-smart-table/dist/smart-table.js"></script>
 	<script type="text/javascript"
 		src="./resources/bower_components/angular-ui-grid/ui-grid.js"></script>
-
 </body>
 </html>

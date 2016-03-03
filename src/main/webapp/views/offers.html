@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="row sgpfc-container-cards .sgpfc-card-wrap">
+		<div class="col-xs-3 img-responsive"
+			ng-repeat="offer in activeOfferList">
+			<div class="panel panel-default sgpfc-card-tall-big">
+				<div
+					class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
+					<img src="{{offer.offerImage}}" class="img-responsive">
+				</div>
+				<div class="panel-body sgpfc-card-content">
+					<div class="panel-body sgpfc-card-content">
+						<p class="sgpfc-card-title">
+							<a class="sgpfc-card-title a">{{offer.offerName}}</a>
+						</p>
+						<p class="lead sgpfc-card-teacher">
+							<a class="sgpfc-card-teacher">{{offer.offerTeacher}}</a>
+						</p>
+						<p class="sgpfc-card-description">{{offer.offerDescription}}</p>
+						<p class="">
+							<img ng-repeat="subcategory in offer.offerSubcategoryList"
+								src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

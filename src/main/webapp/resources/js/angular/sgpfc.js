@@ -1,7 +1,9 @@
 (function(){
-	var app = angular.module('sgpfc', ['smart-table', 'ui.grid']);
+	var app = angular.module('sgpfc', ['smart-table', 'ngRoute']);
 
-//	'ngResource'
+	app.config(['$routeProvider', function($routeProvider) {
+		 // Routes will be here
+	}]);
 
 	app.controller('sgpfcCtrl', function($scope, $http){
 		/*$scope.getOffers = function() {

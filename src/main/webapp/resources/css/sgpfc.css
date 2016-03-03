@@ -16,7 +16,7 @@
 }
 
 .sgpfc-jumbotron {
-   background-color: SteelBlue;
+   background-color: dimgrey;
 }
 
 .sgpfc-jumbotron h1 {
@@ -26,9 +26,16 @@
     margin-left: 30px;
 }
 
+.sgpfc-btn-primary {
+	color: #fff;
+    background-color: dimgrey;
+    border-color: dimgray;
+}
+	
 .sgpfc-header-links-left {
     font-size: 16px;
     font-weight: bold;
+    color: dimgrey;
 }
 
 .sgpfc-header-links-right {
@@ -36,14 +43,23 @@
     font-weight: bold;
     float: right;
     width: 126px;
+    color: dimgrey;
 }
 
 .sgpfc-createofferform-nameinput {
     margin-bottom: 15px;
 }
 
+.sgpfc-createofferform-descriptioninput {
+    margin-bottom: 15px;
+}
+
 .sgpfc-createofferform-datelimitinput {
     margin-bottom: 15px;
+}
+
+.sgpfc-createofferform-offerimageinput {
+	
 }
 
 .sgpfc-createofferform-createofferbutton {
