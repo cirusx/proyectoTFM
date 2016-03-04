@@ -98,7 +98,7 @@ public class OfferResource {
 		List<Offer> lastOffers;
 		try{
 			em.getTransaction().begin();;
-			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o ORDER BY o.offerID DESC LIMIT 4", Offer.class);
+			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o ORDER BY o.offerId DESC LIMIT 4", Offer.class);
 			lastOffers = query.getResultList();
 			System.out.println("ofertas " + lastOffers);
 			em.getTransaction().commit();
