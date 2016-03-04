@@ -26,7 +26,6 @@
 	href="./resources/bower_components/ag-grid/dist/pathToGrid / tema-dark.css">
 <link rel="stylesheet" type="text / css"
 	href="./resources/bower_components/ag-grid/dist/pathToGrid / tema-blue.css">
-
 <script type="text/javascript">
 	function toggleStatus() {
 		if ($('#offerWithLimit').is(':checked')) {
@@ -45,8 +44,10 @@
 
 </head>
 <body ng-controller="sgpfcCtrl" ng-init=getActiveOffers()>
-	<div ng-include src="'./resources/views/header.html'"></div>
-	<div ng-include src="'./resources/views/welcome.html'"></div>
+	<div ng-include src="'/proyectoTFM/views/header.html'"></div>
+	<div ng-include src="'/proyectoTFM/views/welcome.html'"></div>
+	
+	<div ng-view></div>
 
 	
 	<script src="./resources/js/bootstrap/bootstrap.min.js"></script>
@@ -62,11 +63,10 @@
 	<script type="text/javascript"
 		src="./resources/js/angular/angular.min.js"></script>
 	<script
-		src="./resources/bower_components/angular-route/angular-route.js"></script>
+		src="./resources/bower_components/angular-route/angular-route.min.js"></script>
 	<script type="text/javascript" src="./resources/js/angular/sgpfc.js"></script>
 	<script type="text/javascript"
 		src="./resources/bower_components/angular-smart-table/dist/smart-table.js"></script>
-	<script type="text/javascript"
-		src="./resources/bower_components/angular-ui-grid/ui-grid.js"></script>
+	
 </body>
 </html>

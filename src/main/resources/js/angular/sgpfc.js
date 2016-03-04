@@ -1,7 +1,16 @@
 (function(){
 	var app = angular.module('sgpfc', ['smart-table']);
 
-//	'ngResource'
+	app.config(['$routeProvider', function($routeProvider) {
+		$routeProvider.when('/offers', {
+			templateUrl: '/proyectoTFM/views/offers.html'
+		}).when('/offer/:offerId', {
+			templateUrl: '/proyectoTFM/views/offers.html'
+		}).otherwise({
+			redirectTo: '/',
+			templateUrl: '/proyectoTFM/views/home.html'
+		})
+	}]);
 
 	app.controller('sgpfcCtrl', function($scope, $http){
 		/*$scope.getOffers = function() {
@@ -31,8 +40,17 @@
 			})
 		
 		}
+		
+		$scope.getRecommendedOffers = function() {
+			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/recommendedoffers').then(function(recommendedOffers) {
+			    $scope.recommendedOfferList = recommendedOffers.data;
+			  }, function(err) {
+			    console.error('ERR', err);
+			    // err.status will contain the status code
+			})
+		
+		}
 	
-
 		$scope.createOffer = function() {
 
 			$http({

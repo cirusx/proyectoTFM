@@ -65,6 +65,52 @@ public class OfferResource {
 			throw e;
 		}
 	}
+	
+	@GET
+	@Path("recommendedoffers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Offer> getRecommendedOffers() {
+		try{
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		List<Offer> recommendedOffers;
+		try{
+			em.getTransaction().begin();;
+			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o WHERE o.offerClose = false AND o.offerRecommended = true", Offer.class);
+			recommendedOffers = query.getResultList();
+			System.out.println("ofertas " + recommendedOffers);
+			em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+		return recommendedOffers;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
+	@Path("lastoffers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Offer> getLastOffers() {
+		try{
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		List<Offer> lastOffers;
+		try{
+			em.getTransaction().begin();;
+			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o ORDER BY o.offerID DESC LIMIT 4", Offer.class);
+			lastOffers = query.getResultList();
+			System.out.println("ofertas " + lastOffers);
+			em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+		return lastOffers;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
 	 
 	@GET
 	@Path("{offerId}")

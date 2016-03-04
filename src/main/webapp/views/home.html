@@ -2,9 +2,66 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Home</title>
 </head>
 <body>
-
+	<div ng-init="getRecommendedOffers()" class="row sgpfc-home-recommended sgpfc-container-cards">
+		<h2 class="col-xs-6">Ofertas Recomendadas</h2>
+		<a class="btn sgpfc-btn-seeall col-xs-offset-4">Ver todas</a>
+	</div>
+	<div class="row sgpfc-container-cards .sgpfc-card-wrap">
+		<div class="col-xs-3 img-responsive" ng-repeat="offer in recommendedOfferList">
+			<div class="panel panel-default sgpfc-card-tall-big">
+				<div class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
+					<a ng-click="getOffer(offer.offerId)" href="#/offers/{{offer.offerId}}">
+						<img src="{{offer.offerImage}}" class="img-responsive">
+					</a>
+				</div>
+				<div class="panel-body sgpfc-card-content">
+					<div class="panel-body sgpfc-card-content">
+						<p class="sgpfc-card-title">
+							<a href="#/offers/{{offer.offerId}}" class="sgpfc-card-title a">{{offer.offerName}}</a>
+						</p>
+						<p class="lead sgpfc-card-teacher">
+							<a class="sgpfc-card-teacher">{{offer.offerTeacher}}</a>
+						</p>
+						<p class="sgpfc-card-description">{{offer.offerDescription}}</p>
+						<p class="sgpfc-card-footer">
+							<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div ng-init="getLastOffers()" class="row sgpfc-home-recommended sgpfc-container-cards">
+		<h2 class="col-xs-6">Últimas Ofertas</h2>
+		<a class="btn sgpfc-btn-seeall col-xs-offset-4">Ver todas</a>
+	</div>
+	<div class="row sgpfc-container-cards .sgpfc-card-wrap">
+		<div class="col-xs-3 img-responsive" ng-repeat="offer in lastOfferList">
+			<div class="panel panel-default sgpfc-card-tall-big">
+				<div class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
+					<a ng-click="getOffer(offer.offerId)" href="#/offers/{{offer.offerId}}">
+						<img src="{{offer.offerImage}}" class="img-responsive">
+					</a>
+				</div>
+				<div class="panel-body sgpfc-card-content">
+					<div class="panel-body sgpfc-card-content">
+						<p class="sgpfc-card-title">
+							<a href="#/offers/{{offer.offerId}}" class="sgpfc-card-title a">{{offer.offerName}}</a>
+						</p>
+						<p class="lead sgpfc-card-teacher">
+							<a class="sgpfc-card-teacher">{{offer.offerTeacher}}</a>
+						</p>
+						<p class="sgpfc-card-description">{{offer.offerDescription}}</p>
+						<p class="sgpfc-card-footer">
+							<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
