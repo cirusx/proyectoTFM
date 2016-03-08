@@ -1,11 +1,13 @@
 (function(){
-	var app = angular.module('sgpfc', ['smart-table']);
+	var app = angular.module('sgpfc', ['smart-table', 'ngRoute']);
 
 	app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/offers', {
 			templateUrl: '/proyectoTFM/views/offers.html'
-		}).when('/offer/:offerId', {
-			templateUrl: '/proyectoTFM/views/offers.html'
+		}).when('/offers/:offerId', {
+			templateUrl: '/proyectoTFM/views/offer.html'
+		}).when('/projects', {
+			templateUrl: '/proyectoTFM/views/projects.html'
 		}).otherwise({
 			redirectTo: '/',
 			templateUrl: '/proyectoTFM/views/home.html'
@@ -21,6 +23,17 @@
 			});
 		
 		}*/
+		
+		$scope.getOffer = function(offerId) {
+			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
+			    $scope.offer = offer.data;
+			  }, function(err) {
+			    console.error('ERR', err);
+			    // err.status will contain the status code
+			})
+		
+		}
+		
 		$scope.getOffers = function() {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers').then(function(offers) {
 			    $scope.offerList = offers.data;
@@ -50,7 +63,17 @@
 			})
 		
 		}
-	
+		
+		$scope.getLastOffers = function() {
+			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/lastoffers').then(function(lastOffers) {
+			    $scope.lastOfferList = lastOffers.data;
+			  }, function(err) {
+			    console.error('ERR', err);
+			    // err.status will contain the status code
+			})
+		
+		}
+
 		$scope.createOffer = function() {
 
 			$http({
@@ -59,5 +82,16 @@
 				data: $scope.offer,
 			});
 		}
+		
+		$scope.getProjects = function() {
+			  $http.get('http://localhost:8080/proyectoTFM/rest/projects').then(function(projects) {
+			    $scope.projectList = projects.data;
+			  }, function(err) {
+			    console.error('ERR', err);
+			    // err.status will contain the status code
+			})
+		}
+		
+		
 	});
 })();
