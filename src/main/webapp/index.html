@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sistema de Gestión de Proyectos Universitarios</title>
 <link href="./resources/css/bootstrap.css" rel="stylesheet">
-<link href="./resources/css/bootstrap-datetimepicker.min.css"
-	rel="stylesheet">
+<link href="./resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 <link href="./resources/css/sgpfc.css" rel="stylesheet">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <! - Este es el código javascript de ag-Grid ->
@@ -17,15 +17,12 @@
 	
 </script>
 <! - Este es el css núcleo requerido para ag-Grid, gestiona el diseño ->
-<link rel="stylesheet" type="text / css"
-	href="./resources/bower_components/ag-grid/dist/ag-grid.css">
+<link rel="stylesheet" type="text / css" href="./resources/bower_components/ag-grid/dist/ag-grid.css">
 <! - Este es el estilo (no básicos) parte de la CSS, incluir el tema que desea, o crear su propio tema en lugar ->
-<link rel="stylesheet" type="text / css"
-	href="./resources/bower_components/ag-grid/dist/tema-fresh.css">
-<link rel="stylesheet" type="text / css"
-	href="./resources/bower_components/ag-grid/dist/pathToGrid / tema-dark.css">
-<link rel="stylesheet" type="text / css"
-	href="./resources/bower_components/ag-grid/dist/pathToGrid / tema-blue.css">
+<link rel="stylesheet" type="text / css" href="./resources/bower_components/ag-grid/dist/tema-fresh.css">
+<link rel="stylesheet" type="text / css" href="./resources/bower_components/ag-grid/dist/pathToGrid / tema-dark.css">
+<link rel="stylesheet" type="text / css" href="./resources/bower_components/ag-grid/dist/pathToGrid / tema-blue.css">
+
 <script type="text/javascript">
 	function toggleStatus() {
 		if ($('#offerWithLimit').is(':checked')) {
@@ -39,6 +36,7 @@
 		$('#loginModal').appendTo("body")
 		$('#registerModal').appendTo("body")
 		$('#createOfferModal').appendTo("body")
+		$('#recoverPasswordModal').appendTo("body")
 	}
 </script>
 
@@ -50,23 +48,15 @@
 	<div ng-view></div>
 
 	
-	<script src="./resources/js/bootstrap/bootstrap.min.js"></script>
-	<script type="text/javascript"
-		src="./resources/js/moment/moment.min.js"></script>
+	<script type="text/javascript" src="./resources/js/bootstrap/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./resources/js/moment/moment.min.js"></script>
 	<script type="text/javascript" src="./resources/js/moment/locale/es.js"></script>
-	<script type="text/javascript"
-		src="./resources/js/bootstrap/transition.js"></script>
-	<script type="text/javascript"
-		src="./resources/js/bootstrap/collapse.js"></script>
-	<script type="text/javascript"
-		src="./resources/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
-	<script type="text/javascript"
-		src="./resources/js/angular/angular.min.js"></script>
-	<script
-		src="./resources/bower_components/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript" src="./resources/js/bootstrap/transition.js"></script>
+	<script type="text/javascript" src="./resources/js/bootstrap/collapse.js"></script>
+	<script type="text/javascript" src="./resources/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="./resources/js/angular/angular.min.js"></script>
+	<script type="text/javascript" src="./resources/bower_components/angular-route/angular-route.min.js"></script>
 	<script type="text/javascript" src="./resources/js/angular/sgpfc.js"></script>
-	<script type="text/javascript"
-		src="./resources/bower_components/angular-smart-table/dist/smart-table.js"></script>
-	
+	<script type="text/javascript" src="./resources/bower_components/angular-smart-table/dist/smart-table.js"></script>
 </body>
 </html>

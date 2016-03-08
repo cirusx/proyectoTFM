@@ -2,9 +2,54 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Ofertas</title>
 </head>
 <body>
+<div class="container">
+	<div class="row">
+        <button type="button" class="btn sgpfc-btn-primary sgpfc-btn-offers-search" data-toggle="collapse" data-target="#filter-panel">
+            <span class="glyphicon glyphicon-cog"></span> Búsqueda Avanzada
+        </button>
+        <div id="filter-panel" class="collapse filter-panel">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form class="form-inline" role="form">
+                        <div class="form-group">
+                            <label class="filter-col" style="margin-right:0;" for="pref-perpage">Resultados por Página:</label>
+                            <select id="pref-perpage" class="form-control">
+                                <option value="8">8</option>
+                                <option selected="selected" value="16">16</option>
+                                <option value="24">4</option>
+                                <option value="32">32</option>
+                                <option value="40">40</option>
+                            </select>                                
+                        </div> <!-- form group [rows] -->
+                        <div class="form-group">
+                            <label class="filter-col" style="margin-right:0;" for="pref-search">Búsqueda:</label>
+                            <input type="text" class="form-control input-sm" id="pref-search">
+                        </div><!-- form group [search] -->
+                        <div class="form-group">
+                            <label class="filter-col" style="margin-right:0;" for="pref-orderby">Order by:</label>
+                            <select id="pref-orderby" class="form-control">
+                                <option>Descendente</option>
+                                <option>Ascendente</option>
+                            </select>                                
+                        </div> <!-- form group [order by] --> 
+                        <div class="form-group">    
+                            <div class="checkbox" style="margin-left:10px; margin-right:10px;">
+                                <label><input type="checkbox"> Recordad Parámetros</label>
+                            </div>
+                            <button type="submit" class="btn btn-default filter-col">
+                                <span class="glyphicon glyphicon-record"></span> Buscar
+                            </button>  
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>    
+	</div>
+</div>
+
 	<div class="row sgpfc-container-cards .sgpfc-card-wrap">
 		<div class="col-xs-3 img-responsive"
 			ng-repeat="offer in activeOfferList">

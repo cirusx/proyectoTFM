@@ -9,85 +9,66 @@
 		<div class="navbar navbar-static-top">
 			<div class="navbar-inner">
 				<div class="container-fluid">
-					<a class="brand col-xs-2" href="index.html"> <img
-						class="logo-header" src="./resources/img/nombreESEI.png">
+					<a class="brand col-xs-2" href="index.html"> 
+						<img class="logo-header" src="./resources/img/nombreESEI.png">
 					</a>
-					<ul class="nav col-xs-5">
-						<li class="active col-xs-3"><a
-							class="sgpfc-header-links-left" href="index.html"> <i
-								class="glyphicon glyphicon-home"></i> Inicio
-						</a></li>
-						<li class="dropdown col-xs-3"><a href="#"
-							class="dropdown-toggle sgpfc-header-links-left"
-							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false"> <i
-								class="glyphicon glyphicon-bullhorn"></i> Ofertas <b
-								class="caret"></b>
-						</a>
+					<ul class="nav col-xs-4">
+						<li class="active col-xs-3 sgpfc-header-left">
+							<a class="sgpfc-header-links-left" href="index.html"> 
+								<i class="glyphicon glyphicon-home"></i> Inicio
+							</a>
+						</li>
+						<li class="dropdown col-xs-3 sgpfc-header-left">
+							<a href="#" class="dropdown-toggle sgpfc-header-links-left" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<i class="glyphicon glyphicon-bullhorn"></i> Ofertas <b class="caret"></b>
+							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Buscar Ofertas</a></li>
-								<li><a data-toggle="modal" data-target="#createOfferModal"
-									onClick="launchModal()" href="#">Crear Oferta</a></li>
-							</ul></li>
-						<li class="dropdown col-xs-6"><a href="#"
-							class="dropdown-toggle sgpfc-header-links-left"
-							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false"> <i
-								class="glyphicon glyphicon-folder-open"></i> Base de Datos
-								Proyectos <b class="caret"></b>
-						</a>
+								<li><a href="#/offers">Buscar Ofertas</a></li>
+								<li><a data-toggle="modal" data-target="#createOfferModal" onClick="launchModal()" href="#">Crear Oferta</a></li>
+							</ul>
+						</li>
+						<li class="dropdown col-xs-6 sgpfc-header-left">
+							<a href="#" class="dropdown-toggle sgpfc-header-links-left" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+								<i class="glyphicon glyphicon-folder-open"></i> Base de Datos Proyectos <b class="caret"></b>
+							</a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Buscar Proyectos</a></li>
 								<li><a href="#">Crear Proyecto</a></li>
-							</ul></li>
-
-						<div class=" modal fade" id="createOfferModal" tabindex="-1"
-							role="dialog" aria-labelledby="createOfferModalLabel">
+							</ul>
+						</li>
+						<div class=" modal fade" id="createOfferModal" tabindex="-1" role="dialog" aria-labelledby="createOfferModalLabel">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Close">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-										<h4 class="modal-title" id="createOfferModalLabel">Formulario
-											de creación de ofertas</h4>
+										<h3 class="modal-title sgpfc-modal-title" id="createOfferModalLabel">Formulario de creación de ofertas</h3>
 									</div>
 									<div class="modal-body">
 										<form class="container" ng-submit="createOffer()">
 											<div class="form-group">
 												<div class="col-xs-6">
-													<input type="text"
-														class="form-control sgpfc-createofferform-nameinput"
-														aria-label="..." placeholder="Nombre"
-														ng-model="offer.offerName" required>
+													<input type="text" class="form-control sgpfc-createofferform-nameinput" aria-label="..." placeholder="Nombre" ng-model="offer.offerName" required>
 													<textarea
-														class="form-control sgpfc-createofferform-descriptioninput"
-														placeholder="Descripción"
-														ng-model="offer.offerDescription" required>
+														class="form-control sgpfc-createofferform-descriptioninput" placeholder="Descripción" ng-model="offer.offerDescription" required>
 													</textarea>
 													<div>
-														<label for="inputImage">Image</label> <input
-															id="inputImage" type="file" accept="image/*"
-															image="image" /> <img ng-show="image"
-															ng-src="{{image.url}}" type="{{image.file.type}}" />
+														<label for="inputImage">Image</label> 
+														<input id="inputImage" type="file" accept="image/*" image="image" /> <img ng-show="image" ng-src="{{image.url}}" type="{{image.file.type}}" />
 														<button type="submit" ng-click="single(image)" disabled>Add</button>
 														<button type="reset">Clear</button>
 													</div>
 													<div class="checkbox">
-														<label> <input class="" id="offerWithLimit"
-															ng-model="offer.offerWithLimit" type="checkbox"
-															onchange="toggleStatus()"> Oferta con límite de
-															tiempo
+														<label> 
+															<input class="" id="offerWithLimit" ng-model="offer.offerWithLimit" type="checkbox" onchange="toggleStatus()"> Oferta con límite de tiempo
 														</label>
 													</div>
-													<div
-														class="input-group date sgpfc-createofferform-datelimitinput"
-														id="dt">
-														<span class="input-group-addon"> <span
-															class="glyphicon glyphicon-calendar"></span>
-														</span> <input type="text" class="form-control"
-															ng-model="offer.offerTimeLimit" disabled="disabled" />
+													<div class="input-group date sgpfc-createofferform-datelimitinput" id="dt">
+														<span class="input-group-addon"> 
+															<span class="glyphicon glyphicon-calendar"></span>
+														</span> 
+														<input type="text" class="form-control" ng-model="offer.offerTimeLimit" disabled="disabled" />
 													</div>
 
 													<script type="text/javascript">
@@ -99,107 +80,109 @@
 																			});
 														});
 													</script>
-													<button type="submit"
-														class="btn btn-primary sgpfc-createofferform-createofferbutton">Crear
-														Oferta</button>
+													
+													<button type="submit" class="btn btn-primary sgpfc-createofferform-createofferbutton">Crear Oferta</button>
 												</div>
 											</div>
-
 										</form>
 									</div>
 								</div>
 							</div>
 						</div>
-
 					</ul>
-					<ul class="nav col-xs-2 col-xs-offset-3">
+					<ul class="nav col-xs-2 col-xs-offset-4">
 						<!--<li class="divider-vertical"></li>-->
-						<li class="col-xs-6"><a class="sgpfc-header-links-right"
-							data-toggle="modal" data-target="#loginModal"
-							onClick="launchModal()"> Login</a></li>
+						<li class="col-xs-6 sgpfc-header-right">
+							<a class="sgpfc-header-links-right" data-toggle="modal" data-target="#loginModal" onClick="launchModal()"> Login</a>
+						</li>
 						<!--<li class="divider-vertical"></li>-->
-						<li class="col-xs-6"><a class="sgpfc-header-links-right"
-							data-toggle="modal" data-target="#registerModal"
-							onClick="launchModal()"> Registro</a></li>
-						<!--<li class="divider-vertical"></li>-->
+						<li class="col-xs-6 sgpfc-header-right">
+							<a class="sgpfc-header-links-right" data-toggle="modal" data-target="#registerModal"onClick="launchModal()"> Registro</a>
+						</li>
 					</ul>
 					<div class=" modal fade" id="loginModal" tabindex="-1"
 						role="dialog" aria-labelledby="loginModalLabel">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-									<h4 class="modal-title" id="loginModalLabel">Login</h4>
+									<h3 class="modal-title sgpfc-modal-title" id="loginModalLabel">Login</h3>
 								</div>
 								<div class="modal-body">
-									<form class="form col-xs-12 center-block">
+									<form role="form">
 										<div class="form-group">
-											<input type="text" class="form-control input-lg"
-												placeholder="Email">
+											<input type="text" class="form-control input-lg" placeholder="Email">
 										</div>
 										<div class="form-group">
-											<input type="password" class="form-control input-lg"
-												placeholder="Contraseña">
+											<input type="password" class="form-control input-lg" placeholder="Contraseña">
 										</div>
 										<div class="form-group">
-											<button class="btn sgpfc-btn-primary btn-lg btn-block">Sign
-												In</button>
-											<span class="pull-right"><a href="#">Registro</a></span><span><a
-												href="#">Recuperar contraseña</a></span>
+											<button class="btn sgpfc-btn-primary btn-lg btn-block">Login</button>
+											<span class="pull-right">
+												<a class="btn" data-toggle="modal" data-dismiss="modal" data-target="#registerModal" onClick="launchModal()">Registro</a>
+											</span>
+											<span>
+												<a class="btn" data-toggle="modal" data-dismiss="modal" data-target="#recoverPasswordModal" onClick="launchModal()">Recuperar contraseña</a>
+											</span>
 										</div>
 									</form>
-								</div>
-								<div class="modal-footer">
-									<div class="col-xs-12"></div>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class=" modal fade" id="registerModal" tabindex="-1"
-						role="dialog" aria-labelledby="registerModalLabel">
+					<div class=" modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-									<h4 class="modal-title" id="registerModalLabel">Formulario
-										de registro</h4>
+									<h3 class="modal-title sgpfc-modal-title" id="registerModalLabel">Formulario de registro</h3>
 								</div>
 								<div class="modal-body">
-									<form id="register-form"
-										action="http://phpoll.com/register/process" method="post"
-										role="form" style="">
+									<form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="">
 										<div class="form-group">
-											<input type="text" name="username" id="username"
-												class="form-control input-lg" placeholder="Usuario" value="">
+											<input type="text" name="username" id="username" class="form-control input-lg" placeholder="Usuario" value="">
 										</div>
 										<div class="form-group">
-											<input type="email" name="email" id="email"
-												class="form-control input-lg" placeholder="Email" value="">
+											<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email" value="">
 										</div>
 										<div class="form-group">
-											<input type="password" name="password" id="password"
-												class="form-control input-lg" placeholder="Contraseña">
+											<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Contraseña">
 										</div>
 										<div class="form-group">
-											<input type="password" name="confirm-password"
-												id="confirm-password" class="form-control input-lg"
-												placeholder="Confirmar Contraseña">
+											<input type="password" name="confirm-password" id="confirm-password" class="form-control input-lg" placeholder="Confirmar Contraseña">
 										</div>
 										<div class="form-group">
 											<div class="row">
 												<div class="col-xs-6 col-xs-offset-3">
-													<input type="submit" name="register-submit"
-														id="register-submit"
-														class="form-control btn sgpfc-btn-primary"
-														value="Register Now">
+													<input type="submit" name="register-submit" id="register-submit" class="form-control btn sgpfc-btn-primary" value="Registrar">
 												</div>
 											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class=" modal fade" id="recoverPasswordModal" tabindex="-1" role="dialog" aria-labelledby="recoverPasswordModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h3 class="modal-title sgpfc-modal-title" id="recoverPasswordModalLabel">Recuperar contraseña</h3>
+								</div>
+								<div class="modal-body">
+									<form role="form">
+										<div class="form-group">
+											<input type="text" class="form-control input-lg" placeholder="Email">
+										</div>
+										<div class="form-group">
+											<button class="btn sgpfc-btn-primary btn-lg btn-block">Enviar Contraseña</button>
 										</div>
 									</form>
 								</div>

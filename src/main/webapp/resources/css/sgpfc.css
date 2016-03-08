@@ -46,12 +46,22 @@
     color: dimgrey;
 }
 
+.sgpfc-header-left {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
 .sgpfc-header-links-right {
     font-size: 16px;
     font-weight: bold;
-    float: right;
-    width: 126px;
+  /*   float: right;
+    width: 126px; */
     color: dimgrey;
+}
+
+.sgpfc-header-right {
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 .sgpfc-createofferform-nameinput {
@@ -72,6 +82,10 @@
 
 .sgpfc-createofferform-createofferbutton {
     float: right;
+}
+
+.sgpfc-modal-title {
+	
 }
 
  .st-sort-ascent:before {
@@ -181,3 +195,9 @@
     position: absolute;
     padding-top: 45px;
 }
+
+.sgpfc-btn-offers-search {
+	margin-bottom: 20px;
+    margin-left: 80px;
+}
+
