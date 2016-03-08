@@ -6,6 +6,8 @@
 			templateUrl: '/proyectoTFM/views/offers.html'
 		}).when('/offers/:offerId', {
 			templateUrl: '/proyectoTFM/views/offer.html'
+		}).when('/projects', {
+			templateUrl: '/proyectoTFM/views/projects.html'
 		}).otherwise({
 			redirectTo: '/',
 			templateUrl: '/proyectoTFM/views/home.html'
@@ -79,6 +81,15 @@
 				url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
 				data: $scope.offer,
 			});
+		}
+		
+		$scope.getProjects = function() {
+			  $http.get('http://localhost:8080/proyectoTFM/rest/projects').then(function(projects) {
+			    $scope.projectList = projects.data;
+			  }, function(err) {
+			    console.error('ERR', err);
+			    // err.status will contain the status code
+			})
 		}
 		
 		

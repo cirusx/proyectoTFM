@@ -9,7 +9,7 @@
 		<div class="navbar navbar-static-top">
 			<div class="navbar-inner">
 				<div class="container-fluid">
-					<a class="brand col-xs-2" href="index.html"> 
+					<a class="brand col-xs-3" href="index.html"> 
 						<img class="logo-header" src="./resources/img/nombreESEI.png">
 					</a>
 					<ul class="nav col-xs-4">
@@ -32,8 +32,8 @@
 								<i class="glyphicon glyphicon-folder-open"></i> Base de Datos Proyectos <b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Buscar Proyectos</a></li>
-								<li><a href="#">Crear Proyecto</a></li>
+								<li><a href="#/projects">Buscar Proyectos</a></li>
+								<li><a data-toggle="modal" data-target="#createProyectModal" onClick="launchModal()" href="#">Crear Proyecto</a></li>
 							</ul>
 						</li>
 						<div class=" modal fade" id="createOfferModal" tabindex="-1" role="dialog" aria-labelledby="createOfferModalLabel">
@@ -81,7 +81,7 @@
 														});
 													</script>
 													
-													<button type="submit" class="btn btn-primary sgpfc-createofferform-createofferbutton">Crear Oferta</button>
+													<button type="submit" class="btn sgpfc-btn-primary sgpfc-createofferform-createofferbutton">Crear Oferta</button>
 												</div>
 											</div>
 										</form>
@@ -90,7 +90,7 @@
 							</div>
 						</div>
 					</ul>
-					<ul class="nav col-xs-2 col-xs-offset-4">
+					<ul class="nav col-xs-2 col-xs-offset-3">
 						<!--<li class="divider-vertical"></li>-->
 						<li class="col-xs-6 sgpfc-header-right">
 							<a class="sgpfc-header-links-right" data-toggle="modal" data-target="#loginModal" onClick="launchModal()"> Login</a>
