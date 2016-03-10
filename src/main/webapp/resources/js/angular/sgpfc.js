@@ -12,6 +12,10 @@
 			templateUrl: '/proyectoTFM/views/login.html'
 		}).when('/register', {
 			templateUrl: '/proyectoTFM/views/register.html'
+		}).when('/recoverpassword', {
+			templateUrl: '/proyectoTFM/views/recoverpassword.html'
+		}).when('/createoffer', {
+			templateUrl: '/proyectoTFM/views/createoffer.html'
 		}).otherwise({
 			redirectTo: '/',
 			templateUrl: '/proyectoTFM/views/home.html'

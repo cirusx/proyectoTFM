@@ -38,191 +38,19 @@
 <!-- 								<li><a data-toggle="modal" data-target="#createProyectModal" onClick="launchModal()" href="#">Crear Proyecto</a></li> -->
 							</ul>
 						</li>
-						<div class=" modal fade" id="createOfferModal" tabindex="-1" role="dialog" aria-labelledby="createOfferModalLabel">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-										<h3 class="modal-title sgpfc-modal-title" id="createOfferModalLabel">Formulario de creación de ofertas</h3>
-									</div>
-									<div class="modal-body">
-										<form class="container" ng-submit="createOffer()">
-											<div class="form-group">
-												<div class="col-xs-6">
-													<input type="text" class="form-control sgpfc-createofferform-nameinput" aria-label="..." placeholder="Nombre" ng-model="offer.offerName" required>
-													<textarea
-														class="form-control sgpfc-createofferform-descriptioninput" placeholder="Descripción" ng-model="offer.offerDescription" required>
-													</textarea>
-													<div>
-														<label for="inputImage">Image</label> 
-														<input id="inputImage" type="file" accept="image/*" image="image" /> <img ng-show="image" ng-src="{{image.url}}" type="{{image.file.type}}" />
-														<button type="submit" ng-click="single(image)" disabled>Add</button>
-														<button type="reset">Clear</button>
-													</div>
-													<div class="checkbox">
-														<label> 
-															<input class="" id="offerWithLimit" ng-model="offer.offerWithLimit" type="checkbox" onchange="toggleStatus()"> Oferta con límite de tiempo
-														</label>
-													</div>
-													<div class="input-group date sgpfc-createofferform-datelimitinput" id="dt">
-														<span class="input-group-addon"> 
-															<span class="glyphicon glyphicon-calendar"></span>
-														</span> 
-														<input type="text" class="form-control" ng-model="offer.offerTimeLimit" disabled="disabled" />
-													</div>
-
-													<script type="text/javascript">
-														$(function() {
-															$('#dt')
-																	.datetimepicker(
-																			{
-																				locale : 'es'
-																			});
-														});
-													</script>
-													
-													<button type="submit" class="btn sgpfc-btn-primary sgpfc-createofferform-createofferbutton">Crear Oferta</button>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
 					</ul>
 					<ul class="nav col-xs-2 col-xs-offset-3">
 						<!--<li class="divider-vertical"></li>-->
 						<li class="col-xs-6 sgpfc-header-right">
-<!-- 							<a class="sgpfc-header-links-right" data-toggle="modal" data-target="#loginModal" onClick="launchLoginModal()"> Login</a> -->
-								<li><a class="sgpfc-header-links-right" href="#/login">Login</a></li>
+<!-- 						<a class="sgpfc-header-links-right" data-toggle="modal" data-target="#loginModal" onClick="launchLoginModal()"> Login</a> -->
+							<a class="sgpfc-header-links-right" href="#/login">Login</a>
 						</li>
 						<!--<li class="divider-vertical"></li>-->
 						<li class="col-xs-6 sgpfc-header-right">
-<!-- 							<a class="sgpfc-header-links-right" onClick="launchRegisterModal()"> Registro</a> -->
-							<li><a class="sgpfc-header-links-right" href="#/register">Registro</a></li>
+<!-- 						<a class="sgpfc-header-links-right" onClick="launchRegisterModal()"> Registro</a> -->
+							<a class="sgpfc-header-links-right" href="#/register">Registro</a>
 						</li>
 					</ul>
-					<div class=" modal fade login" id="loginModal" tabindex="-1"
-						role="dialog" aria-labelledby="loginModalLabel">
-						<div class="modal-dialog login animated" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<h3 class="modal-title sgpfc-modal-title" id="loginModalLabel">Login</h3>
-								</div>
-								<div class="modal-body">
-									<div class="box">
-                             			<div class="content">
-                             				<div class="error"></div>
-                             				<div class="form loginBox">
-												<form role="form" method="post" action="/login" accept-charset="UTF-8">
-													<div class="form-group">
-														<input id="email" type="text" class="form-control input-lg" placeholder="Email" name="email">
-													</div>
-													<div class="form-group">
-														<input id="password" type="password" class="form-control input-lg" placeholder="Contraseña" name="password">
-													</div>
-													<div class="form-group">
-														<input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
-														<span class="pull-right">
-															<a class="btn" data-toggle="modal" data-dismiss="modal" data-target="#registerModal" onClick="launchModal()">Registro</a>
-														</span>
-														<span>
-															<a class="btn" data-toggle="modal" data-dismiss="modal" data-target="#recoverPasswordModal" onClick="launchModal()">Recuperar contraseña</a>
-														</span>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-									<div class="box">
-                            			<div class="content registerBox" style="display:none;">
-                             				<div class="form">
-                                				<form method="post" html="{:multipart=>true}" data-remote="true" action="/register" accept-charset="UTF-8">
-                                					<input id="email" class="form-control" type="text" placeholder="Email" name="email">
-                                					<input id="password" class="form-control" type="password" placeholder="Password" name="password">
-                                					<input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
-                                					<input class="btn btn-default btn-register" type="submit" value="Create account" name="commit">
-                                				</form>
-                                			</div>
-                            			</div>
-                        			</div>
-								</div>
-								<div class="modal-footer">
-                        			<div class="forgot login-footer">
-                            			<span>Looking to 
-                                 			<a href="javascript: showRegisterForm();">create an account</a>
-                            			?</span>
-                        			</div>
-                        			<div class="forgot register-footer" style="display:none">
-                             			<span>Already have an account?</span>
-                             			<a href="javascript: showLoginForm();">Login</a>
-                        			</div>
-                    			</div>        
-							</div>
-						</div>
-					</div>
-					<!-- <div class=" modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<h3 class="modal-title sgpfc-modal-title" id="registerModalLabel">Formulario de registro</h3>
-								</div>
-								<div class="modal-body">
-									<form id="register-form" action="http://phpoll.com/register/process" method="post" role="form" style="">
-										<div class="form-group">
-											<input type="text" name="username" id="username" class="form-control input-lg" placeholder="Usuario" value="">
-										</div>
-										<div class="form-group">
-											<input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email" value="">
-										</div>
-										<div class="form-group">
-											<input type="password" name="password" id="password" class="form-control input-lg" placeholder="Contraseña">
-										</div>
-										<div class="form-group">
-											<input type="password" name="confirm-password" id="confirm-password" class="form-control input-lg" placeholder="Confirmar Contraseña">
-										</div>
-										<div class="form-group">
-											<div class="row">
-												<div class="col-xs-6 col-xs-offset-3">
-													<input type="submit" name="register-submit" id="register-submit" class="form-control btn sgpfc-btn-primary" value="Registrar">
-												</div>
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div> -->
-					<div class=" modal fade" id="recoverPasswordModal" tabindex="-1" role="dialog" aria-labelledby="recoverPasswordModalLabel">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-									<h3 class="modal-title sgpfc-modal-title" id="recoverPasswordModalLabel">Recuperar contraseña</h3>
-								</div>
-								<div class="modal-body">
-									<form role="form">
-										<div class="form-group">
-											<input type="text" class="form-control input-lg" placeholder="Email">
-										</div>
-										<div class="form-group">
-											<button class="btn sgpfc-btn-primary btn-lg btn-block">Enviar Contraseña</button>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
