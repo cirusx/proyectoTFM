@@ -8,6 +8,10 @@
 			templateUrl: '/proyectoTFM/views/offer.html'
 		}).when('/projects', {
 			templateUrl: '/proyectoTFM/views/projects.html'
+		}).when('/login', {
+			templateUrl: '/proyectoTFM/views/login.html'
+		}).when('/register', {
+			templateUrl: '/proyectoTFM/views/register.html'
 		}).otherwise({
 			redirectTo: '/',
 			templateUrl: '/proyectoTFM/views/home.html'

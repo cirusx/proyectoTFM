@@ -24,7 +24,8 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="#/offers">Buscar Ofertas</a></li>
-								<li><a data-toggle="modal" data-target="#createOfferModal" onClick="launchModal()" href="#">Crear Oferta</a></li>
+								<li><a href="#/createoffer">Crear Oferta</a></li>
+<!-- 								<li><a data-toggle="modal" data-target="#createOfferModal" onClick="launchModal()" href="#">Crear Oferta</a></li> -->
 							</ul>
 						</li>
 						<li class="dropdown col-xs-6 sgpfc-header-left">
@@ -33,7 +34,8 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="#/projects">Buscar Proyectos</a></li>
-								<li><a data-toggle="modal" data-target="#createProyectModal" onClick="launchModal()" href="#">Crear Proyecto</a></li>
+								<li><a href="#/createproject">Crear Proyecto</a></li>
+<!-- 								<li><a data-toggle="modal" data-target="#createProyectModal" onClick="launchModal()" href="#">Crear Proyecto</a></li> -->
 							</ul>
 						</li>
 						<div class=" modal fade" id="createOfferModal" tabindex="-1" role="dialog" aria-labelledby="createOfferModalLabel">
@@ -93,16 +95,18 @@
 					<ul class="nav col-xs-2 col-xs-offset-3">
 						<!--<li class="divider-vertical"></li>-->
 						<li class="col-xs-6 sgpfc-header-right">
-							<a class="sgpfc-header-links-right" data-toggle="modal" data-target="#loginModal" onClick="launchModal()"> Login</a>
+<!-- 							<a class="sgpfc-header-links-right" data-toggle="modal" data-target="#loginModal" onClick="launchLoginModal()"> Login</a> -->
+								<li><a class="sgpfc-header-links-right" href="#/login">Login</a></li>
 						</li>
 						<!--<li class="divider-vertical"></li>-->
 						<li class="col-xs-6 sgpfc-header-right">
-							<a class="sgpfc-header-links-right" data-toggle="modal" data-target="#registerModal"onClick="launchModal()"> Registro</a>
+<!-- 							<a class="sgpfc-header-links-right" onClick="launchRegisterModal()"> Registro</a> -->
+							<li><a class="sgpfc-header-links-right" href="#/register">Registro</a></li>
 						</li>
 					</ul>
-					<div class=" modal fade" id="loginModal" tabindex="-1"
+					<div class=" modal fade login" id="loginModal" tabindex="-1"
 						role="dialog" aria-labelledby="loginModalLabel">
-						<div class="modal-dialog" role="document">
+						<div class="modal-dialog login animated" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -111,28 +115,58 @@
 									<h3 class="modal-title sgpfc-modal-title" id="loginModalLabel">Login</h3>
 								</div>
 								<div class="modal-body">
-									<form role="form">
-										<div class="form-group">
-											<input type="text" class="form-control input-lg" placeholder="Email">
+									<div class="box">
+                             			<div class="content">
+                             				<div class="error"></div>
+                             				<div class="form loginBox">
+												<form role="form" method="post" action="/login" accept-charset="UTF-8">
+													<div class="form-group">
+														<input id="email" type="text" class="form-control input-lg" placeholder="Email" name="email">
+													</div>
+													<div class="form-group">
+														<input id="password" type="password" class="form-control input-lg" placeholder="Contraseña" name="password">
+													</div>
+													<div class="form-group">
+														<input class="btn btn-default btn-login" type="button" value="Login" onclick="loginAjax()">
+														<span class="pull-right">
+															<a class="btn" data-toggle="modal" data-dismiss="modal" data-target="#registerModal" onClick="launchModal()">Registro</a>
+														</span>
+														<span>
+															<a class="btn" data-toggle="modal" data-dismiss="modal" data-target="#recoverPasswordModal" onClick="launchModal()">Recuperar contraseña</a>
+														</span>
+													</div>
+												</form>
+											</div>
 										</div>
-										<div class="form-group">
-											<input type="password" class="form-control input-lg" placeholder="Contraseña">
-										</div>
-										<div class="form-group">
-											<button class="btn sgpfc-btn-primary btn-lg btn-block">Login</button>
-											<span class="pull-right">
-												<a class="btn" data-toggle="modal" data-dismiss="modal" data-target="#registerModal" onClick="launchModal()">Registro</a>
-											</span>
-											<span>
-												<a class="btn" data-toggle="modal" data-dismiss="modal" data-target="#recoverPasswordModal" onClick="launchModal()">Recuperar contraseña</a>
-											</span>
-										</div>
-									</form>
+									</div>
+									<div class="box">
+                            			<div class="content registerBox" style="display:none;">
+                             				<div class="form">
+                                				<form method="post" html="{:multipart=>true}" data-remote="true" action="/register" accept-charset="UTF-8">
+                                					<input id="email" class="form-control" type="text" placeholder="Email" name="email">
+                                					<input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                                					<input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
+                                					<input class="btn btn-default btn-register" type="submit" value="Create account" name="commit">
+                                				</form>
+                                			</div>
+                            			</div>
+                        			</div>
 								</div>
+								<div class="modal-footer">
+                        			<div class="forgot login-footer">
+                            			<span>Looking to 
+                                 			<a href="javascript: showRegisterForm();">create an account</a>
+                            			?</span>
+                        			</div>
+                        			<div class="forgot register-footer" style="display:none">
+                             			<span>Already have an account?</span>
+                             			<a href="javascript: showLoginForm();">Login</a>
+                        			</div>
+                    			</div>        
 							</div>
 						</div>
 					</div>
-					<div class=" modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel">
+					<!-- <div class=" modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -166,7 +200,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class=" modal fade" id="recoverPasswordModal" tabindex="-1" role="dialog" aria-labelledby="recoverPasswordModalLabel">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
