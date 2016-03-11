@@ -200,3 +200,61 @@
 	margin-bottom: 20px;
     margin-left: 80px;
 }
+
+.sgpfc-loginbox {
+	margin-top:50px;
+}
+
+
+
+.sgpfc-loginbox-heading {
+	color: white;
+	background-color: dimgrey;
+	border-color: dimgray;
+}
+
+.sgpfc-registerbox {
+	margin-top:50px;
+}
+
+.sgpfc-loginbox-recoverypassword-link {
+	float:right; 
+	font-size: 85%; 
+	position: relative; 
+	top:-10px;
+	color: white;
+}
+
+.sgpfc-loginbox-login-link {
+	float:right; 
+	font-size: 85%; 
+	position: relative; 
+	top:-10px;
+	color: white;
+}
+
+.sgpfc-loginbox-panelbody {
+	padding-top:30px;
+}
+
+.sgpfc-loginbox-inputgroup {
+	margin-bottom: 25px;
+}
+
+.sgpfc-loginbox-btn-loginzone {
+	margin: 10 auto;
+}
+
+.sgpfc-loginbox-loginbutton {
+	margin: 0 auto;
+}
+
+.sgpfc-loginbox-registerlink {
+	border-top: 1px solid#888; 
+	padding-top:15px; 
+	font-size:85%;
+}
+
+.sgpfc-loginbox-registerzone {
+	margin-top: 10px;
+}
