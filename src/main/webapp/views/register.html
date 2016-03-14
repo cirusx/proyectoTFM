@@ -2,50 +2,62 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Registro</title>
+<title>Registrar</title>
 </head>
 <body>
 <div class="container">  
- <div id="signupbox" class="sgpfc-registerbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <div class="panel-title">Registrar</div>
+ <div id="registerbox" class="sgpfc-registerbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+                    <div class="panel sgpfc-loginbox-panel">
+                        <div class="panel-heading sgpfc-loginbox-heading">
+                            <div class="panel-title sgpfc-loginbox-title">Registrar</div>
                             <div class="sgpfc-loginbox-login-link"><a id="signinlink" href="#/login" ">Iniciar Sesión</a></div>
                         </div>  
-                        <div class="panel-body" >
-                            <form id="signupform" class="form-horizontal" role="form">
+                        <div class="sgpfc-loginbox-panelbody panel-body" >
+                            <form id="registerform" class="form-horizontal" role="form">
                                 <div id="signupalert" style="display:none" class="alert alert-danger">
                                     <p>Error:</p>
                                     <span></span>
-                                </div>  
+                                </div>
                                 <div class="form-group">
                                     <label for="email" class="col-md-3 control-label">Email</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="email" placeholder="Email">
+                                    	<div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                        <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email">                                        
+                                    </div>
                                     </div>
                                 </div>                         
                                 <div class="form-group">
                                     <label for="user" class="col-md-3 control-label">Usuario</label>
                                     <div class="col-md-9">
-                                        <input type="text" class="form-control" name="user" placeholder="Usuario">
+                                        <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="user" type="text" class="form-control" name="user" value="" placeholder="Usuario">                                        
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="col-md-3 control-label">Contraseña</label>
                                     <div class="col-md-9">
-                                        <input type="password" class="form-control" name="password" placeholder="Contraseña">
+                                        <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="Contraseña">
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="confirmpassword" class="col-md-3 control-label">Contraseña</label>
                                     <div class="col-md-9">
-                                        <input type="password" class="form-control" name="confirmpassword" placeholder="Confirmar contraseña">
+                                        <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        <input id="login-confirmpassword" type="password" class="form-control" name="confirmpassword" placeholder="Confirmar Contraseña">
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <!-- Button -->                                        
                                     <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Registrar</button>  
+                                        <button id="btn-signup" type="button" class="btn sgpfc-btn-primary btn-block"><i class="icon-hand-right"></i>Registrar</button>  
                                     </div>
                                 </div>
                             </form>

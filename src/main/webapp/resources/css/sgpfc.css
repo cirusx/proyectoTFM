@@ -205,7 +205,9 @@
 	margin-top:50px;
 }
 
-
+.sgpfc-loginbox-panel {
+	border-color: dimgray;
+}
 
 .sgpfc-loginbox-heading {
 	color: white;
@@ -213,11 +215,15 @@
 	border-color: dimgray;
 }
 
+.sgpfc-loginbox-panel {
+	border-color: dimgray;
+}
+
 .sgpfc-registerbox {
 	margin-top:50px;
 }
 
-.sgpfc-loginbox-recoverypassword-link {
+.sgpfc-loginbox-recoverypassword-link > a {
 	float:right; 
 	font-size: 85%; 
 	position: relative; 
@@ -225,7 +231,7 @@
 	color: white;
 }
 
-.sgpfc-loginbox-login-link {
+.sgpfc-loginbox-login-link > a {
 	float:right; 
 	font-size: 85%; 
 	position: relative; 
@@ -238,11 +244,13 @@
 }
 
 .sgpfc-loginbox-inputgroup {
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 }
 
 .sgpfc-loginbox-btn-loginzone {
 	margin: 10 auto;
+	padding-right:0px;
+	padding-left:0px;
 }
 
 .sgpfc-loginbox-loginbutton {
@@ -257,4 +265,39 @@
 
 .sgpfc-loginbox-registerzone {
 	margin-top: 10px;
+}
+
+.sgpfc-recoverypasswordbox-button {
+	margin-top: 15px;
+}
+
+.sgpfc-createofferbox-description {
+	resize: vertical;
+}
+
+.image-preview-input {
+    position: relative;
+	overflow: hidden;
+	margin: 0px;    
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;    
+}
+.image-preview-input-file {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	cursor: pointer;
+	opacity: 0;
+	filter: alpha(opacity=0);
+}
+.image-preview-input-title {
+    margin-left:2px;
+}
+
+.sgpfc-createofferbox-temporaloffer {
+	margin-left: 10px;
 }
