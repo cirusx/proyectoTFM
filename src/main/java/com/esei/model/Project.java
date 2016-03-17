@@ -1,6 +1,9 @@
 package com.esei.model;
 
+import static javax.persistence.CascadeType.ALL;
+
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.List;
 
@@ -11,12 +14,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.*;
 
 @Entity(name="Project")
 public class Project implements Serializable{
@@ -25,6 +32,8 @@ public class Project implements Serializable{
 	
 	private Long 				projectId;
 	private String 				projectName;
+	private String 				projectCareer;
+	private int 				projectYear;
 	private byte[]				projectDraft;
 	private byte[]				projectDocumentation;
 	private Teacher				projectTeacher;
@@ -57,6 +66,22 @@ public class Project implements Serializable{
 		this.projectName = projectName;
 	}
 	
+	public String getProjectCareer() {
+		return projectCareer;
+	}
+
+	public void setProjectCareer(String projectCareer) {
+		this.projectCareer = projectCareer;
+	}
+	
+	public int getProjectYear() {
+		return projectYear;
+	}
+
+	public void setProjectYear(int projectYear) {
+		this.projectYear = projectYear;
+	}
+	
 	public byte[] getProjectDraft() {
 		return projectDraft;
 	}
@@ -73,9 +98,9 @@ public class Project implements Serializable{
 		this.projectDocumentation = projectDocumentation;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
-	//targetEntity=Teacher.class
+	@OneToOne(fetch=FetchType.EAGER, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	@JoinColumn(name="teacherId")
+	@JsonManagedReference
 	public Teacher getProjectTeacher() {
 		return projectTeacher;
 	}
@@ -84,9 +109,10 @@ public class Project implements Serializable{
 		this.projectTeacher = projectTeacher;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne(fetch=FetchType.EAGER, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	//targetEntity=Student.class
 	@JoinColumn(name="studentId")
+	@JsonManagedReference
 	public Student getProjectStudent() {
 		return projectStudent;
 	}
@@ -95,7 +121,12 @@ public class Project implements Serializable{
 		this.projectStudent = projectStudent;
 	}
 	
-	@ManyToMany
+	@ManyToMany(cascade = ALL, fetch=FetchType.EAGER)
+	@JoinTable(
+	      joinColumns={@JoinColumn(name = "Project_projectId", referencedColumnName = "projectId")},
+	      inverseJoinColumns={@JoinColumn(name = "projectSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
+	@OrderBy
+	@JsonManagedReference
 	public List<Subcategory> getProjectSubcategoryList() {
 		return projectSubcategoryList;
 	}

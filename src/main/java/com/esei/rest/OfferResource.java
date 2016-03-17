@@ -90,6 +90,29 @@ public class OfferResource {
 	}
 	
 	@GET
+	@Path("homerecommendedoffers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Offer> getHomeRecommendedOffers() {
+		try{
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		List<Offer> homeRecommendedOffers;
+		try{
+			em.getTransaction().begin();;
+			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o WHERE o.offerClose = false AND o.offerHomeRecommended = true", Offer.class);
+			homeRecommendedOffers = query.setMaxResults(3).getResultList();
+			System.out.println("ofertas " + homeRecommendedOffers);
+			em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+		return homeRecommendedOffers;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
 	@Path("lastoffers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getLastOffers() {
@@ -99,7 +122,7 @@ public class OfferResource {
 		try{
 			em.getTransaction().begin();;
 			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o ORDER BY o.offerId DESC", Offer.class);
-			lastOffers = query.setMaxResults(4).getResultList();
+			lastOffers = query.setMaxResults(3).getResultList();
 			System.out.println("ofertas " + lastOffers);
 			em.getTransaction().commit();
 			}finally{

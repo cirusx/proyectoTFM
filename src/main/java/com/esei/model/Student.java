@@ -2,9 +2,12 @@ package com.esei.model;
 
 import java.util.List;
 
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.*;
 
 @Entity(name="Student")
 @DiscriminatorValue("1")
@@ -33,6 +36,7 @@ public class Student extends User {
 	}
 	
 	@ManyToMany(mappedBy="offerRegistrationList")
+	@JsonBackReference
 	public List<Offer> getRegisterOfferList() {
 		return registerOfferList;
 	}

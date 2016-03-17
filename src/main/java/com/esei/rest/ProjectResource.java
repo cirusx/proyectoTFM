@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.esei.model.Project;
+import com.esei.model.Teacher;
 
 @Path("projects")
 public class ProjectResource {

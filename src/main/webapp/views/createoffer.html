@@ -91,8 +91,8 @@
     										$('.image-preview').popover({
         										trigger:'manual',
         										html:true,
-        										title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
-        										content: "There's no image",
+        										title: "<strong>Vista previa</strong>"+$(closebtn)[0].outerHTML,
+        										content: "Esto no es una imagen",
         										placement:'bottom'
     										});
     									// Clear event
@@ -101,7 +101,7 @@
         									$('.image-preview-filename').val("");
         									$('.image-preview-clear').hide();
         									$('.image-preview-input input:file').val("");
-        									$(".image-preview-input-title").text("Browse"); 
+        									$(".image-preview-input-title").text("Cargar Imagen"); 
     									}); 
     									// Create the preview image
     									$(".image-preview-input input:file").change(function (){     

@@ -25,6 +25,7 @@ public class User implements Serializable {
 	
 	private Long 				userId;
 	private String 				userName;
+	private String 				name;
 	private String				password;
 	private String				email;
 	private boolean				enable;
@@ -52,6 +53,14 @@ public class User implements Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public String getPassword() {

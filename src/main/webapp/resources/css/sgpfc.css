@@ -16,34 +16,34 @@
 }
 
 .sgpfc-jumbotron {
-   background-color: dimgrey;
+   background-color: #0D1E23;
 }
 
 .sgpfc-jumbotron h1 {
-    color: #ffffff;
+    color: #EEEEEE;
     font-size: 50px;
     padding: 0px;
     margin-left: 30px;
 }
 
 .sgpfc-btn-primary {
-	color: #fff;
-    background-color: dimgrey;
-    border-color: dimgray;
+	color: #EEEEEE;
+    background-color: #2BDE73;
+    border-color: #2BDBA1;
 }
 
 .sgpfc-btn-seeall {
-	color: dimgrey;
-    border-color: dimgrey;
+	color: #0D1E23;
+    border-color: #0D1E23;
     margin-top: 15px;
     font-weight: bold;
-    font-color:dimgrey;
+    font-color:#0D1E23;
 }
 	
 .sgpfc-header-links-left {
     font-size: 16px;
     font-weight: bold;
-    color: dimgrey;
+    color: #0D1E23;
 }
 
 .sgpfc-header-left {
@@ -56,7 +56,7 @@
     font-weight: bold;
   /*   float: right;
     width: 126px; */
-    color: dimgrey;
+    color: #0D1E23;
 }
 
 .sgpfc-header-right {
@@ -76,16 +76,8 @@
     margin-bottom: 15px;
 }
 
-.sgpfc-createofferform-offerimageinput {
-	
-}
-
 .sgpfc-createofferform-createofferbutton {
     float: right;
-}
-
-.sgpfc-modal-title {
-	
 }
 
  .st-sort-ascent:before {
@@ -108,7 +100,7 @@
   }
   
   .sgpfc-card-tall-big {
-    background-color: #ffffff;
+    background-color: #EEEEEE;
     border: solid 1px #D9D9DE;
     border-radius: 6px;
     line-height: 1.5;
@@ -139,7 +131,7 @@
 
 .sgpfc-card-thumbnail-img img {
     display: block;
-    height: 150px;
+    height: 200px;
     width: 100%
 }
 
@@ -157,11 +149,11 @@
 }
 
 .sgpfc-card-title a {
-    color: #0F2105;
+    color: #0D1E23;
 }
 
 .sgpfc-card-title a:hover {
-    color: #0F2105;
+    color: #0D1E23;
     text-decoration: none;
 }
 
@@ -188,7 +180,7 @@
 }
 
 .sgpfc-card-footer {
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #fff 26%);
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #EEEEEE 26%);
     border-radius: 0 0 6px 6px;
     bottom: 0;
     width: 90%;
@@ -206,17 +198,13 @@
 }
 
 .sgpfc-loginbox-panel {
-	border-color: dimgray;
+	border-color: #0D1E23;
 }
 
 .sgpfc-loginbox-heading {
 	color: white;
-	background-color: dimgrey;
-	border-color: dimgray;
-}
-
-.sgpfc-loginbox-panel {
-	border-color: dimgray;
+	background-color: #0D1E23;
+	border-color: #0D1E23;
 }
 
 .sgpfc-registerbox {
@@ -241,6 +229,7 @@
 
 .sgpfc-loginbox-panelbody {
 	padding-top:30px;
+	background-color: #EEEEEE;
 }
 
 .sgpfc-loginbox-inputgroup {
@@ -279,8 +268,8 @@
     position: relative;
 	overflow: hidden;
 	margin: 0px;    
-    color: #333;
-    background-color: #fff;
+    color: #0D1E23;
+    background-color: #eee;
     border-color: #ccc;    
 }
 .image-preview-input-file {
@@ -301,3 +290,31 @@
 .sgpfc-createofferbox-temporaloffer {
 	margin-left: 10px;
 }
+
+  .sgpfc-container-offer {
+    max-width: 1040px;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+  }
+  
+  .sgpfc-container-offer-titlezone {
+   	text-align: center;
+  }
+  
+  .sgpfc-container-offer-imagezone {
+  	height: 500px;
+  }
+  
+  .sgpfc-container-offer-imagezone > img {
+  	height: 100%;
+  	width: 100%;
+  }
+  
+    .sgpfc-container-offer-applyzone {
+  	height: 500px;
+  }
+  
+    .sgpfc-container-offer-teacherzone {
+  	height: 500px;
+  }

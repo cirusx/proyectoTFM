@@ -5,12 +5,12 @@
 <title>Home</title>
 </head>
 <body>
-	<div ng-init="getRecommendedOffers()" class="row sgpfc-home-recommended sgpfc-container-cards">
+	<div ng-init="getHomeRecommendedOffers()" class="row sgpfc-home-recommended sgpfc-container-cards">
 		<h2 class="col-xs-6">Ofertas Recomendadas</h2>
 		<a class="btn sgpfc-btn-seeall col-xs-offset-4">Ver todas</a>
 	</div>
 	<div class="row sgpfc-container-cards .sgpfc-card-wrap">
-		<div class="col-xs-3 img-responsive" ng-repeat="offer in recommendedOfferList">
+		<div class="col-xs-4 img-responsive" ng-repeat="offer in homeRecommendedOfferList">
 			<div class="panel panel-default sgpfc-card-tall-big">
 				<div class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
 					<a ng-click="getOffer(offer.offerId)" href="#/offers/{{offer.offerId}}">
@@ -39,7 +39,7 @@
 		<a class="btn sgpfc-btn-seeall col-xs-offset-4">Ver todas</a>
 	</div>
 	<div class="row sgpfc-container-cards .sgpfc-card-wrap">
-		<div class="col-xs-3 img-responsive" ng-repeat="offer in lastOfferList">
+		<div class="col-xs-4 img-responsive" ng-repeat="offer in lastOfferList">
 			<div class="panel panel-default sgpfc-card-tall-big">
 				<div class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
 					<a ng-click="getOffer(offer.offerId)" href="#/offers/{{offer.offerId}}">

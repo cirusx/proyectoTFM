@@ -39,6 +39,7 @@ public class Offer implements Serializable{
 	private List<Subcategory>	offerSubcategoryList;
 	private boolean				offerClose;
 	private boolean				offerRecommended;
+	private boolean				offerHomeRecommended;
 	private Date 				savedTime;
 	private Date 				creationTime;
 	private Long				version; 
@@ -142,6 +143,15 @@ public class Offer implements Serializable{
 
 	public void setOfferRecommended(boolean offerRecommended) {
 		this.offerRecommended = offerRecommended;
+	}
+	
+	@Column(nullable=false, columnDefinition="boolean default false")
+	public boolean isOfferHomeRecommended() {
+		return offerHomeRecommended;
+	}
+
+	public void setOfferHomeRecommended(boolean offerHomeRecommended) {
+		this.offerHomeRecommended = offerHomeRecommended;
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)

@@ -1,4 +1,5 @@
 (function(){
+
 	var app = angular.module('sgpfc', ['smart-table', 'ngRoute']);
 
 	app.config(['$routeProvider', function($routeProvider) {
@@ -23,6 +24,25 @@
 			templateUrl: '/proyectoTFM/views/home.html'
 		})
 	}]);
+	
+	app.filter('myStrictFilter', function($filter){
+	    return function(input, predicate){
+	        return $filter('filter')(input, predicate, true);
+	    }
+	});
+
+/*	app.filter('unique', function() {
+	    return function (arr, field) {
+	        var o = {}, i, l = arr.length, r = [];
+	        for(i=0; i<l;i+=1) {
+	            o[arr[i][field]] = arr[i];
+	        }
+	        for(i in o) {
+	            r.push(o[i]);
+	        }
+	        return r;
+	    };
+	 })*/
 
 	app.controller('sgpfcCtrl', function($scope, $http){
 		/*$scope.getOffers = function() {
@@ -83,15 +103,6 @@
 			})
 		
 		}
-
-		$scope.createOffer = function() {
-
-			$http({
-				method: 'POST',
-				url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
-				data: $scope.offer,
-			});
-		}
 		
 		$scope.getProjects = function() {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/projects').then(function(projects) {
@@ -101,7 +112,14 @@
 			    // err.status will contain the status code
 			})
 		}
-		
-		
+
+		$scope.createOffer = function() {
+
+			$http({
+				method: 'POST',
+				url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
+				data: $scope.offer,
+			});
+		}
 	});
 })();
