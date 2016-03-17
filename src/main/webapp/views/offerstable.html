@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -12,7 +14,7 @@
 				<tr>
 					<th st-sort="offerId">Id</th>
 					<th st-sort="offerName">Nombre</th>
-					<th st-sort="offerDescription">Descripción</th>
+					<th st-sort="offerDescription">DescripciÃ³n</th>
 					<th st-sort="teacher">Profesor</th>
 					<th st-sort="offerClose">Oferta Cerrada</th>
 					<th st-sort="offerWithLimit">Oferta con Fecha Limite</th>
@@ -25,7 +27,7 @@
 						placeholder="buscar por nombre" class="input-sm form-control"
 						type="search" /></th>
 					<th><input st-search="offerDescription"
-						placeholder="buscar por descripción" class="input-sm form-control"
+						placeholder="buscar por descripciÃ³n" class="input-sm form-control"
 						type="search" /></th>
 					<th><input st-search="teacher"
 						placeholder="buscar por profesor" class="input-sm form-control"
@@ -41,7 +43,7 @@
 								value="{{offer.offerWithLimit}}">{{offer.offerWithLimit}}</option>
 					</select></th>
 					<th><input st-search="offerTimeLimit"
-						placeholder="buscar por fecha límite"
+						placeholder="buscar por fecha lÃ­mite"
 						class="input-sm form-control" type="search" /></th>
 					<th></th>
 				</tr>
