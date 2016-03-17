@@ -94,6 +94,16 @@
 		
 		}
 		
+		$scope.getHomeRecommendedOffers = function() {
+			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/homerecommendedoffers').then(function(recommendedOffers) {
+			    $scope.homeRecommendedOfferList = homeRecommendedOffers.data;
+			  }, function(err) {
+			    console.error('ERR', err);
+			    // err.status will contain the status code
+			})
+		
+		}
+		
 		$scope.getLastOffers = function() {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/lastoffers').then(function(lastOffers) {
 			    $scope.lastOfferList = lastOffers.data;
