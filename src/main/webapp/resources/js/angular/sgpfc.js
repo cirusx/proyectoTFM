@@ -95,7 +95,7 @@
 		}
 		
 		$scope.getHomeRecommendedOffers = function() {
-			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/homerecommendedoffers').then(function(recommendedOffers) {
+			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/homerecommendedoffers').then(function(homeRecommendedOffers) {
 			    $scope.homeRecommendedOfferList = homeRecommendedOffers.data;
 			  }, function(err) {
 			    console.error('ERR', err);
