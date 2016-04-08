@@ -18,7 +18,7 @@ import javax.persistence.Version;
 
 @Entity(name="User")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name="EMP_TYPE", discriminatorType=DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name="USER_TYPE", discriminatorType=DiscriminatorType.INTEGER)
 public class User implements Serializable {
 
 	private static final long serialVersionUID = -4722216552949310274L;
