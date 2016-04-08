@@ -63,7 +63,7 @@
 			})
 		
 		}
-		
+
 		$scope.getOffers = function() {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers').then(function(offers) {
 			    $scope.offerList = offers.data;

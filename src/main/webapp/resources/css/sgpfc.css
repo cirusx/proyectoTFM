@@ -311,10 +311,23 @@
   	width: 100%;
   }
   
-    .sgpfc-container-offer-applyzone {
+  .sgpfc-container-offer-applyzone {
   	height: 500px;
   }
   
-    .sgpfc-container-offer-teacherzone {
+  .sgpfc-container-offer-applyzone-number {
+  	font-weight: bold;
+  }
+  
+  .sgpfc-container-offer-applyzone-applybutton {
+  	margin-top: 20px;
+  	margin-bottom: 20px;
+  }
+  
+  .sgpfc-container-offer-descriptionzone {
+  	margin-top: 30px;
+  }
+  
+  .sgpfc-container-offer-teacherzone {
   	height: 500px;
   }

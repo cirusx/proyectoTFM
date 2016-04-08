@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>Oferta</title>
 </head>
 <body>
-<div class="sgpfc-container-offer">
+<div ng-init="getOffer(getOfferId())" class="sgpfc-container-offer">
 	<div class="sgpfc-container-offer-titlezone">
 		<h2>{{offer.offerName}}</h2>
 		<p>dirigido por <a><b>{{offer.teacher.name}}</b></a></p>
@@ -14,14 +14,24 @@
 	<div class="col-xs-8 sgpfc-container-offer-imagezone">
 		<img src="{{offer.offerImage}}" class="img-responsive">
 	</div>
-	<div ng-show class="col-xs-4 sgpfc-container-offer-applyzone">
-		<h1>{{offer.offer}}</h1>
+	<div ng-show="{{offer.offerWithLimit}}" class="ng-hide col-xs-4 sgpfc-container-offer-applyzone">
+		<h1 class="sgpfc-container-offer-applyzone-number">50{{offer.offer}}</h1>
 		<span class="text" >Alumnos Inscritos</span>
-		<a class="btn sgpfc-btn-primary btn-block">Inscribirse</a>
-		<span class="text" >Esta oferta finaliza el {{offer.offer}}</span>
-		
+		<a class="btn sgpfc-btn-primary btn-block sgpfc-container-offer-applyzone-applybutton">Inscribirse</a>
+		<p><span class="text" >Esta oferta finaliza el <b>{{offer.offerTimeLimit}}</b></span></p>
+		<span class="text" >Categorias de la oferta:</span>
+		<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
 	</div>
-	<div ng-show class="col-xs-4 sgpfc-container-offer-teacherzone"></div>
+	<div ng-show="{{!offer.offerWithLimit}}" class="col-xs-4 sgpfc-container-offer-teacherzone">
+		<h1 class="sgpfc-container-offer-applyzone-number">Contacto</h1>
+		<p>Profesor: <a><b>{{offer.teacher.name}}</b></a></p>
+		<p>Correo Electrónico: <a><b>{{offer.teacher.email}}</b></a></p>
+		<span class="text" >Categorias de la oferta:</span>
+		<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+	</div>
+	<div class="col-xs-12 sgpfc-container-offer-descriptionzone">
+		<span class="text">{{offer.offerDescription}}</span>
+	</div>
 </div>
 
 </body>
