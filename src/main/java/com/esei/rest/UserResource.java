@@ -71,7 +71,7 @@ public class UserResource {
 		List<User> students;
 		try{
 			em.getTransaction().begin();;
-			TypedQuery<User> query = em.createQuery("SELECT o FROM User o WHERE o.USER_TYPE = 1", User.class);
+			TypedQuery<User> query = em.createQuery("SELECT o FROM User o INNER JOIN Student s ON o.userId = s.userId", User.class);
 			students = query.getResultList();
 			System.out.println("estudiantes " + students);
 			em.getTransaction().commit();
@@ -94,7 +94,7 @@ public class UserResource {
 		List<User> teachers;
 		try{
 			em.getTransaction().begin();;
-			TypedQuery<User> query = em.createQuery("SELECT o FROM User o WHERE o.USER_TYPE = 2", User.class);
+			TypedQuery<User> query = em.createQuery("SELECT o FROM User o INNER JOIN Teacher t ON o.userId = t.userId", User.class);
 			teachers = query.getResultList();
 			System.out.println("profesores " + teachers);
 			em.getTransaction().commit();

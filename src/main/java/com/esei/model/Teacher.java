@@ -10,11 +10,13 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import com.fasterxml.jackson.annotation.*;
 
 @Entity(name="Teacher")
 @DiscriminatorValue("2")
+@PrimaryKeyJoinColumn(name="userId")
 public class Teacher extends User {
 
 	private static final long serialVersionUID = 2937085374262803187L;
