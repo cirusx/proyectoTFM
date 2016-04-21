@@ -7,6 +7,15 @@
 <title>Iniciar</title>
 </head>
 <body>
+
+<form ua-login>
+    <input name="login" placeholder="Username"><br>
+    <input name="password" placeholder="Password" type="password"><br>
+    <button type="submit">Log In</button>
+
+    <p ng-show="error">{{ error.message }}</p>
+</form>
+
 <div class="container">    
         <div id="loginbox" class="sgpfc-loginbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel sgpfc-loginbox-panel" >
