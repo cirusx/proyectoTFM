@@ -136,7 +136,7 @@ public class OfferResource {
 	}
 	 
 	@GET
-	@Path("{offerId}")
+	@Path("/{offerId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Offer getOffer(@PathParam("offerId") Long offerId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();

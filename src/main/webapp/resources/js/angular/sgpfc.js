@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('sgpfc', ['smart-table', 'ngRoute']);
+	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'UserApp']);
 
 	app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/offers', {
@@ -10,9 +10,11 @@
 		}).when('/projects', {
 			templateUrl: '/proyectoTFM/views/projects.html'
 		}).when('/login', {
-			templateUrl: '/proyectoTFM/views/login.html'
+			templateUrl: '/proyectoTFM/views/login.html',
+			login: true
 		}).when('/register', {
-			templateUrl: '/proyectoTFM/views/register.html'
+			templateUrl: '/proyectoTFM/views/register.html',
+			public: true
 		}).when('/recoverpassword', {
 			templateUrl: '/proyectoTFM/views/recoverpassword.html'
 		}).when('/createoffer', {
@@ -24,6 +26,11 @@
 			templateUrl: '/proyectoTFM/views/home.html'
 		})
 	}]);
+	
+	app.run(function(user) {
+		user.init({ appId: '5718fee9b3e0c' });
+	
+	});
 	
 	app.filter('myStrictFilter', function($filter){
 	    return function(input, predicate){
