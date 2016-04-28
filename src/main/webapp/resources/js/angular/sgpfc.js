@@ -1,12 +1,13 @@
 (function(){
 
-	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'UserApp']);
+	var app = angular.module('sgpfc', ['smart-table', 'ngRoute']);
 
 	app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/offers', {
 			templateUrl: '/proyectoTFM/views/offers.html'
 		}).when('/offers/:offerId', {
-			templateUrl: '/proyectoTFM/views/offer.html'
+			templateUrl: '/proyectoTFM/views/offer.html',
+			controller: 'offerController'
 		}).when('/projects', {
 			templateUrl: '/proyectoTFM/views/projects.html'
 		}).when('/login', {
@@ -27,10 +28,9 @@
 		})
 	}]);
 	
-	app.run(function(user) {
-		user.init({ appId: '5718fee9b3e0c' });
+
 	
-	});
+	
 	
 	app.filter('myStrictFilter', function($filter){
 	    return function(input, predicate){
@@ -50,6 +50,12 @@
 	        return r;
 	    };
 	 })*/
+	
+	app.controller('offerController',['$scope', '$routeParams',
+	                                  function ($scope, $routeParams) {
+	      //Get ID out of current URL
+	      $scope.offer_Id = $routeParams.id;
+	}]);
 
 	app.controller('sgpfcCtrl', function($scope, $http){
 		/*$scope.getOffers = function() {
