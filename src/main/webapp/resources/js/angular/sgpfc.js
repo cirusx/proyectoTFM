@@ -51,7 +51,15 @@
 	                                  function ($scope, $routeParams) {
 	      //Get ID out of current URL
 	      var offerId = $scope.offer_Id = $routeParams.id;
-	      $scope.offer = getOffer(offerId);
+	  	$scope.getOffer = function(offerId) {
+			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
+			    $scope.offer = offer.data;
+			  }, function(err) {
+			    console.error('ERR', err);
+			    // err.status will contain the status code
+			})
+		
+		}
 	}]);
 
 	app.controller('sgpfcCtrl', function($scope, $http){
