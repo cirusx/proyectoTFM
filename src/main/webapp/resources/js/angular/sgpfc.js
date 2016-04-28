@@ -28,10 +28,6 @@
 		})
 	}]);
 	
-
-	
-	
-	
 	app.filter('myStrictFilter', function($filter){
 	    return function(input, predicate){
 	        return $filter('filter')(input, predicate, true);
@@ -54,7 +50,8 @@
 	app.controller('offerController',['$scope', '$routeParams',
 	                                  function ($scope, $routeParams) {
 	      //Get ID out of current URL
-	      $scope.offer_Id = $routeParams.id;
+	      var offerId = $scope.offer_Id = $routeParams.id;
+	      $scope.offer = getOffer(offerId);
 	}]);
 
 	app.controller('sgpfcCtrl', function($scope, $http){
