@@ -47,19 +47,16 @@
 	    };
 	 })*/
 	
-	app.controller('offerController',['$scope', '$routeParams',
-	                                  function ($scope, $routeParams) {
+	app.controller('offerController',['$scope', '$http', '$location', '$routeParams',
+	                                  function ($scope, $http, $location,$routeParams) {
+		
 	      //Get ID out of current URL
-	      var offerId = $scope.offer_Id = $routeParams.id;
-	  	$scope.getOffer = function(offerId) {
-			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
-			    $scope.offer = offer.data;
-			  }, function(err) {
-			    console.error('ERR', err);
-			    // err.status will contain the status code
+		var offerId = $scope.offer_Id = $routeParams.offerId;
+			$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
+				$scope.offer = offer.data;
 			})
 		
-		}
+		
 	}]);
 
 	app.controller('sgpfcCtrl', function($scope, $http){
