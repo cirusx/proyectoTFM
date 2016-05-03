@@ -64,7 +64,7 @@
 	}]);
 	
 	app.controller('authController',['$scope', '$http', '$location', '$cookies',
-	                                  function ($scope, $http, $location,$cookies) {
+	                                  function ($scope, $http, $location, $cookies) {
 	$scope.login = function() {
 		
 		var aaa= null;
