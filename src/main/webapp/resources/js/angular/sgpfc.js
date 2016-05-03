@@ -84,14 +84,6 @@
 		
 		}*/
 		
-		$scope.login = function() {
-			
-			var asd = null;
-			/*$cookies.put('user', 'user.email');
-			$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);*/
-		
-		}
-		
 		$scope.getOffer = function(offerId) {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
 			    $scope.offer = offer.data;
