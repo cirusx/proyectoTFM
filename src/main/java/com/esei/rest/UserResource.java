@@ -159,5 +159,13 @@ public class UserResource {
         }
         return out;  
 	}
+	
+	public Response login(@HeaderParam("Authorization") String
+			credentials, ...) {
+			        //decodificar el base64 de credentials y separar los ":" para tener el
+			login/pass que te envian
+
+			}
+
 
 }
