@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!--  <meta charset="ISO-8859-1"> -->
-
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />    
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />   
 <meta name="viewport" content="width=device-width, initial-scale=1"><title>Oferta</title>
 </head>
 <body>
@@ -27,7 +25,7 @@
 	<div ng-hide="offer.offerWithLimit" class="col-xs-4 sgpfc-container-offer-teacherzone">
 		<h1 class="sgpfc-container-offer-applyzone-number">Contacto</h1>
 		<p>Profesor: <a><b>{{offer.teacher.name}}</b></a></p>
-		<p>Correo Electrónico: <a><b>{{offer.teacher.email}}</b></a></p>
+		<p>Correo ElectrÃ³nico: <a><b>{{offer.teacher.email}}</b></a></p>
 		<span class="text" >Categorias de la oferta:</span>
 		<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
 	</div>
