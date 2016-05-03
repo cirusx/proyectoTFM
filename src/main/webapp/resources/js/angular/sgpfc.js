@@ -47,7 +47,7 @@
 	 })*/
 	
 	app.controller('offerController',['$scope', '$http', '$location', '$routeParams',
-	                                  function ($scope, $http, $location,$routeParams) {
+	                                  function ($scope, $http, $location, $routeParams) {
 		
 	      //Get ID out of current URL
 		var offerId = $scope.offer_Id = $routeParams.offerId;
