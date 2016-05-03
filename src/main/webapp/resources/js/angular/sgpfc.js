@@ -12,8 +12,9 @@
 			templateUrl: '/proyectoTFM/views/projects.html'
 		}).when('/login', {
 			templateUrl: '/proyectoTFM/views/login.html',
+			controller: 'authController'
 		}).when('/register', {
-			templateUrl: '/proyectoTFM/views/register.html',
+			templateUrl: '/proyectoTFM/views/register.html'
 		}).when('/recoverpassword', {
 			templateUrl: '/proyectoTFM/views/recoverpassword.html'
 		}).when('/createoffer', {
@@ -51,20 +52,25 @@
 	      //Get ID out of current URL
 		var offerId = $scope.offer_Id = $routeParams.offerId;
 		$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
-			$scope.offer = offer.data;
+			if (offer.data.offerId==null) {
+				$location.path("/");
+			}else {
+				$scope.offer = offer.data;
+			}
 		}, function(err) {
 		    console.error('ERR', err);
 		    // err.status will contain the status code
-		})
+		})	
+	}]);
+	
+	app.controller('authController'['$scope', '$http', '$location', '$cookies',
+	                                  function ($scope, $http, $location,$cookies) {
+	$scope.login = function() {
 		
-		$scope.login = function() {
-			
-			$cookies.put('user', 'user.email');
-			$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);
-		
-		}
-		
-		
+		$cookies.put('user', 'user.email');
+		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);
+	
+	}
 	}]);
 
 	app.controller('sgpfcCtrl', function($scope, $http){
