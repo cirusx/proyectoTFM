@@ -68,8 +68,8 @@
 	$scope.login = function() {
 		
 		var aaa= null;
-		/*$cookies.put('user', 'user.email');
-		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);*/
+		$cookies.put('user', 'user.email');
+		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);
 	
 	}
 	}]);
