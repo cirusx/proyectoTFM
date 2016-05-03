@@ -22,7 +22,7 @@
 		<span class="text" >Categorias de la oferta:</span>
 		<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
 	</div>
-	<div ng-hide="{{offer.offerWithLimit}}" class="col-xs-4 sgpfc-container-offer-teacherzone">
+	<div class="col-xs-4 sgpfc-container-offer-teacherzone">
 		<h1 class="sgpfc-container-offer-applyzone-number">Contacto</h1>
 		<p>Profesor: <a><b>{{offer.teacher.name}}</b></a></p>
 		<p>Correo Electrónico: <a><b>{{offer.teacher.email}}</b></a></p>

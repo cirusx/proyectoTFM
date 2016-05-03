@@ -12,10 +12,8 @@
 			templateUrl: '/proyectoTFM/views/projects.html'
 		}).when('/login', {
 			templateUrl: '/proyectoTFM/views/login.html',
-			login: true
 		}).when('/register', {
 			templateUrl: '/proyectoTFM/views/register.html',
-			public: true
 		}).when('/recoverpassword', {
 			templateUrl: '/proyectoTFM/views/recoverpassword.html'
 		}).when('/createoffer', {
