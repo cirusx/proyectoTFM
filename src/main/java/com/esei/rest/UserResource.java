@@ -15,10 +15,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.esei.model.Offer;
-import com.esei.model.Project;
-import com.esei.model.Teacher;
 import com.esei.model.User;
+
 
 @Path("users")
 public class UserResource {
@@ -159,13 +157,5 @@ public class UserResource {
         }
         return out;  
 	}
-	
-	public Response login(@HeaderParam("Authorization") String
-			credentials, ...) {
-			        //decodificar el base64 de credentials y separar los ":" para tener el
-			login/pass que te envian
-
-			}
-
 
 }
