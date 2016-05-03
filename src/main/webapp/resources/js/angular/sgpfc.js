@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('sgpfc', ['smart-table', 'ngRoute']);
+	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies']);
 
 	app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/offers', {
@@ -52,9 +52,19 @@
 		
 	      //Get ID out of current URL
 		var offerId = $scope.offer_Id = $routeParams.offerId;
-			$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
-				$scope.offer = offer.data;
-			})
+		$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
+			$scope.offer = offer.data;
+		}, function(err) {
+		    console.error('ERR', err);
+		    // err.status will contain the status code
+		})
+		
+		$scope.login = function() {
+			
+			$cookies.put('user', 'user.email');
+			$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);
+		
+		}
 		
 		
 	}]);
