@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -20,6 +21,13 @@ import com.esei.model.User;
 
 @Path("users")
 public class UserResource {
+	
+	@GET
+	public Response getLogin(@HeaderParam("Authorization") String credentials) {
+        //decodificar el base64 de credentials y separar los ":" para tener ellogin/pass que te envian
+Response respuesta=null;
+return respuesta;
+}
 	
 	
 	@GET
