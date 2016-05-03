@@ -63,12 +63,13 @@
 		})	
 	}]);
 	
-	app.controller('authController'['$scope', '$http', '$location', '$cookies',
+	app.controller('authController',['$scope', '$http', '$location', '$cookies',
 	                                  function ($scope, $http, $location,$cookies) {
 	$scope.login = function() {
 		
-		$cookies.put('user', 'user.email');
-		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);
+		var aaa= null;
+		/*$cookies.put('user', 'user.email');
+		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);*/
 	
 	}
 	}]);
@@ -82,6 +83,14 @@
 			});
 		
 		}*/
+		
+		$scope.login = function() {
+			
+			var asd = null;
+			/*$cookies.put('user', 'user.email');
+			$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);*/
+		
+		}
 		
 		$scope.getOffer = function(offerId) {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
