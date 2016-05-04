@@ -2,9 +2,7 @@
 
 	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies']);
 
-//	['$routeProvider', 
-	app.config(function($routeProvider, $locationProvider, $httpProvider) {
-		$httpProvider.responseInterceptors.push('httpInterceptor');
+	app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/offers', {
 			templateUrl: '/proyectoTFM/views/offers.html'
 		}).when('/offers/:offerId', {
@@ -26,75 +24,8 @@
 		}).otherwise({
 			redirectTo: '/',
 			templateUrl: '/proyectoTFM/views/home.html'
-		});
-		$locationProvider.html5Mode(true);
-	});
-	
-	app.run(function (api) {
-		  api.init();
-		});
-	angular.module('sgpfc').controller('authController', function ($scope, $location, $cookieStore, authorization, api) {
-		  $scope.title = 'Likeastore. Analytics';
-
-		  $scope.login = function () {
-		      var credentials = {
-		          username: this.username,
-		          token: this.token
-		      };
-
-		      var success = function (data) {
-		          var token = data.token;
-
-		          api.init(token);
-
-		          $cookieStore.put('token', token);
-		          $location.path('/');
-		      };
-
-		      var error = function () {
-		          // TODO: apply user notification here..
-		      };
-
-		      authorization.login(credentials).success(success).error(error);
-		  };
-		});
-	
-	angular.module('sgpfc').factory('authorization', function ($http, config) {
-		  var url = config.analytics.url;
-
-		  return {
-		      login: function (credentials) {
-		          return $http.post(url + '/auth', credentials);
-		      }
-		  };
-		});
-	
-	angular.module('sgpfc').factory('httpInterceptor', function httpInterceptor ($q, $window, $location) {
-		  return function (promise) {
-		      var success = function (response) {
-		          return response;
-		      };
-
-		      var error = function (response) {
-		          if (response.status === 401) {
-		              $location.url('/login');
-		          }
-
-		          return $q.reject(response);
-		      };
-
-		      return promise.then(success, error);
-		  };
-		});
-	
-	angular.module('sgpfc').factory('api', function ($http, $cookies) {
-		  return {
-		      init: function (token) {
-		          $http.defaults.headers.common['X-Access-Token'] = token || $cookies.token;
-		      }
-		  };
-		});
-	
+		})
+	}]);
 	
 	app.filter('myStrictFilter', function($filter){
 	    return function(input, predicate){
@@ -132,7 +63,7 @@
 		})	
 	}]);
 	
-/*	app.controller('authController',['$scope', '$http', '$location', '$cookies',
+	app.controller('authController',['$scope', '$http', '$location', '$cookies',
 	                                  function ($scope, $http, $location, $cookies) {
 	$scope.login = function() {
 		
@@ -143,7 +74,7 @@
 		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);
 	
 	}
-	}]);*/
+	}]);
 
 	app.controller('sgpfcCtrl', function($scope, $http){
 		/*$scope.getOffers = function() {
