@@ -38,7 +38,7 @@
 			templateUrl: '/proyectoTFM/views/projects.html'
 		}).when('/login', {
 			templateUrl: '/proyectoTFM/views/login.html',
-			controller: 'authController'
+			controller: 'LoginController'
 		}).when('/register', {
 			templateUrl: '/proyectoTFM/views/register.html'
 		}).when('/recoverpassword', {
