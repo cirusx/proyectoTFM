@@ -1,6 +1,29 @@
 (function(){
 
-	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies']);
+//	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies']);
+
+	var app = angular.module('sgpfc', [
+	    'Authentication',
+	    'Home',
+	    'ngRoute',
+	    'ngCookies'
+	])
+	 
+	.run(['$rootScope', '$location', '$cookieStore', '$http',
+	    function ($rootScope, $location, $cookieStore, $http) {
+	        // keep user logged in after page refresh
+	        $rootScope.globals = $cookieStore.get('globals') || {};
+	        if ($rootScope.globals.currentUser) {
+	            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+	        }
+	 
+	        $rootScope.$on('$locationChangeStart', function (event, next, current) {
+	            // redirect to login page if not logged in
+	            if ($location.path() !== '/login' && !$rootScope.globals.currentUser) {
+	                $location.path('/login');
+	            }
+	        });
+	    }]);
 
 	app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/offers', {
@@ -164,4 +187,86 @@
 			});
 		}
 	});
+	
+	angular.module('Authentication')
+	
+	.controller('LoginController',
+    ['$scope', '$rootScope', '$location', 'AuthenticationService',
+    function ($scope, $rootScope, $location, AuthenticationService) {
+        // reset login status
+        AuthenticationService.ClearCredentials();
+ 
+        $scope.login = function () {
+            $scope.dataLoading = true;
+            AuthenticationService.Login($scope.username, $scope.password, function(response) {
+                if(response.success) {
+                    AuthenticationService.SetCredentials($scope.username, $scope.password);
+                    $location.path('/');
+                } else {
+                    $scope.error = response.message;
+                    $scope.dataLoading = false;
+                }
+            });
+        };
+    }])
+	 
+	.factory('AuthenticationService',
+	    ['$http', '$cookieStore', '$rootScope', '$timeout',
+	    function ($http, $cookieStore, $rootScope, $timeout) {
+	        var service = {};
+
+	        service.Login = function (username, password, callback) {
+
+	            /* Dummy authentication for testing, uses $timeout to simulate api call
+	             ----------------------------------------------*/
+	            $timeout(function(){
+	                var response = { success: username === 'test' && password === 'test' };
+	                if(!response.success) {
+	                    response.message = 'Username or password is incorrect';
+	                }
+	                callback(response);
+	            }, 1000);
+
+
+	            /* Use this for real authentication
+	             ----------------------------------------------*/
+	            //$http.post(''http://localhost:8080/proyectoTFM/rest/login', { username: username, password: password })
+	            //    .success(function (response) {
+	            //        callback(response);
+	            //    });
+	            
+	            // Simple GET request example:
+
+	        };
+	 
+	        service.SetCredentials = function (username, password) {
+	            var authdata = btoa(username + ':' + password);
+	 
+	            $rootScope.globals = {
+	                currentUser: {
+	                    username: username,
+	                    authdata: authdata
+	                }
+	            };
+	 
+	            $http.defaults.headers.common['Authorization'] = 'Basic ' +btoa(username+':'+password);; // jshint ignore:line
+	            $cookieStore.put('globals', $rootScope.globals);
+	        };
+	 
+	        service.ClearCredentials = function () {
+	            $rootScope.globals = {};
+	            $cookieStore.remove('globals');
+	            $http.defaults.headers.common.Authorization = 'Basic ';
+	        };
+	 
+	        return service;
+	    }]);
+	
+	angular.module('Home')
+	 
+	.controller('HomeController',
+	    ['$scope',
+	    function ($scope) {
+	      
+	    }]);
 })();

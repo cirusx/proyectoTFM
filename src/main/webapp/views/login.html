@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<!-- <div ng-show="error" class="alert alert-danger">{{error}}</div>
+<div ng-show="error" class="alert alert-danger">{{error}}</div>
 <form name="form" ng-submit="login()" role="form">
     <div class="form-group">
         <label for="username">Username</label>
@@ -26,9 +26,9 @@
         <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-danger">Login</button>
         <img ng-if="dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
     </div>
-</form> -->
+</form>
 
-<div class="container">    
+<!-- <div class="container">    
         <div id="loginbox" class="sgpfc-loginbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel sgpfc-loginbox-panel" >
                     <div class="panel-heading sgpfc-loginbox-heading">
@@ -39,27 +39,26 @@
                     <div class="sgpfc-loginbox-panelbody panel-body">
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-<!--                         <div ng-show="error" class="alert alert-danger">{{error}}</div> -->
-                            
-                        <form id="loginform" class="form-group" role="form" ng-submit="login()">
+                        <div ng-show="error" class="alert alert-danger">{{error}}</div>
+                        <form id="loginform" class="form-group" role="form">
                                     
                             <div class="sgpfc-loginbox-inputgroup input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input id="email" type="email" class="form-control" name="email" placeholder="Email o Usuario" ng-model="user.email" required>                                        
-<!--                                     <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span> -->
+                                    <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
                                     </div>
                                 
                             <div class="sgpfc-loginbox-inputgroup input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                         <input id="password" type="password" class="form-control" name="password" placeholder="Contraseña" ng-model="user.password" required>
-<!--                                     <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span> -->
+                                    <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
                                     </div>
 
                                 <div class="form-group">
                                     <div class="sgpfc-loginbox-btn-loginzone col-sm-12 controls">
-<!--                                       -->
+                    
                                       <a id="btn-login" class="btn sgpfc-btn-primary btn-block" type="submit" ng-click="login()">Iniciar Sesión</a>
-                                    <!-- ng-disabled="form.$invalid || dataLoading" -->
+                                    ng-disabled="form.$invalid || dataLoading"
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -75,6 +74,6 @@
                         </div>                     
                     </div>  
         </div>
-    </div>
+    </div> -->
     </body>
 </html>
