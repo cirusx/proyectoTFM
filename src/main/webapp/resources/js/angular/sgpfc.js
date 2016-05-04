@@ -1,6 +1,9 @@
 (function(){
 
 //	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies']);
+	
+	angular.module('Authentication', []);
+	angular.module('Home', []);
 
 	var app = angular.module('sgpfc', [
 	    'Authentication',
