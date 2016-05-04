@@ -91,7 +91,7 @@
 	
 	app.controller('authController',['$scope', '$http', '$location', '$cookies',
 	                                  function ($scope, $http, $location, $cookies) {
-	$scope.login = function() {
+/*	$scope.login = function() {
 		
 		var aaa= null;
 		var login = $scope.user.email;
@@ -100,7 +100,7 @@
 		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);
 	
 	}
-	}]);
+	}]);*/
 
 	app.controller('sgpfcCtrl', function($scope, $http){
 		/*$scope.getOffers = function() {
