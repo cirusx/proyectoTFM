@@ -99,8 +99,8 @@
 		$cookies.put('user', login+':'+password);
 		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);
 	
-	}
-	}]);*/
+	}*/
+	}]);
 
 	app.controller('sgpfcCtrl', function($scope, $http){
 		/*$scope.getOffers = function() {
