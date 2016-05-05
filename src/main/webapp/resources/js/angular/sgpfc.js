@@ -52,16 +52,19 @@
 		
 	      //Get ID out of current URL
 		var offerId = $scope.offer_Id = $routeParams.offerId;
-		$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
-			if (offer.data.offerId==null) {
-				$location.path("/");
-			}else {
-				$scope.offer = offer.data;
-			}
-		}, function(err) {
-		    console.error('ERR', err);
-		    // err.status will contain the status code
-		})
+		if (offerId != undefined) {
+			$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
+				if (offer.data.offerId==null) {
+					$location.path("/");
+				}else {
+					$scope.offer = offer.data;
+				}
+			}, function(err) {
+			    console.error('ERR', err);
+			    // err.status will contain the status code
+			})
+		}
+		
 		
 		$scope.createOffer = function() {
 			
