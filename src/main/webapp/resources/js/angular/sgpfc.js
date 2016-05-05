@@ -64,12 +64,13 @@
 		})
 		
 		$scope.createOffer = function() {
-
-			$http({
+			
+			$http.post('http://localhost:8080/proyectoTFM/rest/offers/create', $scope.offer);
+			/*$http({
 				method: 'POST',
 				url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
 				data: $scope.offer,
-			});
+			});*/
 		}
 	}]);
 	

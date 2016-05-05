@@ -45,20 +45,19 @@
                             <div class="sgpfc-loginbox-inputgroup input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input id="email" type="email" class="form-control" name="email" placeholder="Email o Usuario" ng-model="user.email" required>                                        
-                                    <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+<!--                                     <span ng-show="form.email.$dirty && form.username.$error.required" class="help-block">Email is required</span> -->
                                     </div>
                                 
                             <div class="sgpfc-loginbox-inputgroup input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                         <input id="password" type="password" class="form-control" name="password" placeholder="Contraseña" ng-model="user.password" required>
-                                    <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+<!--                                     <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span> -->
                                     </div>
 
                                 <div class="form-group">
                                     <div class="sgpfc-loginbox-btn-loginzone col-sm-12 controls">
                     
                                       <a id="btn-login" class="btn sgpfc-btn-primary btn-block" type="submit" ng-click="login()">Iniciar Sesión</a>
-                                    ng-disabled="form.$invalid || dataLoading"
                                     </div>
                                 </div>
                                 <div class="form-group">
