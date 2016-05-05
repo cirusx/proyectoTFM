@@ -70,6 +70,7 @@
 				method: 'POST',
 				url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
 				data: $scope.offer,
+				headers: {'Content-Type': 'application/json'}
 			});*/
 		}
 	}]);
