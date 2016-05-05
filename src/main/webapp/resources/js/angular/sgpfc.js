@@ -18,7 +18,8 @@
 		}).when('/recoverpassword', {
 			templateUrl: '/proyectoTFM/views/recoverpassword.html'
 		}).when('/createoffer', {
-			templateUrl: '/proyectoTFM/views/createoffer.html'
+			templateUrl: '/proyectoTFM/views/createoffer.html',
+			controller: 'offerController'
 		}).when('/createproject', {
 			templateUrl: '/proyectoTFM/views/createproject.html'
 		}).otherwise({
@@ -60,7 +61,16 @@
 		}, function(err) {
 		    console.error('ERR', err);
 		    // err.status will contain the status code
-		})	
+		})
+		
+		$scope.createOffer = function() {
+
+			$http({
+				method: 'POST',
+				url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
+				data: $scope.offer,
+			});
+		}
 	}]);
 	
 	app.controller('authController',['$scope', '$http', '$location', '$cookies',
@@ -155,13 +165,6 @@
 			})
 		}
 
-		$scope.createOffer = function() {
-
-			$http({
-				method: 'POST',
-				url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
-				data: $scope.offer,
-			});
-		}
+		
 	});
 })();
