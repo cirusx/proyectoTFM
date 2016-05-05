@@ -71,7 +71,7 @@
 		var login = $scope.user.email;
 		var password = $scope.user.password;
 		$cookies.put('user', login+':'+password);
-		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);
+		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password).sucess()
 	
 	}
 	}]);
