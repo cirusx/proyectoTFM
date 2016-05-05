@@ -40,6 +40,19 @@
 	
 </script>
 
+<script>
+      $(document).ready(function() {
+          $("a.dropdown-toggle").click(function(ev) {
+              $("a.dropdown-toggle").dropdown("toggle");
+              return false;
+          });
+          $("ul.dropdown-menu a").click(function(ev) {
+              $("a.dropdown-toggle").dropdown("toggle");
+              return false;
+          });
+      });
+    </script>
+
 </head>
 <body ng-controller="sgpfcCtrl" ng-init=getActiveOffers() background="./resources/img/debut_light.png">
 	<div ng-include src="'/proyectoTFM/views/header.html'"></div>
