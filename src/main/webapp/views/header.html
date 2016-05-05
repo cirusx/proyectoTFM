@@ -7,6 +7,7 @@
 <title>Header</title>
 </head>
 <body>
+<script>$('.dropdown-toggle').dropdown();</script>
 	<header class="header">
 		<div class="navbar navbar-static-top">
 			<div class="navbar-inner">
@@ -31,11 +32,10 @@
 							</ul>
 						</li> -->
 						<li><div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Dropdown
-    <span class="caret"></span>
+  <button  id="dLabel" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action <span class="caret"></span>
   </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+  <ul class="dropdown-menu" aria-labelledby="dLabel">
     <li><a href="#">Action</a></li>
     <li><a href="#">Another action</a></li>
     <li><a href="#">Something else here</a></li>
@@ -43,6 +43,8 @@
     <li><a href="#">Separated link</a></li>
   </ul>
 </div></li>
+
+
 						
 						<li class="dropdown col-xs-6 sgpfc-header-left">
 							<a href="#" class="dropdown-toggle sgpfc-header-links-left" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
