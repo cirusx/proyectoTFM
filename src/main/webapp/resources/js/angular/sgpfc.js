@@ -22,7 +22,7 @@
 		}).when('/createproject', {
 			templateUrl: '/proyectoTFM/views/createproject.html'
 		}).otherwise({
-			redirectTo: '/',
+			redirectTo: '/home',
 			templateUrl: '/proyectoTFM/views/home.html'
 		})
 	}]);
