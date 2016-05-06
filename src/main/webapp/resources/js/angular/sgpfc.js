@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies']);
+	var app = angular.module('sgpfc', ['smart-table', 'ngRoute']);
 
 	app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/offers', {
@@ -47,11 +47,11 @@
 	    };
 	 })*/
 	
-	app.controller('offerController',['$scope', '$http', '$location', '$routeParams',
-	                                  function ($scope, $http, $location, $routeParams) {
+	app.controller('offerController',['$scope', '$http', '$routeParams',
+	                                  function ($scope, $http, $routeParams) {
 		
 	      //Get ID out of current URL
-		var offerId = $scope.offer_Id = $routeParams.offerId;
+		/*var offerId = $scope.offer_Id = $routeParams.offerId;
 		if (offerId != undefined) {
 			$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
 				if (offer.data.offerId==null) {
@@ -63,7 +63,7 @@
 			    console.error('ERR', err);
 			    // err.status will contain the status code
 			})
-		}
+		}*/
 		
 		
 		$scope.createOffer = function() {
@@ -77,10 +77,7 @@
 			var config = {
 	            method: 'POST',
 	            url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
-	            headers: {
-	              'Content-Type': undefined
-	           },
-	           data: $scope.offer
+	            data: $scope.offer
 	       };
 
 	      $http(config).success(function(data) {
