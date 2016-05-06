@@ -47,8 +47,8 @@
 	    };
 	 })*/
 	
-	app.controller('offerController',['$scope', '$http', '$routeParams',
-	                                  function ($scope, $http, $routeParams) {
+	app.controller('offerController',['$scope', '$http',
+	                                  function ($scope, $http) {
 		
 	      //Get ID out of current URL
 		/*var offerId = $scope.offer_Id = $routeParams.offerId;
