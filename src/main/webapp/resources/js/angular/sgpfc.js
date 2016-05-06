@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('sgpfc', ['smart-table', 'ngRoute']);
+	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies']);
 
 	app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/offers', {
@@ -47,11 +47,11 @@
 	    };
 	 })*/
 	
-	app.controller('offerController',['$scope', '$http',
-	                                  function ($scope, $http) {
+	app.controller('offerController',['$scope', '$http', '$location', '$routeParams',
+	                                  function ($scope, $http, $location, $routeParams) {
 		
 	      //Get ID out of current URL
-		/*var offerId = $scope.offer_Id = $routeParams.offerId;
+		var offerId = $scope.offer_Id = $routeParams.offerId;
 		if (offerId != undefined) {
 			$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
 				if (offer.data.offerId==null) {
@@ -63,7 +63,7 @@
 			    console.error('ERR', err);
 			    // err.status will contain the status code
 			})
-		}*/
+		}
 		
 		
 		$scope.createOffer = function() {
@@ -73,18 +73,6 @@
 				url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
 				data: $scope.offer
 			})*/
-			
-			var config = {
-	            method: 'POST',
-	            url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
-	            data: $scope.offer
-	       };
-
-	      $http(config).success(function(data) {
-	         $scope.server_resp = data;
-	      }).error(function(response) {
-
-	      });
 			
 		}
 	}]);
@@ -97,7 +85,7 @@
 		var login = $scope.user.email;
 		var password = $scope.user.password;
 		$cookies.put('user', login+':'+password);
-		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password).sucess()
+		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password);
 	
 	}
 	}]);
