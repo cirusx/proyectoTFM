@@ -67,25 +67,28 @@
 		
 		
 		$scope.createOffer = function() {
-			var offer = $scope.offer
-			$http.post('http://localhost:8080/proyectoTFM/rest/offers/create', $scope.offer, {headers: {'Content-Type': 'application/json'} }).
-		    success(function(data) {
-		        // this callback will be called asynchronously
-		        // when the response is available
-		    	var x = data.offer
-		        console.log(data);
-		      });
-			/*.
-		      error(function(data, status, headers, config) {
-		        // called asynchronously if an error occurs
-		        // or server returns response with an error status.
-		      });
 			
-			$http({
+			/*$http({
 				method: 'POST',
 				url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
 				data: $scope.offer
 			})*/
+			
+			var config = {
+	            method: 'POST',
+	            url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
+	            headers: {
+	              'Content-Type': undefined
+	           },
+	           data: $scope.offer
+	       };
+
+	      $http(config).success(function(data) {
+	         $scope.server_resp = data;
+	      }).error(function(response) {
+
+	      });
+			
 		}
 	}]);
 	
