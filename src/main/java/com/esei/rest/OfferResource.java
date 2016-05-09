@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.esei.model.Offer;
+import com.esei.rest.transferobjects.OfferTO;
 
 @Path("offers")
 public class OfferResource {
@@ -156,8 +157,8 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createOffer(Offer offer){
+		System.out.println(offer.getOfferDescription());
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        
         try {
             em.getTransaction().begin();
             em.persist(offer);

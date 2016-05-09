@@ -49,6 +49,7 @@
 					<a ng-href="#/offers/{{offer.offerId}}">
 						<img src="{{offer.offerImage}}" class="img-responsive">
 					</a>
+					<div ng-repeat="item in offer.subitems"> {{item}}</div>
 				</div>
 				<div class="panel-body sgpfc-card-content">
 					<div class="panel-body sgpfc-card-content">

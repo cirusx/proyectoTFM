@@ -25,7 +25,6 @@ public class Teacher extends User {
 	private List<Project>  	projectList;
 	
 	@OneToMany(mappedBy="teacher", fetch=FetchType.EAGER)
-	@JsonBackReference
 	public List<Offer> getOfferList() {
 		return offerList;
 	}
@@ -35,7 +34,6 @@ public class Teacher extends User {
 	}
 	
 	@OneToMany(mappedBy="projectTeacher", fetch=FetchType.EAGER)
-	@JsonBackReference
 	public List<Project> getProjectList() {
 		return projectList;
 	}

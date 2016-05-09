@@ -100,7 +100,6 @@ public class Project implements Serializable{
 	
 	@OneToOne(fetch=FetchType.EAGER, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	@JoinColumn(name="teacherId")
-	@JsonManagedReference
 	public Teacher getProjectTeacher() {
 		return projectTeacher;
 	}
@@ -112,7 +111,6 @@ public class Project implements Serializable{
 	@OneToOne(fetch=FetchType.EAGER, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	//targetEntity=Student.class
 	@JoinColumn(name="studentId")
-	@JsonManagedReference
 	public Student getProjectStudent() {
 		return projectStudent;
 	}
@@ -126,7 +124,6 @@ public class Project implements Serializable{
 	      joinColumns={@JoinColumn(name = "Project_projectId", referencedColumnName = "projectId")},
 	      inverseJoinColumns={@JoinColumn(name = "projectSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
 	@OrderBy
-	@JsonManagedReference
 	public List<Subcategory> getProjectSubcategoryList() {
 		return projectSubcategoryList;
 	}
