@@ -1,7 +1,16 @@
 (function(){
 
 	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies']);
-
+	
+	app.run(['$http', '$cookies', function($http, $cookies) {
+		//alert("trying...");
+		if ($cookies.get('user')) {
+			alert("relogin user "+$cookies.get('user'));
+			$http.defaults.headers.common.Authorization = 'Basic '+btoa($cookies.get('user')+':'+$cookies.get('password'));
+			
+		}
+		
+	}]);
 	app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/offers', {
 			templateUrl: '/proyectoTFM/views/offers.html'
@@ -18,7 +27,8 @@
 		}).when('/recoverpassword', {
 			templateUrl: '/proyectoTFM/views/recoverpassword.html'
 		}).when('/createoffer', {
-			templateUrl: '/proyectoTFM/views/createoffer.html'
+			templateUrl: '/proyectoTFM/views/createoffer.html',
+			controller: 'sgpfcCtrl'
 		}).when('/createproject', {
 			templateUrl: '/proyectoTFM/views/createproject.html'
 		}).otherwise({
@@ -63,6 +73,10 @@
 		})	
 	}]);
 	
+	
+	
+	
+	
 	app.controller('authController',['$scope', '$http', '$location', '$cookies',
 	                                  function ($scope, $http, $location, $cookies) {
 	$scope.login = function() {
@@ -70,13 +84,21 @@
 		
 		var login = $scope.user.email;
 		var password = $scope.user.password;
-		$cookies.put('user', login+':'+password);
-		$http.defaults.headers.common.Authorization = 'Basic'+btoa(login+':'+password).sucess()
+		$cookies.put('user', login);
+		$cookies.put('password', password);
+		$http.defaults.headers.common.Authorization = 'Basic '+btoa(login+':'+password);
+		
+		$http.get('http://localhost:8080/proyectoTFM/rest/users/'+login.replace('@', '%40')).then(function(user) {
+			alert(JSON.stringify(user));
+		}, function(err) {
+		    console.error('ERR', err);
+		    // err.status will contain the status code
+		})	
 	
 	}
 	}]);
 
-	app.controller('sgpfcCtrl', function($scope, $http){
+	app.controller('sgpfcCtrl',['$scope', '$http', '$timeout', function($scope, $http, $timeout){
 		/*$scope.getOffers = function() {
 			
 			$http({
@@ -139,6 +161,14 @@
 		$scope.getLastOffers = function() {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/lastoffers').then(function(lastOffers) {
 			    $scope.lastOfferList = lastOffers.data;
+			    
+			    
+			    lastOffers.data.forEach(function(offer) {
+			    	//$http.get(.... /students?offerId=offer.getId
+			    	$timeout(function() {
+			    		offer.subitems = [1, 2, 3];
+			    	}, 3000);
+			    });
 			  }, function(err) {
 			    console.error('ERR', err);
 			    // err.status will contain the status code
@@ -156,12 +186,16 @@
 		}
 
 		$scope.createOffer = function() {
-
-			$http({
-				method: 'POST',
-				url: 'http://localhost:8080/proyectoTFM/rest/offers/create',
-				data: $scope.offer,
-			});
+			alert(JSON.stringify($scope.offer));
+			$http.post('http://localhost:8080/proyectoTFM/rest/offers/create', $scope.offer).then(
+					function (response) {
+						
+					},
+					function (response) {
+						
+					}
+			
+			);
 		}
-	});
+	}]);
 })();

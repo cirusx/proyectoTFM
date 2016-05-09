@@ -1,8 +1,11 @@
 package com.esei.rest;
 
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -22,13 +25,13 @@ import com.esei.model.User;
 @Path("users")
 public class UserResource {
 	
-	@GET
+/*	@GET
 	public Response getLogin(@HeaderParam("Authorization") String credentials) {
         //decodificar el base64 de credentials y separar los ":" para tener ellogin/pass que te envian
-Response respuesta=null;
-return respuesta;
-}
-	
+		Response respuesta=null;
+		return respuesta;
+	}
+	*/
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -45,7 +48,8 @@ return respuesta;
 			}finally{
 				em.close();
 			}
-		return users;
+		//return users;
+		return new ArrayList<>();
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
@@ -53,21 +57,27 @@ return respuesta;
 	}
 	 
 	@GET
-	@Path("{userId}")
+	@Path("{email}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public User getUser(@PathParam("userId") Long userId) {
+	public User getUser(@PathParam("email") String email, @HeaderParam("Authorization") String authHeader) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		User user;
-		try{
-			em.getTransaction().begin();;
-			user = em.find(User.class, userId);
-			em.getTransaction().commit();
-			}finally{
-				em.close();
-			}
+		User user = requireUser(authHeader, em);
 		return user;
 	}
 	
+	private User requireUser(String authHeader, EntityManager em) {
+		String authString = new String(Base64.getDecoder().decode(authHeader.replace("Basic ","").getBytes()));
+		String login = authString.split(":")[0];
+		String pass = authString.split(":")[1];
+		try {
+			return em.createQuery("SELECT u FROM User u WHERE u.email = '"+ login +"' and u.password='"+pass+"'", User.class).getSingleResult();
+		} catch(NoResultException e) {
+			e.printStackTrace();
+			throw new SecurityException("user is not correct");
+		}
+	}
+
+
 	@GET
 	@Path("students")
 	@Produces(MediaType.APPLICATION_JSON)

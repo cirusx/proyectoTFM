@@ -17,6 +17,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.JoinColumn;
 
 import static javax.persistence.CascadeType.ALL;
@@ -50,8 +53,7 @@ public class Offer implements Serializable{
 	public Offer() {}
 
 	@Id
-	@SequenceGenerator(name = "OfferIdGenerator", sequenceName = "OfferSeq") //It only takes effect for databases providing identifier generators.
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "OfferIdGenerator")	
+	@GeneratedValue
 	//@Override
 	public Long getOfferId() {
 		return offerId;
@@ -101,11 +103,12 @@ public class Offer implements Serializable{
 		this.offerTimeLimit = offerTimeLimit;
 	}
 
-	@ManyToMany(cascade = ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = ALL)
 	@JoinTable(
 	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
 	      inverseJoinColumns={@JoinColumn(name = "offerRegistrationList_userId", referencedColumnName = "userId")})
 	@OrderBy
+	@JsonIgnore
 	public List<Student> getOfferRegistrationList() {
 		return offerRegistrationList;
 	}
