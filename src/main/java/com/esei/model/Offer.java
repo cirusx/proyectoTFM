@@ -53,8 +53,7 @@ public class Offer implements Serializable{
 	public Offer() {}
 
 	@Id
-	@GeneratedValue
-	//@Override
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getOfferId() {
 		return offerId;
 	}
@@ -103,7 +102,7 @@ public class Offer implements Serializable{
 		this.offerTimeLimit = offerTimeLimit;
 	}
 
-	@ManyToMany(cascade = ALL)
+	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
 	@JoinTable(
 	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
 	      inverseJoinColumns={@JoinColumn(name = "offerRegistrationList_userId", referencedColumnName = "userId")})
@@ -117,11 +116,12 @@ public class Offer implements Serializable{
 		this.offerRegistrationList = offerRegistrationList;
 	}
 	
-	@ManyToMany(cascade = ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
 	@JoinTable(
 	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
 	      inverseJoinColumns={@JoinColumn(name = "offerSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
 	@OrderBy
+	@JsonIgnore
 	public List<Subcategory> getOfferSubcategoryList() {
 		return offerSubcategoryList;
 	}

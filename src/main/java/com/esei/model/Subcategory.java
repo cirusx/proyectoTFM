@@ -28,9 +28,7 @@ public class Subcategory implements Serializable {
 	public Subcategory() {}
 
 	@Id
-	@SequenceGenerator(name = "SubcategoryIdGenerator", sequenceName = "SubcategorySeq") //It only takes effect for databases providing identifier generators.
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SubcategoryIdGenerator")	
-	
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getSubcategoryId() {
 		return subcategoryId;
 	}

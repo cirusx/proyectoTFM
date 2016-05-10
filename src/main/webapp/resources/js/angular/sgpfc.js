@@ -22,7 +22,8 @@
 			templateUrl: '/proyectoTFM/views/login.html',
 			controller: 'authController'
 		}).when('/register', {
-			templateUrl: '/proyectoTFM/views/register.html'
+			templateUrl: '/proyectoTFM/views/register.html',
+			controller: 'authController'
 		}).when('/recoverpassword', {
 			templateUrl: '/proyectoTFM/views/recoverpassword.html'
 		}).when('/createoffer', {
@@ -90,6 +91,18 @@
 		    // err.status will contain the status code
 		})
 	}
+	
+	$scope.register = function() {
+		alert(JSON.stringify($scope.user));
+		$http.post('http://localhost:8080/proyectoTFM/rest/users/create', $scope.user).then(
+				function (response) {
+					
+				},
+				function (response) {
+					
+				}
+		);
+	}
 	}]);
 
 	app.controller('sgpfcCtrl',['$scope', '$http', '$timeout', function($scope, $http, $timeout){
@@ -156,10 +169,16 @@
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/lastoffers').then(function(lastOffers) {
 			    $scope.lastOfferList = lastOffers.data;
 			    lastOffers.data.forEach(function(offer) {
+			    	$http.get('http://localhost:8080/proyectoTFM/rest/offers/subcategories'+'?offerId='+offer.offerId).then(function(subcategoryIcons) {
+			    		 $scope.offer.subcategoryIcons = subcategoryIcons.data;
+					  }, function(err) {
+					    console.error('ERR', err);
+					    // err.status will contain the status code
+			    	})
 			    	//$http.get(.... /students?offerId=offer.getId
-			    	$timeout(function() {
+			    	/*$timeout(function() {
 			    		offer.subitems = [1, 2, 3];
-			    	}, 3000);
+			    	}, 3000);*/
 			    });
 			  }, function(err) {
 			    console.error('ERR', err);

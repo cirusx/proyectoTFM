@@ -38,7 +38,6 @@ public class Student extends User {
 	}
 	
 	@ManyToMany(mappedBy="offerRegistrationList")
-	@JsonBackReference
 	public List<Offer> getRegisterOfferList() {
 		return registerOfferList;
 	}

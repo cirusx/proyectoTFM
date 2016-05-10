@@ -12,10 +12,12 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.esei.model.Offer;
+import com.esei.model.Subcategory;
 import com.esei.rest.transferobjects.OfferTO;
 
 @Path("offers")
@@ -150,6 +152,30 @@ public class OfferResource {
 				em.close();
 			}
 		return offer;
+	}
+	
+	@GET
+	@Path("/subcategories")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Subcategory> getOfferSubcategories(@QueryParam("offerId") Long offerId) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<Subcategory> subcategories;
+			try{
+				em.getTransaction().begin();
+				String offerIdStr = offerId.toString();
+				TypedQuery<Subcategory> query = em.createQuery("SELECT o.offerSubcategoryList FROM Subcategory s , offer o WHERE o.offerId="+ offerIdStr +"", Subcategory.class);
+				subcategories = query.getResultList();
+				System.out.println("categorias " + subcategories);
+				em.getTransaction().commit();
+				}finally{
+					em.close();
+				}
+			return subcategories;
+			}catch(Exception e){
+				e.printStackTrace();
+				throw e;
+			}
 	}
 	
 	@POST
