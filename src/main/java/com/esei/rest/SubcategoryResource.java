@@ -46,7 +46,6 @@ public class SubcategoryResource {
 		}
 	}
 	
-	
 	@GET
 	@Path("/{subcategoryId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -81,7 +80,7 @@ public class SubcategoryResource {
      }
 	
 	@DELETE
-	@Path("/delete/{subcategoryId}")
+	@Path("/{subcategoryId}")
 	public String deleteSubcategory(@PathParam("subcategoryId") int subcategoryId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;
@@ -98,7 +97,7 @@ public class SubcategoryResource {
 	}
 	
 	@PUT
-	@Path("/update/{subcategoryId}")
+	@Path("/{subcategoryId}")
 	public String updateSubcategory(Subcategory subcategory) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;

@@ -106,7 +106,6 @@ public class Offer implements Serializable{
 	@JoinTable(
 	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
 	      inverseJoinColumns={@JoinColumn(name = "offerRegistrationList_userId", referencedColumnName = "userId")})
-	@OrderBy
 	@JsonIgnore
 	public List<Student> getOfferRegistrationList() {
 		return offerRegistrationList;
@@ -120,7 +119,6 @@ public class Offer implements Serializable{
 	@JoinTable(
 	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
 	      inverseJoinColumns={@JoinColumn(name = "offerSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
-	@OrderBy
 	@JsonIgnore
 	public List<Subcategory> getOfferSubcategoryList() {
 		return offerSubcategoryList;

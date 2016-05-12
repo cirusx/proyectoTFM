@@ -2,15 +2,19 @@ package com.esei.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="Subcategory")
 public class Subcategory implements Serializable {
@@ -24,7 +28,9 @@ public class Subcategory implements Serializable {
 	private Date 				savedTime;
 	private Date 				creationTime;
 	private Long				version;
+	private List<Offer>			subcategoryOfferList;
 	
+
 	public Subcategory() {}
 
 	@Id
@@ -51,6 +57,16 @@ public class Subcategory implements Serializable {
 
 	public void setSubcategoryIcon(String subcategoryIcon) {
 		this.subcategoryIcon = subcategoryIcon;
+	}
+	
+	@ManyToMany(mappedBy="offerSubcategoryList")
+	@JsonIgnore
+	public List<Offer> getSubcategoryOfferList() {
+		return subcategoryOfferList;
+	}
+
+	public void setSubcategoryOfferList(List<Offer> subcategoryOfferList) {
+		this.subcategoryOfferList = subcategoryOfferList;
 	}
 	
 	@Temporal(TemporalType.TIMESTAMP)

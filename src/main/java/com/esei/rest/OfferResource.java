@@ -137,6 +137,30 @@ public class OfferResource {
 			throw e;
 		}
 	}
+	
+	@GET
+	@Path("subcategories")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Subcategory> getSubcategoriesByOffer(@QueryParam("offerId") Long offerId) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<Subcategory> subcategories;
+			try{
+				em.getTransaction().begin();
+				String offerIdStr = offerId.toString();
+				TypedQuery<Subcategory> query = em.createQuery("SELECT s FROM Subcategory s JOIN s.subcategoryOfferList o WHERE o.offerId="+ offerIdStr +"", Subcategory.class);
+				subcategories = query.getResultList();
+				System.out.println("categorias " + subcategories);
+				em.getTransaction().commit();
+				}finally{
+					em.close();
+				}
+			return subcategories;
+			}catch(Exception e){
+				e.printStackTrace();
+				throw e;
+			}
+	}
 	 
 	@GET
 	@Path("/{offerId}")
@@ -152,30 +176,6 @@ public class OfferResource {
 				em.close();
 			}
 		return offer;
-	}
-	
-	@GET
-	@Path("/subcategories")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Subcategory> getOfferSubcategories(@QueryParam("offerId") Long offerId) {
-		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-			List<Subcategory> subcategories;
-			try{
-				em.getTransaction().begin();
-				String offerIdStr = offerId.toString();
-				TypedQuery<Subcategory> query = em.createQuery("SELECT o.offerSubcategoryList FROM Subcategory s , offer o WHERE o.offerId="+ offerIdStr +"", Subcategory.class);
-				subcategories = query.getResultList();
-				System.out.println("categorias " + subcategories);
-				em.getTransaction().commit();
-				}finally{
-					em.close();
-				}
-			return subcategories;
-			}catch(Exception e){
-				e.printStackTrace();
-				throw e;
-			}
 	}
 	
 	@POST
@@ -197,7 +197,7 @@ public class OfferResource {
      }
 	
 	@DELETE
-	@Path("/delete/{offerId}")
+	@Path("/{offerId}")
 	public String deleteOffer(@PathParam("offerId") int offerId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;
@@ -214,7 +214,7 @@ public class OfferResource {
 	}
 	
 	@PUT
-	@Path("/update/{offerId}")
+	@Path("/{offerId}")
 	public String updateOffer(Offer offer) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;

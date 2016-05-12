@@ -66,6 +66,12 @@
 				if (offer.data.offerId==null) {
 					$location.path("/");
 				}else {
+					$http.get('http://localhost:8080/proyectoTFM/rest/offers/subcategories'+'?offerId='+offerId).then(function(subcategories) {
+			    		offer.data.offerSubcategoryList = subcategories.data
+					  }, function(err) {
+					    console.error('ERR', err);
+					    // err.status will contain the status code
+			    	});
 					$scope.offer = offer.data;
 				}
 			}, function(err) {
@@ -157,24 +163,38 @@
 		
 		$scope.getHomeRecommendedOffers = function() {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/homerecommendedoffers').then(function(homeRecommendedOffers) {
-			    $scope.homeRecommendedOfferList = homeRecommendedOffers.data;
-			  }, function(err) {
-			    console.error('ERR', err);
-			    // err.status will contain the status code
-			})
+				  homeRecommendedOffers.data.forEach(function(offer) {
+				    	$http.get('http://localhost:8080/proyectoTFM/rest/offers/subcategories'+'?offerId='+offer.offerId).then(function(subcategories) {
+				    		offer.offerSubcategoryList = subcategories.data
+						  }, function(err) {
+						    console.error('ERR', err);
+						    // err.status will contain the status code
+				    	})
+				    	 $scope.homeRecommendedOfferList = homeRecommendedOffers.data;
+				    	//$http.get(.... /students?offerId=offer.getId
+				    	/*$timeout(function() {
+				    		offer.subitems = [1, 2, 3];
+				    	}, 3000);*/
+				    });
+				  }, function(err) {
+				    console.error('ERR', err);
+				    // err.status will contain the status code
+				})
 		
 		}
 		
 		$scope.getLastOffers = function() {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/lastoffers').then(function(lastOffers) {
-			    $scope.lastOfferList = lastOffers.data;
+			   
+	
 			    lastOffers.data.forEach(function(offer) {
-			    	$http.get('http://localhost:8080/proyectoTFM/rest/offers/subcategories'+'?offerId='+offer.offerId).then(function(subcategoryIcons) {
-			    		 $scope.offer.subcategoryIcons = subcategoryIcons.data;
+			    	$http.get('http://localhost:8080/proyectoTFM/rest/offers/subcategories'+'?offerId='+offer.offerId).then(function(subcategories) {
+			    		offer.offerSubcategoryList = subcategories.data
 					  }, function(err) {
 					    console.error('ERR', err);
 					    // err.status will contain the status code
 			    	})
+			    	 $scope.lastOfferList = lastOffers.data;
 			    	//$http.get(.... /students?offerId=offer.getId
 			    	/*$timeout(function() {
 			    		offer.subitems = [1, 2, 3];
@@ -184,7 +204,6 @@
 			    console.error('ERR', err);
 			    // err.status will contain the status code
 			})
-		
 		}
 		
 		$scope.getProjects = function() {
@@ -198,6 +217,9 @@
 
 		$scope.createOffer = function() {
 			alert(JSON.stringify($scope.offer));
+			var datetimeStr = "2020/07/19 07:00";
+			var datetime = new Date(datetimeStr);
+			$scope.offer.offerTimeLimit = datetime;
 			$http.post('http://localhost:8080/proyectoTFM/rest/offers/create', $scope.offer).then(
 					function (response) {
 						
