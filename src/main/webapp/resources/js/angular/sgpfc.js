@@ -28,7 +28,7 @@
 			templateUrl: '/proyectoTFM/views/recoverpassword.html'
 		}).when('/createoffer', {
 			templateUrl: '/proyectoTFM/views/createoffer.html',
-			controller: 'sgpfcCtrl'
+			controller: 'createOfferController'
 		}).when('/createproject', {
 			templateUrl: '/proyectoTFM/views/createproject.html'
 		}).otherwise({
@@ -214,7 +214,11 @@
 			    // err.status will contain the status code
 			})
 		}
-
+	}]);
+	
+	app.controller('creteOfferController',['$scope', '$http', '$location', '$routeParams',
+	                                  function ($scope, $http, $location, $routeParams) {
+		
 		$scope.createOffer = function() {
 			alert(JSON.stringify($scope.offer));
 			var datetimeStr = "2020/07/19 07:00";
@@ -229,5 +233,11 @@
 					}
 			);
 		}
-	}]);
+		
+		$scope
+	
+		
+	}
+	])
+	
 })();
