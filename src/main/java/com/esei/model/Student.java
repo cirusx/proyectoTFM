@@ -38,6 +38,7 @@ public class Student extends User {
 	}
 	
 	@ManyToMany(mappedBy="offerRegistrationList")
+	@JsonIgnore
 	public List<Offer> getRegisterOfferList() {
 		return registerOfferList;
 	}
