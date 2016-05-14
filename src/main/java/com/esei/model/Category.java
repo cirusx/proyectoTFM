@@ -32,9 +32,7 @@ public class Category implements Serializable {
 	public Category() {}
 
 	@Id
-	@SequenceGenerator(name = "CategoryIdGenerator", sequenceName = "CategorySeq") //It only takes effect for databases providing identifier generators.
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "CategoryIdGenerator")	
-	//@Override
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getCategoryId() {
 		return categoryId;
 	}

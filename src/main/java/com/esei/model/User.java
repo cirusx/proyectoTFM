@@ -36,9 +36,7 @@ public class User implements Serializable {
 	public User() {}
 	
 	@Id
-	@SequenceGenerator(name = "UserIdGenerator", sequenceName = "UserSeq") //It only takes effect for databases providing identifier generators.
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "UserIdGenerator")	
-	//@Override
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getUserId() {
 		return userId;
 	}

@@ -25,14 +25,7 @@ import com.esei.model.User;
 @Path("users")
 public class UserResource {
 	
-/*	@GET
-	public Response getLogin(@HeaderParam("Authorization") String credentials) {
-        //decodificar el base64 de credentials y separar los ":" para tener ellogin/pass que te envian
-		Response respuesta=null;
-		return respuesta;
-	}
-	*/
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getUsers() {

@@ -24,7 +24,10 @@ public class Teacher extends User {
 	private List<Offer>		offerList;
 	private List<Project>  	projectList;
 	
-	@OneToMany(mappedBy="teacher", fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy="teacher", fetch=FetchType.LAZY)
+	@JsonIgnore
+
 	public List<Offer> getOfferList() {
 		return offerList;
 	}
@@ -33,7 +36,9 @@ public class Teacher extends User {
 		this.offerList = offerList;
 	}
 	
-	@OneToMany(mappedBy="projectTeacher", fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy="projectTeacher", fetch=FetchType.LAZY)
+	@JsonIgnore
 	public List<Project> getProjectList() {
 		return projectList;
 	}

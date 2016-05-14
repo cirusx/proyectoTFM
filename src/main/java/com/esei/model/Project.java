@@ -47,9 +47,7 @@ public class Project implements Serializable{
 	public Project() {}
 
 	@Id
-	@SequenceGenerator(name = "ProjectIdGenerator", sequenceName = "ProjectSeq") //It only takes effect for databases providing identifier generators.
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "ProjectIdGenerator")	
-	//@Override
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getProjectId() {
 		return projectId;
 	}
@@ -98,8 +96,9 @@ public class Project implements Serializable{
 		this.projectDocumentation = projectDocumentation;
 	}
 	
-	@OneToOne(fetch=FetchType.EAGER, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	@JoinColumn(name="teacherId")
+	@JsonIgnore
 	public Teacher getProjectTeacher() {
 		return projectTeacher;
 	}
@@ -108,9 +107,10 @@ public class Project implements Serializable{
 		this.projectTeacher = projectTeacher;
 	}
 	
-	@OneToOne(fetch=FetchType.EAGER, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	//targetEntity=Student.class
 	@JoinColumn(name="studentId")
+	@JsonIgnore
 	public Student getProjectStudent() {
 		return projectStudent;
 	}
@@ -119,11 +119,11 @@ public class Project implements Serializable{
 		this.projectStudent = projectStudent;
 	}
 	
-	@ManyToMany(cascade = ALL, fetch=FetchType.EAGER)
+	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
 	@JoinTable(
 	      joinColumns={@JoinColumn(name = "Project_projectId", referencedColumnName = "projectId")},
 	      inverseJoinColumns={@JoinColumn(name = "projectSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
-	@OrderBy
+	@JsonIgnore
 	public List<Subcategory> getProjectSubcategoryList() {
 		return projectSubcategoryList;
 	}

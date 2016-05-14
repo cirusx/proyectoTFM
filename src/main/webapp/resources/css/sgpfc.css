@@ -64,6 +64,11 @@
     padding-left: 0px;
 }
 
+.sgpfc-header-right-menu {
+    margin-left: -30px;
+	padding-right: 80px;
+}
+
 .sgpfc-createofferform-nameinput {
     margin-bottom: 15px;
 }
@@ -131,7 +136,7 @@
 
 .sgpfc-card-thumbnail-img img {
     display: block;
-    height: 200px;
+    height: 180px;
     width: 100%
 }
 
@@ -262,29 +267,6 @@
 
 .sgpfc-createofferbox-description {
 	resize: vertical;
-}
-
-.image-preview-input {
-    position: relative;
-	overflow: hidden;
-	margin: 0px;    
-    color: #0D1E23;
-    background-color: #eee;
-    border-color: #ccc;    
-}
-.image-preview-input-file {
-	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 0;
-	padding: 0;
-	font-size: 20px;
-	cursor: pointer;
-	opacity: 0;
-	filter: alpha(opacity=0);
-}
-.image-preview-input-title {
-    margin-left:2px;
 }
 
 .sgpfc-createofferbox-temporaloffer {

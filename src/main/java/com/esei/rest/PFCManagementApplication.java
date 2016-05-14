@@ -13,8 +13,7 @@ public class PFCManagementApplication extends ResourceConfig {
 	public PFCManagementApplication() {
 		super();
 		this.packages("com.esei.rest").register(JacksonFeature.class);
-		/*this.packages("org.glassfish.jersey.examples.multipart")
-	    .register(MultiPartFeature.class);*/
+		this.packages("com.esei.rest").register(MultiPartFeature.class);
 	}
 
 }
