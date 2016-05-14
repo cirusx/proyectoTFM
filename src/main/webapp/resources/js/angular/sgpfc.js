@@ -11,8 +11,11 @@
 		
 		/*$window.onbeforeunload = function() {
             // Clearing all cookies now!
-            $cookies.remove("user"); 
+            if ($cookies.get('user')) {
+			$cookies.remove("user"); 
             $cookies.remove("password");
+		}
+            
         };*/
 	}]);
 	
@@ -32,6 +35,9 @@
 			controller: 'authController'
 		}).when('/recoverpassword', {
 			templateUrl: '/proyectoTFM/views/recoverpassword.html',
+			controller: 'authController'
+		}).when('/projects/myprojects', {
+			templateUrl: '/proyectoTFM/views/login.html',
 			controller: 'authController'
 		}).when('/createoffer', {
 			templateUrl: '/proyectoTFM/views/createoffer.html',
@@ -97,7 +103,7 @@
 				$http.defaults.headers.common.Authorization = 'Basic '+btoa($cookies.get('user')+':'+$cookies.get('password'));	
 			}
 			
-			$scope.user = $http.get('http://localhost:8080/proyectoTFM/rest/users/'+$cookies.get('user').replace('@', '%40')).then(function(user) {
+				$http.get('http://localhost:8080/proyectoTFM/rest/users/'+$cookies.get('user').replace('@', '%40')).then(function(user) {
 				alert(JSON.stringify(user));
 				var userData = user.data;
 				
@@ -107,8 +113,8 @@
 				if(user.data.registerOfferList == undefined){
 					user.data.registerOfferList = [];
 				}
-				
 				user.data.registerOfferList.push($scope.offer);
+				/*user.data.registerOfferList.push($scope.offer.offerId);*/
 				$scope.offer.offerRegistrationList.push(userData);
 				
 				$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId, offer).then(
@@ -192,10 +198,20 @@
 		
 		$http.get('http://localhost:8080/proyectoTFM/rest/users/'+login.replace('@', '%40')).then(function(user) {
 			alert(JSON.stringify(user));
+			$location.path("/");
 		}, function(err) {
 		    console.error('ERR', err);
 		    // err.status will contain the status code
 		})
+	}
+	
+	$scope.logout = function() {
+		 if ($cookies.get('user')) {
+				$cookies.remove("user"); 
+	            $cookies.remove("password");
+	            alert('logout');
+	            $location.path("/login");
+		}
 	}
 	
 	$scope.register = function() {
@@ -250,7 +266,7 @@
 	}]);
 	
 
-	app.controller('sgpfcCtrl',['$scope', '$http', '$timeout', function($scope, $http, $timeout){
+	app.controller('sgpfcCtrl',['$scope', '$http', '$cookies', '$location', function($scope, $http, $cookies, $location){
 		/*$scope.getOffers = function() {
 			
 			$http({
@@ -259,6 +275,15 @@
 			});
 		
 		}*/
+		
+		$scope.logout = function() {
+			 if ($cookies.get('user')) {
+					$cookies.remove("user"); 
+		            $cookies.remove("password");
+		            alert('logout');
+		            $location.path("/login");
+			}
+		}
 		
 		$scope.getOffer = function(offerId) {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {

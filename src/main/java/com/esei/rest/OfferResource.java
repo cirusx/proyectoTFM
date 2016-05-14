@@ -377,6 +377,7 @@ public class OfferResource {
 	
 	@PUT
 	@Path("/{offerId}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	public String updateOffer(Offer offer) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;

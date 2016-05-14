@@ -64,6 +64,11 @@
     padding-left: 0px;
 }
 
+.sgpfc-header-right-menu {
+    margin-left: -30px;
+	padding-right: 80px;
+}
+
 .sgpfc-createofferform-nameinput {
     margin-bottom: 15px;
 }
