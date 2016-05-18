@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import com.fasterxml.jackson.annotation.*;
@@ -17,25 +18,21 @@ public class Student extends User {
 	
 	private static final long serialVersionUID = 8475009995080328661L;
 	
-	private Project 		TFG;
-	private Project 		TFM;
+	
+	private List<Project>	userProjectList;
 	private List<Offer>		registerOfferList;
 	
-	public Project getTFG() {
-		return TFG;
+	
+	
+	@OneToMany(mappedBy="projectStudent" )
+	@JsonIgnore
+	public List<Project> getUserProjectList() {
+		return userProjectList;
 	}
 	
-	public void setTFG(Project tFG) {
-		TFG = tFG;
-	}
-	
-	public Project getTFM() {
-		return TFM;
-	}
-	
-	public void setTFM(Project tFM) {
-		TFM = tFM;
-	}
+	public void setUserProjectList(List<Project> userProjectList) {
+		this.userProjectList = userProjectList;
+	}	
 	
 	@ManyToMany(mappedBy="offerRegistrationList")
 	@JsonIgnore

@@ -43,8 +43,6 @@ public class Offer implements Serializable{
 	private boolean				offerClose;
 	private boolean				offerRecommended;
 	private boolean				offerHomeRecommended;
-	private Date 				savedTime;
-	private Date 				creationTime;
 	private Long				version; 
 	private Teacher				teacher;
 
@@ -155,28 +153,6 @@ public class Offer implements Serializable{
 
 	public void setOfferHomeRecommended(boolean offerHomeRecommended) {
 		this.offerHomeRecommended = offerHomeRecommended;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	//@Override
-	public Date getSavedTime() {
-		return savedTime;
-	}
-
-	//@Override
-	public void setSavedTime(Date savedTime) {
-		this.savedTime = savedTime;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	//@Override
-	public Date getCreationTime() {
-		return creationTime;
-	}
-
-	//@Override
-	public void setCreationTime(Date creationTime) {
-		this.creationTime = creationTime;
 	}
 
 	@Version

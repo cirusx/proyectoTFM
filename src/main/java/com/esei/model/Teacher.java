@@ -27,7 +27,6 @@ public class Teacher extends User {
 
 	@OneToMany(mappedBy="teacher", fetch=FetchType.LAZY)
 	@JsonIgnore
-
 	public List<Offer> getOfferList() {
 		return offerList;
 	}

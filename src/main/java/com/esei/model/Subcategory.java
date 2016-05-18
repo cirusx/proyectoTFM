@@ -25,10 +25,9 @@ public class Subcategory implements Serializable {
 	private String 				subcategoryName;
 	private String 				subcategoryIcon;
 	//private Category   			category;
-	private Date 				savedTime;
-	private Date 				creationTime;
 	private Long				version;
 	private List<Offer>			subcategoryOfferList;
+	private List<Project>		subcategoryProjectList;
 	
 
 	public Subcategory() {}
@@ -69,26 +68,14 @@ public class Subcategory implements Serializable {
 		this.subcategoryOfferList = subcategoryOfferList;
 	}
 	
-	@Temporal(TemporalType.TIMESTAMP)
-	//@Override
-	public Date getSavedTime() {
-		return savedTime;
+	@ManyToMany(mappedBy="projectSubcategoryList")
+	@JsonIgnore
+	public List<Project> getSubcategoryProjectList() {
+		return subcategoryProjectList;
 	}
 
-	//@Override
-	public void setSavedTime(Date savedTime) {
-		this.savedTime = savedTime;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	//@Override
-	public Date getCreationTime() {
-		return creationTime;
-	}
-
-	//@Override
-	public void setCreationTime(Date creationTime) {
-		this.creationTime = creationTime;
+	public void setSubcategoryProjectList(List<Project> subcategoryProjectList) {
+		this.subcategoryProjectList = subcategoryProjectList;
 	}
 
 	@Version

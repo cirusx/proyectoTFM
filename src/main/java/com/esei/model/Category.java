@@ -25,8 +25,6 @@ public class Category implements Serializable {
 	private Long 				categoryId;
 	private String 				categoryName;
 	private List<Subcategory>   subcategories;
-	private Date 				savedTime;
-	private Date 				creationTime;
 	private Long				version;
 	
 	public Category() {}
@@ -57,28 +55,6 @@ public class Category implements Serializable {
 
 	public void setSubcategories(List<Subcategory> subcategories) {
 		this.subcategories = subcategories;
-	}
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	//@Override
-	public Date getSavedTime() {
-		return savedTime;
-	}
-
-	//@Override
-	public void setSavedTime(Date savedTime) {
-		this.savedTime = savedTime;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	//@Override
-	public Date getCreationTime() {
-		return creationTime;
-	}
-
-	//@Override
-	public void setCreationTime(Date creationTime) {
-		this.creationTime = creationTime;
 	}
 
 	@Version

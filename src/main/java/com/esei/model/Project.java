@@ -40,8 +40,6 @@ public class Project implements Serializable{
 	private Student				projectStudent;
 	private List<Subcategory>	projectSubcategoryList;
 	private boolean				projectTFG;
-	private Date 				savedTime;
-	private Date 				creationTime;
 	private Long				version; 
 
 	public Project() {}
@@ -138,28 +136,6 @@ public class Project implements Serializable{
 
 	public void setProjectTFG(boolean projectTFG) {
 		this.projectTFG = projectTFG;
-	}
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	//@Override
-	public Date getSavedTime() {
-		return savedTime;
-	}
-
-	//@Override
-	public void setSavedTime(Date savedTime) {
-		this.savedTime = savedTime;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	//@Override
-	public Date getCreationTime() {
-		return creationTime;
-	}
-
-	//@Override
-	public void setCreationTime(Date creationTime) {
-		this.creationTime = creationTime;
 	}
 
 	@Version
