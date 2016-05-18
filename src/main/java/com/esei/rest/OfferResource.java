@@ -243,7 +243,7 @@ public class OfferResource {
 		@FormDataParam("file") InputStream uploadedInputStream,
 		@FormDataParam("file") FormDataContentDisposition fileDetail) {
 
-		String uploadedFileLocation = "c://Users/Cirusx/workspace/proyectoTFM/src/main/webapp/resources/img/" + fileDetail.getFileName();
+		String uploadedFileLocation = "c://Users/Mario/git/proyectoTFM/src/main/webapp/resources/img/" + fileDetail.getFileName();
 
 		// save it
 		writeToFile(uploadedInputStream, uploadedFileLocation);

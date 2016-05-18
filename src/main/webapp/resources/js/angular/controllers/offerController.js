@@ -66,5 +66,7 @@ app.controller('offerController',['$scope', '$http', '$location', '$routeParams'
 		}
 		
 		
+		
+		
 	}]);
 	}());
