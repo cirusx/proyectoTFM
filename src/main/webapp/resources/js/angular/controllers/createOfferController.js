@@ -2,7 +2,7 @@
     'use strict';
  
     var app= angular.module('sgpfc');
-app.controller('createOfferController',['$scope', '$http', '$location', '$cookies', multipartForm,
+app.controller('createOfferController',['$scope', '$http', '$location', '$cookies', 'multipartForm',
 	                                  function ($scope, $http, $location, $cookies, multipartForm) {
 	
 		$scope.createOffer = function() {
