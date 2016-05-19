@@ -53,11 +53,11 @@
 		})
 	}]);
 	
-	app.filter('myStrictFilter', function($filter){
+	/*app.filter('myStrictFilter', function($filter){
 	    return function(input, predicate){
 	        return $filter('filter')(input, predicate, true);
 	    }
-	});
+	});*/
 
 /*	app.filter('unique', function() {
 	    return function (arr, field) {

@@ -313,3 +313,20 @@
   .sgpfc-container-offer-teacherzone {
   	height: 500px;
   }
+  
+  .sgpfc-offers-offerRecommendedFilterZone > label {
+  	margin-top: 15px;
+  	font-weight: bold;
+  }
+  
+  .sgpfc-offers-offerRecommendedFilterZone {
+  	margin-top: 15px;
+  }
+  
+  .sgpfc-offers-orderFilterZone {
+  	margin-top: 23px;
+  }
+  
+  .sgpfc-card-panel {
+  	display: none;
+  }

@@ -1,22 +1,101 @@
-G-<!DOCTYPE html>
+G-
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ofertas</title>
 </head>
 <body>
-<div class="container">
-	<div class="row">
-        <button type="button" class="btn sgpfc-btn-primary sgpfc-btn-offers-search" data-toggle="collapse" data-target="#filter-panel">
-            <span class="glyphicon glyphicon-cog"></span> Búsqueda Avanzada
-        </button>
-        <div id="filter-panel" class="collapse filter-panel">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <form class="form-inline" role="form">
-                        <div class="form-group">
+	<script type="text/javascript"> $(function(){ 
+		$(".sgpfc-card-panel").slice(0, 4).show(); // select the first ten
+	    $("#load").click(function(e){ // click event for load more
+	        e.preventDefault();
+	        $(".sgpfc-card-panel:hidden").slice(0, 4).show(); // select next 10 hidden divs and show them
+	        if($(".sgpfc-card-panel:hidden").length == 0){ // check if any hidden divs still exist
+	            alert("No more divs"); // alert if there are none left
+	        }
+	    });});</script>
+	<div class="container">
+		<div class="row">
+			<button type="button"
+				class="btn sgpfc-btn-primary sgpfc-btn-offers-search"
+				data-toggle="collapse" data-target="#filter-panel">
+				<span class="glyphicon glyphicon-cog"></span> Búsqueda Avanzada
+			</button>
+			<div id="filter-panel" class="collapse filter-panel">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form class="form" role="form">
+						
+						
+							<div class="col-xs-6">
+								<label class="filter-col" style="margin-right: 0;"
+									for="pref-search">Nombre Oferta:</label> <input type="text"
+									class="sgpfc-filter-title form-control input-sm"
+									id="pref-search" ng-model="search.offerName">
+							</div>
+							<!-- form group [search] -->
+							<div class="col-xs-6">
+								<label class="filter-col" style="margin-right: 0;"
+									for="pref-search">Descripción:</label> <input type="text"
+									class="sgpfc-filter-title form-control input-sm"
+									id="pref-search" ng-model="search.offerDescription">
+							</div>
+							<!-- form group [search] -->
+							<div class="col-xs-6">
+								<label class="filter-col" style="margin-right: 0;"
+									for="pref-search">Subcategoría:</label> <input type="text"
+									class="sgpfc-filter-title form-control input-sm"
+									id="pref-search" ng-model="search.$">
+							</div>
+							<!-- form group [search] -->
+							<div class="col-xs-4 sgpfc-offers-orderFilterZone">
+
+								<label id="orderLabel" class="filter-col"
+									style="margin-right: 0;" for="pref-orderby">Ofertas
+									Nuevas primero:</label>
+								<button ng-click="order('offerId')" class="btn btn-default">Cambiar
+									Orden</button>
+								<span class="sortorder" ng-show="predicate === 'offerId'"
+									ng-class="{reverse:reverse}"></span>
+								<!-- <label class="filter-col" style="margin-right:0;" for="pref-orderby">Orden:</label>
+                            <select id="pref-orderby" class="form-control" ng-model="search.order">
+                                <option value="true">Nuevas Primero</option>
+                                <option value="false">Antiguas primero</option>
+                            </select>         -->
+							</div>
+							<!-- form group [order by] -->
+							
+							<div class="col-xs-2 sgpfc-offers-offerRecommendedFilterZone">
+								<!--  <div class="checkbox" style="margin-left:10px; margin-right:10px;">
+                                <label><input type="checkbox" ng-model="search.offerRecommended"> Ofertas recomendadas</label>
+                            </div> -->
+
+								<!--  <input ng-model="search.offerRecommended" type="radio" name="offerRecommended" value="" checked> Todas las ofertas<br>
+  							<input ng-model="search.offerRecommended" type="radio" name="offerRecommended" value="true"> Ofertas recomendadas<br>
+  							<input ng-model="search.offerRecommended" type="radio" name="offerRecommended" value="false"> Otras ofertas -->
+
+								<label class="radio"> <input type="radio"
+									name="offerRecommended" id="inlineRadio1"
+									ng-model="search.offerRecommended" value=""> Todas
+									las ofertas
+								</label> <label class="radio"> <input type="radio"
+									name="offerRecommended" id="inlineRadio2"
+									ng-model="search.offerRecommended" value=true> Ofertas
+									recomendadas
+								</label> <label class="radio"> <input type="radio"
+									name="offerRecommended" id="inlineRadio3"
+									ng-model="search.offerRecommended" value=false> Otras
+									ofertas
+								</label>
+
+								<!-- <button type="button" class="btn btn-default filter-col">
+									<span class="glyphicon glyphicon-erase" ng-click="resetOfferRecommendedFilter()"></span> Reset
+								</button> -->
+							</div>
+							<!-- <div class="form-group">
                             <label class="filter-col" style="margin-right:0;" for="pref-perpage">Resultados por Página:</label>
                             <select id="pref-perpage" class="form-control">
                                 <option value="8">8</option>
@@ -25,37 +104,18 @@ G-<!DOCTYPE html>
                                 <option value="32">32</option>
                                 <option value="40">40</option>
                             </select>                                
-                        </div> <!-- form group [rows] -->
-                        <div class="form-group">
-                            <label class="filter-col" style="margin-right:0;" for="pref-search">Búsqueda:</label>
-                            <input type="text" class="form-control input-sm" id="pref-search">
-                        </div><!-- form group [search] -->
-                        <div class="form-group">
-                            <label class="filter-col" style="margin-right:0;" for="pref-orderby">Orden:</label>
-                            <select id="pref-orderby" class="form-control">
-                                <option>Descendente</option>
-                                <option>Ascendente</option>
-                            </select>                                
-                        </div> <!-- form group [order by] --> 
-                        <div class="form-group">    
-                            <div class="checkbox" style="margin-left:10px; margin-right:10px;">
-                                <label><input type="checkbox"> Recordad Parámetros</label>
-                            </div>
-                            <button type="submit" class="btn btn-default filter-col">
-                                <span class="glyphicon glyphicon-record"></span> Buscar
-                            </button>  
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>    
+                        </div> form group [rows] -->
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
 
 	<div class="row sgpfc-container-cards .sgpfc-card-wrap">
 		<div class="col-xs-3 img-responsive"
-			ng-repeat="offer in activeOfferList">
-			<div class="panel panel-default sgpfc-card-tall-big">
+			ng-repeat="offer in activeOfferList | filter:search:strict | orderBy :offerId:reverse">
+			<div class="panel panel-default sgpfc-card-tall-big sgpfc-card-panel">
 				<div
 					class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
 					<img src="{{offer.offerImage}}" class="img-responsive">
@@ -70,12 +130,23 @@ G-<!DOCTYPE html>
 						</p>
 						<p class="sgpfc-card-description">{{offer.offerDescription}}</p>
 						<p class="sgpfc-card-footer">
-							<img ng-repeat="subcategory in offer.offerSubcategoryList"
+							<img
+								ng-repeat="subcategory in offer.offerSubcategoryList | filter:search:strict"
 								src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="col-xs-12" >
+			<a class="btn sgpfc-btn-seeall col-xs-offset-5" id="load">Cargar más</a>
+		</div>
+		
+
+		<!-- 	<script type="text/javascript">$('.sgpfc-filter-title').change( function () { 
+ 		    $('.panel').show();
+ 			var filter = $(this).val(); // get the value of the input, which we filter on
+ 		    $('.sgpfc-container-cards').find(".sgpfc-card-title:not(:contains(" + filter + "))").parent().parent().parent().css('display','none');
+ 		});</script> -->
 </body>
 </html>
