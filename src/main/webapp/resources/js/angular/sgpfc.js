@@ -22,7 +22,8 @@
 
 	app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/offers', {
-			templateUrl: '/proyectoTFM/views/offers.html'
+			templateUrl: '/proyectoTFM/views/offers.html',
+			controller: 'offersController'
 		}).when('/offers/:offerId', {
 			templateUrl: '/proyectoTFM/views/offer.html',
 			controller: 'offerController'
@@ -73,8 +74,6 @@
 	
 
 	app.controller('sgpfcCtrl',['$scope', '$http', '$cookies', '$location', function($scope, $http, $cookies, $location){
-
-	
 		
 		$scope.getOffer = function(offerId) {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
@@ -97,27 +96,6 @@
 		
 		}
 		
-		$scope.getActiveOffers = function() {
-			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/activeoffers').then(function(activeOffers) {
-			    $scope.activeOfferList = activeOffers.data;
-			  }, function(err) {
-			    console.error('ERR', err);
-			    // err.status will contain the status code
-			})
-		
-		}
-		
-		$scope.getRecommendedOffers = function() {
-			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/recommendedoffers').then(function(recommendedOffers) {
-			    $scope.recommendedOfferList = recommendedOffers.data;
-			  }, function(err) {
-			    console.error('ERR', err);
-			    // err.status will contain the status code
-			})
-		
-		}
-		
-
 		$scope.getProjects = function() {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/projects').then(function(projects) {
 			    $scope.projectList = projects.data;
@@ -126,12 +104,7 @@
 			    alert("No se han logrado conseguir los proyectos");
 			})
 		}
-
-	
 		
 	}]);
-	
-	
-	
 
 })();

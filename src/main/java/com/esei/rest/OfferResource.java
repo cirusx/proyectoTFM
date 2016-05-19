@@ -36,122 +36,122 @@ import com.esei.model.Subcategory;
 
 @Path("offers")
 public class OfferResource {
-	
-	
+
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getOffers() {
 		try{
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		List<Offer> offers;
-		try{
-			em.getTransaction().begin();;
-			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o ", Offer.class);
-			offers = query.getResultList();
-			System.out.println("ofertas " + offers);
-			em.getTransaction().commit();
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<Offer> offers;
+			try{
+				em.getTransaction().begin();;
+				TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o ", Offer.class);
+				offers = query.getResultList();
+				System.out.println("ofertas " + offers);
+				em.getTransaction().commit();
 			}finally{
 				em.close();
 			}
-		return offers;
+			return offers;
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("activeoffers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getActiveOffers() {
 		try{
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		List<Offer> activeOffers;
-		try{
-			em.getTransaction().begin();;
-			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o WHERE o.offerClose = false", Offer.class);
-			activeOffers = query.getResultList();
-			System.out.println("ofertas " + activeOffers);
-			em.getTransaction().commit();
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<Offer> activeOffers;
+			try{
+				em.getTransaction().begin();;
+				TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o WHERE o.offerClose = false", Offer.class);
+				activeOffers = query.getResultList();
+				System.out.println("ofertas " + activeOffers);
+				em.getTransaction().commit();
 			}finally{
 				em.close();
 			}
-		return activeOffers;
+			return activeOffers;
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("recommendedoffers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getRecommendedOffers() {
 		try{
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		List<Offer> recommendedOffers;
-		try{
-			em.getTransaction().begin();;
-			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o WHERE o.offerClose = false AND o.offerRecommended = true", Offer.class);
-			recommendedOffers = query.getResultList();
-			System.out.println("ofertas " + recommendedOffers);
-			em.getTransaction().commit();
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<Offer> recommendedOffers;
+			try{
+				em.getTransaction().begin();;
+				TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o WHERE o.offerClose = false AND o.offerRecommended = true", Offer.class);
+				recommendedOffers = query.getResultList();
+				System.out.println("ofertas " + recommendedOffers);
+				em.getTransaction().commit();
 			}finally{
 				em.close();
 			}
-		return recommendedOffers;
+			return recommendedOffers;
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("homerecommendedoffers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getHomeRecommendedOffers() {
 		try{
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		List<Offer> homeRecommendedOffers;
-		try{
-			em.getTransaction().begin();;
-			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o WHERE o.offerClose = false AND o.offerHomeRecommended = true", Offer.class);
-			homeRecommendedOffers = query.setMaxResults(3).getResultList();
-			System.out.println("ofertas " + homeRecommendedOffers);
-			em.getTransaction().commit();
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<Offer> homeRecommendedOffers;
+			try{
+				em.getTransaction().begin();;
+				TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o WHERE o.offerClose = false AND o.offerHomeRecommended = true", Offer.class);
+				homeRecommendedOffers = query.setMaxResults(3).getResultList();
+				System.out.println("ofertas " + homeRecommendedOffers);
+				em.getTransaction().commit();
 			}finally{
 				em.close();
 			}
-		return homeRecommendedOffers;
+			return homeRecommendedOffers;
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("lastoffers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getLastOffers() {
 		try{
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		List<Offer> lastOffers;
-		try{
-			em.getTransaction().begin();;
-			TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o ORDER BY o.offerId DESC", Offer.class);
-			lastOffers = query.setMaxResults(3).getResultList();
-			System.out.println("ofertas " + lastOffers);
-			em.getTransaction().commit();
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<Offer> lastOffers;
+			try{
+				em.getTransaction().begin();;
+				TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o ORDER BY o.offerId DESC", Offer.class);
+				lastOffers = query.setMaxResults(3).getResultList();
+				System.out.println("ofertas " + lastOffers);
+				em.getTransaction().commit();
 			}finally{
 				em.close();
 			}
-		return lastOffers;
+			return lastOffers;
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("subcategories")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -166,16 +166,16 @@ public class OfferResource {
 				subcategories = query.getResultList();
 				System.out.println("categorias " + subcategories);
 				em.getTransaction().commit();
-				}finally{
-					em.close();
-				}
-			return subcategories;
-			}catch(Exception e){
-				e.printStackTrace();
-				throw e;
+			}finally{
+				em.close();
 			}
+			return subcategories;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
 	}
-	 
+
 	@GET
 	@Path("/{offerId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -186,12 +186,12 @@ public class OfferResource {
 			em.getTransaction().begin();;
 			offer = em.find(Offer.class, offerId);
 			em.getTransaction().commit();
-			}finally{
-				em.close();
-			}
+		}finally{
+			em.close();
+		}
 		return offer;
 	}
-	
+
 	@POST
 	@Path("create")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -199,49 +199,23 @@ public class OfferResource {
 	public Response createOffer(Offer offer){
 		System.out.println(offer.getOfferDescription());
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(offer);
-            em.getTransaction().commit();
-           
-        }finally{
-        	em.close();
-        }
-        return Response.created(null).build();  
-     }
-	
+		try {
+			em.getTransaction().begin();
+			em.persist(offer);
+			em.getTransaction().commit();
+
+		}finally{
+			em.close();
+		}
+		return Response.created(null).build();  
+	}
+
 	@POST
 	@Path("/images")
-	@Consumes({MediaType.MULTIPART_FORM_DATA})
-	public Response uploadPdfFile(  @FormDataParam("file") InputStream fileInputStream,
-	                                @FormDataParam("file") FormDataContentDisposition fileMetaData) throws Exception
-	{
-	    String UPLOAD_PATH = "c://Users/Cirusx/workspace/proyectoTFM/src/main/webapp/resources/img/";
-	    try
-	    {
-	        int read = 0;
-	        byte[] bytes = new byte[1024];
-	 
-	        OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + fileMetaData.getFileName()));
-	        while ((read = fileInputStream.read(bytes)) != -1) 
-	        {
-	            out.write(bytes, 0, read);
-	        }
-	        out.flush();
-	        out.close();
-	    } catch (IOException e) 
-	    {
-	        throw new WebApplicationException("Error while uploading file. Please try again !!");
-	    }
-	    return Response.ok("Data uploaded successfully !!").build();
-	}
-	
-	@POST
-	@Path("/images2")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response uploadFile(
-		@FormDataParam("file") InputStream uploadedInputStream,
-		@FormDataParam("file") FormDataContentDisposition fileDetail) {
+			@FormDataParam("file") InputStream uploadedInputStream,
+			@FormDataParam("file") FormDataContentDisposition fileDetail) {
 
 		String uploadedFileLocation = "c://Users/Mario/git/proyectoTFM/src/main/webapp/resources/img/" + fileDetail.getFileName();
 
@@ -256,7 +230,7 @@ public class OfferResource {
 
 	// save uploaded file to new location
 	private void writeToFile(InputStream uploadedInputStream,
-		String uploadedFileLocation) {
+			String uploadedFileLocation) {
 
 		try {
 			OutputStream out = new FileOutputStream(new File(
@@ -276,122 +250,40 @@ public class OfferResource {
 		}
 
 	}
-	
-	private static final String SERVER_UPLOAD_LOCATION_FOLDER = "c://Users/Cirusx/workspace/proyectoTFM/src/main/webapp/resources/img/";
 
-	    @POST
-	    @Path("/images3")
-	    @Consumes(MediaType.MULTIPART_FORM_DATA)
-	    public Response uploadFile(FormDataMultiPart form) {
-
-	         FormDataBodyPart filePart = form.getField("file");
-	         ContentDisposition headerOfFilePart =  filePart.getContentDisposition();
-	         InputStream fileInputStream = filePart.getValueAs(InputStream.class);
-	         String filePath = SERVER_UPLOAD_LOCATION_FOLDER + headerOfFilePart.getFileName();
-	        saveFile(fileInputStream, filePath);
-	        String output = "File saved to server location using FormDataMultiPart : " + filePath;
-	        return Response.status(200).entity(output).build();
-	    }
-
-	    private void saveFile(InputStream uploadedInputStream, String serverLocation) {
-	
-	        try {
-	
-	            OutputStream outpuStream = new FileOutputStream(new File(serverLocation));
-	
-	            int read = 0;
-	            byte[] bytes = new byte[1024];
-	            outpuStream = new FileOutputStream(new File(serverLocation));
-	
-	            while ((read = uploadedInputStream.read(bytes)) != -1) {
-	
-	                outpuStream.write(bytes, 0, read);
-	            }
-
-	            outpuStream.flush();
-	            outpuStream.close();
-	            uploadedInputStream.close();
-	
-	        } catch (IOException e) {
-
-	            e.printStackTrace();
-	
-	        }
-	
-	    }
-	  
-	    @POST
-	    @Path("/images4")
-	    @Consumes(MediaType.MULTIPART_FORM_DATA)
-	    @Produces("text/html")
-	    public Response uploadFiles(
-	        @FormDataParam("file") InputStream fileInputString,
-	        @FormDataParam("file") FormDataContentDisposition fileInputDetails) {
-	    
-	      String fileLocation = SERVER_UPLOAD_LOCATION_FOLDER + fileInputDetails.getFileName();
-	      String status = null;
-	      NumberFormat myFormat = NumberFormat.getInstance();
-	      myFormat.setGroupingUsed(true);
-	       
-	      // Save the file 
-	      try {
-	       OutputStream out = new FileOutputStream(new File(fileLocation));
-	       byte[] buffer = new byte[1024];
-	       int bytes = 0;
-	       long file_size = 0; 
-	       while ((bytes = fileInputString.read(buffer)) != -1) {
-	        out.write(buffer, 0, bytes);
-	        file_size += bytes;
-	       }
-	       out.flush();  
-	       out.close();
-	               
-	       /*logger.info(String.format("Inside uploadFile==> fileName: %s,  fileSize: %s", 
-	            fileInputDetails.getFileName(), myFormat.format(file_size)));*/
-	               
-	       status = "File has been uploaded to:" + fileLocation 
-	                   + ", size: " + myFormat.format(file_size) + " bytes";
-	      } catch (IOException ex) {
-	        /*logger.error("Unable to save file: "  + fileLocation);*/
-	        ex.printStackTrace();
-	      }
-	   
-	      return Response.status(200).entity(status).build();
-	    }
-	
 	@DELETE
 	@Path("/{offerId}")
 	public String deleteOffer(@PathParam("offerId") int offerId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        String out;
-        try {
-            em.getTransaction().begin();
-            Offer offer = em.find(Offer.class, offerId);
-            em.remove(offer);
-            em.getTransaction().commit();
-            out = "Oferta eliminada correctamente";
-        }finally{
-        	em.close();
-        }
-        return out;  
+		String out;
+		try {
+			em.getTransaction().begin();
+			Offer offer = em.find(Offer.class, offerId);
+			em.remove(offer);
+			em.getTransaction().commit();
+			out = "Oferta eliminada correctamente";
+		}finally{
+			em.close();
+		}
+		return out;  
 	}
-	
+
 	@PUT
 	@Path("/{offerId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String updateOffer(Offer offer) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        String out;
-        try {
-            em.getTransaction().begin();
-            Offer offer2 = em.find(Offer.class, offer.getOfferId());
-            em.merge(offer2);
-            em.getTransaction().commit();
-            out = "Oferta actualizada correctamente";
-        }finally{
-        	em.close();
-        }
-        return out;  
+		String out;
+		try {
+			em.getTransaction().begin();
+			Offer offer2 = em.find(Offer.class, offer.getOfferId());
+			em.merge(offer2);
+			em.getTransaction().commit();
+			out = "Oferta actualizada correctamente";
+		}finally{
+			em.close();
+		}
+		return out;  
 	}
 
 }
