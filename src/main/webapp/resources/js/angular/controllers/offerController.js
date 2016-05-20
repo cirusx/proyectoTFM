@@ -39,36 +39,19 @@
 				alert("No puedes registrarte ya que no estas registrado como alumno o logeado");
 			}
 			if(login) {
-				$http.get('http://localhost:8080/proyectoTFM/rest/users/'+$cookies.get('user').replace('@', '%40')).then(function(user) {
-					alert(JSON.stringify(user));
-					var userData = user.data;
+					//alert(JSON.stringify(user));
+											
+					$http.post('http://localhost:8080/proyectoTFM/rest/offers/'+offer.offerId+'/students').then(
+							function (response) {
+								alert('registrado');
+							},
+							function (response) {
+								alert('error ene el registro');
+							}
+					);
+				
 
-					if (userData.user_TYPE == 1){
-						if($scope.offer.offerRegistrationList == undefined){
-							$scope.offer.offerRegistrationList = [];
-						}
-						/*if(user.data.registerOfferList == undefined){
-							user.data.registerOfferList = [];
-						}
-						user.data.registerOfferList.push($scope.offer);*/
-						/*user.data.registerOfferList.push($scope.offer.offerId);*/
-						$scope.offer.offerRegistrationList.push(userData);
-						$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId, offer).then(
-								function (response) {
-									alert('registrado');
-								},
-								function (response) {
-									alert('error ene el registro');
-								}
-						);
-					}else {
-						alert("No te puedes registrar si no eres un alumno");
-					}
-
-				}, function(err) {
-					console.error('ERR', err);
-					// err.status will contain the status code
-				})
+			
 			}
 
 		}

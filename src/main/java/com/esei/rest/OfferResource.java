@@ -6,13 +6,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.NumberFormat;
+import java.util.Base64;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -31,7 +34,9 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 
 
 import com.esei.model.Offer;
+import com.esei.model.Student;
 import com.esei.model.Subcategory;
+import com.esei.model.User;
 
 
 @Path("offers")
@@ -193,6 +198,28 @@ public class OfferResource {
 	}
 
 	@POST
+	@Path("/{offerId}/students")
+	public Response addStudent(@PathParam("offerId") Long offerId, @HeaderParam("Authorization") String authHeader) {
+		System.err.println("añadiendo a offer "+offerId);
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		Offer offer;
+		User user = requireUser(authHeader, em);
+		
+		try{
+			em.getTransaction().begin();;
+			System.err.println(user.getClass());
+			offer = em.find(Offer.class, offerId);
+			System.err.println("oferta "+offer);
+			offer.getOfferRegistrationList().add((Student) user);
+			((Student) user).getRegisterOfferList().add(offer);
+			em.getTransaction().commit();
+			System.err.println("COMMITEADO");
+		}finally{
+			em.close();
+		}
+		return Response.created(null).build();
+	}
+	@POST
 	@Path("create")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -285,5 +312,18 @@ public class OfferResource {
 		}
 		return out;  
 	}
+	
+	private User requireUser(String authHeader, EntityManager em) {
+		String authString = new String(Base64.getDecoder().decode(authHeader.replace("Basic ","").getBytes()));
+		String login = authString.split(":")[0];
+		String pass = authString.split(":")[1];
+		try {
+			return em.createQuery("SELECT u FROM User u WHERE u.email = '"+ login +"' and u.password='"+pass+"'", User.class).getSingleResult();
+		} catch(NoResultException e) {
+			e.printStackTrace();
+			throw new SecurityException("user is not correct");
+		}
+	}
+
 
 }

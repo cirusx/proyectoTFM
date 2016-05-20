@@ -12,8 +12,11 @@ public class PFCManagementApplication extends ResourceConfig {
 	
 	public PFCManagementApplication() {
 		super();
+		System.err.println("PFCMANAGEMENTAPP");
 		this.packages("com.esei.rest").register(JacksonFeature.class);
 		this.packages("com.esei.rest").register(MultiPartFeature.class);
+		packages("com.esei.rest");
+		
 	}
 
 }
