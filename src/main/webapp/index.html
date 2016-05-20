@@ -44,7 +44,7 @@
 </script>
 </head>
 <body ng-controller="authController" background="./resources/img/debut_light.png">
-	<div ng-include src="'/proyectoTFM/views/header.html'"></div>
+	<div ng-controller="authController" ng-include src="'/proyectoTFM/views/header.html'"></div>
 	<div ng-include src="'/proyectoTFM/views/welcome.html'"></div>
 	
 	<div ng-view></div>

@@ -3,6 +3,7 @@ package com.esei.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -29,10 +30,20 @@ public class User implements Serializable {
 	private String				password;
 	private String				email;
 	private boolean				enable;
-	private Date 				savedTime;
-	private Date 				creationTime;
-	private Long				version; 
+	private Long				version;
 	
+	@Column(name = "USER_TYPE", insertable = false, updatable = false)
+	private String              USER_TYPE;
+	
+	
+	public String getUSER_TYPE() {
+		return USER_TYPE;
+	}
+
+	public void setUSER_TYPE(String uSER_TYPE) {
+		USER_TYPE = uSER_TYPE;
+	}
+
 	public User() {}
 	
 	@Id
@@ -83,28 +94,6 @@ public class User implements Serializable {
 
 	public void setEnable(boolean enable) {
 		this.enable = enable;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	//@Override
-	public Date getSavedTime() {
-		return savedTime;
-	}
-
-	//@Override
-	public void setSavedTime(Date savedTime) {
-		this.savedTime = savedTime;
-	}
-
-	@Temporal(TemporalType.TIMESTAMP)
-	//@Override
-	public Date getCreationTime() {
-		return creationTime;
-	}
-
-	//@Override
-	public void setCreationTime(Date creationTime) {
-		this.creationTime = creationTime;
 	}
 
 	@Version

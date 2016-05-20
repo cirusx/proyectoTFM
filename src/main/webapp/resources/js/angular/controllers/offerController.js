@@ -30,36 +30,47 @@
 
 		$scope.offerUserRegister = function() {
 			var offer = $scope.offer;
+			var login = false;
 			if ($cookies.get('user')) {
-				alert("relogin user "+$cookies.get('user'));
-				$http.defaults.headers.common.Authorization = 'Basic '+btoa($cookies.get('user')+':'+$cookies.get('password'));	
+				//alert("relogin user "+$cookies.get('user'));
+				var login = true
+				//$http.defaults.headers.common.Authorization = 'Basic '+btoa($cookies.get('user')+':'+$cookies.get('password'));	
+			} else {
+				alert("No puedes registrarte ya que no estas registrado como alumno o logeado");
 			}
-			$http.get('http://localhost:8080/proyectoTFM/rest/users/'+$cookies.get('user').replace('@', '%40')).then(function(user) {
-				alert(JSON.stringify(user));
-				var userData = user.data;
+			if(login) {
+				$http.get('http://localhost:8080/proyectoTFM/rest/users/'+$cookies.get('user').replace('@', '%40')).then(function(user) {
+					alert(JSON.stringify(user));
+					var userData = user.data;
 
-				if($scope.offer.offerRegistrationList == undefined){
-					$scope.offer.offerRegistrationList = [];
-				}
-				/*if(user.data.registerOfferList == undefined){
-					user.data.registerOfferList = [];
-				}
-				user.data.registerOfferList.push($scope.offer);*/
-				/*user.data.registerOfferList.push($scope.offer.offerId);*/
-				$scope.offer.offerRegistrationList.push(userData);
-
-				$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId, offer).then(
-						function (response) {
-							alert('registrado');
-						},
-						function (response) {
-
+					if (userData.user_TYPE == 1){
+						if($scope.offer.offerRegistrationList == undefined){
+							$scope.offer.offerRegistrationList = [];
 						}
-				);
-			}, function(err) {
-				console.error('ERR', err);
-				// err.status will contain the status code
-			})
+						/*if(user.data.registerOfferList == undefined){
+							user.data.registerOfferList = [];
+						}
+						user.data.registerOfferList.push($scope.offer);*/
+						/*user.data.registerOfferList.push($scope.offer.offerId);*/
+						$scope.offer.offerRegistrationList.push(userData);
+						$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId, offer).then(
+								function (response) {
+									alert('registrado');
+								},
+								function (response) {
+									alert('error ene el registro');
+								}
+						);
+					}else {
+						alert("No te puedes registrar si no eres un alumno");
+					}
+
+				}, function(err) {
+					console.error('ERR', err);
+					// err.status will contain the status code
+				})
+			}
+
 		}
 	}]);
 }());

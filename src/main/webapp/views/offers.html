@@ -34,21 +34,21 @@ G-
 								<label class="filter-col" style="margin-right: 0;"
 									for="pref-search">Nombre Oferta:</label> <input type="text"
 									class="sgpfc-filter-title form-control input-sm"
-									id="pref-search" ng-model="search.offerName">
+									id="pref-search" ng-model="search.offerName" placeholder="Nombre">
 							</div>
 							<!-- form group [search] -->
 							<div class="col-xs-6">
 								<label class="filter-col" style="margin-right: 0;"
 									for="pref-search">Descripción:</label> <input type="text"
 									class="sgpfc-filter-title form-control input-sm"
-									id="pref-search" ng-model="search.offerDescription">
+									id="pref-search" ng-model="search.offerDescription" placeholder="Descripción">
 							</div>
 							<!-- form group [search] -->
 							<div class="col-xs-6">
 								<label class="filter-col" style="margin-right: 0;"
 									for="pref-search">Subcategoría:</label> <input type="text"
 									class="sgpfc-filter-title form-control input-sm"
-									id="pref-search" ng-model="search.$">
+									id="pref-search" ng-model="search.$" placeholder="Subcategoría">
 							</div>
 							<!-- form group [search] -->
 							<div class="col-xs-4 sgpfc-offers-orderFilterZone">
@@ -118,12 +118,14 @@ G-
 			<div class="panel panel-default sgpfc-card-tall-big sgpfc-card-panel">
 				<div
 					class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
+					<a ng-href="#/offers/{{offer.offerId}}">
 					<img src="{{offer.offerImage}}" class="img-responsive">
+					</a>
 				</div>
 				<div class="panel-body sgpfc-card-content">
 					<div class="panel-body sgpfc-card-content">
 						<p class="sgpfc-card-title">
-							<a class="sgpfc-card-title a">{{offer.offerName}}</a>
+							<a ng-href="#/offers/{{offer.offerId}}" class="sgpfc-card-title a">{{offer.offerName}}</a>
 						</p>
 						<p class="lead sgpfc-card-teacher">
 							<a class="sgpfc-card-teacher">{{offer.offerTeacher}}</a>

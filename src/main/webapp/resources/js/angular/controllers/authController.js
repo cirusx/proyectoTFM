@@ -4,7 +4,7 @@
 	var app= angular.module('sgpfc');
 	app.controller('authController',['$scope', '$http', '$location', '$cookies',
 	                                 function ($scope, $http, $location, $cookies) {
-
+		$scope.menuUser="";
 		$scope.login = function() {
 			var login = $scope.user.email;
 			var password = $scope.user.password;
@@ -15,7 +15,7 @@
 				//alert(JSON.stringify(user));
 				$cookies.put('user', login);
 				$cookies.put('password', password);
-
+				$scope.menuUser=true;
 				$location.path("/");
 
 			}, function(err) {
@@ -23,9 +23,9 @@
 				// err.status will contain the status code
 			})
 
-			if ($cookies.get('user')) {
+			/*if ($cookies.get('user')) {
 				$scope.menuUser=true;	
-			}
+			}*/
 		}
 
 

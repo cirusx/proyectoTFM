@@ -5,7 +5,7 @@
 app.controller('homeController',['$scope', '$http', '$location', '$cookies',
 	                                  function ($scope, $http, $location, $cookies) {
 		
-		$scope.getHomeRecommendedOffers = function() {
+//		$scope.getHomeRecommendedOffers = function() {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/homerecommendedoffers').then(function(homeRecommendedOffers) {
 				  homeRecommendedOffers.data.forEach(function(offer) {
 				    	$http.get('http://localhost:8080/proyectoTFM/rest/offers/subcategories'+'?offerId='+offer.offerId).then(function(subcategories) {
@@ -25,9 +25,9 @@ app.controller('homeController',['$scope', '$http', '$location', '$cookies',
 				    // err.status will contain the status code
 				})
 		
-		}
+//		}
 		
-		$scope.getLastOffers = function() {
+//		$scope.getLastOffers = function() {
 			  $http.get('http://localhost:8080/proyectoTFM/rest/offers/lastoffers').then(function(lastOffers) {
 			    lastOffers.data.forEach(function(offer) {
 			    	$http.get('http://localhost:8080/proyectoTFM/rest/offers/subcategories'+'?offerId='+offer.offerId).then(function(subcategories) {
@@ -42,7 +42,7 @@ app.controller('homeController',['$scope', '$http', '$location', '$cookies',
 			    console.error('ERR', err);
 			    // err.status will contain the status code
 			})
-		}
+//		}
 		
 		
 	}]);
