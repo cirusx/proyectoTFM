@@ -31,7 +31,7 @@ import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.FormDataParam;
-
+import org.hibernate.HibernateException;
 
 import com.esei.model.Offer;
 import com.esei.model.Student;
@@ -197,6 +197,26 @@ public class OfferResource {
 		return offer;
 	}
 
+/*	public static void main(String[] args) {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		Offer offer;
+		User user = findUser(em, "alumno@esei.uvigo.es", "alumno");
+		
+		
+		try{
+			em.getTransaction().begin();;
+			System.err.println(user.getClass());
+			offer = em.find(Offer.class, 1l);
+			System.err.println("oferta "+offer);
+			offer.getOfferRegistrationList().add((Student) user);
+			((Student) user).getRegisterOfferList().add(offer);
+			em.getTransaction().commit();
+			System.err.println("COMMITEADO");
+		}finally{
+			em.close();
+		}
+	}*/
+	
 	@POST
 	@Path("/{offerId}/students")
 	public Response addStudent(@PathParam("offerId") Long offerId, @HeaderParam("Authorization") String authHeader) {
@@ -318,11 +338,15 @@ public class OfferResource {
 		String login = authString.split(":")[0];
 		String pass = authString.split(":")[1];
 		try {
-			return em.createQuery("SELECT u FROM User u WHERE u.email = '"+ login +"' and u.password='"+pass+"'", User.class).getSingleResult();
+			return findUser(em, login, pass);
 		} catch(NoResultException e) {
 			e.printStackTrace();
 			throw new SecurityException("user is not correct");
 		}
+	}
+
+	private static User findUser(EntityManager em, String login, String pass) {
+		return em.createQuery("SELECT u FROM User u WHERE u.email = '"+ login +"' and u.password='"+pass+"'", User.class).getSingleResult();
 	}
 
 

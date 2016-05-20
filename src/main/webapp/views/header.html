@@ -42,7 +42,7 @@
 								<li><a href="#/createproject"><b>Crear Proyecto</b></a></li>
 							</ul></li>
 					</ul>
-					<ul ng-hide="menuUser" class="nav col-xs-2 col-xs-offset-2">
+					<ul ng-hide="logged" class="nav col-xs-2 col-xs-offset-2">
 						<!--<li class="divider-vertical"></li>-->
 						<li class="col-xs-6 sgpfc-header-right"><a
 							class="sgpfc-header-links-right" href="#/login">Login</a></li>
@@ -51,7 +51,7 @@
 							class="sgpfc-header-links-right" href="#/register">Registro</a></li>
 					</ul>
 
-					<ul ng-show="menuUser" class="nav col-xs-1 col-xs-offset-3">
+					<ul ng-show="logged" class="nav col-xs-1 col-xs-offset-3">
 						<li class="dropdown sgpfc-header-right-menu"><a 
 							class="dropdown-toggle sgpfc-header-links-right"
 							data-toggle="dropdown" role="button" aria-haspopup="true"

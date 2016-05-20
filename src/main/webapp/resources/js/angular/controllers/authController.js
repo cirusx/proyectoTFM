@@ -2,9 +2,14 @@
 	'use strict';
 
 	var app= angular.module('sgpfc');
-	app.controller('authController',['$scope', '$http', '$location', '$cookies',
-	                                 function ($scope, $http, $location, $cookies) {
-		$scope.menuUser="";
+	app.controller('authController',['$scope', '$rootScope', '$http', '$location', '$cookies',
+	                                 function ($scope, $rootScope, $http, $location, $cookies) {
+		$rootScope.logged="";
+		if ($cookies.get('user')) {
+			$rootScope.logged=true;	
+		}
+		
+		
 		$scope.login = function() {
 			var login = $scope.user.email;
 			var password = $scope.user.password;
@@ -15,17 +20,13 @@
 				//alert(JSON.stringify(user));
 				$cookies.put('user', login);
 				$cookies.put('password', password);
-				$scope.menuUser=true;
+				$rootScope.logged=true;
 				$location.path("/");
 
 			}, function(err) {
 				console.error('ERR', err);
 				// err.status will contain the status code
 			})
-
-			/*if ($cookies.get('user')) {
-				$scope.menuUser=true;	
-			}*/
 		}
 
 
@@ -35,7 +36,7 @@
 				$cookies.remove("password");
 				alert('logout');
 				$location.path("/login");
-				$scope.menuUser= false;
+				$rootScope.logged="";
 			}
 		}
 
@@ -51,9 +52,6 @@
 			);
 		}
 
-		if ($cookies.get('user')) {
-			$scope.menuUser=true;	
-		}
 	}]);
 
 

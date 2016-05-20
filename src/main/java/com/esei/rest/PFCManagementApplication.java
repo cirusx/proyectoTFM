@@ -6,17 +6,19 @@ import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
+import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+
 @ApplicationPath("/rest/*")
 public class PFCManagementApplication extends ResourceConfig {
 	
 	
+
 	public PFCManagementApplication() {
 		super();
-		System.err.println("PFCMANAGEMENTAPP");
-		this.packages("com.esei.rest").register(JacksonFeature.class);
-		this.packages("com.esei.rest").register(MultiPartFeature.class);
-		packages("com.esei.rest");
-		
+
+		this.packages("com.esei.rest");
+		register(JacksonFeature.class);
+		register(MultiPartFeature.class);
 	}
 
 }
