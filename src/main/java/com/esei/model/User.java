@@ -19,7 +19,7 @@ import javax.persistence.Version;
 
 @Entity(name="User")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name="USER_TYPE", discriminatorType=DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name="userType", discriminatorType=DiscriminatorType.STRING)
 public class User implements Serializable {
 
 	private static final long serialVersionUID = -4722216552949310274L;
@@ -32,17 +32,11 @@ public class User implements Serializable {
 	private boolean				enable;
 	private Long				version;
 	
-	@Column(name = "USER_TYPE", insertable = false, updatable = false)
-	private String              USER_TYPE;
+	@Column(name = "userType", insertable = false, updatable = false)
+	private String              userType;
 	
 	
-	public String getUSER_TYPE() {
-		return USER_TYPE;
-	}
-
-	public void setUSER_TYPE(String uSER_TYPE) {
-		USER_TYPE = uSER_TYPE;
-	}
+	
 
 	public User() {}
 	
@@ -94,6 +88,14 @@ public class User implements Serializable {
 
 	public void setEnable(boolean enable) {
 		this.enable = enable;
+	}
+	
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 	@Version

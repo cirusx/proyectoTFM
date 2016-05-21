@@ -16,9 +16,9 @@
 				</div>
 				<div class="sgpfc-loginbox-panelbody panel-body">
 
-					<form id="createofferform" class="form-horizontal" role="form"
-						action="rest/offers/images" method="post"
-						enctype="multipart/form-data">
+					<form id="createofferform" class="form-horizontal" role="form">
+<!-- 						action="rest/offers/images" method="post" enctype="multipart/form-data" -->
+						
 						<div id="createofferalert" style="display: none"
 							class="alert alert-danger">
 							<p>Error:</p>
@@ -52,16 +52,15 @@
 							<label for="inputImage" class="col-md-3 control-label">Imagen</label>
 							<div class="col-md-9">
 								<!-- 								<label class="control-label">Select File</label> -->
-								<input id="input-offerImage" name="file" type="file"
-									class="file sgpfc-btn-primary"
+								<input name="file" type="file" class="file sgpfc-btn-primary"
 									data-allowed-file-extensions='["jpg", "png"]'
-									ng-model="offer.offerImage" required>
+									 id="photofile" ng-disabled="link != null && link.length != 0"
+									file-model="offer.offerImage" required>
+									
 								<script type="text/javascript">$("#input-offerImage").fileinput();</script>
 							</div>
 
 						</div>
-
-
 
 						<div class="form-group">
 							<label for="dt" class="col-md-3 control-label">Fecha
@@ -89,7 +88,9 @@
 									<div
 										class="sgpfc-recoverypasswordbox-button col-xs-offset-3 col-xs-9">
 
-										<button id="btn-recoverpassword" type="submit"
+<!-- ng-disabled="text == null || text.length==0" -->
+										<button id="btn-recoverpassword" ng-click="postPhoto()"
+											
 											class="btn sgpfc-btn-primary btn-block">
 											<i class="icon-hand-right"></i>Crear Oferta
 										</button>

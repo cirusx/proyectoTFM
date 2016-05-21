@@ -103,7 +103,7 @@ public class ProjectResource {
      }
 	
 	@DELETE
-	@Path("/delete/{projectId}")
+	@Path("/{projectId}")
 	public String deleteProject(@PathParam("projectId") int projectId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;
@@ -120,7 +120,7 @@ public class ProjectResource {
 	}
 	
 	@PUT
-	@Path("/update/{projectId}")
+	@Path("/{projectId}")
 	public String updateProject(Project project) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;

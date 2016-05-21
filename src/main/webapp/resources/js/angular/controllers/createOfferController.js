@@ -3,32 +3,20 @@
 
 	var app= angular.module('sgpfc');
 
-	app.controller('createOfferController',['$scope', '$http', '$location', '$cookies',
-	                                        function ($scope, $http, $location, $cookies) {
+	app.controller('createOfferController',['$scope', '$http', '$location', '$cookies', 'postService',
+	                                        function ($scope, $http, $location, $cookies, postService) {
 
+		
+		$scope.postPhoto = function() {
+		    postService.postPhoto($scope.offer.offerName, $scope.offer.offerDescription, $scope.offer.offerImage,
+		      function(photo){
+		        $scope.posts.splice(0,0,photo);
+		      },
+		      function(){alert("Problem with server during post"); }
+		    );
+		  };
+		
 		$scope.createOffer = function() {
-			alert(JSON.stringify($scope.offer));
-
-
-			var datetimeStr1 = "2020/01/19 07:00";
-			var datetimeStr2 = "2020/07/19 08:00";
-			var datetime;
-
-			if($scope.offer.offerWithLimit == 0) {
-				$scope.offer.offerWithLimit = false;
-			}else{
-				$scope.offer.offerWithLimit = true;
-			}
-			if($scope.offer.offerTimeLimit == 1) {
-				datetime = new Date(datetimeStr1);
-				$scope.offer.offerTimeLimit = datetime;
-			}else if($scope.offer.offerTimeLimit == 2){
-				datetime = new Date(datetimeStr2);
-				$scope.offer.offerTimeLimit = datetime;
-			}else{
-				$scope.offer.offerTimeLimit = null;
-				$scope.offer.offerWithLimit = false;
-			}
 
 			alert(JSON.stringify($scope.offer));
 			$http.post('http://localhost:8080/proyectoTFM/rest/offers/create', $scope.offer).then(

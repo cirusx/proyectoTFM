@@ -1,6 +1,9 @@
 package com.esei.model;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.URLConnection;
 import java.util.Date;
 import java.util.List;
 
@@ -11,11 +14,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -35,7 +40,7 @@ public class Offer implements Serializable{
 	private Long 				offerId;
 	private String 				offerName;
 	private String				offerDescription;
-	private String				offerImage;
+	private byte[]				offerImage;
 	private boolean             offerWithLimit;
 	private Date                offerTimeLimit;
 	private List<Student>		offerRegistrationList;
@@ -46,7 +51,12 @@ public class Offer implements Serializable{
 	private Long				version; 
 	private Teacher				teacher;
 
-	
+	@Lob
+	@Column(length=10000000)
+	private byte[] content;
+
+	@Transient
+	private String contentMime;
 
 	public Offer() {}
 
@@ -76,11 +86,11 @@ public class Offer implements Serializable{
 		this.offerDescription = offerDescription;
 	}
 	
-	public String getOfferImage() {
+	public byte[] getOfferImage() {
 		return offerImage;
 	}
 
-	public void setOfferImage(String offerImage) {
+	public void setOfferImage(byte[] offerImage) {
 		this.offerImage = offerImage;
 	}
 
@@ -171,5 +181,26 @@ public class Offer implements Serializable{
 
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
+	}
+	
+	public void setContent(byte[] content) {
+		this.content = content;
+	}
+
+	public byte[] getContent() {
+		return content;
+	}
+
+	public String getContentMime() throws IOException {
+		if (this.contentMime!=null){
+			return this.contentMime;
+		}
+		return "hola";
+		/*ByteArrayInputStream bais = new ByteArrayInputStream(this.content);
+		return URLConnection.guessContentTypeFromStream(bais);*/
+	}
+	
+	public void setContentMime(String contentMime) {
+		this.contentMime = contentMime;
 	}
 }

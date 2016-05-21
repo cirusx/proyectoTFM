@@ -2,10 +2,13 @@
 
 	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies']);
 	
-	app.run(['$http', '$cookies', '$window', function($http, $cookies, $window) {
+	app.run(['$http', '$cookies', '$window', '$rootScope', function($http, $cookies, $window, $rootScope) {
 		//alert("trying...");
 		if ($cookies.get('user')) {
 			alert("relogin user "+$cookies.get('user'));
+			$rootScope.logged = true;
+			var rol = $cookies.get('rol');
+			$rootScope.loggedType = rol;
 			$http.defaults.headers.common.Authorization = 'Basic '+btoa($cookies.get('user')+':'+$cookies.get('password'));	
 		}
 		
@@ -14,6 +17,7 @@
             if ($cookies.get('user')) {
 			$cookies.remove("user"); 
             $cookies.remove("password");
+            $cookies.remove("rol");
 		}
             
         };*/

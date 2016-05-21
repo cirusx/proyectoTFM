@@ -123,6 +123,7 @@ public class UserResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createProject(User user){
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		
         
         try {
             em.getTransaction().begin();
@@ -136,7 +137,7 @@ public class UserResource {
      }
 	
 	@DELETE
-	@Path("/delete/{userId}")
+	@Path("/{userId}")
 	public String deleteUser(@PathParam("userId") int userId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;
@@ -153,7 +154,7 @@ public class UserResource {
 	}
 	
 	@PUT
-	@Path("/update/{userId}")
+	@Path("/{userId}")
 	public String updateUser(User user) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;
