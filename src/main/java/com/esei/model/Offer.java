@@ -40,6 +40,8 @@ public class Offer implements Serializable{
 	private Long 				offerId;
 	private String 				offerName;
 	private String				offerDescription;
+	@Lob
+	@Column(length=10000000)
 	private byte[]				offerImage;
 	private boolean             offerWithLimit;
 	private Date                offerTimeLimit;
@@ -195,9 +197,10 @@ public class Offer implements Serializable{
 		if (this.contentMime!=null){
 			return this.contentMime;
 		}
-		return "hola";
-		/*ByteArrayInputStream bais = new ByteArrayInputStream(this.content);
-		return URLConnection.guessContentTypeFromStream(bais);*/
+		ByteArrayInputStream bais = new ByteArrayInputStream(this.content);
+		return URLConnection.guessContentTypeFromStream(bais);
+				/*"png";*/
+		
 	}
 	
 	public void setContentMime(String contentMime) {

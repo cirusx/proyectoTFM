@@ -32,7 +32,8 @@
 			templateUrl: '/proyectoTFM/views/offer.html',
 			controller: 'offerController'
 		}).when('/projects', {
-			templateUrl: '/proyectoTFM/views/projects.html'
+			templateUrl: '/proyectoTFM/views/projects.html',
+			controller: 'projectsController'
 		}).when('/login', {
 			templateUrl: '/proyectoTFM/views/login.html',
 			controller: 'authController'
@@ -44,12 +45,25 @@
 			controller: 'authController'
 		}).when('/projects/myprojects', {
 			templateUrl: '/proyectoTFM/views/myprojects.html',
-			controller: 'authController'
+			controller: 'projectsController'
+		}).when('/projects/mymanagedprojects', {
+			templateUrl: '/proyectoTFM/views/managedprojects.html',
+			controller: 'projectsController'
+		}).when('/offers/myoffers', {
+			templateUrl: '/proyectoTFM/views/myoffers.html',
+			controller: 'offersController'
+		}).when('/users/myprofile', {
+			templateUrl: '/proyectoTFM/views/profile.html',
+			controller: 'profileController'
+		}).when('/offers/myregistrations', {
+			templateUrl: '/proyectoTFM/views/registrations.html',
+			controller: 'offersController'
 		}).when('/createoffer', {
 			templateUrl: '/proyectoTFM/views/createoffer.html',
 			controller: 'createOfferController'
 		}).when('/createproject', {
-			templateUrl: '/proyectoTFM/views/createproject.html'
+			templateUrl: '/proyectoTFM/views/createproject.html',
+			controller: 'createProjectController'
 		}).otherwise({
 			redirectTo: '/',
 			templateUrl: '/proyectoTFM/views/home.html',
