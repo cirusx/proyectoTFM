@@ -19,6 +19,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.esei.model.Offer;
+import com.esei.model.Student;
+import com.esei.model.Teacher;
 import com.esei.model.User;
 
 
@@ -88,6 +91,56 @@ public class UserResource {
 				em.close();
 			}
 		return students;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
+	@Path("myregistrations")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Offer> getRegistrations(@HeaderParam("Authorization") String authHeader) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			Student student = (Student) requireUser(authHeader, em);
+			List<Offer> myregistrations;
+			try{
+				em.getTransaction().begin();;
+				String userId = student.getUserId().toString();
+				TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o JOIN o.offerRegistrationList s WHERE s.userId="+ userId +"", Offer.class);
+				myregistrations = query.getResultList();
+				System.out.println("ofertas " + myregistrations);
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return myregistrations;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
+	@Path("myoffers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Offer> getMyOffers(@HeaderParam("Authorization") String authHeader) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			Teacher teacher = (Teacher) requireUser(authHeader, em);
+			List<Offer> myOffers;
+			try{
+				em.getTransaction().begin();;
+				String userId = teacher.getUserId().toString();
+				TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o JOIN o.teacher s WHERE s.userId="+ userId +"", Offer.class);
+				myOffers = query.getResultList();
+				System.out.println("ofertas " + myOffers);
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return myOffers;
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;

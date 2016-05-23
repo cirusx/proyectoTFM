@@ -40,9 +40,6 @@ public class Offer implements Serializable{
 	private Long 				offerId;
 	private String 				offerName;
 	private String				offerDescription;
-	@Lob
-	@Column(length=10000000)
-	private byte[]				offerImage;
 	private boolean             offerWithLimit;
 	private Date                offerTimeLimit;
 	private List<Student>		offerRegistrationList;
@@ -53,11 +50,15 @@ public class Offer implements Serializable{
 	private Long				version; 
 	private Teacher				teacher;
 
-	@Lob
-	@Column(length=10000000)
+	/*@Lob
+	@Column(length=10000000)*/
+	private byte[]				offerImage;
+	
+	/*@Lob
+	@Column(length=10000000)*/
 	private byte[] content;
 
-	@Transient
+	//@Transient
 	private String contentMime;
 
 	public Offer() {}
@@ -114,7 +115,6 @@ public class Offer implements Serializable{
 
 
 	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
-
 	@JoinTable(
 	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
 	      inverseJoinColumns={@JoinColumn(name = "offerRegistrationList_userId", referencedColumnName = "userId")})

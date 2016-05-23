@@ -31,6 +31,9 @@
 		}).when('/offers/:offerId', {
 			templateUrl: '/proyectoTFM/views/offer.html',
 			controller: 'offerController'
+		}).when('/offers/teacher/:offerId', {
+			templateUrl: '/proyectoTFM/views/myoffer.html',
+			controller: 'myOfferController'
 		}).when('/projects', {
 			templateUrl: '/proyectoTFM/views/projects.html',
 			controller: 'projectsController'
@@ -49,15 +52,15 @@
 		}).when('/projects/mymanagedprojects', {
 			templateUrl: '/proyectoTFM/views/managedprojects.html',
 			controller: 'projectsController'
-		}).when('/offers/myoffers', {
+		}).when('/users/myoffers', {
 			templateUrl: '/proyectoTFM/views/myoffers.html',
-			controller: 'offersController'
+			controller: 'myOffersController'
 		}).when('/users/myprofile', {
 			templateUrl: '/proyectoTFM/views/profile.html',
 			controller: 'profileController'
-		}).when('/offers/myregistrations', {
+		}).when('/users/myregistrations', {
 			templateUrl: '/proyectoTFM/views/registrations.html',
-			controller: 'offersController'
+			controller: 'registrationsController'
 		}).when('/createoffer', {
 			templateUrl: '/proyectoTFM/views/createoffer.html',
 			controller: 'createOfferController'

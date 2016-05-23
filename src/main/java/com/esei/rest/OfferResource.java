@@ -273,6 +273,7 @@ public class OfferResource {
 		}
 		return offer;
 	}
+	
 	@POST
 	@Path("create")
 	@Produces(MediaType.APPLICATION_JSON)

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi Oferta</title>
+</head>
+<body>
+	<div class="container">
+		<div id="createofferbox"
+			class="sgpfc-registerbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel sgpfc-loginbox-panel">
+				<div class="panel-heading sgpfc-loginbox-heading">
+					<div class="panel-title sgpfc-loginbox-title">Editar Oferta</div>
+				</div>
+				<div class="sgpfc-loginbox-panelbody panel-body">
+
+					<form id="createofferform" class="form-horizontal" role="form">
+<!-- 						action="rest/offers/images" method="post" enctype="multipart/form-data" -->
+						
+						<div id="createofferalert" style="display: none"
+							class="alert alert-danger">
+							<p>Error:</p>
+							<span></span>
+						</div>
+
+						<div class="form-group">
+							<label for="name" class="col-md-3 control-label">Nombre</label>
+							<div class="col-md-9">
+								<div class="input-group col-xs-12">
+									<input id="name" type="text" class="form-control" name="name"
+										aria-label="..." placeholder="Nombre"
+										ng-model="offer.offerName" required>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="description" class="col-md-3 control-label">Descripción</label>
+							<div class="col-md-9">
+								<div class="input-group col-xs-12">
+									<textarea id="description" type="text"
+										class="sgpfc-createofferbox-description form-control"
+										name="description" value="" aria-label="..."
+										placeholder="Descripción" ng-model="offer.offerDescription"
+										required> </textarea>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="inputImage" class="col-md-3 control-label">Imagen</label>
+							<div class="col-md-9">
+								<!-- 								<label class="control-label">Select File</label> -->
+								<input name="file" type="file" class="file sgpfc-btn-primary"
+									data-allowed-file-extensions='["jpg", "png"]'
+									 id="photofile" ng-disabled="link != null && link.length != 0"
+									file-model="offer.offerImage" required>
+									
+								<script type="text/javascript">$("#input-offerImage").fileinput();</script>
+							</div>
+
+						</div>
+
+						<div class="form-group">
+							<label for="dt" class="col-md-3 control-label">Fecha
+								Límite</label>
+							<div class="col-md-9">
+								<div class="radio">
+									<label> <input ng-model="offer.offerWithLimit"
+										type="radio" name="optionsRadios" id="optionsRadios1"
+										value="0" checked> Oferta abierta
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input ng-model="offer.offerTimeLimit"
+										type="radio" name="optionsRadios" id="optionsRadios2"
+										value="1"> Oferta Primer Cuatrimestre
+									</label>
+								</div>
+								<div class="radio">
+									<label> <input ng-model="offer.offerTimeLimit"
+										type="radio" name="optionsRadios" id="optionsRadios3"
+										value="2"> Oferta Segundo Cuatrimestre
+									</label>
+								</div>
+								<div class="form-group">
+									<div
+										class="sgpfc-recoverypasswordbox-button col-xs-offset-3 col-xs-9">
+
+<!-- ng-disabled="text == null || text.length==0" -->
+										<button id="btn-recoverpassword" ng-click="postPhoto()"
+											
+											class="btn sgpfc-btn-primary btn-block">
+											<i class="icon-hand-right"></i>Crear Oferta
+										</button>
+									</div>
+								</div>
+					</form>
+				</div>
+			</div>
+		</div>
+</body>
+</html>
