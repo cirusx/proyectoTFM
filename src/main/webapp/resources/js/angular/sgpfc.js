@@ -1,6 +1,6 @@
 (function(){
 
-	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies']);
+	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies', 'ngMessages']);
 	
 	app.run(['$http', '$cookies', '$window', '$rootScope', function($http, $cookies, $window, $rootScope) {
 		//alert("trying...");

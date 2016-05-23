@@ -17,8 +17,9 @@
 	<div ng-show="offer.offerWithLimit" class="col-xs-4 sgpfc-container-offer-applyzone">
 		<h1 class="sgpfc-container-offer-applyzone-number">{{offer.offerRegistrationList.length}}</h1>
 		<span class="text" >Alumnos Inscritos</span>
-		<button ng-click="offerUserRegister()" ng-hide="enableButton == 2" ng-disabled="enableButton == 3" class="btn sgpfc-btn-primary btn-block sgpfc-container-offer-applyzone-applybutton">Inscribirse</button>
- 		<button ng-show="enableButton == 2" class="btn btn-danger btn-block sgpfc-container-offer-applyzone-applybutton">Registrado</button> 
+		<button ng-click="offerUserRegister()" ng-hide="enableButton == 2 || offerClose" ng-disabled="enableButton == 3" class="btn sgpfc-btn-primary btn-block sgpfc-container-offer-applyzone-applybutton">Inscribirse</button>
+ 		<button ng-show="enableButton == 2 && !offerClose" class="btn btn-default btn-block sgpfc-container-offer-applyzone-applybutton">Registrado</button>
+ 		<button ng-show="offerClose" class="btn btn-danger btn-block sgpfc-container-offer-applyzone-applybutton">Oferta Finalizada</button>
 		<p><span class="text" >Esta oferta finaliza el <b>{{offer.offerTimeLimit | date:'dd/MM/yyyy HH:mm'}}</b></span></p>
 		<span class="text" >Categorias de la oferta:</span>
 		<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">

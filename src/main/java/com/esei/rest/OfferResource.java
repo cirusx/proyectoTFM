@@ -405,6 +405,26 @@ public class OfferResource {
 		return out;  
 	}
 	
+	@PUT
+	@Path("/{offerId}/close")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Offer closeOffer(@PathParam("offerId") Long offerId) {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		String out;
+		Offer offer;
+		try {
+			em.getTransaction().begin();;
+			offer = em.find(Offer.class, offerId);
+			offer.setOfferClose(true);
+			em.getTransaction().commit();
+			
+		}finally{
+			em.close();
+		}
+		return offer;  
+	}
+	
 	private User requireUser(String authHeader, EntityManager em) {
 		String authString = new String(Base64.getDecoder().decode(authHeader.replace("Basic ","").getBytes()));
 		String login = authString.split(":")[0];

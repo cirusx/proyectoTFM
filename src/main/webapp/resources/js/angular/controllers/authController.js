@@ -12,16 +12,23 @@
 			$http.defaults.headers.common.Authorization = 'Basic '+btoa(login+':'+password);
 
 			$http.get('http://localhost:8080/proyectoTFM/rest/users/'+login.replace('@', '%40')).then(function(user) {
-				$cookies.put('user', user.data.email);
-				$cookies.put('password', user.data.password);
-				$cookies.put('rol', user.data.userType);
-				$rootScope.logged = true;
-				$rootScope.loggedType = user.data.userType;
-				$location.path("/");
+				$scope.incorrectUser= false;
+				if (user.data.enable == true) {
+					$cookies.put('user', user.data.email);
+					$cookies.put('password', user.data.password);
+					$cookies.put('rol', user.data.userType);
+					$rootScope.logged = true;
+					$scope.enableUser = 1;
+					$rootScope.loggedType = user.data.userType;
+					$location.path("/");
+				} else {
+					$scope.enableUser = 0;
+				}
+		
 
 			}, function(err) {
 				console.error('ERR', err);
-				alert("Usuario Incorrecto");
+				$scope.incorrectUser= true;
 			})
 		}
 
@@ -42,16 +49,13 @@
 			alert(JSON.stringify($scope.user));
 			$http.post('http://localhost:8080/proyectoTFM/rest/users/create', $scope.user).then(
 					function (response) {
-
+						alert("El Usuario ha sido creado correctamente");
 					},
 					function (response) {
-
+						alert("El Usuario no se ha podido crear correctamente");
 					}
 			);
 		}
 
 	}]);
-
-
-
 }());

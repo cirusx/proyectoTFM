@@ -1,20 +1,20 @@
 package com.esei.model;
 
+
 import java.io.Serializable;
-import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import javax.persistence.Version;
 
 @Entity(name="User")
@@ -106,4 +106,5 @@ public class User implements Serializable {
 	protected void setVersion(Long version) {
 		this.version = version;
 	}
+
 }

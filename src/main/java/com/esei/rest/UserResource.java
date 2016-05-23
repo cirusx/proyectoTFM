@@ -174,10 +174,8 @@ public class UserResource {
 	@Path("create")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createProject(User user){
+	public Response createUser(User user){
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		
-        
         try {
             em.getTransaction().begin();
             em.persist(user);
@@ -188,6 +186,7 @@ public class UserResource {
         }
         return Response.created(null).build();  
      }
+
 	
 	@DELETE
 	@Path("/{userId}")
