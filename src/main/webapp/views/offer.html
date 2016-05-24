@@ -14,7 +14,7 @@
 	<div class="col-xs-8 sgpfc-container-offer-imagezone">
 		<img src="{{offer.offerImage}}" class="img-responsive">
 	</div>
-	<div ng-show="offer.offerWithLimit" class="col-xs-4 sgpfc-container-offer-applyzone">
+	<div ng-show="offer.offerWithLimit && !registrations" class="col-xs-4 sgpfc-container-offer-applyzone">
 		<h1 class="sgpfc-container-offer-applyzone-number">{{offer.offerRegistrationList.length}}</h1>
 		<span class="text" >Alumnos Inscritos</span>
 		<button ng-click="offerUserRegister()" ng-hide="enableButton == 2 || offerClose" ng-disabled="enableButton == 3" class="btn sgpfc-btn-primary btn-block sgpfc-container-offer-applyzone-applybutton">Inscribirse</button>
@@ -31,6 +31,16 @@
 		<span class="text" >Categorias de la oferta:</span>
 		<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
 	</div>
+	<div ng-show="registrations" class="col-xs-4 sgpfc-container-offer-listregistrationszone">
+		<button ng-hide="offerClose" class="btn sgpfc-btn-primary sgpfc-container-offer-applyzone-applybutton">Editar oferta</button>
+ 		<button ng-click="closeOffer()" ng-hide="offerClose" class="btn btn-danger sgpfc-container-offer-applyzone-applybutton">Cerrar oferta</button>
+ 		<button ng-show="offerClose" class="btn btn-danger btn-block sgpfc-container-offer-applyzone-applybutton">Oferta Finalizada</button>
+		<h2 class="">Usuarios Inscritos</h2>
+		<div ng-repeat="user in offer.offerRegistrationList" >
+			<p>{{user.name}} - {{user.email}}</p>
+		</div>
+	</div>
+	
 	<div class="col-xs-12 sgpfc-container-offer-descriptionzone">
 		<span class="text">{{offer.offerDescription}}</span>
 	</div>

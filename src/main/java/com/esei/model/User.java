@@ -17,6 +17,8 @@ import javax.persistence.InheritanceType;
 
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name="User")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name="userType", discriminatorType=DiscriminatorType.STRING)
@@ -66,6 +68,7 @@ public class User implements Serializable {
 		this.name = name;
 	}
 	
+	//@JsonIgnore
 	public String getPassword() {
 		return password;
 	}

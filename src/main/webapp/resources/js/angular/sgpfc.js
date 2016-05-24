@@ -32,7 +32,7 @@
 			templateUrl: '/proyectoTFM/views/offer.html',
 			controller: 'offerController'
 		}).when('/offers/teacher/:offerId', {
-			templateUrl: '/proyectoTFM/views/myoffer.html',
+			templateUrl: '/proyectoTFM/views/offer.html',
 			controller: 'myOfferController'
 		}).when('/projects', {
 			templateUrl: '/proyectoTFM/views/projects.html',
