@@ -31,6 +31,9 @@
 		}).when('/offers/:offerId', {
 			templateUrl: '/proyectoTFM/views/offer.html',
 			controller: 'offerController'
+		}).when('/offers/teacher/:offerId/edit', {
+			templateUrl: '/proyectoTFM/views/editoffer.html',
+			controller: 'createOfferController'
 		}).when('/offers/teacher/:offerId', {
 			templateUrl: '/proyectoTFM/views/offer.html',
 			controller: 'myOfferController'
@@ -74,11 +77,11 @@
 		})
 	}]);
 	
-	/*app.filter('myStrictFilter', function($filter){
+	app.filter('myStrictFilter', function($filter){
 	    return function(input, predicate){
 	        return $filter('filter')(input, predicate, true);
 	    }
-	});*/
+	});
 
 /*	app.filter('unique', function() {
 	    return function (arr, field) {
@@ -115,15 +118,6 @@
 			    // err.status will contain the status code
 			})
 		
-		}
-		
-		$scope.getProjects = function() {
-			  $http.get('http://localhost:8080/proyectoTFM/rest/projects').then(function(projects) {
-			    $scope.projectList = projects.data;
-			  }, function(err) {
-			    console.error('ERR', err);
-			    alert("No se han logrado conseguir los proyectos");
-			})
 		}
 		
 	}]);

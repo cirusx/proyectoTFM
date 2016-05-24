@@ -17,9 +17,9 @@
 	<div ng-show="offer.offerWithLimit && !registrations" class="col-xs-4 sgpfc-container-offer-applyzone">
 		<h1 class="sgpfc-container-offer-applyzone-number">{{offer.offerRegistrationList.length}}</h1>
 		<span class="text" >Alumnos Inscritos</span>
-		<button ng-click="offerUserRegister()" ng-hide="enableButton == 2 || offerClose" ng-disabled="enableButton == 3" class="btn sgpfc-btn-primary btn-block sgpfc-container-offer-applyzone-applybutton">Inscribirse</button>
- 		<button ng-show="enableButton == 2 && !offerClose" class="btn btn-default btn-block sgpfc-container-offer-applyzone-applybutton">Registrado</button>
- 		<button ng-show="offerClose" class="btn btn-danger btn-block sgpfc-container-offer-applyzone-applybutton">Oferta Finalizada</button>
+		<button ng-click="offerUserRegister()" ng-hide="enableButton == 2 || offer.offerClose" ng-disabled="enableButton == 3" class="btn sgpfc-btn-primary btn-block sgpfc-container-offer-applyzone-applybutton">Inscribirse</button>
+ 		<button ng-show="enableButton == 2 && !offer.offerClose" class="btn btn-default btn-block sgpfc-container-offer-applyzone-applybutton">Registrado</button>
+ 		<button ng-show="offer.offerClose" class="btn btn-danger btn-block sgpfc-container-offer-applyzone-applybutton">Oferta Finalizada</button>
 		<p><span class="text" >Esta oferta finaliza el <b>{{offer.offerTimeLimit | date:'dd/MM/yyyy HH:mm'}}</b></span></p>
 		<span class="text" >Categorias de la oferta:</span>
 		<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
@@ -32,9 +32,9 @@
 		<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
 	</div>
 	<div ng-show="registrations" class="col-xs-4 sgpfc-container-offer-listregistrationszone">
-		<button ng-hide="offerClose" class="btn sgpfc-btn-primary sgpfc-container-offer-applyzone-applybutton">Editar oferta</button>
- 		<button ng-click="closeOffer()" ng-hide="offerClose" class="btn btn-danger sgpfc-container-offer-applyzone-applybutton">Cerrar oferta</button>
- 		<button ng-show="offerClose" class="btn btn-danger btn-block sgpfc-container-offer-applyzone-applybutton">Oferta Finalizada</button>
+		<a ng-href="#/offers/teacher/{{offer.offerId}}/edit" ng-hide="offer.offerClose" class="btn sgpfc-btn-primary sgpfc-container-offer-applyzone-applybutton">Editar oferta</a>
+ 		<button ng-click="closeOffer()" ng-hide="offer.offerClose" class="btn btn-danger sgpfc-container-offer-applyzone-applybutton">Cerrar oferta</button>
+ 		<button ng-show="offer.offerClose" class="btn btn-danger btn-block sgpfc-container-offer-applyzone-applybutton">Oferta Finalizada</button>
 		<h2 class="">Usuarios Inscritos</h2>
 		<div ng-repeat="user in offer.offerRegistrationList" >
 			<p>{{user.name}} - {{user.email}}</p>

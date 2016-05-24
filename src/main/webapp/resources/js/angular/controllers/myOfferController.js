@@ -57,7 +57,7 @@
 		
 		$scope.closeOffer = function() {
 			$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/close').then(function(cerrar) {
-				$scope.offerClose = true;
+				$scope.offer.offerClose = true;
 			}, function(err) {
 				console.error('ERR', err);
 				// err.status will contain the status code
