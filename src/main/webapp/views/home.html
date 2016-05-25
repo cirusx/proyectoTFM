@@ -18,7 +18,7 @@
 			<div class="panel panel-default sgpfc-card-tall-big">
 				<div class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
 					<a ng-href="#/offers/{{offer.offerId}}">
-						<img src="{{offer.offerImage}}" class="img-responsive">
+						<img ng-src="data:{{offer.contentMime}};base64,{{offer.content}}" class="img-responsive">
 					</a>
 				</div>
 				<div class="panel-body sgpfc-card-content">
@@ -49,7 +49,7 @@
 				<div class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
 <!-- 				 ng-click="getOffer(offer.offerId)" -->
 					<a ng-href="#/offers/{{offer.offerId}}">
-						<img src="{{offer.offerImage}}" class="img-responsive">
+						<img ng-src="data:{{offer.contentMime}};base64,{{offer.content}}" class="img-responsive">
 					</a>
 					<div ng-repeat="item in offer.subitems"> {{item}}</div>
 				</div>

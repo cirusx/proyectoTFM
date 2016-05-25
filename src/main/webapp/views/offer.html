@@ -12,7 +12,7 @@
 		<p>dirigido por <a><b>{{offer.teacher.name}}</b></a></p>
 	</div>
 	<div class="col-xs-8 sgpfc-container-offer-imagezone">
-		<img src="{{offer.offerImage}}" class="img-responsive">
+		<img ng-src="data:{{offer.contentMime}};base64,{{offer.content}}" class="img-responsive">
 	</div>
 	<div ng-show="offer.offerWithLimit && !registrations" class="col-xs-4 sgpfc-container-offer-applyzone">
 		<h1 class="sgpfc-container-offer-applyzone-number">{{offer.offerRegistrationList.length}}</h1>

@@ -23,8 +23,11 @@
         };*/
 	}]);
 	
+	
+	
 
 	app.config(['$routeProvider', function($routeProvider) {
+		
 		$routeProvider.when('/offers', {
 			templateUrl: '/proyectoTFM/views/offers.html',
 			controller: 'offersController'

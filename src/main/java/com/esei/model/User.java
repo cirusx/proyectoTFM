@@ -3,7 +3,7 @@ package com.esei.model;
 
 import java.io.Serializable;
 
-
+import javax.persistence.Access;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -18,6 +18,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity(name="User")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -29,18 +30,17 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long 				userId;
-	
-	private String 				userName;
+	//private String 				userName;
 	private String 				name;
 	@JsonIgnore
 	private String				password;
 	private String				email;
 	private boolean				enable;
-	
 	@Version
 	private Long				version;
 
 	public User() {}
+	
 	
 	public Long getUserId() {
 		return userId;
@@ -50,13 +50,13 @@ public class User implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getUserName() {
+	/*public String getUserName() {
 		return userName;
 	}
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
+	}*/
 	
 	public String getName() {
 		return name;
@@ -66,11 +66,12 @@ public class User implements Serializable {
 		this.name = name;
 	}
 	
-	//@JsonIgnore
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
-
+	
+	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}

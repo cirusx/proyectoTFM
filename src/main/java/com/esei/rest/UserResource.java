@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
@@ -16,11 +17,13 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.esei.model.Offer;
 import com.esei.model.Student;
+import com.esei.model.Subcategory;
 import com.esei.model.Teacher;
 import com.esei.model.User;
 
@@ -72,8 +75,30 @@ public class UserResource {
 			throw new SecurityException("user is not correct");
 		}
 	}
-
-
+	
+	@GET
+	@Path("check")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUserByEmail(@QueryParam("email") String email) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			User user;
+			try{
+				em.getTransaction().begin();
+				TypedQuery<User> query = em.createQuery("SELECT u FROM User  u WHERE u.email='"+ email +"'", User.class);
+				user = query.getSingleResult();
+				System.out.println("usuario " + user.getEmail());
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return user;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
 	@GET
 	@Path("students")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -171,7 +196,7 @@ public class UserResource {
 	}
 	
 	@POST
-	@Path("create")
+	@Path("")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createUser(User user){
@@ -223,3 +248,4 @@ public class UserResource {
 	}
 
 }
+

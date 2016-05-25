@@ -4,7 +4,7 @@
 	var app= angular.module('sgpfc');
 	app.controller('authController',['$scope', '$rootScope', '$http', '$location', '$cookies',
 	                                 function ($scope, $rootScope, $http, $location, $cookies) {
-		
+
 		$scope.login = function() {
 			var login = $scope.user.email;
 			var password = $scope.user.password;
@@ -24,7 +24,7 @@
 				} else {
 					$scope.enableUser = 0;
 				}
-		
+
 
 			}, function(err) {
 				console.error('ERR', err);
@@ -45,17 +45,28 @@
 			}
 		}
 
-		$scope.register = function() {
-			alert(JSON.stringify($scope.user));
-			$http.post('http://localhost:8080/proyectoTFM/rest/users/create', $scope.user).then(
-					function (response) {
-						alert("El Usuario ha sido creado correctamente");
-					},
-					function (response) {
-						alert("El Usuario no se ha podido crear correctamente");
-					}
-			);
-		}
 
+		$scope.register = function() {
+			$scope.emailUsed = false;
+			$scope.userCreated = false;
+			var email = $scope.user.email;
+			$http.get('http://localhost:8080/proyectoTFM/rest/users/check'+'?email='+email.replace('@', '%40')).then(function(user) {
+				
+					$scope.emailUsed = true;
+					$scope.userCreated = false;
+				
+			}, function(user) {
+				
+				$scope.emailUsed = false;
+				
+				$http.post('http://localhost:8080/proyectoTFM/rest/users', $scope.user).then(function (response) {
+					$scope.userCreated = true;
+					$scope.emailUsed = false;
+				},
+				function (response) {
+					$scope.userCreated = false;
+				})
+			})
+		}	
 	}]);
 }());

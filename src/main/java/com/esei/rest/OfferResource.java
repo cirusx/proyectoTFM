@@ -222,26 +222,6 @@ public class OfferResource {
 		}
 		return offer;
 	}
-
-/*	public static void main(String[] args) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		Offer offer;
-		User user = findUser(em, "alumno@esei.uvigo.es", "alumno");
-		
-		
-		try{
-			em.getTransaction().begin();;
-			System.err.println(user.getClass());
-			offer = em.find(Offer.class, 1l);
-			System.err.println("oferta "+offer);
-			offer.getOfferRegistrationList().add((Student) user);
-			((Student) user).getRegisterOfferList().add(offer);
-			em.getTransaction().commit();
-			System.err.println("COMMITEADO");
-		}finally{
-			em.close();
-		}
-	}*/
 	
 	@POST
 	@Path("/{offerId}/students")
@@ -275,7 +255,7 @@ public class OfferResource {
 	}
 	
 	@POST
-	@Path("create")
+	@Path("")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
@@ -283,28 +263,6 @@ public class OfferResource {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		try {
 			em.getTransaction().begin();
-			/*var datetimeStr1 = "2020/01/19 07:00";
-			var datetimeStr2 = "2020/07/19 08:00";
-			var datetime;*/
-/*
-			if(!offer.isOfferWithLimit()) {
-				offer.setOfferWithLimit(false);
-			}else{
-				offer.setOfferWithLimit(true);
-			}
-			
-			Date lol = offer.getOfferTimeLimit();*/
-			/*if(offer.geofferTimeLimit == 1) {
-				datetime = new Date(datetimeStr1);
-				$scope.offer.offerTimeLimit = datetime;
-			}else if($scope.offer.offerTimeLimit == 2){
-				datetime = new Date(datetimeStr2);
-				$scope.offer.offerTimeLimit = datetime;
-			}else{
-				$scope.offer.offerTimeLimit = null;
-				$scope.offer.offerWithLimit = false;
-			}*/
-			String x = null;
 			em.persist(offer);
 			em.getTransaction().commit();
 
@@ -313,61 +271,13 @@ public class OfferResource {
 		}
 		return Response.created(null).build();  
 	}
-
-	/*@POST
-	@Path("/images")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response uploadFile(
-			@FormDataParam("file") InputStream uploadedInputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail) {
-
-		String uploadedFileLocation = "c://Users/Mario/git/proyectoTFM/src/main/webapp/resources/img/" + fileDetail.getFileName();
-
-		// save it
-		writeToFile(uploadedInputStream, uploadedFileLocation);
-
-		String output = "File uploaded to : " + uploadedFileLocation;
-
-		return Response.status(200).entity(output).build();
-
-	}
-
-	// save uploaded file to new location
-	private void writeToFile(InputStream uploadedInputStream,
-			String uploadedFileLocation) {
-
-		try {
-			OutputStream out = new FileOutputStream(new File(
-					uploadedFileLocation));
-			int read = 0;
-			byte[] bytes = new byte[1024];
-
-			out = new FileOutputStream(new File(uploadedFileLocation));
-			while ((read = uploadedInputStream.read(bytes)) != -1) {
-				out.write(bytes, 0, read);
-			}
-			out.flush();
-			out.close();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		}
-
-	}*/
 	
 	@POST
 	@Path("/photo")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response postImage( @HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
-	
-		
-	//byte[] prueba = offer.getContent();
-	//offer.setOfferImage(prueba);
-		Response res = null;
-		
-		
 	        return createOffer(authHeader, offer);
-//	        postSimplePost(authHeader, offer);
+
 	}
 
 	@DELETE

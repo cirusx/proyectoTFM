@@ -8,7 +8,7 @@
 
 		
 		$scope.postPhoto = function() {
-		    postService.postPhoto($scope.offer.offerName, $scope.offer.offerDescription, $scope.offer.offerImage,
+		    postService.postPhoto($scope.offer.offerName, $scope.offer.offerDescription, $scope.offer.content, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit,
 		      function(photo){
 		        $scope.posts.splice(0,0,photo);
 		      },
@@ -18,7 +18,7 @@
 		
 		$scope.createOffer = function() {
 
-			alert(JSON.stringify($scope.offer));
+			
 			$http.post('http://localhost:8080/proyectoTFM/rest/offers/create', $scope.offer).then(
 					function (response) {
 						alert("La Oferta ha sido creada correctamente");
