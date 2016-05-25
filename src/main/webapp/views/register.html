@@ -2,79 +2,148 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Registrar</title>
 </head>
 <body>
-<div class="container">  
- <div id="registerbox" class="sgpfc-registerbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-                    <div class="panel sgpfc-loginbox-panel">
-                        <div class="panel-heading sgpfc-loginbox-heading">
-                            <div class="panel-title sgpfc-loginbox-title">Registrar</div>
-                            <div class="sgpfc-loginbox-login-link"><a id="signinlink" href="#/login" ">Iniciar Sesión</a></div>
-                        </div>  
-                        <div class="sgpfc-loginbox-panelbody panel-body" >
-                            <form id="registerform" class="form-horizontal" role="form">
-                                <div id="signupalert" style="display:none" class="alert alert-danger">
-                                    <p>Error:</p>
-                                    <span></span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email" class="col-md-3 control-label">Email</label>
-                                    <div class="col-md-9">
-                                    	<div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                        <input id="email" type="email" class="form-control" name="email" value="" placeholder="Email" ng-model="user.email">                                        
-                                    </div>
-                                    </div>
-                                </div>                         
-                                <div class="form-group">
-                                    <label for="user" class="col-md-3 control-label">Usuario</label>
-                                    <div class="col-md-9">
-                                        <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="user" type="text" class="form-control" name="user" value="" placeholder="Usuario" ng-model="user.userName">                                        
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="name" class="col-md-3 control-label">Nombre</label>
-                                    <div class="col-md-9">
-                                        <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="name" type="text" class="form-control" name="name" value="" placeholder="Nombre Completo" ng-model="user.name">                                        
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="col-md-3 control-label">Contraseña</label>
-                                    <div class="col-md-9">
-                                        <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input id="login-password" type="password" class="form-control" name="password" placeholder="Contraseña" ng-model="user.password">
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="confirmpassword" class="col-md-3 control-label">Contraseña</label>
-                                    <div class="col-md-9">
-                                        <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input id="login-confirmpassword" type="password" class="form-control" name="confirmpassword" placeholder="Confirmar Contraseña">
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <!-- Button -->                                        
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <button id="btn-signup" type="button" class="btn sgpfc-btn-primary btn-block" ng-click="register()"><i class="icon-hand-right"></i>Registrar</button>  
-                                    </div>
-                                </div>
-                            </form>
-                         </div>
-                    </div>
-              </div>    
-         </div> 
+	<div class="container">
+		<div id="registerbox"
+			class="sgpfc-registerbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			<div class="panel sgpfc-loginbox-panel">
+				<div class="panel-heading sgpfc-loginbox-heading">
+					<div class="panel-title sgpfc-loginbox-title">Registrar</div>
+					<div class="sgpfc-loginbox-login-link">
+						<a id="signinlink" href="#/login"">Iniciar Sesión</a>
+					</div>
+				</div>
+				<div class="sgpfc-loginbox-panelbody panel-body">
+					<form id="registerform" name="registerform" class="form-horizontal"
+						role="form" ng-submit="register()" novalidate>
+
+						<div class="form-group">
+							<label for="email" class="col-md-3 control-label">Email</label>
+							<div class="col-md-9">
+								<div class="input-group"
+									ng-class="{ 'has-error': registerform.email.$touched && registerform.email.$invalid }">
+									<span class="input-group-addon"><i
+										class="glyphicon glyphicon-envelope"></i></span> <input id="email"
+										type="email" class="form-control" name="email" value=""
+										placeholder="Email" ng-model="user.email" required>
+								</div>
+								<div class="help-block" ng-messages="registerform.email.$error"
+									ng-if="registerform.email.$touched" role="alert">
+									<div ng-message="required" class="alert alert-danger">Este
+										campo es Obligatorio</div>
+									<div ng-message="email" class="alert alert-danger">No es
+										un formato de email valido</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="user" class="col-md-3 control-label">Usuario</label>
+							<div class="col-md-9">
+								<div class="input-group"
+									ng-class="{ 'has-error': registerform.user.$touched && registerform.user.$invalid }">
+									<span class="input-group-addon"><i
+										class="glyphicon glyphicon-user"></i></span> <input id="user"
+										type="text" class="form-control" name="user" value=""
+										placeholder="Usuario" ng-minlength="3" ng-maxlength="12"
+										ng-model="user.userName" required>
+								</div>
+								<div class="help-block" ng-messages="registerform.user.$error"
+									ng-if="registerform.user.$touched" role="alert">
+									<div ng-message="required" class="alert alert-danger">Este
+										campo es Obligatorio</div>
+									<div ng-message="maxlength" class="alert alert-danger">Nombre
+										de usuario demasiado largo</div>
+									<div ng-message="minlength" class="alert alert-danger">Nombre
+										de usuario demasiado corto</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="name" class="col-md-3 control-label">Nombre</label>
+							<div class="col-md-9">
+								<div class="input-group"
+									ng-class="{ 'has-error': registerform.name.$touched && registerform.name.$invalid }">
+									<span class="input-group-addon"><i
+										class="glyphicon glyphicon-user"></i></span> <input id="name"
+										type="text" class="form-control" name="name" value=""
+										ng-minlength="10" ng-maxlength="45"
+										placeholder="Nombre Completo" ng-model="user.name" required>
+								</div>
+								<div class="help-block" ng-messages="registerform.name.$error"
+									ng-if="registerform.name.$touched" role="alert">
+									<div ng-message="required" class="alert alert-danger">Este
+										campo es Obligatorio</div>
+									<div ng-message="maxlength" class="alert alert-danger">Nombre
+										demasiado largo</div>
+									<div ng-message="minlength" class="alert alert-danger">Nombre
+										demasiado corto</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="password" class="col-md-3 control-label">Contraseña</label>
+							<div class="col-md-9">
+								<div class="input-group" ng-class="{ 'has-error': registerform.password.$dirty && registerform.password.$invalid }">
+									<span class="input-group-addon"><i
+										class="glyphicon glyphicon-lock"></i></span> <input
+										id="login-password" type="password" class="form-control"
+										name="password" placeholder="Contraseña"
+										ng-model="user.password" required ng-minlength="6" ng-maxlength="20">
+								</div>
+								<div class="help-block" ng-messages="registerform.password.$error"
+									ng-if="registerform.password.$dirty" role="alert">
+									<div ng-message="required" class="alert alert-danger">Este
+										campo es Obligatorio</div>
+									<div ng-message="maxlength" class="alert alert-danger">Contraseña
+										demasiado larga</div>
+									<div ng-message="minlength" class="alert alert-danger">Contraseña
+										demasiado corta</div>
+								</div>
+								
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="confirmpassword" class="col-md-3 control-label">Confirmar Contraseña</label>
+							<div class="col-md-9">
+								<div class="input-group" ng-class="{ 'has-error': registerform.confirmpassword.$dirty && registerform.confirmpassword.$invalid }">
+									<span class="input-group-addon"><i
+										class="glyphicon glyphicon-lock"></i></span> <input
+										id="login-confirmpassword" type="password"
+										class="form-control" name="confirmpassword"
+										placeholder="Confirmar Contraseña" required ng-pattern="{{user.password}}" ng-model="confirmpassword" ng-minlength="6" ng-maxlength="20">
+								</div>
+								
+								<div class="help-block" ng-messages="registerform.confirmpassword.$error"
+									ng-if="registerform.confirmpassword.$dirty" role="alert">
+									<div ng-message="required" class="alert alert-danger">Este
+										campo es Obligatorio</div>
+									<div ng-message="pattern" class="alert alert-danger">Las contraseñas no coinciden</div>
+									<div ng-message="maxlength" class="alert alert-danger">Contraseña
+										demasiado larga</div>
+									<div ng-message="minlength" class="alert alert-danger">Contraseña
+										demasiado corta</div>
+								</div>
+								
+								
+							</div>
+						</div>
+						<div class="form-group">
+							<!-- Button -->
+							<div class="col-md-offset-3 col-md-9">
+								<button id="btn-signup" type="submit"
+									class="btn sgpfc-btn-primary btn-block" ng-disabled="registerform.$invalid">
+									<i class="icon-hand-right"></i>Registrar
+								</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

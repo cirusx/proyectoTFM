@@ -1,25 +1,27 @@
 package com.esei.model;
 
+
 import java.io.Serializable;
-import java.util.Date;
+
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import javax.persistence.Version;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="User")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name="USER_TYPE", discriminatorType=DiscriminatorType.INTEGER)
+@DiscriminatorColumn(name="userType", discriminatorType=DiscriminatorType.STRING)
 public class User implements Serializable {
 
 	private static final long serialVersionUID = -4722216552949310274L;
@@ -32,17 +34,11 @@ public class User implements Serializable {
 	private boolean				enable;
 	private Long				version;
 	
-	@Column(name = "USER_TYPE", insertable = false, updatable = false)
-	private String              USER_TYPE;
+	@Column(name = "userType", insertable = false, updatable = false)
+	private String              userType;
 	
 	
-	public String getUSER_TYPE() {
-		return USER_TYPE;
-	}
-
-	public void setUSER_TYPE(String uSER_TYPE) {
-		USER_TYPE = uSER_TYPE;
-	}
+	
 
 	public User() {}
 	
@@ -72,6 +68,7 @@ public class User implements Serializable {
 		this.name = name;
 	}
 	
+	//@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -95,6 +92,14 @@ public class User implements Serializable {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
+	
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
 
 	@Version
 	protected Long getVersion() {
@@ -104,4 +109,5 @@ public class User implements Serializable {
 	protected void setVersion(Long version) {
 		this.version = version;
 	}
+
 }

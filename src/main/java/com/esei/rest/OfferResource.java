@@ -7,8 +7,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.NumberFormat;
 import java.util.Base64;
+import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
@@ -180,6 +182,30 @@ public class OfferResource {
 			throw e;
 		}
 	}
+	
+	@GET
+	@Path("users")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Student> getStudentsByOffer(@QueryParam("offerId") Long offerId) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<Student> students;
+			try{
+				em.getTransaction().begin();
+				String offerIdStr = offerId.toString();
+				TypedQuery<Student> query = em.createQuery("SELECT s FROM Student s JOIN s.registerOfferList o WHERE o.offerId="+ offerIdStr +"", Student.class);
+				students = query.getResultList();
+				System.out.println("categorias " + students);
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return students;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
 
 	@GET
 	@Path("/{offerId}")
@@ -188,7 +214,7 @@ public class OfferResource {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		Offer offer;
 		try{
-			em.getTransaction().begin();;
+			em.getTransaction().begin();
 			offer = em.find(Offer.class, offerId);
 			em.getTransaction().commit();
 		}finally{
@@ -219,7 +245,7 @@ public class OfferResource {
 	
 	@POST
 	@Path("/{offerId}/students")
-	public Response addStudent(@PathParam("offerId") Long offerId, @HeaderParam("Authorization") String authHeader) {
+	public Offer addStudent(@PathParam("offerId") Long offerId, @HeaderParam("Authorization") String authHeader) {
 		System.err.println("añadiendo a offer "+offerId);
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		Offer offer;
@@ -230,24 +256,55 @@ public class OfferResource {
 			System.err.println(user.getClass());
 			offer = em.find(Offer.class, offerId);
 			System.err.println("oferta "+offer);
-			offer.getOfferRegistrationList().add((Student) user);
-			((Student) user).getRegisterOfferList().add(offer);
+			boolean userInList = false;
+			for(Student student : offer.getOfferRegistrationList()){
+				if (student.getUserId() == user.getUserId()){
+					userInList = true;
+				}
+			}
+			if (userInList == false){
+				offer.getOfferRegistrationList().add((Student) user);
+				((Student) user).getRegisterOfferList().add(offer);
+			}
 			em.getTransaction().commit();
 			System.err.println("COMMITEADO");
 		}finally{
 			em.close();
 		}
-		return Response.created(null).build();
+		return offer;
 	}
+	
 	@POST
 	@Path("create")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOffer(Offer offer){
+	public Response createOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
 		System.out.println(offer.getOfferDescription());
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		try {
 			em.getTransaction().begin();
+			/*var datetimeStr1 = "2020/01/19 07:00";
+			var datetimeStr2 = "2020/07/19 08:00";
+			var datetime;*/
+/*
+			if(!offer.isOfferWithLimit()) {
+				offer.setOfferWithLimit(false);
+			}else{
+				offer.setOfferWithLimit(true);
+			}
+			
+			Date lol = offer.getOfferTimeLimit();*/
+			/*if(offer.geofferTimeLimit == 1) {
+				datetime = new Date(datetimeStr1);
+				$scope.offer.offerTimeLimit = datetime;
+			}else if($scope.offer.offerTimeLimit == 2){
+				datetime = new Date(datetimeStr2);
+				$scope.offer.offerTimeLimit = datetime;
+			}else{
+				$scope.offer.offerTimeLimit = null;
+				$scope.offer.offerWithLimit = false;
+			}*/
+			String x = null;
 			em.persist(offer);
 			em.getTransaction().commit();
 
@@ -257,7 +314,7 @@ public class OfferResource {
 		return Response.created(null).build();  
 	}
 
-	@POST
+	/*@POST
 	@Path("/images")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response uploadFile(
@@ -296,6 +353,21 @@ public class OfferResource {
 			e.printStackTrace();
 		}
 
+	}*/
+	
+	@POST
+	@Path("/photo")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response postImage( @HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
+	
+		
+	//byte[] prueba = offer.getContent();
+	//offer.setOfferImage(prueba);
+		Response res = null;
+		
+		
+	        return createOffer(authHeader, offer);
+//	        postSimplePost(authHeader, offer);
 	}
 
 	@DELETE
@@ -331,6 +403,26 @@ public class OfferResource {
 			em.close();
 		}
 		return out;  
+	}
+	
+	@PUT
+	@Path("/{offerId}/close")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Offer closeOffer(@PathParam("offerId") Long offerId) {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		String out;
+		Offer offer;
+		try {
+			em.getTransaction().begin();;
+			offer = em.find(Offer.class, offerId);
+			offer.setOfferClose(true);
+			em.getTransaction().commit();
+			
+		}finally{
+			em.close();
+		}
+		return offer;  
 	}
 	
 	private User requireUser(String authHeader, EntityManager em) {

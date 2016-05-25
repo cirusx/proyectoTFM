@@ -6,7 +6,7 @@
 	                                  function ($scope, $http, $location, $routeParams, $cookies) {
 
 		//Get ID out of current URL
-		var offerId = $scope.offer_Id = $routeParams.offerId;
+		var offerId = $scope.offerId = $routeParams.offerId;
 		if (offerId != undefined) {
 			$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
 				if (offer.data.offerId==null) {
@@ -18,8 +18,44 @@
 						console.error('ERR', err);
 						// err.status will contain the status code
 					});
-					var datetime = offer.data.offerTimeLimit;
-					//var startOk = new Date(parseInt(datetime, 10));
+					
+					$http.get('http://localhost:8080/proyectoTFM/rest/offers/users'+'?offerId='+offerId).then(function(users) {
+						offer.data.offerRegistrationList = users.data
+						
+						$scope.offerRegisterButton = 1;
+						if ($cookies.get('user')) {
+							var rol = $cookies.get('rol');
+							if (rol == "1") {
+								for (var user in users.data) {
+									var email = users.data[user].email;
+									var cookiemail= $cookies.get('user')
+									if ( email == cookiemail){
+										$scope.enableButton = 2;
+									}
+								}
+							} else if($cookies.get('rol')== "2"){
+								$scope.enableButton = 3;
+							}
+						} 
+					}, function(err) {
+						console.error('ERR', err);
+						// err.status will contain the status code
+					});
+					
+					var offerTimeLimit = offer.data.offerTimeLimit;
+					var actualDate = Date.now();
+					
+					if (actualDate >= offerTimeLimit){
+						offer.data.offerClose = true;
+						$scope.offer = offer.data;
+						$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/close').then(function(cerrar) {
+							$scope.offerClose = true;
+						}, function(err) {
+							console.error('ERR', err);
+							// err.status will contain the status code
+						});
+					}
+					
 					$scope.offer = offer.data;
 				}
 			}, function(err) {
@@ -31,29 +67,39 @@
 		$scope.offerUserRegister = function() {
 			var offer = $scope.offer;
 			var login = false;
+			var rol = false;
 			if ($cookies.get('user')) {
-				//alert("relogin user "+$cookies.get('user'));
-				var login = true
-				//$http.defaults.headers.common.Authorization = 'Basic '+btoa($cookies.get('user')+':'+$cookies.get('password'));	
+				login = true
+				if ($cookies.get('rol')== "1") {
+					rol = true
+				} else {
+					alert("No puedes registrarte ya que no eres un alumno");
+				}
 			} else {
 				alert("No puedes registrarte ya que no estas registrado como alumno o logeado");
 			}
-			if(login) {
-					//alert(JSON.stringify(user));
-											
-					$http.post('http://localhost:8080/proyectoTFM/rest/offers/'+offer.offerId+'/students').then(
-							function (response) {
-								alert('registrado');
-							},
-							function (response) {
-								alert('error ene el registro');
-							}
-					);
-				
-
-			
+			if(login & rol) {
+				$http.post('http://localhost:8080/proyectoTFM/rest/offers/'+offer.offerId+'/students').then(
+						function (offer) {
+							alert('registrado');
+							$http.get('http://localhost:8080/proyectoTFM/rest/offers/users'+'?offerId='+offerId).then(function(users) {
+								offer.data.offerRegistrationList = users.data
+								
+								$scope.enableButton = 2;
+								$scope.offer = offer.data;
+								$location.path("/offers/"+offer.data.offerId);		
+									
+								 
+							}, function(err) {
+								console.error('ERR', err);
+								// err.status will contain the status code
+							});
+						},
+						function (offer) {
+							alert('error ene el registro');
+						}
+				);
 			}
-
 		}
 	}]);
 }());

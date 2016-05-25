@@ -18,7 +18,6 @@ public class Student extends User {
 	
 	private static final long serialVersionUID = 8475009995080328661L;
 	
-	
 	private List<Project>	userProjectList;
 	private List<Offer>		registerOfferList;
 	

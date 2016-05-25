@@ -12,10 +12,13 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.esei.model.Project;
+import com.esei.model.Student;
+import com.esei.model.Subcategory;
 import com.esei.model.Teacher;
 
 @Path("projects")
@@ -38,6 +41,78 @@ public class ProjectResource {
 				em.close();
 			}
 		return projects;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
+	@Path("subcategories")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Subcategory> getSubcategoriesByProject(@QueryParam("projectId") Long projectId) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<Subcategory> subcategories;
+			try{
+				em.getTransaction().begin();
+				String projectIdStr = projectId.toString();
+				TypedQuery<Subcategory> query = em.createQuery("SELECT s FROM Subcategory s JOIN s.subcategoryProjectList p WHERE p.projectId="+ projectIdStr +"", Subcategory.class);
+				subcategories = query.getResultList();
+				System.out.println("categorias " + subcategories);
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return subcategories;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
+	@Path("student")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Student getStudentByProject(@QueryParam("projectId") Long projectId) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			Student student;
+			try{
+				em.getTransaction().begin();
+				String projectIdStr = projectId.toString();
+				TypedQuery<Student> query = em.createQuery("SELECT s FROM Student s JOIN s.userProjectList p WHERE p.projectId="+ projectIdStr +"", Student.class);
+				student = query.getSingleResult();
+				System.out.println("alumno " + student);
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return student;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
+	@Path("teacher")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Teacher getTeacherByProject(@QueryParam("projectId") Long projectId) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			Teacher teacher;
+			try{
+				em.getTransaction().begin();
+				String projectIdStr = projectId.toString();
+				TypedQuery<Teacher> query = em.createQuery("SELECT t FROM Teacher t JOIN t.projectList p WHERE p.projectId="+ projectIdStr +"", Teacher.class);
+				teacher = query.getSingleResult();
+				System.out.println("profesor " + teacher);
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return teacher;
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
@@ -103,7 +178,7 @@ public class ProjectResource {
      }
 	
 	@DELETE
-	@Path("/delete/{projectId}")
+	@Path("/{projectId}")
 	public String deleteProject(@PathParam("projectId") int projectId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;
@@ -120,7 +195,7 @@ public class ProjectResource {
 	}
 	
 	@PUT
-	@Path("/update/{projectId}")
+	@Path("/{projectId}")
 	public String updateProject(Project project) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;

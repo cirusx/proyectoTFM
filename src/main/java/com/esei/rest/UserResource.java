@@ -19,6 +19,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.esei.model.Offer;
+import com.esei.model.Student;
+import com.esei.model.Teacher;
 import com.esei.model.User;
 
 
@@ -95,6 +98,56 @@ public class UserResource {
 	}
 	
 	@GET
+	@Path("myregistrations")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Offer> getRegistrations(@HeaderParam("Authorization") String authHeader) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			Student student = (Student) requireUser(authHeader, em);
+			List<Offer> myregistrations;
+			try{
+				em.getTransaction().begin();;
+				String userId = student.getUserId().toString();
+				TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o JOIN o.offerRegistrationList s WHERE s.userId="+ userId +"", Offer.class);
+				myregistrations = query.getResultList();
+				System.out.println("ofertas " + myregistrations);
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return myregistrations;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
+	@Path("myoffers")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Offer> getMyOffers(@HeaderParam("Authorization") String authHeader) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			Teacher teacher = (Teacher) requireUser(authHeader, em);
+			List<Offer> myOffers;
+			try{
+				em.getTransaction().begin();;
+				String userId = teacher.getUserId().toString();
+				TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o JOIN o.teacher s WHERE s.userId="+ userId +"", Offer.class);
+				myOffers = query.getResultList();
+				System.out.println("ofertas " + myOffers);
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return myOffers;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
 	@Path("teachers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getTeachers() {
@@ -121,9 +174,8 @@ public class UserResource {
 	@Path("create")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createProject(User user){
+	public Response createUser(User user){
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        
         try {
             em.getTransaction().begin();
             em.persist(user);
@@ -134,9 +186,10 @@ public class UserResource {
         }
         return Response.created(null).build();  
      }
+
 	
 	@DELETE
-	@Path("/delete/{userId}")
+	@Path("/{userId}")
 	public String deleteUser(@PathParam("userId") int userId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;
@@ -153,7 +206,7 @@ public class UserResource {
 	}
 	
 	@PUT
-	@Path("/update/{userId}")
+	@Path("/{userId}")
 	public String updateUser(User user) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;
