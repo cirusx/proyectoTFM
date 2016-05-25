@@ -37,34 +37,57 @@ public class Offer implements Serializable{
 
 	private static final long serialVersionUID = -7829559240923524678L;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long 				offerId;
 	private String 				offerName;
 	private String				offerDescription;
 	private boolean             offerWithLimit;
 	private Date                offerTimeLimit;
+
+	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
+	@JoinTable(
+	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
+	      inverseJoinColumns={@JoinColumn(name = "offerRegistrationList_userId", referencedColumnName = "userId")})
+	@JsonIgnore
 	private List<Student>		offerRegistrationList;
+
+	
+	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
+	@JoinTable(
+	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
+	      inverseJoinColumns={@JoinColumn(name = "offerSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
+	@JsonIgnore
 	private List<Subcategory>	offerSubcategoryList;
+	
+	@Column(nullable=false, columnDefinition="boolean default false")
 	private boolean				offerClose;
+	
+	@Column(nullable=false, columnDefinition="boolean default false")
 	private boolean				offerRecommended;
+
+	@Column(nullable=false, columnDefinition="boolean default false")
 	private boolean				offerHomeRecommended;
+
+	@Version
 	private Long				version; 
+	
+	@ManyToOne
 	private Teacher				teacher;
 
 	/*@Lob
 	@Column(length=10000000)*/
-	private byte[]				offerImage;
+	//private byte[]				offerImage;
 	
-	/*@Lob
-	@Column(length=10000000)*/
+	@Lob
+	@Column(length=10000000)
 	private byte[] content;
 
-	//@Transient
+	@Transient
 	private String contentMime;
 
 	public Offer() {}
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getOfferId() {
 		return offerId;
 	}
@@ -89,14 +112,14 @@ public class Offer implements Serializable{
 		this.offerDescription = offerDescription;
 	}
 	
-	public byte[] getOfferImage() {
+	/*public byte[] getOfferImage() {
 		return offerImage;
 	}
 
 	public void setOfferImage(byte[] offerImage) {
 		this.offerImage = offerImage;
 	}
-
+*/
 	public boolean isOfferWithLimit() {
 		return offerWithLimit;
 	}
@@ -114,11 +137,6 @@ public class Offer implements Serializable{
 	}
 
 
-	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
-	@JoinTable(
-	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
-	      inverseJoinColumns={@JoinColumn(name = "offerRegistrationList_userId", referencedColumnName = "userId")})
-	@JsonIgnore
 	public List<Student> getOfferRegistrationList() {
 		return offerRegistrationList;
 	}
@@ -127,11 +145,6 @@ public class Offer implements Serializable{
 		this.offerRegistrationList = offerRegistrationList;
 	}
 	
-	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
-	@JoinTable(
-	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
-	      inverseJoinColumns={@JoinColumn(name = "offerSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
-	@JsonIgnore
 	public List<Subcategory> getOfferSubcategoryList() {
 		return offerSubcategoryList;
 	}
@@ -140,7 +153,6 @@ public class Offer implements Serializable{
 		this.offerSubcategoryList = offerSubcategoryList;
 	}
 	
-	@Column(nullable=false, columnDefinition="boolean default false")
 	public boolean isOfferClose() {
 		return offerClose;
 	}
@@ -149,7 +161,6 @@ public class Offer implements Serializable{
 		this.offerClose = offerClose;
 	}
 	
-	@Column(nullable=false, columnDefinition="boolean default false")
 	public boolean isOfferRecommended() {
 		return offerRecommended;
 	}
@@ -158,7 +169,6 @@ public class Offer implements Serializable{
 		this.offerRecommended = offerRecommended;
 	}
 	
-	@Column(nullable=false, columnDefinition="boolean default false")
 	public boolean isOfferHomeRecommended() {
 		return offerHomeRecommended;
 	}
@@ -167,7 +177,6 @@ public class Offer implements Serializable{
 		this.offerHomeRecommended = offerHomeRecommended;
 	}
 
-	@Version
 	protected Long getVersion() {
 		return version;
 	}
@@ -176,7 +185,6 @@ public class Offer implements Serializable{
 		this.version = version;
 	}
 	
-	@ManyToOne
 	public Teacher getTeacher() {
 		return teacher;
 	}

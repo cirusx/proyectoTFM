@@ -21,12 +21,16 @@ public class Teacher extends User {
 
 	private static final long serialVersionUID = 2937085374262803187L;
 	
+	@OneToMany(mappedBy="teacher", fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Offer>		offerList;
+
+	
+	@OneToMany(mappedBy="projectTeacher", fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Project>  	projectList;
 	
 
-	@OneToMany(mappedBy="teacher", fetch=FetchType.LAZY)
-	@JsonIgnore
 	public List<Offer> getOfferList() {
 		return offerList;
 	}
@@ -36,8 +40,6 @@ public class Teacher extends User {
 	}
 	
 
-	@OneToMany(mappedBy="projectTeacher", fetch=FetchType.LAZY)
-	@JsonIgnore
 	public List<Project> getProjectList() {
 		return projectList;
 	}

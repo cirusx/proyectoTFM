@@ -15,7 +15,7 @@
 				$scope.incorrectUser= false;
 				if (user.data.enable == true) {
 					$cookies.put('user', user.data.email);
-					$cookies.put('password', user.data.password);
+					$cookies.put('password', password);
 					$cookies.put('rol', user.data.userType);
 					$rootScope.logged = true;
 					$scope.enableUser = 1;

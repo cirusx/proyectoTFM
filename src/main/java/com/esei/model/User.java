@@ -25,25 +25,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User implements Serializable {
 
 	private static final long serialVersionUID = -4722216552949310274L;
-	
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long 				userId;
+	
 	private String 				userName;
 	private String 				name;
+	@JsonIgnore
 	private String				password;
 	private String				email;
 	private boolean				enable;
+	
+	@Version
 	private Long				version;
-	
-	@Column(name = "userType", insertable = false, updatable = false)
-	private String              userType;
-	
-	
-	
 
 	public User() {}
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getUserId() {
 		return userId;
 	}
@@ -94,14 +92,10 @@ public class User implements Serializable {
 	}
 	
 	public String getUserType() {
-		return userType;
+		return this.getClass().getSimpleName();
 	}
 
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
-
-	@Version
+	
 	protected Long getVersion() {
 		return version;
 	}

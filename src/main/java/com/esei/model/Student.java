@@ -18,13 +18,16 @@ public class Student extends User {
 	
 	private static final long serialVersionUID = 8475009995080328661L;
 	
+	@OneToMany(mappedBy="projectStudent" )
+	@JsonIgnore
 	private List<Project>	userProjectList;
+
+	@ManyToMany(mappedBy="offerRegistrationList")
+	@JsonIgnore
 	private List<Offer>		registerOfferList;
 	
 	
 	
-	@OneToMany(mappedBy="projectStudent" )
-	@JsonIgnore
 	public List<Project> getUserProjectList() {
 		return userProjectList;
 	}
@@ -33,8 +36,6 @@ public class Student extends User {
 		this.userProjectList = userProjectList;
 	}	
 	
-	@ManyToMany(mappedBy="offerRegistrationList")
-	@JsonIgnore
 	public List<Offer> getRegisterOfferList() {
 		return registerOfferList;
 	}
