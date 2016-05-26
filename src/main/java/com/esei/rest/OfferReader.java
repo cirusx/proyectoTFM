@@ -10,7 +10,7 @@ import com.esei.model.Offer;
 
 
 @Provider
-public class PhotoReader extends MultipartMessageBodyReader<Offer> {
+public class OfferReader extends MultipartMessageBodyReader<Offer> {
 
 
 	static final String FIRST_QUARTER_LIMIT_DATETIME = "2020/01/19 07:00";

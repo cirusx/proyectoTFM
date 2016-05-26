@@ -38,6 +38,7 @@ import org.hibernate.HibernateException;
 import com.esei.model.Offer;
 import com.esei.model.Student;
 import com.esei.model.Subcategory;
+import com.esei.model.Teacher;
 import com.esei.model.User;
 
 
@@ -247,7 +248,6 @@ public class OfferResource {
 				((Student) user).getRegisterOfferList().add(offer);
 			}
 			em.getTransaction().commit();
-			System.err.println("COMMITEADO");
 		}finally{
 			em.close();
 		}
@@ -261,8 +261,12 @@ public class OfferResource {
 	public Response createOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
 		System.out.println(offer.getOfferDescription());
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		User user = requireUser(authHeader, em);
+		Teacher teacher = (Teacher) user;
 		try {
 			em.getTransaction().begin();
+			teacher.getOfferList().add(offer);
+			offer.setTeacher(teacher);
 			em.persist(offer);
 			em.getTransaction().commit();
 
@@ -273,7 +277,7 @@ public class OfferResource {
 	}
 	
 	@POST
-	@Path("/photo")
+	@Path("offer")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response postImage( @HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
 	        return createOffer(authHeader, offer);

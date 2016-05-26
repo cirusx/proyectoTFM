@@ -31,10 +31,10 @@
 							});
 						}
 					}
-					
+
 					var offerTimeLimit = offer.data.offerTimeLimit;
 					var actualDate = Date.now();
-					
+
 					if (actualDate >= offerTimeLimit){
 						offer.data.offerClose = true;
 						$scope.offer = offer.data;
@@ -45,7 +45,7 @@
 							// err.status will contain the status code
 						});
 					}
-					
+
 					//offer.data.
 					$scope.offer = offer.data;
 				}
@@ -54,7 +54,7 @@
 				// err.status will contain the status code
 			})
 		}
-		
+
 		$scope.closeOffer = function() {
 			$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/close').then(function(cerrar) {
 				$scope.offer.offerClose = true;
@@ -63,6 +63,6 @@
 				// err.status will contain the status code
 			});
 		}
-		
+
 	}]);
 }());

@@ -12,7 +12,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import com.fasterxml.jackson.annotation.*;
 
 @Entity(name="Student")
-@DiscriminatorValue("1")
+@DiscriminatorValue("Student")
 @PrimaryKeyJoinColumn(name="userId")
 public class Student extends User {
 	

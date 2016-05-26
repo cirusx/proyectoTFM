@@ -6,28 +6,37 @@
 	app.controller('createOfferController',['$scope', '$http', '$location', '$cookies', 'postService',
 	                                        function ($scope, $http, $location, $cookies, postService) {
 
-		
-		$scope.postPhoto = function() {
-		    postService.postPhoto($scope.offer.offerName, $scope.offer.offerDescription, $scope.offer.content, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit,
-		      function(photo){
-		        $scope.posts.splice(0,0,photo);
-		      },
-		      function(){alert("Problem with server during post"); }
-		    );
-		  };
-		
 		$scope.createOffer = function() {
-
 			
-			$http.post('http://localhost:8080/proyectoTFM/rest/offers/create', $scope.offer).then(
-					function (response) {
-						alert("La Oferta ha sido creada correctamente");
-					},
-					function (response) {
-						alert("La Oferta no se ha podido crear correctamente");
-					}
-			);
-		}
-
+			$scope.noCreateOffer = false;
+			$scope.offerCreated = false;
+			$scope.noTeacher = false;
+			$scope.noTeacherOrLogged = false;
+			var login = false;
+			var rol = false;
+			if ($cookies.get('user')) {
+				login = true
+				if ($cookies.get('rol')== "Teacher") {
+					rol = true
+				} else {
+					$scope.noTeacher = true;
+				}
+			} else {
+				$scope.noTeacherOrLogged= true;
+			}
+			if(login & rol) {
+				postService.postOffer($scope.offer.offerName, $scope.offer.offerDescription, $scope.offer.content, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit,
+						function(offer){
+					$scope.offerCreated = true;
+					$scope.noCreateOffer = false;
+					$scope.posts.splice(0,0,offer);
+				},
+				function(){
+					$scope.noCreateOffer = true;
+					$scope.offerCreated = false; 
+				}
+				);
+			}
+		};
 	}]);
 }());

@@ -15,7 +15,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import com.fasterxml.jackson.annotation.*;
 
 @Entity(name="Teacher")
-@DiscriminatorValue("2")
+@DiscriminatorValue("Teacher")
 @PrimaryKeyJoinColumn(name="userId")
 public class Teacher extends User {
 

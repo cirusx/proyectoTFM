@@ -18,14 +18,14 @@
 						console.error('ERR', err);
 						// err.status will contain the status code
 					});
-					
+
 					$http.get('http://localhost:8080/proyectoTFM/rest/offers/users'+'?offerId='+offerId).then(function(users) {
 						offer.data.offerRegistrationList = users.data
-						
+
 						$scope.offerRegisterButton = 1;
 						if ($cookies.get('user')) {
 							var rol = $cookies.get('rol');
-							if (rol == "1") {
+							if (rol == "Student") {
 								for (var user in users.data) {
 									var email = users.data[user].email;
 									var cookiemail= $cookies.get('user')
@@ -33,7 +33,7 @@
 										$scope.enableButton = 2;
 									}
 								}
-							} else if($cookies.get('rol')== "2"){
+							} else if($cookies.get('rol')== "Teacher"){
 								$scope.enableButton = 3;
 							}
 						} 
@@ -41,10 +41,10 @@
 						console.error('ERR', err);
 						// err.status will contain the status code
 					});
-					
+
 					var offerTimeLimit = offer.data.offerTimeLimit;
 					var actualDate = Date.now();
-					
+
 					if (actualDate >= offerTimeLimit){
 						offer.data.offerClose = true;
 						$scope.offer = offer.data;
@@ -55,7 +55,7 @@
 							// err.status will contain the status code
 						});
 					}
-					
+
 					$scope.offer = offer.data;
 				}
 			}, function(err) {
@@ -70,26 +70,24 @@
 			var rol = false;
 			if ($cookies.get('user')) {
 				login = true
-				if ($cookies.get('rol')== "1") {
+				if ($cookies.get('rol')== "Student") {
 					rol = true
 				} else {
-					alert("No puedes registrarte ya que no eres un alumno");
+					alert("No puedes inscribirte ya que no eres un alumno");
+					$scope.NoStudent= true;
 				}
 			} else {
 				alert("No puedes registrarte ya que no estas registrado como alumno o logeado");
+				$scope.NoStudentOrLogged= true;
 			}
 			if(login & rol) {
 				$http.post('http://localhost:8080/proyectoTFM/rest/offers/'+offer.offerId+'/students').then(
 						function (offer) {
-							alert('registrado');
 							$http.get('http://localhost:8080/proyectoTFM/rest/offers/users'+'?offerId='+offerId).then(function(users) {
 								offer.data.offerRegistrationList = users.data
-								
 								$scope.enableButton = 2;
 								$scope.offer = offer.data;
 								$location.path("/offers/"+offer.data.offerId);		
-									
-								 
 							}, function(err) {
 								console.error('ERR', err);
 								// err.status will contain the status code

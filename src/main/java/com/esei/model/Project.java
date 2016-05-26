@@ -39,7 +39,6 @@ public class Project implements Serializable{
 	private Teacher				projectTeacher;
 	private Student				projectStudent;
 	private List<Subcategory>	projectSubcategoryList;
-	private boolean				projectTFG;
 	private Long				version; 
 
 	public Project() {}
@@ -128,14 +127,6 @@ public class Project implements Serializable{
 
 	public void setProjectSubcategoryList(List<Subcategory> projectSubcategoryList) {
 		this.projectSubcategoryList = projectSubcategoryList;
-	}
-	
-	public boolean isProjectTFG() {
-		return projectTFG;
-	}
-
-	public void setProjectTFG(boolean projectTFG) {
-		this.projectTFG = projectTFG;
 	}
 
 	@Version

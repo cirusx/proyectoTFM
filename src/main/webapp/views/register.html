@@ -9,7 +9,7 @@
 <body>
 	<div class="container">
 		<div id="registerbox"
-			class="sgpfc-registerbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			class="sgpfc-registerbox col-xs-6 col-xs-offset-3 col-xs-8 col-xs-offset-2">
 			<div class="panel sgpfc-loginbox-panel">
 				<div class="panel-heading sgpfc-loginbox-heading">
 					<div class="panel-title sgpfc-loginbox-title">Registrar</div>
@@ -24,15 +24,15 @@
 							</div>
 							
 					<div class="help-block" role="alert">
-								<div ng-show="userCreated" class="alert alert-danger">Usuario registrado correctamente, necesitará esperar a la activación de cuenta por parte del administrador</div>
+								<div ng-show="userCreated" class="alert alert-success">Usuario registrado correctamente, necesitará esperar a la activación de cuenta por parte del administrador</div>
 							</div>
 				
 					<form id="registerform" name="registerform" class="form-horizontal"
 						role="form" ng-submit="register()" novalidate>
 
 						<div class="form-group">
-							<label for="email" class="col-md-3 control-label">Email</label>
-							<div class="col-md-9">
+							<label for="email" class="col-xs-3 control-label">Email</label>
+							<div class="col-xs-9">
 								<div class="input-group"
 									ng-class="{ 'has-error': registerform.email.$touched && registerform.email.$invalid }">
 									<span class="input-group-addon"><i
@@ -49,30 +49,8 @@
 								</div>
 							</div>
 						</div>
-<!-- 						<div class="form-group">
-							<label for="user" class="col-md-3 control-label">Usuario</label>
-							<div class="col-md-9">
-								<div class="input-group"
-									ng-class="{ 'has-error': registerform.user.$touched && registerform.user.$invalid }">
-									<span class="input-group-addon"><i
-										class="glyphicon glyphicon-user"></i></span> <input id="user"
-										type="text" class="form-control" name="user" value=""
-										placeholder="Usuario" ng-minlength="3" ng-maxlength="12"
-										ng-model="user.userName" required>
-								</div>
-								<div class="help-block" ng-messages="registerform.user.$error"
-									ng-if="registerform.user.$touched" role="alert">
-									<div ng-message="required" class="alert alert-danger">Este
-										campo es Obligatorio</div>
-									<div ng-message="maxlength" class="alert alert-danger">Nombre
-										de usuario demasiado largo</div>
-									<div ng-message="minlength" class="alert alert-danger">Nombre
-										de usuario demasiado corto</div>
-								</div>
-							</div>
-						</div> -->
 						<div class="form-group">
-							<label for="name" class="col-md-3 control-label">Nombre</label>
+							<label for="name" class="col-xs-3 control-label">Nombre</label>
 							<div class="col-md-9">
 								<div class="input-group"
 									ng-class="{ 'has-error': registerform.name.$touched && registerform.name.$invalid }">
@@ -94,8 +72,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="password" class="col-md-3 control-label">Contraseña</label>
-							<div class="col-md-9">
+							<label for="password" class="col-xs-3 control-label">Contraseña</label>
+							<div class="col-xs-9">
 								<div class="input-group" ng-class="{ 'has-error': registerform.password.$dirty && registerform.password.$invalid }">
 									<span class="input-group-addon"><i
 										class="glyphicon glyphicon-lock"></i></span> <input
@@ -116,8 +94,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="confirmpassword" class="col-md-3 control-label">Confirmar Contraseña</label>
-							<div class="col-md-9">
+							<label for="confirmpassword" class="col-xs-3 control-label">Confirmar Contraseña</label>
+							<div class="col-xs-9">
 								<div class="input-group" ng-class="{ 'has-error': registerform.confirmpassword.$dirty && registerform.confirmpassword.$invalid }">
 									<span class="input-group-addon"><i
 										class="glyphicon glyphicon-lock"></i></span> <input
@@ -136,13 +114,11 @@
 									<div ng-message="minlength" class="alert alert-danger">Contraseña
 										demasiado corta</div>
 								</div>
-								
-								
 							</div>
 						</div>
 						<div class="form-group">
 							<!-- Button -->
-							<div class="col-md-offset-3 col-md-9">
+							<div class="col-xs-offset-3 col-xs-9">
 								<button id="btn-signup" type="submit"
 									class="btn sgpfc-btn-primary btn-block" ng-disabled="registerform.$invalid">
 									<i class="icon-hand-right"></i>Registrar

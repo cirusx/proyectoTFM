@@ -9,7 +9,7 @@
 <body>
 	<div class="container">
 		<div id="createofferbox"
-			class="sgpfc-registerbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+			class="sgpfc-registerbox col-xs-6 col-xs-offset-3 col-xs-8 col-xs-offset-2">
 			<div class="panel sgpfc-loginbox-panel">
 				<div class="panel-heading sgpfc-loginbox-heading">
 					<div class="panel-title sgpfc-loginbox-title">Editar Oferta</div>
@@ -26,8 +26,8 @@
 						</div>
 
 						<div class="form-group">
-							<label for="name" class="col-md-3 control-label">Nombre</label>
-							<div class="col-md-9">
+							<label for="name" class="col-xs-3 control-label">Nombre</label>
+							<div class="col-xs-9">
 								<div class="input-group col-xs-12">
 									<input id="name" type="text" class="form-control" name="name"
 										aria-label="..." placeholder="Nombre"
@@ -36,8 +36,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="description" class="col-md-3 control-label">Descripción</label>
-							<div class="col-md-9">
+							<label for="description" class="col-xs-3 control-label">Descripción</label>
+							<div class="col-xs-9">
 								<div class="input-group col-xs-12">
 									<textarea id="description" type="text"
 										class="sgpfc-createofferbox-description form-control"
@@ -49,8 +49,8 @@
 						</div>
 
 						<div class="form-group">
-							<label for="inputImage" class="col-md-3 control-label">Imagen</label>
-							<div class="col-md-9">
+							<label for="inputImage" class="col-xs-3 control-label">Imagen</label>
+							<div class="col-xs-9">
 								<!-- 								<label class="control-label">Select File</label> -->
 								<input name="file" type="file" class="file sgpfc-btn-primary"
 									data-allowed-file-extensions='["jpg", "png"]'
@@ -63,9 +63,9 @@
 						</div>
 
 						<div class="form-group">
-							<label for="dt" class="col-md-3 control-label">Fecha
+							<label for="dt" class="col-xs-3 control-label">Fecha
 								Límite</label>
-							<div class="col-md-9">
+							<div class="col-xs-9">
 								<div class="radio">
 									<label> <input ng-model="offer.offerWithLimit"
 										type="radio" name="optionsRadios" id="optionsRadios1"
@@ -88,7 +88,7 @@
 									<div
 										class="sgpfc-recoverypasswordbox-button col-xs-offset-3 col-xs-9">
 
-<!-- ng-disabled="text == null || text.length==0" -->
+
 										<button id="btn-recoverpassword" ng-click="postPhoto()"
 											
 											class="btn sgpfc-btn-primary btn-block">

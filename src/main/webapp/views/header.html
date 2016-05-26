@@ -51,7 +51,7 @@
 							class="sgpfc-header-links-right" href="#/register">Registro</a></li>
 					</ul>
 
-					<ul ng-show="logged && loggedType == 1" class="nav col-xs-1 col-xs-offset-3">
+					<ul ng-show="logged && loggedType == 'Student'" class="nav col-xs-1 col-xs-offset-3">
 						<li class="dropdown sgpfc-header-right-menu"><a 
 							class="dropdown-toggle sgpfc-header-links-right"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
@@ -68,7 +68,7 @@
 							</ul></li>
 					</ul>
 					
-					<ul ng-show="logged && loggedType == 2" class="nav col-xs-1 col-xs-offset-3">
+					<ul ng-show="logged && loggedType == 'Teacher'" class="nav col-xs-1 col-xs-offset-3">
 						<li class="dropdown sgpfc-header-right-menu"><a 
 							class="dropdown-toggle sgpfc-header-links-right"
 							data-toggle="dropdown" role="button" aria-haspopup="true"

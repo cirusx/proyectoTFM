@@ -30,7 +30,6 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long 				userId;
-	//private String 				userName;
 	private String 				name;
 	@JsonIgnore
 	private String				password;
@@ -50,14 +49,6 @@ public class User implements Serializable {
 		this.userId = userId;
 	}
 
-	/*public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}*/
-	
 	public String getName() {
 		return name;
 	}

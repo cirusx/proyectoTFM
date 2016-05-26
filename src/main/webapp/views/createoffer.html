@@ -15,71 +15,110 @@
 					<div class="panel-title sgpfc-loginbox-title">Crear Oferta</div>
 				</div>
 				<div class="sgpfc-loginbox-panelbody panel-body">
-					<form id="createofferform" class="form-horizontal" role="form">
-
-
+					
+					<div class="help-block" role="alert">
+						<div ng-show="noCreateOffer" class="alert alert-danger">La
+							oferta no se pudo crear correctamente</div>
+					</div>
+					<div class="help-block" role="alert">
+						<div ng-show="offerCreated" class="alert alert-success">Oferta
+							creada correctamente, necesitará esperar a la activación por
+							parte del administrador</div>
+					</div>
+					
+					<div class="help-block" role="alert">
+						<div ng-show="noTeacher" class="alert alert-danger">No puedes crear una oferta ya que no eres un profesor</div>
+					</div>
+					
+					<div class="help-block" role="alert">
+						<div ng-show="noTeacherOrLogged" class="alert alert-danger">No se puede crear la oferta (no  registrado como profesor o logeado)</div>
+					</div>
+					
+					<form id="createofferform" name="createofferform"
+						class="form-horizontal" role="form" ng-submit="createOffer()"
+						novalidate>
 						<div class="form-group">
 							<label for="name" class="col-xs-3 control-label">Nombre</label>
 							<div class="col-xs-9">
-								<div class="input-group col-xs-12">
+								<div class="input-group col-xs-12"
+									ng-class="{ 'has-error': createofferform.name.$touched && createofferform.name.$invalid }">
 									<input id="name" type="text" class="form-control" name="name"
 										aria-label="..." placeholder="Nombre"
 										ng-model="offer.offerName" required>
+								</div>
+								<div class="help-block"
+									ng-messages="createofferform.name.$error"
+									ng-if="createofferform.name.$touched" role="alert">
+									<div ng-message="required" class="alert alert-danger">Este
+										campo es Obligatorio</div>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="description" class="col-xs-3 control-label">Descripción</label>
 							<div class="col-xs-9">
-								<div class="input-group col-xs-12">
+								<div class="input-group col-xs-12"
+									ng-class="{ 'has-error': createofferform.description.$touched && createofferform.description.$invalid }">
 									<textarea id="description" type="text"
 										class="sgpfc-createofferbox-description form-control"
 										name="description" value="" aria-label="..."
 										placeholder="Descripción" ng-model="offer.offerDescription"
 										required> </textarea>
 								</div>
+								<div class="help-block"
+									ng-messages="createofferform.description.$error"
+									ng-if="createofferform.description.$touched" role="alert">
+									<div ng-message="required" class="alert alert-danger">Este
+										campo es Obligatorio</div>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputImage" class="col-xs-3 control-label">Imagen</label>
-							<div class="col-xs-9"> 
+							<div class="col-xs-9"
+								ng-class="{ 'has-error': createofferform.file.$touched && createofferform.file.$invalid }">
 								<input name="file" type="file" class="file sgpfc-btn-primary"
 									data-allowed-file-extensions='["jpg", "png"]' id="photofile"
 									ng-disabled="link != null && link.length != 0"
 									file-model="offer.content" required>
 
-								<script type="text/javascript">$("#photofile").fileinput();</script>
+								<script type="text/javascript">$("#photofile").fileinput({showUpload: false, language: 'es'});</script>
+							</div>
+							<div class="help-block" ng-messages="createofferform.file.$error"
+								ng-if="createofferform.file.$touched" role="alert">
+								<div ng-message="required" class="alert alert-danger">Este
+									campo es Obligatorio</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-3 control-label">Fecha Límite</label>
+							<div class="btn-group col-xs-9" data-toggle="buttons"
+								ng-class="{ 'has-error': createofferform.options.$touched && createofferform.options.$invalid }">
+								<label class="btn btn-default active"> <input
+									type="radio" name="options" id="option1" autocomplete="off"
+									value="0" checked> Sin Límite
+								</label> <label class="btn btn-default"> <input type="radio"
+									name="options" id="option2" autocomplete="off" value="1">
+									Oferta Primer Cuatrimestre
+								</label> <label class="btn btn-default"> <input type="radio"
+									name="options" id="option3" autocomplete="off" value="2">
+									Oferta Segundo Cuatrimestre
+								</label>
 							</div>
 
-						</div>
-						<div class="form-group">
-							<label for="dt" class="col-xs-3 control-label">Fecha
-								Límite</label>
-							<div class="col-xs-9">
-								<div class="radio">
-									<label> <input ng-model="offer.offerWithLimit"
-										type="radio" name="optionsRadios" id="optionsRadios1"
-										value="0" checked> Oferta abierta
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input ng-model="offer.offerTimeLimit"
-										type="radio" name="optionsRadios" id="optionsRadios2"
-										value="1"> Oferta Primer Cuatrimestre
-									</label>
-								</div>
-								<div class="radio">
-									<label> <input ng-model="offer.offerTimeLimit"
-										type="radio" name="optionsRadios" id="optionsRadios3"
-										value="2"> Oferta Segundo Cuatrimestre
-									</label>
-								</div>
+							<div class="help-block"
+								ng-messages="createofferform.options.$error"
+								ng-if="createofferform.options.$touched" role="alert">
+								<div ng-message="required" class="alert alert-danger">Este
+									campo es Obligatorio</div>
 							</div>
 						</div>
 						<div class="form-group">
-							<div class="sgpfc-recoverypasswordbox-button col-xs-offset-3 col-xs-9">
-								<button id="btn-recoverpassword" ng-click="postPhoto()"
-									class="btn sgpfc-btn-primary btn-block">
+							<div
+								class="sgpfc-recoverypasswordbox-button col-xs-offset-3 col-xs-9">
+								<button id="btn-recoverpassword" type="submit"
+									class="btn sgpfc-btn-primary btn-block"
+									ng-disabled="createofferform.$invalid">
 									<i class="icon-hand-right"></i>Crear Oferta
 								</button>
 							</div>
