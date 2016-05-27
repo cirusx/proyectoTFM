@@ -80,7 +80,7 @@
 								<input name="file" type="file" class="file sgpfc-btn-primary"
 									data-allowed-file-extensions='["jpg", "png"]' id="photofile"
 									ng-disabled="link != null && link.length != 0"
-									file-model="offer.content" required>
+									file-model="offer.offerImage" required>
 
 								<script type="text/javascript">$("#photofile").fileinput({showUpload: false, language: 'es'});</script>
 							</div>
@@ -92,25 +92,21 @@
 						</div>
 						<div class="form-group">
 							<label class="col-xs-3 control-label">Fecha Límite</label>
-							<div class="btn-group col-xs-9" data-toggle="buttons"
-								ng-class="{ 'has-error': createofferform.options.$touched && createofferform.options.$invalid }">
-								<label class="btn btn-default active"> <input
-									type="radio" name="options" id="option1" autocomplete="off"
-									value="0" checked> Sin Límite
-								</label> <label class="btn btn-default"> <input type="radio"
-									name="options" id="option2" autocomplete="off" value="1">
-									Oferta Primer Cuatrimestre
-								</label> <label class="btn btn-default"> <input type="radio"
-									name="options" id="option3" autocomplete="off" value="2">
-									Oferta Segundo Cuatrimestre
+							<div class="btn-group col-xs-9" data-toggle="buttons" ng-class="{ 'has-error': createofferform.options.$touched && createofferform.options.$invalid }">
+								<label class="btn btn-default active"> 
+									<input type="radio" ng-model="offer.offerWithLimit" name="options" id="option1" value="0" checked>Sin Límite
+								</label> 
+								<label class="btn btn-default"> 
+									<input type="radio" ng-model="offer.offerTimeLimit" name="options" id="option2" value="1">Oferta Primer Cuatrimestre
+								</label> 
+								<label class="btn btn-default"> 
+									<input type="radio" ng-model="offerofferTimeLimit" name="options" id="option3" value="2">Oferta Segundo Cuatrimestre
 								</label>
 							</div>
 
-							<div class="help-block"
-								ng-messages="createofferform.options.$error"
+							<div class="help-block" ng-messages="createofferform.options.$error"
 								ng-if="createofferform.options.$touched" role="alert">
-								<div ng-message="required" class="alert alert-danger">Este
-									campo es Obligatorio</div>
+								<div ng-message="required" class="alert alert-danger">Este campo es Obligatorio</div>
 							</div>
 						</div>
 						<div class="form-group">

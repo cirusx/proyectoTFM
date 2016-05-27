@@ -1,12 +1,16 @@
 package com.esei.rest;
 
+import java.util.Base64;
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -16,14 +20,42 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.esei.model.Offer;
 import com.esei.model.Project;
 import com.esei.model.Student;
 import com.esei.model.Subcategory;
 import com.esei.model.Teacher;
+import com.esei.model.User;
 
 @Path("projects")
 public class ProjectResource {
 	
+	
+	@Path("/pdf/draft/{projectId}")
+	@GET
+	public Response getDraftPDF(@PathParam("projectId") Long projectId) throws Exception {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		Project project= em.find(Project.class, projectId);
+	    
+	    return Response
+	            .ok()
+	            .type("application/pdf")
+	            .entity(project.getProjectDraft()) // Assumes document is a byte array in the domain object.
+	            .build();
+	}
+	
+	@Path("/pdf/documentation/{projectId}")
+	@GET
+	public Response getDocumentationPDF(@PathParam("projectId") Long projectId) throws Exception {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		Project project= em.find(Project.class, projectId);
+	    
+	    return Response
+	            .ok()
+	            .type("application/pdf")
+	            .entity(project.getProjectDocumentation()) // Assumes document is a byte array in the domain object.
+	            .build();
+	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
@@ -159,7 +191,7 @@ public class ProjectResource {
 		return project;
 	}
 	
-	@POST
+/*	@POST
 	@Path("create")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -175,7 +207,38 @@ public class ProjectResource {
         	em.close();
         }
         return Response.created(null).build();  
-     }
+     }*/
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response createProject(@HeaderParam("Authorization") String authHeader, Project project){
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		User user = requireUser(authHeader, em);
+		Teacher teacher = (Teacher) user;
+		Long userId = project.getProjectStudent().getUserId();
+		Student student = (Student) getStudent(userId, em);
+		try {
+			em.getTransaction().begin();
+			teacher.getProjectList().add(project);
+			project.setProjectTeacher(teacher);
+			project.setProjectStudent(student);
+			em.persist(project);
+			em.getTransaction().commit();
+
+		}finally{
+			em.close();
+		}
+		return Response.created(null).build();  
+	}
+	
+	@POST
+	@Path("project")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response postProject( @HeaderParam("Authorization") String authHeader, Project project) throws MessagingException {
+	        return createProject(authHeader, project);
+
+	}
 	
 	@DELETE
 	@Path("/{projectId}")
@@ -210,5 +273,24 @@ public class ProjectResource {
         }
         return out;  
 	}
+	
+	private User requireUser(String authHeader, EntityManager em) {
+		String authString = new String(Base64.getDecoder().decode(authHeader.replace("Basic ","").getBytes()));
+		String login = authString.split(":")[0];
+		String pass = authString.split(":")[1];
+		try {
+			return findUser(em, login, pass);
+		} catch(NoResultException e) {
+			e.printStackTrace();
+			throw new SecurityException("user is not correct");
+		}
+	}
 
+	private static User findUser(EntityManager em, String login, String pass) {
+		return em.createQuery("SELECT u FROM User u WHERE u.email = '"+ login +"' and u.password='"+pass+"'", User.class).getSingleResult();
+	}
+	
+	private User getStudent(Long userId, EntityManager em) {
+		return em.find(User.class, userId);
+	}
 }

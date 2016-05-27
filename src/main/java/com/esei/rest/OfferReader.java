@@ -28,19 +28,14 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 
 		switch(name) {
 		case "name":
-			//offer.setText(new String(bs));
 			offer.setOfferName(new String(bs));
-
 			break;
 		case "description":
-			//offer.setText(new String(bs));
 			offer.setOfferDescription(new String(bs));
-
 			break;        
-		case "content":
-			offer.setContent(bs);
+		case "image":
+			offer.setOfferImage(bs);
 			break;
-
 		case "withLimit":
 			String offerWithLimitString = new String(bs);
 			if (offerWithLimitString == "0"){
@@ -53,17 +48,13 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 			String offerTimeLimitString = new String(bs);
 			Date datetime;
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-			
 			if (offerTimeLimitString.compareTo("1") == 0) {
-				
 				try {
 					datetime = dateFormat.parse(FIRST_QUARTER_LIMIT_DATETIME);
 					offer.setOfferTimeLimit(datetime);
 				} catch (ParseException e) {
-					
 					e.printStackTrace();
 				}
-				
 			}else if (offerTimeLimitString.compareTo("2") == 0){
 				try {
 					datetime = dateFormat.parse(SECOND_QUARTER_LIMIT_DATETIME);
@@ -74,7 +65,6 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 				}
 				}else{
 					offer.setOfferTimeLimit(null);
-					
 				}
 			break;  
 		}

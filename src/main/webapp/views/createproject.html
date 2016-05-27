@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Crear Proyecto</title>
 </head>
@@ -16,8 +16,8 @@
 					<div class="panel-title sgpfc-loginbox-title">Crear Proyecto</div>
 				</div>
 				<div class="sgpfc-loginbox-panelbody panel-body">
-				
-							<div class="help-block" role="alert">
+
+					<div class="help-block" role="alert">
 						<div ng-show="noCreateProject" class="alert alert-danger">El
 							proyecto no se pudo crear correctamente</div>
 					</div>
@@ -26,23 +26,28 @@
 							creado correctamente, necesitará esperar a la activación por
 							parte del administrador</div>
 					</div>
-					
+
 					<div class="help-block" role="alert">
-						<div ng-show="noTeacher" class="alert alert-danger">No puedes crear un proyecto ya que no eres un profesor</div>
+						<div ng-show="noTeacher" class="alert alert-danger">No
+							puedes crear un proyecto ya que no eres un profesor</div>
 					</div>
-					
+
 					<div class="help-block" role="alert">
-						<div ng-show="noTeacherOrLogged" class="alert alert-danger">No se puede crear el proyecto (no registrado como profesor o logeado)</div>
+						<div ng-show="noTeacherOrLogged" class="alert alert-danger">No
+							se puede crear el proyecto (no registrado como profesor o
+							logeado)</div>
 					</div>
-				
-				
-		 			<form id="createprojectform" name="createprojectform" class="form-horizontal" role="form"
-						ng-submit="createProject()" novalidate>
-					
+
+
+					<form id="createprojectform" name="createprojectform"
+						class="form-horizontal" role="form" ng-submit="createProject()"
+						novalidate>
+
 						<div class="form-group">
 							<label for="name" class="col-xs-3 control-label">Nombre</label>
 							<div class="col-xs-9">
-								<div class="input-group col-xs-12" ng-class="{ 'has-error': createprojectform.name.$touched && createprojectform.name.$invalid }">
+								<div class="input-group col-xs-12"
+									ng-class="{ 'has-error': createprojectform.name.$touched && createprojectform.name.$invalid }">
 									<input id="name" type="text" class="form-control" name="name"
 										value="" aria-label="..." placeholder="Nombre"
 										ng-model="project.projectName" required>
@@ -58,10 +63,12 @@
 						<div class="form-group">
 							<label for="name" class="col-xs-3 control-label">Titulación</label>
 							<div class="col-xs-9">
-								<div class="input-group col-xs-12" ng-class="{ 'has-error': createprojectform.career.$touched && createprojectform.name.$invalid }">
-									<input id="career" type="text" class="form-control" name="career"
-										value="" aria-label="..." placeholder="Titulación"
-										ng-model="project.projectCareer" required>
+								<div class="input-group col-xs-12"
+									ng-class="{ 'has-error': createprojectform.career.$touched && createprojectform.name.$invalid }">
+									<input id="career" type="text" class="form-control"
+										name="career" value="" aria-label="..."
+										placeholder="Titulación" ng-model="project.projectCareer"
+										required>
 								</div>
 								<div class="help-block"
 									ng-messages="createprojectform.career.$error"
@@ -74,7 +81,8 @@
 						<div class="form-group">
 							<label for="name" class="col-xs-3 control-label">Año</label>
 							<div class="col-xs-9">
-								<div class="input-group col-xs-12" ng-class="{ 'has-error': createprojectform.year.$touched && createprojectform.name.$invalid }">
+								<div class="input-group col-xs-12"
+									ng-class="{ 'has-error': createprojectform.year.$touched && createprojectform.year.$invalid }">
 									<input id="year" type="number" class="form-control" name="year"
 										value="" aria-label="..." placeholder="Año"
 										ng-model="project.projectYear" required>
@@ -84,67 +92,88 @@
 									ng-if="createprojectform.year.$touched" role="alert">
 									<div ng-message="required" class="alert alert-danger">Este
 										campo es Obligatorio</div>
-								</div>
-								<div ng-message="number" class="alert alert-danger">El campo no contiene un año</div>
+									<div ng-message="number" class="alert alert-danger">El
+										campo no contiene un año</div>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="student" class="col-xs-3 control-label">Alumno</label>
 							<div class="col-xs-9">
-								<div class="input-group col-xs-12">
-									<select ng-model="project.projectStudent.userName" class="form-control selectpicker" data-live-search="true"> </select>
-										<option ng-repeat="student in students">{{student.name}}</option>
+								<div class="input-group col-xs-12"
+									ng-class="{ 'has-error': createprojectform.student.$touched && createprojectform.student.$invalid }">
+									<select ng-model="project.projectStudent" name="student"
+										class="form-control selectpicker" data-live-search="true">
+										<option ng-repeat="student in students" value="{{student.userId}}">{{student.name}}</option>
+									</select>
+									
+								</div>
+								<div class="help-block"
+									ng-messages="createprojectform.student.$error"
+									ng-if="createprojectform.student.$touched" role="alert">
+									<div ng-message="required" class="alert alert-danger">Este
+										campo es Obligatorio</div>
+									<div ng-message="number" class="alert alert-danger">El
+										campo no contiene un año</div>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="inputImage" class="col-xs-3 control-label">Documentación</label>
-							<div class="col-xs-9"
-								ng-class="{ 'has-error': createprojectform.fileproject.$touched && createprojectform.fileproject.$invalid }">
-								<input name="filedocumentation" type="file" class="file sgpfc-btn-primary"
-									data-allowed-file-extensions='["pdf"]' id="filedocumentation"
-									ng-disabled="link != null && link.length != 0"
-									file-model="project.projectDocumentation" required>
+							<div class="col-xs-9">
+								<div class="input-group col-xs-12 ng-class=" { 'has-error':createprojectform.filedocumentation.$touched && createprojectform.filedocumentation.$invalid }">
 
-								<script type="text/javascript">$("#filedocumentation").fileinput({showUpload: false, language: 'es'});</script>
-							</div>
-							<div class="help-block" ng-messages="createprojectform.filedocumentation.$error"
-								ng-if="createprojectform.filedocumentation.$touched" role="alert">
-								<div ng-message="required" class="alert alert-danger">Este
-									campo es Obligatorio</div>
+									<input name="filedocumentation" type="file"
+										class="file sgpfc-btn-primary"
+										data-allowed-file-extensions='["pdf"]' id="filedocumentation"
+										ng-disabled="link != null && link.length != 0"
+										file-model="project.projectDocumentation" required>
+
+									<script type="text/javascript">$("#filedocumentation").fileinput({showUpload: false, language: 'es'});</script>
+								</div>
+								<div class="help-block"
+									ng-messages="createprojectform.filedocumentation.$error"
+									ng-if="createprojectform.filedocumentation.$touched"
+									role="alert">
+									<div ng-message="required" class="alert alert-danger">Este
+										campo es Obligatorio</div>
+								</div>
 							</div>
 						</div>
-							<div class="form-group">
+						<div class="form-group">
 							<label for="inputImage" class="col-xs-3 control-label">Anteproyecto</label>
-							<div class="col-xs-9"
-								ng-class="{ 'has-error': createprojectform.filedraft.$touched && createprojectform.fileproject.$invalid }">
-								<input name="filedraft" type="file" class="file sgpfc-btn-primary"
+							<div class="col-xs-9">
+								<div class="input-group col-xs-12" ng-class="{ 'has-error': createprojectform.filedraft.$touched && createprojectform.filedraft.$invalid }">
+								<input name="filedraft" type="file"
+									class="file sgpfc-btn-primary"
 									data-allowed-file-extensions='["pdf"]' id="filedraft"
 									ng-disabled="link != null && link.length != 0"
 									file-model="project.projectDraft" required>
 
 								<script type="text/javascript">$("#filedraft").fileinput({showUpload: false, language: 'es'});</script>
 							</div>
-							<div class="help-block" ng-messages="createprojectform.filedraft.$error"
+							<div class="help-block"
+								ng-messages="createprojectform.filedraft.$error"
 								ng-if="createprojectform.filedraft.$touched" role="alert">
 								<div ng-message="required" class="alert alert-danger">Este
 									campo es Obligatorio</div>
 							</div>
 						</div>
-						
+</div>
 						<div class="form-group">
-							<div class="sgpfc-recoverypasswordbox-button col-xs-offset-3 col-xs-9">
+							<div
+								class="sgpfc-recoverypasswordbox-button col-xs-offset-3 col-xs-9">
 								<button id="btn-recoverpassword" type="submit"
-									class="btn sgpfc-btn-primary btn-block" ng-disabled="createprojectform.$invalid">
+									class="btn sgpfc-btn-primary btn-block"
+									ng-disabled="createprojectform.$invalid">
 									<i class="icon-hand-right"></i>Crear Proyecto
 								</button>
 							</div>
 						</div>
-					</form> 
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 </html>

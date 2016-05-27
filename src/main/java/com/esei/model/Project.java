@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
@@ -30,21 +33,41 @@ public class Project implements Serializable{
 
 	private static final long serialVersionUID = -542889196789595703L;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long 				projectId;
 	private String 				projectName;
 	private String 				projectCareer;
-	private int 				projectYear;
+	private String 				projectYear;
+	@Lob
+	@Column(length=100000000)
 	private byte[]				projectDraft;
+	@Lob
+	@Column(length=100000000)
 	private byte[]				projectDocumentation;
+	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	@JoinColumn(name="teacherId")
+	@JsonIgnore
 	private Teacher				projectTeacher;
+	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	@JoinColumn(name="studentId")
+	@JsonIgnore
 	private Student				projectStudent;
+	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
+	@JoinTable(
+	      joinColumns={@JoinColumn(name = "Project_projectId", referencedColumnName = "projectId")},
+	      inverseJoinColumns={@JoinColumn(name = "projectSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
+	@JsonIgnore
 	private List<Subcategory>	projectSubcategoryList;
+	@Column
+    @ElementCollection(targetClass=String.class)
+	@JsonIgnore
+	private List<String>        projectLinks;
+	@Version
 	private Long				version; 
 
 	public Project() {}
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getProjectId() {
 		return projectId;
 	}
@@ -69,11 +92,11 @@ public class Project implements Serializable{
 		this.projectCareer = projectCareer;
 	}
 	
-	public int getProjectYear() {
+	public String getProjectYear() {
 		return projectYear;
 	}
 
-	public void setProjectYear(int projectYear) {
+	public void setProjectYear(String projectYear) {
 		this.projectYear = projectYear;
 	}
 	
@@ -93,9 +116,7 @@ public class Project implements Serializable{
 		this.projectDocumentation = projectDocumentation;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
-	@JoinColumn(name="teacherId")
-	@JsonIgnore
+	
 	public Teacher getProjectTeacher() {
 		return projectTeacher;
 	}
@@ -104,10 +125,7 @@ public class Project implements Serializable{
 		this.projectTeacher = projectTeacher;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
-	//targetEntity=Student.class
-	@JoinColumn(name="studentId")
-	@JsonIgnore
+	
 	public Student getProjectStudent() {
 		return projectStudent;
 	}
@@ -116,11 +134,6 @@ public class Project implements Serializable{
 		this.projectStudent = projectStudent;
 	}
 	
-	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
-	@JoinTable(
-	      joinColumns={@JoinColumn(name = "Project_projectId", referencedColumnName = "projectId")},
-	      inverseJoinColumns={@JoinColumn(name = "projectSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
-	@JsonIgnore
 	public List<Subcategory> getProjectSubcategoryList() {
 		return projectSubcategoryList;
 	}
@@ -129,7 +142,14 @@ public class Project implements Serializable{
 		this.projectSubcategoryList = projectSubcategoryList;
 	}
 
-	@Version
+	public List<String> getProjectLinks() {
+		return projectLinks;
+	}
+
+	public void setProjectLinks(List<String> projectLinks) {
+		this.projectLinks = projectLinks;
+	}
+
 	protected Long getVersion() {
 		return version;
 	}

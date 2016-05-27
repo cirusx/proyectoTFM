@@ -6,6 +6,7 @@
 	app.controller('createOfferController',['$scope', '$http', '$location', '$cookies', 'postService',
 	                                        function ($scope, $http, $location, $cookies, postService) {
 
+		
 		$scope.createOffer = function() {
 			
 			$scope.noCreateOffer = false;
@@ -25,7 +26,7 @@
 				$scope.noTeacherOrLogged= true;
 			}
 			if(login & rol) {
-				postService.postOffer($scope.offer.offerName, $scope.offer.offerDescription, $scope.offer.content, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit,
+				postService.postOffer($scope.offer.offerName, $scope.offer.offerDescription, $scope.offer.offerImage, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit,
 						function(offer){
 					$scope.offerCreated = true;
 					$scope.noCreateOffer = false;

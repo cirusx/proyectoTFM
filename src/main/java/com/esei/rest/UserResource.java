@@ -54,6 +54,22 @@ public class UserResource {
 			throw e;
 		}
 	}
+	
+	@GET
+	@Path("/search/{userId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUserById(@PathParam("userId") Long userId) {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		User user;
+		try{
+			em.getTransaction().begin();
+			user = em.find(User.class, userId);
+			em.getTransaction().commit();
+		}finally{
+			em.close();
+		}
+		return user;
+	}
 	 
 	@GET
 	@Path("{email}")
@@ -196,7 +212,6 @@ public class UserResource {
 	}
 	
 	@POST
-	@Path("")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createUser(User user){

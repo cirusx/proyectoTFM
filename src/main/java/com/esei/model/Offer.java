@@ -75,13 +75,9 @@ public class Offer implements Serializable{
 	@ManyToOne
 	private Teacher				teacher;
 
-	/*@Lob
-	@Column(length=10000000)*/
-	//private byte[]				offerImage;
-	
 	@Lob
-	@Column(length=10000000)
-	private byte[] content;
+	@Column(length=100000000)
+	private byte[]				offerImage;
 
 	@Transient
 	private String contentMime;
@@ -112,14 +108,6 @@ public class Offer implements Serializable{
 		this.offerDescription = offerDescription;
 	}
 	
-	/*public byte[] getOfferImage() {
-		return offerImage;
-	}
-
-	public void setOfferImage(byte[] offerImage) {
-		this.offerImage = offerImage;
-	}
-*/
 	public boolean isOfferWithLimit() {
 		return offerWithLimit;
 	}
@@ -193,19 +181,19 @@ public class Offer implements Serializable{
 		this.teacher = teacher;
 	}
 	
-	public void setContent(byte[] content) {
-		this.content = content;
+	public void setOfferImage(byte[] offerImage) {
+		this.offerImage = offerImage;
 	}
 
-	public byte[] getContent() {
-		return content;
+	public byte[] getOfferImage() {
+		return offerImage;
 	}
 
 	public String getContentMime() throws IOException {
 		if (this.contentMime!=null){
 			return this.contentMime;
 		}
-		ByteArrayInputStream bais = new ByteArrayInputStream(this.content);
+		ByteArrayInputStream bais = new ByteArrayInputStream(this.offerImage);
 		return URLConnection.guessContentTypeFromStream(bais);
 				/*"png";*/
 		

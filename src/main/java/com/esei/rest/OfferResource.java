@@ -255,7 +255,6 @@ public class OfferResource {
 	}
 	
 	@POST
-	@Path("")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
@@ -279,7 +278,7 @@ public class OfferResource {
 	@POST
 	@Path("offer")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response postImage( @HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
+	public Response postOffer( @HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
 	        return createOffer(authHeader, offer);
 
 	}
