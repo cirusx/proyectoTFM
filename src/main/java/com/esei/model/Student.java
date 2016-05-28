@@ -2,6 +2,12 @@ package com.esei.model;
 
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+
 import com.fasterxml.jackson.annotation.*;
 
 @Entity(name="Student")
