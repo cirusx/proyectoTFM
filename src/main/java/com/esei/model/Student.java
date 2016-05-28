@@ -2,13 +2,6 @@ package com.esei.model;
 
 import java.util.List;
 
-
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-
 import com.fasterxml.jackson.annotation.*;
 
 @Entity(name="Student")
@@ -18,7 +11,7 @@ public class Student extends User {
 	
 	private static final long serialVersionUID = 8475009995080328661L;
 	
-	@OneToMany(mappedBy="projectStudent" )
+	@OneToMany(mappedBy="projectStudent")
 	@JsonIgnore
 	private List<Project>	userProjectList;
 
