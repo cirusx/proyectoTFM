@@ -17,9 +17,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
@@ -29,7 +27,7 @@ import javax.persistence.JoinColumn;
 
 import static javax.persistence.CascadeType.ALL;
 
-import javax.persistence.OrderBy;
+
 
 
 @Entity(name="Offer")

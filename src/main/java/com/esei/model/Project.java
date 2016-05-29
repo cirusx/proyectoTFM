@@ -4,7 +4,7 @@ import static javax.persistence.CascadeType.ALL;
 
 import java.io.Serializable;
 
-import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,10 +20,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.*;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-import javax.inject.Singleton;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
@@ -23,7 +23,7 @@ import javax.ws.rs.core.Response;
 
 import com.esei.model.Offer;
 import com.esei.model.Student;
-import com.esei.model.Subcategory;
+
 import com.esei.model.Teacher;
 import com.esei.model.User;
 

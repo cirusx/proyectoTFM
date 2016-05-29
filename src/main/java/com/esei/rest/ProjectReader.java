@@ -1,12 +1,13 @@
 package com.esei.rest;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.ext.Provider;
 
-import com.esei.model.Offer;
+
 import com.esei.model.Project;
 import com.esei.model.Student;
 
@@ -43,7 +44,16 @@ public class ProjectReader extends MultipartMessageBodyReader<Project> {
 			long userId = Long.valueOf(userIdStr).longValue();
 			student.setUserId(userId);
 			project.setProjectStudent(student);
-			break;      
+			break;
+		case "links":
+			List<String> links = new ArrayList<String>();
+			String linksString = new String (bs);
+			String[] linkArray = linksString.split(",");
+			for ( String link : linkArray ) {
+                  links.add(link);
+			}
+			project.setProjectLinks(links);
+			break;
 		case "documentation":
 			project.setProjectDocumentation(bs);
 			break; 

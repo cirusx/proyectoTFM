@@ -1,7 +1,7 @@
 package com.esei.model;
 
 import java.io.Serializable;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -9,9 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

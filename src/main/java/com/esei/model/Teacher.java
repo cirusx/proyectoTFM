@@ -1,11 +1,11 @@
 package com.esei.model;
 
-import static javax.persistence.CascadeType.ALL;
+
 
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

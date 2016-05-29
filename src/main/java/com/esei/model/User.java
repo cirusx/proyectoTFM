@@ -3,8 +3,7 @@ package com.esei.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Access;
-import javax.persistence.Column;
+
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 

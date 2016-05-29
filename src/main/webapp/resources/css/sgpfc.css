@@ -327,6 +327,20 @@
   	margin-top: 23px;
   }
   
+  .sgpfc-projects-pdficon1 {
+  	height: 40px;
+  	margin-left: 30px;
+  }
+  
+   .sgpfc-projects-pdficon2 {
+   	height: 40px;
+  	margin-left: 10px;
+   }
+   
+   .sgpfc-footer {
+   	background-color: #0D1E23;
+   }
+  
   /* .sgpfc-card-panel {
   	display: none;
   } */

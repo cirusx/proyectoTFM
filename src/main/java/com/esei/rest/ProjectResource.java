@@ -20,7 +20,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.esei.model.Offer;
+
 import com.esei.model.Project;
 import com.esei.model.Student;
 import com.esei.model.Subcategory;
@@ -97,6 +97,32 @@ public class ProjectResource {
 				em.close();
 			}
 			return subcategories;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
+	@Path("links")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<String> getLinksByProject(@QueryParam("projectId") Long projectId) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<String> links;
+			Project project;
+			try{
+				em.getTransaction().begin();
+				String projectIdStr = projectId.toString();
+				TypedQuery<Project> query = em.createQuery("SELECT p FROM Project p WHERE p.projectId="+ projectIdStr +"", Project.class);
+				project = query.getSingleResult();
+				links = project.getProjectLinks();
+				System.out.println("categorias " + links);
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return links;
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
@@ -221,6 +247,7 @@ public class ProjectResource {
 		try {
 			em.getTransaction().begin();
 			teacher.getProjectList().add(project);
+			student.getUserProjectList().add(project);
 			project.setProjectTeacher(teacher);
 			project.setProjectStudent(student);
 			em.persist(project);

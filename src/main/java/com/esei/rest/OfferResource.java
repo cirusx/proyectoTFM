@@ -1,13 +1,8 @@
 package com.esei.rest;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.NumberFormat;
+
 import java.util.Base64;
-import java.util.Date;
+
 import java.util.List;
 
 import javax.mail.MessagingException;
@@ -24,16 +19,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.WebApplicationException;
+
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.glassfish.jersey.media.multipart.ContentDisposition;
-import org.glassfish.jersey.media.multipart.FormDataBodyPart;
-import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
-import org.glassfish.jersey.media.multipart.FormDataMultiPart;
-import org.glassfish.jersey.media.multipart.FormDataParam;
-import org.hibernate.HibernateException;
+
 
 import com.esei.model.Offer;
 import com.esei.model.Student;
@@ -324,7 +314,6 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Offer closeOffer(@PathParam("offerId") Long offerId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		String out;
 		Offer offer;
 		try {
 			em.getTransaction().begin();;

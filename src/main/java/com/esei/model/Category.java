@@ -1,19 +1,17 @@
 package com.esei.model;
 
 import java.io.Serializable;
-import java.util.Date;
+
 import java.util.List;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import javax.persistence.Version;
 
 @Entity(name="Category")
@@ -21,7 +19,7 @@ public class Category implements Serializable {
 	
 	private static final long serialVersionUID = -1377888962380332407L;
 	
-	@Column(name="categoryId")
+	
 	private Long 				categoryId;
 	private String 				categoryName;
 	private List<Subcategory>   subcategories;

@@ -34,7 +34,7 @@
 			}
 			if(login & rol) {
 				
-				postService.postProject($scope.project.projectName, $scope.project.projectCareer, $scope.project.projectYear, $scope.project.projectStudent, $scope.project.projectDocumentation, $scope.project.projectDraft,
+				postService.postProject($scope.project.projectName, $scope.project.projectCareer, $scope.project.projectYear, $scope.project.projectStudent, $scope.project.projectLinks, $scope.project.projectDocumentation, $scope.project.projectDraft,
 						function(offer){
 					$scope.projectCreated = true;
 					$scope.noCreateProject = false;

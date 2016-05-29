@@ -7,7 +7,6 @@
 <title>Crear Proyecto</title>
 </head>
 <body>
-<body>
 	<div class="container">
 		<div id="createprojectbox"
 			class="sgpfc-registerbox col-xs-6 col-xs-offset-3 col-xs-8 col-xs-offset-2">
@@ -84,8 +83,8 @@
 								<div class="input-group col-xs-12"
 									ng-class="{ 'has-error': createprojectform.year.$touched && createprojectform.year.$invalid }">
 									<input id="year" type="number" class="form-control" name="year"
-										value="" aria-label="..." placeholder="Año"
-										ng-model="project.projectYear" required>
+										aria-label="..." placeholder="Año"
+										data-ng-model="project.projectYear" required>
 								</div>
 								<div class="help-block"
 									ng-messages="createprojectform.year.$error"
@@ -119,9 +118,19 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label for="links" class="col-xs-3 control-label">Enlaces externos</label>
+							<div class="col-xs-9">
+								<div class="input-group col-xs-12">
+									<input id="links" type="text" class="form-control"
+										name="links" value="" aria-label="..."
+										placeholder="Enlace,Enlace,Enlace" ng-model="project.projectLinks">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
 							<label for="inputImage" class="col-xs-3 control-label">Documentación</label>
 							<div class="col-xs-9">
-								<div class="input-group col-xs-12 ng-class=" { 'has-error':createprojectform.filedocumentation.$touched && createprojectform.filedocumentation.$invalid }">
+								<div class="input-group col-xs-12" ng-class="{ 'has-error':createprojectform.filedocumentation.$touched && createprojectform.filedocumentation.$invalid }">
 
 									<input name="filedocumentation" type="file"
 										class="file sgpfc-btn-primary"

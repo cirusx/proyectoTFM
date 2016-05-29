@@ -49,7 +49,7 @@
 				<div class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
 <!-- 				 ng-click="getOffer(offer.offerId)" -->
 					<a ng-href="#/offers/{{offer.offerId}}">
-						<img ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}" class="img-responsive">
+						<img + class="img-responsive">
 					</a>
 					<div ng-repeat="item in offer.subitems"> {{item}}</div>
 				</div>
