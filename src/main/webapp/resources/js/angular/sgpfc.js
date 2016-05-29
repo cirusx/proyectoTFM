@@ -57,7 +57,7 @@
 			controller: 'projectsController'
 		}).when('/projects/mymanagedprojects', {
 			templateUrl: '/proyectoTFM/views/managedprojects.html',
-			controller: 'projectsController'
+			controller: 'managedProjectsController'
 		}).when('/users/myoffers', {
 			templateUrl: '/proyectoTFM/views/myoffers.html',
 			controller: 'myOffersController'

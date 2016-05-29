@@ -22,6 +22,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.esei.model.Offer;
+import com.esei.model.Project;
 import com.esei.model.Student;
 
 import com.esei.model.Teacher;
@@ -89,6 +90,30 @@ public class UserResource {
 		} catch(NoResultException e) {
 			e.printStackTrace();
 			throw new SecurityException("user is not correct");
+		}
+	}
+	
+	@GET
+	@Path("teacher")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Project> getProjectsByTeacher(@QueryParam("userId") Long userId) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<Project> projects;
+			try{
+				em.getTransaction().begin();
+				String userIdStr = userId.toString();
+				TypedQuery<Project> query = em.createQuery("SELECT s FROM Project s JOIN s.projectTeacher t WHERE t.userId="+ userIdStr +"", Project.class);
+				projects = query.getResultList();
+				System.out.println("mis proyectos " + projects);
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return projects;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
 		}
 	}
 	

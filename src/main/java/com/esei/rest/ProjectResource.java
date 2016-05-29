@@ -217,24 +217,6 @@ public class ProjectResource {
 		return project;
 	}
 	
-/*	@POST
-	@Path("create")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createProject(Project project){
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        
-        try {
-            em.getTransaction().begin();
-            em.persist(project);
-            em.getTransaction().commit();
-           
-        }finally{
-        	em.close();
-        }
-        return Response.created(null).build();  
-     }*/
-	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)

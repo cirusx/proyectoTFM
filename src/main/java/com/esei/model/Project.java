@@ -34,6 +34,7 @@ public class Project implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long 				projectId;
 	private String 				projectName;
+	private String              projectCode;
 	private String 				projectCareer;
 	private String 				projectYear;
 	@Lob
@@ -81,6 +82,14 @@ public class Project implements Serializable{
 		this.projectName = projectName;
 	}
 	
+	public String getProjectCode() {
+		return projectCode;
+	}
+
+	public void setProjectCode(String projectCode) {
+		this.projectCode = projectCode;
+	}
+
 	public String getProjectCareer() {
 		return projectCareer;
 	}

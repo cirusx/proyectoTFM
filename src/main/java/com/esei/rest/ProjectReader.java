@@ -32,6 +32,9 @@ public class ProjectReader extends MultipartMessageBodyReader<Project> {
 		case "name":
 			project.setProjectName(new String(bs));
 			break;
+		case "code":
+			project.setProjectCode(new String(bs));
+			break;
 		case "career":
 			project.setProjectCareer(new String(bs));
 			break;        

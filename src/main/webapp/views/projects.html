@@ -12,7 +12,7 @@
 		st-set-filter="myStrictFilter" class="table table-striped">
 		<thead>
 			<tr>
-<!-- 				<th st-sort="projectId">Id</th> -->
+ 				<th st-sort="projectCode">Código</th>
 				<th st-sort="projectName">Nombre</th>
 				<th st-sort="projectSubcategoryList">Categorias</th>
 				<th st-sort="studentId">Autor</th>
@@ -26,24 +26,24 @@
 				
 			</tr>
 			<tr>
-				<!-- <th><input st-search="projectId"
-					placeholder="#" class="input-sm form-control"
-					type="search" /></th> -->
+				 <th><input st-search="projectCode"
+					placeholder="Buscar por código" class="input-sm form-control"
+					type="search" /></th> 
 				<th><input st-search="projectName"
-					placeholder="buscar por nombre" class="input-sm form-control"
+					placeholder="Buscar por nombre" class="input-sm form-control"
 					type="search" /></th>
 				<th></th>
 				<th><input st-search="projectStudent.name"
-					placeholder="buscar por autor" class="input-sm form-control"
+					placeholder="Buscar por autor" class="input-sm form-control"
 					type="search" /></th>
 				<th><input st-search="projectTeacher.name"
-					placeholder="buscar por profesor" class="input-sm form-control"
+					placeholder="Buscar por profesor" class="input-sm form-control"
 					type="search" /></th>
 				<th><input st-search="projectCareer"
-					placeholder="buscar por titulación" class="input-sm form-control"
+					placeholder="Buscar por titulación" class="input-sm form-control"
 					type="search" /></th>
 				<th><input st-search="projectYear"
-					placeholder="buscar por año" class="input-sm form-control"
+					placeholder="Buscar por año" class="input-sm form-control"
 					type="search" /></th>
 				<th></th>
 				<th></th>
@@ -54,7 +54,7 @@
 		<tbody>
 			<tr
 				ng-repeat="project in displayProjectList">
-<!-- 				<td>{{project.projectId}}</td> -->
+ 				<td>{{project.projectCode}}</td>
 				<td>{{project.projectName}}</td>
 				<td><img ng-repeat="subcategory in project.projectSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px"></img></td>
 				<td>{{project.projectStudent.name}}</td>
@@ -66,6 +66,13 @@
 				<td><a target="new" ng-href="http://localhost:8080/proyectoTFM/rest/projects/pdf/documentation/{{project.projectId}}"><img class="sgpfc-projects-pdficon2" src="./resources/img/pdf1.png"></img></a></td>
 			</tr>
 		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="10" class="text-center">
+					<div st-pagination="" st-items-by-page="8" st-displayed-pages="10"></div>
+				</td>
+			</tr>
+		</tfoot>
 	</table>
 	</div>
 </body>
