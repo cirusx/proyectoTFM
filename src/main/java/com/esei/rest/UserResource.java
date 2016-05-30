@@ -145,7 +145,7 @@ public class UserResource {
 		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
 		generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress());
 		generateMailMessage.setSubject("Recuperación de contraseña");
-		String emailBody = "Recuperación de contraseña. " + "<br><br> Usuario:" + user.getEmail() + "<br>Contraseña:"+user.getPassword();
+		String emailBody = "Recuperación de contraseña. " + "<br><br> Usuario: " + user.getEmail() + "<br>Contraseña: "+user.getPassword();
 		generateMailMessage.setContent(emailBody, "text/html");
 		System.out.println("Mail Session has been created successfully..");
  
@@ -155,7 +155,7 @@ public class UserResource {
  
 		// Enter your correct gmail UserID and Password
 		// if you have 2FA enabled then provide App Specific Password
-		transport.connect("smtp.gmail.com", "mafaro@esei.uvigo.es", "aimar1");
+		transport.connect("smtp.gmail.com", "sgpfc.project@gmail.com", "proyectosgpfc");
 		transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
 		transport.close();
 	}

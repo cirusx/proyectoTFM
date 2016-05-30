@@ -48,12 +48,13 @@
 			var email = $scope.user.email;
 			$http.get('http://localhost:8080/proyectoTFM/rest/users/recovery/'+ email.replace('@', '%40')).then(function(user) {
 				
-			
+				$scope.sendedEmail= true;
 				$scope.incorrectUser= false;
 
 			}, function(err) {
 				console.error('ERR', err);
 				$scope.incorrectUser= true;
+				$scope.sendedEmail= false;
 			}) 
 		}
 
