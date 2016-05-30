@@ -73,11 +73,11 @@
 				if ($cookies.get('rol')== "Student") {
 					rol = true
 				} else {
-					alert("No puedes inscribirte ya que no eres un alumno");
+					//alert("No puedes inscribirte ya que no eres un alumno");
 					$scope.NoStudent= true;
 				}
 			} else {
-				alert("No puedes registrarte ya que no estas registrado como alumno o logeado");
+				//alert("No puedes registrarte ya que no estas registrado como alumno o logeado");
 				$scope.NoStudentOrLogged= true;
 			}
 			if(login & rol) {
@@ -94,7 +94,7 @@
 							});
 						},
 						function (offer) {
-							alert('error ene el registro');
+							alert('error en el registro');
 						}
 				);
 			}

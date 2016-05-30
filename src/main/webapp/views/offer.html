@@ -15,6 +15,13 @@
 		<img ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}" class="img-responsive">
 	</div>
 	<div ng-show="offer.offerWithLimit && !registrations" class="col-xs-4 sgpfc-container-offer-applyzone">
+	<div class="help-block" role="alert">
+								<div ng-show="NoStudent" class="alert alert-danger">No puedes inscribirte ya que no eres un alumno</div>
+							</div>
+							
+					<div class="help-block" role="alert">
+								<div ng-show="NoStudentOrLogged" class="alert alert-danger">No puedes registrarte ya que no estas registrado como alumno o logeado</div>
+							</div>
 		<h1 class="sgpfc-container-offer-applyzone-number">{{offer.offerRegistrationList.length}}</h1>
 		<span class="text" >Alumnos Inscritos</span>
 		<button ng-click="offerUserRegister()" ng-hide="enableButton == 2 || offer.offerClose" ng-disabled="enableButton == 3" class="btn sgpfc-btn-primary btn-block sgpfc-container-offer-applyzone-applybutton">Inscribirse</button>

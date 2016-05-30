@@ -34,6 +34,7 @@ public class Project implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long 				projectId;
 	private String 				projectName;
+	@Column(unique=true)
 	private String              projectCode;
 	private String 				projectCareer;
 	private String 				projectYear;

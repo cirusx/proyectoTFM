@@ -9,14 +9,15 @@
 <body>
 <div class="container-fluid col-xs-offset-1 col-xs-10">
 	<h2>Mis proyectos</h2>
-	<table st-table="displayMyManagedProjectList" st-safe-src="myManagedProjectList"
-		st-set-filter="myStrictFilter" class="table table-striped">
+	<table st-table="displayMyProjectList" st-safe-src="myProjectList"
+		 class="table table-striped">
+<!-- 		 st-set-filter="" -->
 		<thead>
 			<tr>
  				<th st-sort="projectCode">Código</th>
 				<th st-sort="projectName">Nombre</th>
 				<th st-sort="projectSubcategoryList">Categorias</th>
-				<th st-sort="teacherId">Tutor</th>
+				<th st-sort="projectTeacher.name">Autor</th>
 				<th st-sort="projectCareer">Titulación</th>
 				<th st-sort="projectYear">Año</th>
  				<th st-sort="projectLinks">Enlaces</th> 
@@ -34,7 +35,7 @@
 					type="search" /></th>
 				<th></th>
 				<th><input st-search="projectTeacher.name"
-					placeholder="Buscar por profesor" class="input-sm form-control"
+					placeholder="Buscar por autor" class="input-sm form-control"
 					type="search" /></th>
 				<th><input st-search="projectCareer"
 					placeholder="Buscar por titulación" class="input-sm form-control"
@@ -50,7 +51,7 @@
 		</thead>
 		<tbody>
 			<tr
-				ng-repeat="project in displayMyManagedProjectList">
+				ng-repeat="project in displayMyProjectList">
  				<td>{{project.projectCode}}</td>
 				<td>{{project.projectName}}</td>
 				<td><img ng-repeat="subcategory in project.projectSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px"></img></td>
@@ -73,6 +74,3 @@
 	</div>
 </body>
 </html>
-
-341386137810-didcum6s97shoek01g2nlt0qjipac70r.apps.googleusercontent.com
-gkn9UjSKp_jmd_luuKDJWVe2
