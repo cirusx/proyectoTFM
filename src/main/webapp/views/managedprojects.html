@@ -8,15 +8,16 @@
 </head>
 <body>
 <div class="container-fluid col-xs-offset-1 col-xs-10">
+	<h2>Mis proyectos dirigidos</h2>
 	<table st-table="displayMyManagedProjectList" st-safe-src="myManagedProjectList"
-		st-set-filter="myStrictFilter" class="table table-striped">
+		 class="table table-striped">
+<!-- 		 st-set-filter="" -->
 		<thead>
 			<tr>
  				<th st-sort="projectCode">Código</th>
 				<th st-sort="projectName">Nombre</th>
 				<th st-sort="projectSubcategoryList">Categorias</th>
 				<th st-sort="studentId">Autor</th>
-				<th st-sort="teacherId">Tutor</th>
 				<th st-sort="projectCareer">Titulación</th>
 				<th st-sort="projectYear">Año</th>
  				<th st-sort="projectLinks">Enlaces</th> 
@@ -35,9 +36,6 @@
 				<th></th>
 				<th><input st-search="projectStudent.name"
 					placeholder="Buscar por autor" class="input-sm form-control"
-					type="search" /></th>
-				<th><input st-search="projectTeacher.name"
-					placeholder="Buscar por profesor" class="input-sm form-control"
 					type="search" /></th>
 				<th><input st-search="projectCareer"
 					placeholder="Buscar por titulación" class="input-sm form-control"
@@ -58,7 +56,6 @@
 				<td>{{project.projectName}}</td>
 				<td><img ng-repeat="subcategory in project.projectSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px"></img></td>
 				<td>{{project.projectStudent.name}}</td>
-				<td>{{project.projectTeacher.name}}</td>
 				<td>{{project.projectCareer}}</td>
 				<td>{{project.projectYear}}</td>
 				<td><div ng-repeat="link in project.projectLinks"><a target="new" href="{{link}}">Link</a></div></td>

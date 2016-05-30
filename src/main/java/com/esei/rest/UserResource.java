@@ -3,8 +3,15 @@ package com.esei.rest;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Properties;
 
-
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
@@ -71,6 +78,18 @@ public class UserResource {
 		}
 		return user;
 	}
+	
+	@GET
+	@Path("/recovery/{email}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getRecoveryPassword(@PathParam("email") String email) throws AddressException, MessagingException {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		User user = requireUserRecovery(email, em);
+		if (user != null) {
+			generateAndSendEmail(user);
+		}
+		return user;
+	}
 	 
 	@GET
 	@Path("{email}")
@@ -91,6 +110,54 @@ public class UserResource {
 			e.printStackTrace();
 			throw new SecurityException("user is not correct");
 		}
+	}
+	
+	private User requireUserRecovery(String email, EntityManager em) {
+		
+		try {
+			return em.createQuery("SELECT u FROM User u WHERE u.email='"+ email +"'", User.class).getSingleResult();
+		} catch(NoResultException e) {
+			e.printStackTrace();
+			throw new SecurityException("user is not correct");
+		}
+	}
+	
+	static Properties mailServerProperties;
+	static Session getMailSession;
+	static MimeMessage generateMailMessage;
+ 
+
+ 
+	private static void generateAndSendEmail(User user) throws AddressException, MessagingException {
+ 
+		// Step1
+		System.out.println("\n 1st ===> setup Mail Server Properties..");
+		mailServerProperties = System.getProperties();
+		mailServerProperties.put("mail.smtp.port", "587");
+		mailServerProperties.put("mail.smtp.auth", "true");
+		mailServerProperties.put("mail.smtp.starttls.enable", "true");
+		System.out.println("Mail Server Properties have been setup successfully..");
+ 
+		// Step2
+		System.out.println("\n\n 2nd ===> get Mail Session..");
+		getMailSession = Session.getDefaultInstance(mailServerProperties, null);
+		generateMailMessage = new MimeMessage(getMailSession);
+		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
+		generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress());
+		generateMailMessage.setSubject("Recuperación de contraseña");
+		String emailBody = "Recuperación de contraseña. " + "<br><br> Usuario:" + user.getEmail() + "<br>Contraseña:"+user.getPassword();
+		generateMailMessage.setContent(emailBody, "text/html");
+		System.out.println("Mail Session has been created successfully..");
+ 
+		// Step3
+		System.out.println("\n\n 3rd ===> Get Session and Send mail");
+		Transport transport = getMailSession.getTransport("smtp");
+ 
+		// Enter your correct gmail UserID and Password
+		// if you have 2FA enabled then provide App Specific Password
+		transport.connect("smtp.gmail.com", "mafaro@esei.uvigo.es", "aimar1");
+		transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
+		transport.close();
 	}
 	
 	@GET

@@ -26,7 +26,6 @@ import javax.ws.rs.core.Response;
 
 
 import com.esei.model.Offer;
-import com.esei.model.Project;
 import com.esei.model.Student;
 import com.esei.model.Subcategory;
 import com.esei.model.Teacher;
@@ -150,7 +149,7 @@ public class OfferResource {
 			List<Offer> lastOffers;
 			try{
 				em.getTransaction().begin();;
-				TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o ORDER BY o.offerId DESC", Offer.class);
+				TypedQuery<Offer> query = em.createQuery("SELECT o FROM Offer o WHERE o.offerClose = false ORDER BY o.offerId DESC", Offer.class);
 				lastOffers = query.setMaxResults(3).getResultList();
 				System.out.println("ofertas " + lastOffers);
 				em.getTransaction().commit();

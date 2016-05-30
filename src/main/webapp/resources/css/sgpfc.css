@@ -340,6 +340,10 @@
    .sgpfc-footer {
    	background-color: #0D1E23;
    }
+   
+   .sgpfc-header-menuTeacher {
+   	width: 180px;
+   }
   
   /* .sgpfc-card-panel {
   	display: none;

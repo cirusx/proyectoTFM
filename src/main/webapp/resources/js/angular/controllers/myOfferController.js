@@ -21,7 +21,7 @@
 
 					if ($cookies.get('user')) {
 						var rol = $cookies.get('rol');
-						if (rol == "2") {
+						if (rol == "Teacher") {
 							$scope.registrations = true;
 							$http.get('http://localhost:8080/proyectoTFM/rest/offers/users'+'?offerId='+offerId).then(function(users) {
 								offer.data.offerRegistrationList = users.data	

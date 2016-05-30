@@ -42,6 +42,20 @@
 				$rootScope.loggedType = "";
 			}
 		}
+		
+		$scope.recoverypassword = function() {
+			
+			var email = $scope.user.email;
+			$http.get('http://localhost:8080/proyectoTFM/rest/users/recovery/'+ email.replace('@', '%40')).then(function(user) {
+				
+			
+				$scope.incorrectUser= false;
+
+			}, function(err) {
+				console.error('ERR', err);
+				$scope.incorrectUser= true;
+			}) 
+		}
 
 		$scope.register = function() {
 			$scope.emailUsed = false;
