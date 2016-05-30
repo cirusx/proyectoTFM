@@ -26,7 +26,7 @@
 				$scope.noTeacherOrLogged= true;
 			}
 			if(login & rol) {
-				postService.postOffer($scope.offer.offerName, $scope.offer.offerDescription, $scope.offer.offerImage, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit,
+				postService.postOffer($scope.offer.offerName, $scope.offer.offerDescription, $scope.offer.offerImage, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit, $scope.offer.offerPdf,
 						function(offer){
 					$scope.offerCreated = true;
 					$scope.noCreateOffer = false;

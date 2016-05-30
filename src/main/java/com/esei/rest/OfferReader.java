@@ -36,6 +36,9 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 		case "image":
 			offer.setOfferImage(bs);
 			break;
+		case "pdf":
+			offer.setOfferPdf(bs);
+			break;
 		case "withLimit":
 			String offerWithLimitString = new String(bs);
 			if (offerWithLimitString == "0"){

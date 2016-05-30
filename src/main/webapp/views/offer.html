@@ -23,6 +23,7 @@
 		<p><span class="text" >Esta oferta finaliza el <b>{{offer.offerTimeLimit | date:'dd/MM/yyyy HH:mm'}}</b></span></p>
 		<span class="text" >Categorias de la oferta:</span>
 		<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+		<div ng-show="offer.offerPdf != null"><a target="new" ng-href="http://localhost:8080/proyectoTFM/rest/offers/pdf/{{offer.offerId}}"><img class="" src="./resources/img/pdf1.png"></img></a></div>
 	</div>
 	<div ng-hide="offer.offerWithLimit" class="col-xs-4 sgpfc-container-offer-teacherzone">
 		<h1 class="sgpfc-container-offer-applyzone-number">Contacto</h1>
@@ -30,6 +31,7 @@
 		<p>Correo Electrónico: <a><b>{{offer.teacher.email}}</b></a></p>
 		<span class="text" >Categorias de la oferta:</span>
 		<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+		<div ng-show="offer.offerPdf != null"><a target="new" ng-href="http://localhost:8080/proyectoTFM/rest/offers/pdf/{{offer.offerId}}"><img class="" src="./resources/img/pdf1.png"></img></a></div>
 	</div>
 	<div ng-show="registrations" class="col-xs-4 sgpfc-container-offer-listregistrationszone">
 		<a ng-href="#/offers/teacher/{{offer.offerId}}/edit" ng-hide="offer.offerClose" class="btn sgpfc-btn-primary sgpfc-container-offer-applyzone-applybutton">Editar oferta</a>

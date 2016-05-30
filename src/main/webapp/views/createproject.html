@@ -9,7 +9,7 @@
 <body>
 	<div class="container">
 		<div id="createprojectbox"
-			class="sgpfc-registerbox col-xs-6 col-xs-offset-3 col-xs-8 col-xs-offset-2">
+			class="sgpfc-registerbox col-xs-8 col-xs-offset-2">
 			<div class="panel sgpfc-loginbox-panel">
 				<div class="panel-heading sgpfc-loginbox-heading">
 					<div class="panel-title sgpfc-loginbox-title">Crear Proyecto</div>
@@ -150,7 +150,7 @@
 								<div class="input-group col-xs-12" ng-class="{ 'has-error':createprojectform.filedocumentation.$touched && createprojectform.filedocumentation.$invalid }">
 
 									<input name="filedocumentation" type="file"
-										class="file sgpfc-btn-primary"
+										class="file sgpfc-btn-primary" placeholder="pdf"
 										data-allowed-file-extensions='["pdf"]' id="filedocumentation"
 										ng-disabled="link != null && link.length != 0"
 										file-model="project.projectDocumentation" required>
@@ -170,7 +170,7 @@
 							<label for="inputImage" class="col-xs-3 control-label">Anteproyecto</label>
 							<div class="col-xs-9">
 								<div class="input-group col-xs-12" ng-class="{ 'has-error': createprojectform.filedraft.$touched && createprojectform.filedraft.$invalid }">
-								<input name="filedraft" type="file"
+								<input name="filedraft" type="file" placeholder="pdf"
 									class="file sgpfc-btn-primary"
 									data-allowed-file-extensions='["pdf"]' id="filedraft"
 									ng-disabled="link != null && link.length != 0"

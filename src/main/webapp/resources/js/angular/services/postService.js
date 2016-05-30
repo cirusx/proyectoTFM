@@ -3,13 +3,14 @@ var app = angular.module('sgpfc');
 
 
 app.service('postService', ['$http', function ($http) {
-	this.postOffer = function(offerName, offerDescription, offerImage, offerWithLimit, offerTimeLimit, onSuccess, onError  ){
+	this.postOffer = function(offerName, offerDescription, offerImage, offerWithLimit, offerTimeLimit, offerPdf, onSuccess, onError  ){
 		var fd = new FormData();
 		fd.append('name', offerName);
 		fd.append('description', offerDescription);
 		fd.append('image', offerImage);
 		fd.append('withLimit', offerWithLimit);
 		fd.append('timeLimit', offerTimeLimit);
+		fd.append('pdf', offerPdf);
 		$http.post('http://localhost:8080/proyectoTFM/rest/offers/offer', fd, {
 			transformRequest: angular.identity,
 			headers: {'Content-Type': undefined}

@@ -5,7 +5,7 @@
 	app.controller('managedProjectsController',['$scope', '$rootScope', '$http', '$location', '$cookies',
 	                                     function ($scope, $rootScope, $http, $location, $cookies) {
 
-		$http.get('http://localhost:8080/proyectoTFM/rest/users/projects'+'?userId='+teacher.userId).then(function(projects) {
+		$http.get('http://localhost:8080/proyectoTFM/rest/users/mymanagedprojects').then(function(projects) {
 			projects.data.forEach(function(project) {
 				$http.get('http://localhost:8080/proyectoTFM/rest/projects/student'+'?projectId='+project.projectId).then(function(student) {
 					project.projectStudent = student.data
@@ -36,7 +36,7 @@
 				})
 
 			})
-			$scope.projectList = projects.data;
+			$scope.myManagedProjectList = projects.data;
 		}, function(err) {
 			console.error('ERR', err);
 			alert("No se han logrado conseguir los proyectos");

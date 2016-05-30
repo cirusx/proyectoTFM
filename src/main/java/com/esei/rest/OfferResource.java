@@ -26,6 +26,7 @@ import javax.ws.rs.core.Response;
 
 
 import com.esei.model.Offer;
+import com.esei.model.Project;
 import com.esei.model.Student;
 import com.esei.model.Subcategory;
 import com.esei.model.Teacher;
@@ -36,6 +37,19 @@ import com.esei.model.User;
 public class OfferResource {
 
 
+	@Path("/pdf/{offerId}")
+	@GET
+	public Response getofferPDF(@PathParam("offerId") Long offerId) throws Exception {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		Offer offer= em.find(Offer.class, offerId);
+	    
+	    return Response
+	            .ok()
+	            .type("application/pdf")
+	            .entity(offer.getOfferPdf()) // Assumes document is a byte array in the domain object.
+	            .build();
+	}
+	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getOffers() {

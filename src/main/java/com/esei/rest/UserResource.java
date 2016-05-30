@@ -214,6 +214,31 @@ public class UserResource {
 	}
 	
 	@GET
+	@Path("mymanagedprojects")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Project> getMyManagedProjects(@HeaderParam("Authorization") String authHeader) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			Teacher teacher = (Teacher) requireUser(authHeader, em);
+			List<Project> myProjects;
+			try{
+				em.getTransaction().begin();;
+				String userId = teacher.getUserId().toString();
+				TypedQuery<Project> query = em.createQuery("SELECT o FROM Project o JOIN o.projectTeacher s WHERE s.userId="+ userId +"", Project.class);
+				myProjects = query.getResultList();
+				System.out.println("proyectos " + myProjects);
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return myProjects;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
 	@Path("teachers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getTeachers() {

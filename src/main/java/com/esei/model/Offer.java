@@ -79,7 +79,11 @@ public class Offer implements Serializable{
 
 	@Transient
 	private String contentMime;
-
+	
+	@Lob
+	@Column(length=100000000)
+	private byte[]				offerPdf;
+	
 	public Offer() {}
 
 	public Long getOfferId() {
@@ -199,5 +203,13 @@ public class Offer implements Serializable{
 	
 	public void setContentMime(String contentMime) {
 		this.contentMime = contentMime;
+	}
+	
+	public void setOfferPdf(byte[] offerPdf) {
+		this.offerPdf = offerPdf;
+	}
+
+	public byte[] getOfferPdf() {
+		return offerPdf;
 	}
 }
