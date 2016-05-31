@@ -26,6 +26,7 @@ import javax.ws.rs.core.Response;
 
 
 import com.esei.model.Offer;
+import com.esei.model.Project;
 import com.esei.model.Student;
 import com.esei.model.Subcategory;
 import com.esei.model.Teacher;
@@ -319,6 +320,39 @@ public class OfferResource {
 			em.close();
 		}
 		return out;  
+	}
+	
+	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response editOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
+		System.out.println(offer.getOfferDescription());
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		Teacher user = (Teacher) requireUser(authHeader, em);
+		//Teacher teacher = (Teacher) user;
+		try {
+			em.getTransaction().begin();
+			//teacher.getOfferList().add(offer);
+			//offer.setTeacher(teacher);
+			
+			  
+	            Offer editOffer = em.find(Offer.class, offer.getOfferId());
+	            em.merge(editOffer);
+			
+			em.getTransaction().commit();
+
+		}finally{
+			em.close();
+		}
+		return Response.created(null).build();  
+	}
+	
+	@PUT
+	@Path("/{offerId}")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response putOffer( @HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
+	        return editOffer(authHeader, offer);
+
 	}
 	
 	@PUT

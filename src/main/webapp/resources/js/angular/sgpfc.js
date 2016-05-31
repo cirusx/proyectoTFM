@@ -36,7 +36,7 @@
 			controller: 'offerController'
 		}).when('/offers/teacher/:offerId/edit', {
 			templateUrl: '/proyectoTFM/views/editoffer.html',
-			controller: 'createOfferController'
+			controller: 'editOfferController'
 		}).when('/offers/teacher/:offerId', {
 			templateUrl: '/proyectoTFM/views/offer.html',
 			controller: 'myOfferController'

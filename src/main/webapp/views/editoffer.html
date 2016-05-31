@@ -12,16 +12,16 @@
 			class="sgpfc-registerbox col-xs-8 col-xs-offset-2">
 			<div class="panel sgpfc-loginbox-panel">
 				<div class="panel-heading sgpfc-loginbox-heading">
-					<div class="panel-title sgpfc-loginbox-title">Crear Oferta</div>
+					<div class="panel-title sgpfc-loginbox-title">Editar Oferta</div>
 				</div>
 				<div class="sgpfc-loginbox-panelbody panel-body">
 					
 					<div class="help-block" role="alert">
-						<div ng-show="noCreateOffer" class="alert alert-danger">La
+						<div ng-show="noEditOffer" class="alert alert-danger">La
 							oferta no se pudo actualizar correctamente</div>
 					</div>
 					<div class="help-block" role="alert">
-						<div ng-show="offerCreated" class="alert alert-success">Oferta
+						<div ng-show="offerEdited" class="alert alert-success">Oferta
 							actualizada correctamente</div>
 					</div>
 					
@@ -30,11 +30,11 @@
 					</div>
 					
 					<div class="help-block" role="alert">
-						<div ng-show="noTeacherOrLogged" class="alert alert-danger">No se puede actualizar la oferta (no  registrado como profesor o logeado)</div>
+						<div ng-show="noTeacherOrLogged" class="alert alert-danger">No se puede actualizar la oferta (no registrado como profesor o logeado)</div>
 					</div>
 					
 					<form id="editofferform" name="editofferform"
-						class="form-horizontal" role="form" ng-submit="createOffer()"
+						class="form-horizontal" role="form" ng-submit="editOffer()"
 						novalidate>
 						<div class="form-group">
 							<label for="name" class="col-xs-3 control-label">Nombre</label>

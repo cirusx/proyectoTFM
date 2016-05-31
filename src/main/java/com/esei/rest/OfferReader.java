@@ -32,7 +32,12 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 			break;
 		case "description":
 			offer.setOfferDescription(new String(bs));
-			break;        
+			break;
+		case "id":
+			String offerIdStr = new String(bs);
+			Long offerId = Long.valueOf(offerIdStr);
+			offer.setOfferId(offerId);
+			break;
 		case "image":
 			offer.setOfferImage(bs);
 			break;
