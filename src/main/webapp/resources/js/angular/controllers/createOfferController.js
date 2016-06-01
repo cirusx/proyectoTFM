@@ -9,6 +9,7 @@
 		
 		$scope.createOffer = function() {
 			
+			alert("timelimit: "+$scope.offer.offerTimeLimit);
 			$scope.noCreateOffer = false;
 			$scope.offerCreated = false;
 			$scope.noTeacher = false;

@@ -130,13 +130,13 @@
 							<label class="col-xs-3 control-label">Fecha Límite</label>
 							<div class="btn-group col-xs-9" data-toggle="buttons" ng-class="{ 'has-error': createofferform.options.$touched && createofferform.options.$invalid }">
 								<label class="btn btn-default active"> 
-									<input type="radio" ng-model="offer.offerWithLimit" name="options" id="option1" value="0" checked>Sin Límite
+									<input type="radio" ng-model="offer.offerWithLimit" name="options" id="option1" ng-value="0" checked>Sin Límite
+								</label> 
+								<label class=""> 
+									<input type="radio" ng-model="offer.offerTimeLimit" name="options" id="option2" ng-value="1">Oferta Primer Cuatrimestre
 								</label> 
 								<label class="btn btn-default"> 
-									<input type="radio" ng-model="offer.offerTimeLimit" name="options" id="option2" value="1">Oferta Primer Cuatrimestre
-								</label> 
-								<label class="btn btn-default"> 
-									<input type="radio" ng-model="offerofferTimeLimit" name="options" id="option3" value="2">Oferta Segundo Cuatrimestre
+									<input type="radio" ng-model="offerofferTimeLimit" name="options" id="option3" ng-value="2">Oferta Segundo Cuatrimestre
 								</label>
 							</div>
 

@@ -11,7 +11,9 @@ app.service('postService', ['$http', function ($http) {
 		fd.append('image', offerImage);
 		fd.append('withLimit', offerWithLimit);
 		fd.append('timeLimit', offerTimeLimit);
-		fd.append('pdf', offerPdf);
+		if (offerPdf != undefined) {
+			fd.append('pdf', offerPdf);
+		}
 		$http.post('http://localhost:8080/proyectoTFM/rest/offers/offer', fd, {
 			transformRequest: angular.identity,
 			headers: {'Content-Type': undefined}
