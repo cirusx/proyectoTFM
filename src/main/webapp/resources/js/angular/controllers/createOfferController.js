@@ -36,8 +36,7 @@
 					$('#photofile').fileinput('clear');
 					$('#filepdf').fileinput('clear');
 					$scope.htmlVariable = "";
-					$scope.createofferform.$setUntouched();
-					
+					$scope.createofferform.$setUntouched();	
 				},
 				function(){
 					$scope.noCreateOffer = true;
