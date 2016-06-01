@@ -7,12 +7,12 @@
 
 		$http.get('http://localhost:8080/proyectoTFM/rest/users/myprojects').then(function(projects) {
 			projects.data.forEach(function(project) {
-				$http.get('http://localhost:8080/proyectoTFM/rest/projects/student'+'?projectId='+project.projectId).then(function(student) {
+			/*	$http.get('http://localhost:8080/proyectoTFM/rest/projects/student'+'?projectId='+project.projectId).then(function(student) {
 					project.projectStudent = student.data
 				}, function(err) {
 					console.error('ERR', err);
 					// err.status will contain the status code
-				})
+				})*/
 
 				$http.get('http://localhost:8080/proyectoTFM/rest/projects/teacher'+'?projectId='+project.projectId).then(function(teacher) {
 					project.projectTeacher = teacher.data
@@ -38,8 +38,8 @@
 			})
 			$scope.myProjectList = projects.data;
 		}, function(err) {
-			console.error('ERR', err);
-			alert("No se han logrado conseguir los proyectos");
+			console.error('No se han logrado conseguir los proyectos', err);
+			
 		})
 	}]);
 }());

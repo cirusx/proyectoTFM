@@ -50,7 +50,7 @@ public class UserResource {
 			em.getTransaction().begin();;
 			TypedQuery<User> query = em.createQuery("SELECT o FROM User o ", User.class);
 			users = query.getResultList();
-			System.out.println("usuarioss " + users);
+			System.out.println("usuarios " + users);
 			em.getTransaction().commit();
 			}finally{
 				em.close();
@@ -80,87 +80,6 @@ public class UserResource {
 	}
 	
 	@GET
-	@Path("/recovery/{email}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public User getRecoveryPassword(@PathParam("email") String email) throws AddressException, MessagingException {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		User user = requireUserRecovery(email, em);
-		if (user != null) {
-			generateAndSendEmail(user);
-		}
-		return user;
-	}
-	 
-	@GET
-	@Path("{email}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public User getUser(@PathParam("email") String email, @HeaderParam("Authorization") String authHeader) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		User user = requireUser(authHeader, em);
-		return user;
-	}
-	
-	private User requireUser(String authHeader, EntityManager em) {
-		String authString = new String(Base64.getDecoder().decode(authHeader.replace("Basic ","").getBytes()));
-		String login = authString.split(":")[0];
-		String pass = authString.split(":")[1];
-		try {
-			return em.createQuery("SELECT u FROM User u WHERE u.email = '"+ login +"' and u.password='"+pass+"'", User.class).getSingleResult();
-		} catch(NoResultException e) {
-			e.printStackTrace();
-			throw new SecurityException("user is not correct");
-		}
-	}
-	
-	private User requireUserRecovery(String email, EntityManager em) {
-		
-		try {
-			return em.createQuery("SELECT u FROM User u WHERE u.email='"+ email +"'", User.class).getSingleResult();
-		} catch(NoResultException e) {
-			e.printStackTrace();
-			throw new SecurityException("user is not correct");
-		}
-	}
-	
-	static Properties mailServerProperties;
-	static Session getMailSession;
-	static MimeMessage generateMailMessage;
- 
-
- 
-	private static void generateAndSendEmail(User user) throws AddressException, MessagingException {
- 
-		// Step1
-		System.out.println("\n 1st ===> setup Mail Server Properties..");
-		mailServerProperties = System.getProperties();
-		mailServerProperties.put("mail.smtp.port", "587");
-		mailServerProperties.put("mail.smtp.auth", "true");
-		mailServerProperties.put("mail.smtp.starttls.enable", "true");
-		System.out.println("Mail Server Properties have been setup successfully..");
- 
-		// Step2
-		System.out.println("\n\n 2nd ===> get Mail Session..");
-		getMailSession = Session.getDefaultInstance(mailServerProperties, null);
-		generateMailMessage = new MimeMessage(getMailSession);
-		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
-		generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress());
-		generateMailMessage.setSubject("Recuperación de contraseña");
-		String emailBody = "Recuperación de contraseña. " + "<br><br> Usuario: " + user.getEmail() + "<br>Contraseña: "+user.getPassword();
-		generateMailMessage.setContent(emailBody, "text/html");
-		System.out.println("Mail Session has been created successfully..");
- 
-		// Step3
-		System.out.println("\n\n 3rd ===> Get Session and Send mail");
-		Transport transport = getMailSession.getTransport("smtp");
- 
-		// Enter your correct gmail UserID and Password
-		// if you have 2FA enabled then provide App Specific Password
-		transport.connect("smtp.gmail.com", "sgpfc.project@gmail.com", "proyectosgpfc");
-		transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
-		transport.close();
-	}
-	
-	@GET
 	@Path("teacher")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Project> getProjectsByTeacher(@QueryParam("userId") Long userId) {
@@ -185,9 +104,9 @@ public class UserResource {
 	}
 	
 	@GET
-	@Path("check")
+	@Path("/check/{email}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public User getUserByEmail(@QueryParam("email") String email) {
+	public User getUserByEmail(@PathParam("email") String email) {
 		try{
 			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 			User user;
@@ -306,6 +225,31 @@ public class UserResource {
 	}
 	
 	@GET
+	@Path("myprojects")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Project> getMyProjects(@HeaderParam("Authorization") String authHeader) {
+		try{
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			Student student = (Student) requireUser(authHeader, em);
+			List<Project> myProjects;
+			try{
+				em.getTransaction().begin();;
+				String userId = student.getUserId().toString();
+				TypedQuery<Project> query = em.createQuery("SELECT o FROM Project o JOIN o.projectStudent s WHERE s.userId="+ userId +"", Project.class);
+				myProjects = query.getResultList();
+				System.out.println("proyectos " + myProjects);
+				em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+			return myProjects;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
 	@Path("teachers")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getTeachers() {
@@ -378,6 +322,89 @@ public class UserResource {
         }
         return out;  
 	}
+	
+	@GET
+	@Path("/recovery/{email}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getRecoveryPassword(@PathParam("email") String email) throws AddressException, MessagingException {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		User user = requireUserRecovery(email, em);
+		if (user != null) {
+			generateAndSendEmail(user);
+		}
+		return user;
+	}
+	 
+	@GET
+	@Path("{email}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUser(@PathParam("email") String email, @HeaderParam("Authorization") String authHeader) {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		User user = requireUser(authHeader, em);
+		return user;
+	}
+	
+	private User requireUser(String authHeader, EntityManager em) {
+		String authString = new String(Base64.getDecoder().decode(authHeader.replace("Basic ","").getBytes()));
+		String login = authString.split(":")[0];
+		String pass = authString.split(":")[1];
+		try {
+			return em.createQuery("SELECT u FROM User u WHERE u.email = '"+ login +"' and u.password='"+pass+"'", User.class).getSingleResult();
+		} catch(NoResultException e) {
+			e.printStackTrace();
+			throw new SecurityException("user is not correct");
+		}
+	}
+	
+	private User requireUserRecovery(String email, EntityManager em) {
+		
+		try {
+			return em.createQuery("SELECT u FROM User u WHERE u.email='"+ email +"'", User.class).getSingleResult();
+		} catch(NoResultException e) {
+			e.printStackTrace();
+			throw new SecurityException("user is not correct");
+		}
+	}
+	
+	static Properties mailServerProperties;
+	static Session getMailSession;
+	static MimeMessage generateMailMessage;
+ 
+
+ 
+	private static void generateAndSendEmail(User user) throws AddressException, MessagingException {
+ 
+		// Step1
+		System.out.println("\n 1st ===> setup Mail Server Properties..");
+		mailServerProperties = System.getProperties();
+		mailServerProperties.put("mail.smtp.port", "587");
+		mailServerProperties.put("mail.smtp.auth", "true");
+		mailServerProperties.put("mail.smtp.starttls.enable", "true");
+		System.out.println("Mail Server Properties have been setup successfully..");
+ 
+		// Step2
+		System.out.println("\n\n 2nd ===> get Mail Session..");
+		getMailSession = Session.getDefaultInstance(mailServerProperties, null);
+		generateMailMessage = new MimeMessage(getMailSession);
+		generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
+		generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress());
+		generateMailMessage.setSubject("Recuperación de contraseña");
+		String emailBody = "Recuperación de contraseña. " + "<br><br> Usuario: " + user.getEmail() + "<br>Contraseña: "+user.getPassword();
+		generateMailMessage.setContent(emailBody, "text/html");
+		System.out.println("Mail Session has been created successfully..");
+ 
+		// Step3
+		System.out.println("\n\n 3rd ===> Get Session and Send mail");
+		Transport transport = getMailSession.getTransport("smtp");
+ 
+		// Enter your correct gmail UserID and Password
+		// if you have 2FA enabled then provide App Specific Password
+		transport.connect("smtp.gmail.com", "sgpfc.project@gmail.com", "proyectosgpfc");
+		transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
+		transport.close();
+	}
+	
+	
 
 }
 

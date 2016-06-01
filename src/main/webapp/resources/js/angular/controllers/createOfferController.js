@@ -26,11 +26,18 @@
 				$scope.noTeacherOrLogged= true;
 			}
 			if(login & rol) {
-				postService.postOffer($scope.offer.offerName, $scope.offer.offerDescription, $scope.offer.offerImage, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit, $scope.offer.offerPdf,
+				$scope.offer.offerDescription = $scope.htmlVariable;
+				postService.postOffer($scope.offer.offerName, $scope.offer.offerTinyDescription, $scope.offer.offerDescription, $scope.offer.offerImage, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit, $scope.offer.offerPdf,
 						function(offer){
 					$scope.offerCreated = true;
 					$scope.noCreateOffer = false;
-					$scope.posts.splice(0,0,offer);
+					//$scope.posts.splice(0,0,offer);
+					delete $scope.offer;
+					$('#photofile').fileinput('clear');
+					$('#filepdf').fileinput('clear');
+					$scope.htmlVariable = "";
+					$scope.createofferform.$setUntouched();
+					
 				},
 				function(){
 					$scope.noCreateOffer = true;

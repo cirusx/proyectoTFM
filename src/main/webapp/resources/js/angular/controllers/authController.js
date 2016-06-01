@@ -50,6 +50,8 @@
 				
 				$scope.sendedEmail= true;
 				$scope.incorrectUser= false;
+				delete $scope.user;
+				$scope.recoverypasswordform.$setUntouched();
 
 			}, function(err) {
 				console.error('ERR', err);
@@ -62,23 +64,25 @@
 			$scope.emailUsed = false;
 			$scope.userCreated = false;
 			var email = $scope.user.email;
-			$http.get('http://localhost:8080/proyectoTFM/rest/users/check'+'?email='+email.replace('@', '%40')).then(function(user) {
-
+			$http.get('http://localhost:8080/proyectoTFM/rest/users/check/'+ email.replace('@', '%40')).then(function(user) {
 				$scope.emailUsed = true;
 				$scope.userCreated = false;
 
 			}, function(user) {
-
-				$scope.emailUsed = false;
-
-				$http.post('http://localhost:8080/proyectoTFM/rest/users', $scope.user).then(function (response) {
-					$scope.userCreated = true;
-					$scope.emailUsed = false;
-				},
-				function (response) {
-					$scope.userCreated = false;
-				})
-			})
+				if($scope.emailUsed == false) {
+					$http.post('http://localhost:8080/proyectoTFM/rest/users', $scope.user).then(function (response) {
+						$scope.userCreated = true;
+						$scope.emailUsed = false;
+						delete $scope.user;
+						delete $scope.confirmpassword;
+						$scope.registerform.$setUntouched();
+						$scope.registerform.$setPristine();
+					},
+					function (response) {
+						$scope.userCreated = false;
+					})
+				}
+			});
 		}	
 	}]);
 }());

@@ -35,10 +35,14 @@
 			if(login & rol) {
 				
 				postService.postProject($scope.project.projectName, $scope.project.projectCode,  $scope.project.projectCareer, $scope.project.projectYear, $scope.project.projectStudent, $scope.project.projectLinks, $scope.project.projectDocumentation, $scope.project.projectDraft,
-						function(offer){
+						function(project){
 					$scope.projectCreated = true;
 					$scope.noCreateProject = false;
-					$scope.posts.splice(0,0,offer);
+					//$scope.posts.splice(0,0,offer);
+					delete $scope.project;
+					$('#filedocumentation').fileinput('clear');
+					$('#filedraft').fileinput('clear');
+					$scope.createprojectform.$setUntouched();
 				},
 				function(){
 					$scope.noCreateProject = true;

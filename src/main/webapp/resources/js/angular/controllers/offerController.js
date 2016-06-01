@@ -83,8 +83,10 @@
 			if(login & rol) {
 				$http.post('http://localhost:8080/proyectoTFM/rest/offers/'+offer.offerId+'/students').then(
 						function (offer) {
+							$scope.offerRegisterError = false;
 							$http.get('http://localhost:8080/proyectoTFM/rest/offers/users'+'?offerId='+offerId).then(function(users) {
 								offer.data.offerRegistrationList = users.data
+								$scope.offerRegisterError = false;
 								$scope.enableButton = 2;
 								$scope.offer = offer.data;
 								$location.path("/offers/"+offer.data.offerId);		
@@ -94,7 +96,7 @@
 							});
 						},
 						function (offer) {
-							alert('error en el registro');
+							$scope.offerRegisterError = true;
 						}
 				);
 			}

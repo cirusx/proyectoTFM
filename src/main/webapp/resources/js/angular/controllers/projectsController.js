@@ -38,8 +38,8 @@
 			})
 			$scope.projectList = projects.data;
 		}, function(err) {
-			console.error('ERR', err);
-			alert("No se han logrado conseguir los proyectos");
+			console.error('No se han logrado conseguir los proyectos', err);
+			
 		})
 	}]);
 }());

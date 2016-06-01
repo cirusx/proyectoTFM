@@ -30,6 +30,9 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 		case "name":
 			offer.setOfferName(new String(bs));
 			break;
+		case "tinydescription":
+			offer.setOfferTinyDescription(new String(bs));
+			break;
 		case "description":
 			offer.setOfferDescription(new String(bs));
 			break;

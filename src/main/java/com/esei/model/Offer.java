@@ -39,7 +39,9 @@ public class Offer implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long 				offerId;
 	private String 				offerName;
+	@Column(columnDefinition = "TEXT")
 	private String				offerDescription;
+	private String				offerTinyDescription;
 	private boolean             offerWithLimit;
 	private Date                offerTimeLimit;
 
@@ -110,6 +112,14 @@ public class Offer implements Serializable{
 		this.offerDescription = offerDescription;
 	}
 	
+	public String getOfferTinyDescription() {
+		return offerTinyDescription;
+	}
+
+	public void setOfferTinyDescription(String offerTinyDescription) {
+		this.offerTinyDescription = offerTinyDescription;
+	}
+
 	public boolean isOfferWithLimit() {
 		return offerWithLimit;
 	}

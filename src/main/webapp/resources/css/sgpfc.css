@@ -204,6 +204,7 @@
 
 .sgpfc-loginbox-panel {
 	border-color: #0D1E23;
+	margin-bottom: 100px;
 }
 
 .sgpfc-loginbox-heading {
@@ -343,6 +344,10 @@
    
    .sgpfc-header-menuTeacher {
    	width: 180px;
+   }
+   
+   .sgpfc-offer-description {
+   	margin-bottom: 100px;
    }
   
   /* .sgpfc-card-panel {

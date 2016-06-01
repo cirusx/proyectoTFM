@@ -3,9 +3,10 @@ var app = angular.module('sgpfc');
 
 
 app.service('postService', ['$http', function ($http) {
-	this.postOffer = function(offerName, offerDescription, offerImage, offerWithLimit, offerTimeLimit, offerPdf, onSuccess, onError  ){
+	this.postOffer = function(offerName, offerTinyDescription, offerDescription, offerImage, offerWithLimit, offerTimeLimit, offerPdf, onSuccess, onError  ){
 		var fd = new FormData();
 		fd.append('name', offerName);
+		fd.append('tinydescription', offerTinyDescription);
 		fd.append('description', offerDescription);
 		fd.append('image', offerImage);
 		fd.append('withLimit', offerWithLimit);
@@ -19,10 +20,11 @@ app.service('postService', ['$http', function ($http) {
 		.error(onError);
 	}
 	
-	this.putOffer = function(offerId, offerName, offerDescription, offerImage, offerWithLimit, offerTimeLimit, offerPdf, onSuccess, onError  ){
+	this.putOffer = function(offerId, offerName, offerTinyDescription, offerDescription, offerImage, offerWithLimit, offerTimeLimit, offerPdf, onSuccess, onError  ){
 		var fd = new FormData();
 		fd.append('id', offerId);
 		fd.append('name', offerName);
+		fd.append('tinydescription', offerTinyDescription);
 		fd.append('description', offerDescription);
 		fd.append('image', offerImage);
 		fd.append('withLimit', offerWithLimit);
