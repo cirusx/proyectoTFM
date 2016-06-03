@@ -1,13 +1,17 @@
 package com.esei.model;
 
+import static javax.persistence.CascadeType.ALL;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URLConnection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,10 +40,10 @@ public class Subcategory implements Serializable {
 	@ManyToOne			
 	private Category   			category;
 	private Long				version;
-	@ManyToMany(mappedBy="offerSubcategoryList")
+	@ManyToMany(mappedBy="offerSubcategoryList", fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JsonIgnore
 	private List<Offer>			subcategoryOfferList;
-	@ManyToMany(mappedBy="projectSubcategoryList")
+	@ManyToMany(mappedBy="projectSubcategoryList", fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JsonIgnore
 	private List<Project>		subcategoryProjectList;
 	

@@ -293,7 +293,7 @@ public class OfferResource {
 
 	@DELETE
 	@Path("/{offerId}")
-	public String deleteOffer(@PathParam("offerId") int offerId) {
+	public String deleteOffer(@PathParam("offerId") Long offerId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		String out;
 		try {
@@ -370,6 +370,25 @@ public class OfferResource {
 			em.getTransaction().begin();;
 			offer = em.find(Offer.class, offerId);
 			offer.setOfferClose(true);
+			em.getTransaction().commit();
+			
+		}finally{
+			em.close();
+		}
+		return offer;  
+	}
+	
+	@PUT
+	@Path("/{offerId}/open")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Offer openOffer(@PathParam("offerId") Long offerId) {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		Offer offer;
+		try {
+			em.getTransaction().begin();;
+			offer = em.find(Offer.class, offerId);
+			offer.setOfferClose(false);
 			em.getTransaction().commit();
 			
 		}finally{

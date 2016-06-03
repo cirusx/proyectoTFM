@@ -46,7 +46,6 @@
 						});
 					}
 
-					//offer.data.
 					$scope.offer = offer.data;
 				}
 			}, function(err) {
@@ -58,6 +57,24 @@
 		$scope.closeOffer = function() {
 			$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/close').then(function(cerrar) {
 				$scope.offer.offerClose = true;
+			}, function(err) {
+				console.error('ERR', err);
+				// err.status will contain the status code
+			});
+		}
+		
+		$scope.openOffer = function() {
+			$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/open').then(function(open) {
+				$scope.offer.offerClose = false;
+			}, function(err) {
+				console.error('ERR', err);
+				// err.status will contain the status code
+			});
+		}
+		
+		$scope.deleteOffer = function() {
+			$http.delete('http://localhost:8080/proyectoTFM/rest/offers/'+offerId).then(function(del) {
+				$scope.offerDelete = true;
 			}, function(err) {
 				console.error('ERR', err);
 				// err.status will contain the status code

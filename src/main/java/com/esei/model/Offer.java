@@ -7,6 +7,7 @@ import java.net.URLConnection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,7 +46,7 @@ public class Offer implements Serializable{
 	private boolean             offerWithLimit;
 	private Date                offerTimeLimit;
 
-	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
 	      inverseJoinColumns={@JoinColumn(name = "offerRegistrationList_userId", referencedColumnName = "userId")})
@@ -53,7 +54,7 @@ public class Offer implements Serializable{
 	private List<Student>		offerRegistrationList;
 
 	
-	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
 	      inverseJoinColumns={@JoinColumn(name = "offerSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})

@@ -52,17 +52,19 @@
 						| date:'dd/MM/yyyy HH:mm'}}</b></span>
 			</p>
 			<p>
-			<span class="text">Categorias de la oferta:</span> <img
-				ng-repeat="subcategory in offer.offerSubcategoryList"
-				ng-src="data:{{offer.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+				<span class="text">Categorias de la oferta:</span> <img
+					ng-repeat="subcategory in offer.offerSubcategoryList"
+					ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}"
+					width="28px" height="28px">
 			</p>
 			<p>
-			<span class="text">Contacto: <b>{{offer.teacher.email}}</b></span>
+				<span class="text">Contacto: <b>{{offer.teacher.email}}</b></span>
 			</p>
 			<div ng-show="offer.offerPdf != null">
-				<a target="new" ng-href="http://localhost:8080/proyectoTFM/rest/offers/pdf/{{offer.offerId}}">
-					<img class="" src="./resources/img/pdf1.png"></img
-				></a>
+				<a target="new"
+					ng-href="http://localhost:8080/proyectoTFM/rest/offers/pdf/{{offer.offerId}}">
+					<img class="" src="./resources/img/pdf1.png"></img>
+				</a>
 			</div>
 		</div>
 		<div ng-hide="offer.offerWithLimit"
@@ -76,7 +78,8 @@
 			</p>
 			<span class="text">Categorias de la oferta:</span> <img
 				ng-repeat="subcategory in offer.offerSubcategoryList"
-				ng-src="data:{{offer.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+				ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}"
+				width="28px" height="28px">
 			<div ng-show="offer.offerPdf != null">
 				<a target="new"
 					ng-href="http://localhost:8080/proyectoTFM/rest/offers/pdf/{{offer.offerId}}"><img
@@ -85,6 +88,11 @@
 		</div>
 		<div ng-show="registrations"
 			class="col-xs-4 sgpfc-container-offer-listregistrationszone">
+			
+			<div class="help-block" role="alert">
+				<div ng-show="offerDelete" class="alert alert-success">Oferta eliminada correctamente</div>
+			</div>
+			<div ng-hide="offerDelete">
 			<a ng-href="#/offers/teacher/{{offer.offerId}}/edit"
 				ng-hide="offer.offerClose"
 				class="btn sgpfc-btn-primary sgpfc-container-offer-applyzone-applybutton">Editar
@@ -92,6 +100,30 @@
 			<button ng-click="closeOffer()" ng-hide="offer.offerClose"
 				class="btn btn-danger sgpfc-container-offer-applyzone-applybutton">Cerrar
 				oferta</button>
+			<button ng-click="openOffer()" ng-show="offer.offerClose"
+				class="btn sgpfc-btn-primary sgpfc-container-offer-applyzone-applybutton">Abrir
+				oferta</button>
+			<button ng-show="offer.offerClose"
+				class="btn btn-danger sgpfc-container-offer-applyzone-applybutton deleteConfirm" data-toggle="modal" data-target="#confirmDeleteOfferModal" onClick="launchModal()" href="#">Eliminar
+				oferta</button>
+				
+				
+				<div class=" modal fade" id="confirmDeleteOfferModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteOfferModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header"><b>¿Esta seguro que desea eliminar esta oferta?</b>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="col-xs-offset-8 modal-body">
+									<button type="button" data-dismiss="modal" class="btn btn-danger"
+										id="delete" ng-click="deleteOffer()">Eliminar</button>
+									<button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+								</div>
+							</div>
+						</div>
+					</div>
 			<button ng-show="offer.offerClose"
 				class="btn btn-danger btn-block sgpfc-container-offer-applyzone-applybutton">Oferta
 				Finalizada</button>
@@ -100,11 +132,21 @@
 				<p>{{user.name}} - {{user.email}}</p>
 			</div>
 		</div>
-
+</div>
 		<div class="col-xs-12 sgpfc-container-offer-descriptionzone">
-			<div class="sgpfc-offer-description" ng-bind-html="offer.offerDescription">{{offer.offerDescription}}</div>
+			<div class="sgpfc-offer-description"
+				ng-bind-html="offer.offerDescription">{{offer.offerDescription}}</div>
 		</div>
 	</div>
-
+<script type="text/javascript">
+/* $('#deleteConfirm').appendTo("body");
+$('.deleteConfirm').on('click', function (e) {
+    $('#confirm')
+        .modal({ backdrop: 'static', keyboard: false })
+        .one('click', '#delete', function (e) {
+            //delete function
+        });
+}); */
+</script>
 </body>
 </html>

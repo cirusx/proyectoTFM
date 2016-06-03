@@ -57,7 +57,7 @@ public class Project implements Serializable{
 	@JoinColumn(name="studentId")
 	@JsonIgnore
 	private Student				projectStudent;
-	@ManyToMany(cascade = ALL, fetch=FetchType.LAZY)
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
 	@JoinTable(
 	      joinColumns={@JoinColumn(name = "Project_projectId", referencedColumnName = "projectId")},
 	      inverseJoinColumns={@JoinColumn(name = "projectSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
