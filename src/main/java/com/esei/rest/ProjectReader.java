@@ -10,6 +10,7 @@ import javax.ws.rs.ext.Provider;
 
 import com.esei.model.Project;
 import com.esei.model.Student;
+import com.esei.model.Subcategory;
 
 
 @Provider
@@ -47,6 +48,20 @@ public class ProjectReader extends MultipartMessageBodyReader<Project> {
 			long userId = Long.valueOf(userIdStr).longValue();
 			student.setUserId(userId);
 			project.setProjectStudent(student);
+			break;
+		case "subcategories":
+			String subcategoryIds = new String(bs);
+			String[] subcategoryIdsSplit = subcategoryIds.split(",");
+			List<Subcategory> subcategories = new ArrayList<Subcategory>();  
+			for (String subcategoryIdStr : subcategoryIdsSplit) {
+				Subcategory subcategory = new Subcategory();
+				if (subcategoryIdStr.compareTo("") != 0 ) {
+					long subcategoryId = Long.valueOf(subcategoryIdStr).longValue();
+					subcategory.setSubcategoryId(subcategoryId);
+					subcategories.add(subcategory);
+				}
+			}
+			project.setProjectSubcategoryList(subcategories);
 			break;
 		case "links":
 			List<String> links = new ArrayList<String>();

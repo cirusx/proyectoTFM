@@ -3,12 +3,15 @@ var app = angular.module('sgpfc');
 
 
 app.service('postService', ['$http', function ($http) {
-	this.postOffer = function(offerName, offerTinyDescription, offerDescription, offerImage, offerWithLimit, offerTimeLimit, offerPdf, onSuccess, onError  ){
+	this.postOffer = function(offerName, offerTinyDescription, offerDescription, offerSubcategoryList, offerImage, offerWithLimit, offerTimeLimit, offerPdf, onSuccess, onError  ){
 		var fd = new FormData();
 		fd.append('name', offerName);
 		fd.append('tinydescription', offerTinyDescription);
 		fd.append('description', offerDescription);
-		fd.append('image', offerImage);
+		fd.append('subcategories', offerSubcategoryList);
+		if (offerImage != undefined) {
+			fd.append('image', offerImage);
+		}
 		fd.append('withLimit', offerWithLimit);
 		fd.append('timeLimit', offerTimeLimit);
 		if (offerPdf != undefined) {
@@ -40,13 +43,14 @@ app.service('postService', ['$http', function ($http) {
 		.error(onError);
 	}
 	
-	this.postProject = function(projectName, projectCode, projectCareer, projectYear, projectStudent, projectLinks, projectDocumentation, projectDraft, onSuccess, onError  ){
+	this.postProject = function(projectName, projectCode, projectCareer, projectYear, projectStudent, projectSubcategoryList, projectLinks, projectDocumentation, projectDraft, onSuccess, onError  ){
 		var fd = new FormData();
 		fd.append('name', projectName);
 		fd.append('code', projectCode);
 		fd.append('career', projectCareer);
 		fd.append('year', projectYear);
 		fd.append('student', projectStudent);
+		fd.append('subcategories', projectSubcategoryList);
 		fd.append('links', projectLinks);
 		fd.append('documentation', projectDocumentation);
 		fd.append('draft', projectDraft);

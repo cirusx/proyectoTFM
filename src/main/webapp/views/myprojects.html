@@ -54,7 +54,7 @@
 				ng-repeat="project in displayMyProjectList">
  				<td>{{project.projectCode}}</td>
 				<td>{{project.projectName}}</td>
-				<td><img ng-repeat="subcategory in project.projectSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px"></img></td>
+				<td><img ng-repeat="subcategory in project.projectSubcategoryList" ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px"></img></td>
 				<td>{{project.projectTeacher.name}}</td>
 				<td>{{project.projectCareer}}</td>
 				<td>{{project.projectYear}}</td>

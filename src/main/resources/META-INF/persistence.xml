@@ -2,13 +2,13 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="proyectoTFM" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>com.esei.model.Category</class>
+		<class>com.esei.model.Offer</class>
 		<class>com.esei.model.Project</class>
-     	<class>com.esei.model.Category</class>
-     	<class>com.esei.model.Subcategory</class>
-     	<class>com.esei.model.Offer</class>
-    	<class>com.esei.model.User</class>
      	<class>com.esei.model.Student</class>
-     	<class>com.esei.model.Teacher</class>
+     	<class>com.esei.model.Subcategory</class>
+    	<class>com.esei.model.Teacher</class>
+    	<class>com.esei.model.User</class>
      	
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test"/>

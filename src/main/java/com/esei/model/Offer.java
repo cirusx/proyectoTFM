@@ -82,6 +82,9 @@ public class Offer implements Serializable{
 	@Transient
 	private String contentMime;
 	
+	@Transient
+	private String pdfContentMime;
+	
 	@Lob
 	@Column(length=100000000)
 	private byte[]				offerPdf;
@@ -205,15 +208,36 @@ public class Offer implements Serializable{
 		if (this.contentMime!=null){
 			return this.contentMime;
 		}
-		ByteArrayInputStream bais = new ByteArrayInputStream(this.offerImage);
-		return URLConnection.guessContentTypeFromStream(bais);
-				/*"png";*/
+		if (offerImage != null) {
+			ByteArrayInputStream bais = new ByteArrayInputStream(this.offerImage);
+			return URLConnection.guessContentTypeFromStream(bais);
+		} else return "";
+				
 		
 	}
 	
 	public void setContentMime(String contentMime) {
 		this.contentMime = contentMime;
 	}
+	
+	public void setPdfContentMime(String pdfContentMime) {
+		this.pdfContentMime = pdfContentMime;
+	}
+	
+	public String getPdfContentMime() throws IOException {
+		if (this.pdfContentMime!=null){
+			return this.pdfContentMime;
+		}
+		if (offerPdf != null) {
+			ByteArrayInputStream bais = new ByteArrayInputStream(this.offerPdf);
+			return URLConnection.guessContentTypeFromStream(bais);
+		} else return "";
+		
+				
+		
+	}
+	
+	
 	
 	public void setOfferPdf(byte[] offerPdf) {
 		this.offerPdf = offerPdf;

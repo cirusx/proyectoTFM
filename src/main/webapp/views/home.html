@@ -31,7 +31,7 @@
 						</p>
 						<p class="sgpfc-card-description">{{offer.offerTinyDescription}}</p>
 						<p class="sgpfc-card-footer">
-							<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+							<img ng-repeat="subcategory in offer.offerSubcategoryList" ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px">
 						</p>
 					</div>
 				</div>
@@ -63,7 +63,7 @@
 						</p>
 						<p class="sgpfc-card-description">{{offer.offerTinyDescription}}</p>
 						<p class="sgpfc-card-footer">
-							<img ng-repeat="subcategory in offer.offerSubcategoryList" src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+							<img ng-repeat="subcategory in offer.offerSubcategoryList" ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px">
 						</p>
 					</div>
 				</div>

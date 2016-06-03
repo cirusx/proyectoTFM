@@ -1,7 +1,7 @@
 (function(){
 
-	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies', 'ngMessages', 'textAngular', 'ngSanitize']);
-	
+	var app = angular.module('sgpfc', ['smart-table', 'ngRoute', 'ngCookies', 'ngMessages', 'textAngular', 'ngSanitize', 'ngAnimate', 'ui.bootstrap']);
+//	'isteven-multi-select'
 	app.run(['$http', '$cookies', '$window', '$rootScope', function($http, $cookies, $window, $rootScope) {
 		if ($cookies.get('user')) {
 			$rootScope.logged = true;
@@ -67,7 +67,6 @@
 	}]);
 	
 	app.controller('sgpfcCtrl',['$scope', '$http', '$cookies', '$location', function($scope, $http, $cookies, $location){
-		
 	}]);
 
 })();

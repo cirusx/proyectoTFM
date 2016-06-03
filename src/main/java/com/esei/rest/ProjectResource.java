@@ -1,5 +1,6 @@
 package com.esei.rest;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -226,12 +227,21 @@ public class ProjectResource {
 		Teacher teacher = (Teacher) user;
 		Long userId = project.getProjectStudent().getUserId();
 		Student student = (Student) getStudent(userId, em);
+		List<Subcategory> subcategoryIds = project.getProjectSubcategoryList();
+		List<Subcategory> subcategories = new ArrayList<Subcategory>();
+		for (Subcategory subcategoryIdObject : subcategoryIds) {
+			Long subcategoryId = subcategoryIdObject.getSubcategoryId();
+			Subcategory subcategory = getSubcategory(subcategoryId, em);
+			subcategory.getSubcategoryProjectList().add(project);
+			subcategories.add(subcategory);
+		}
 		try {
 			em.getTransaction().begin();
 			teacher.getProjectList().add(project);
 			student.getUserProjectList().add(project);
 			project.setProjectTeacher(teacher);
 			project.setProjectStudent(student);
+			project.setProjectSubcategoryList(subcategories);
 			em.persist(project);
 			em.getTransaction().commit();
 
@@ -301,5 +311,9 @@ public class ProjectResource {
 	
 	private User getStudent(Long userId, EntityManager em) {
 		return em.find(User.class, userId);
+	}
+	
+	private Subcategory getSubcategory(Long subcategoryId, EntityManager em) {
+		return em.find(Subcategory.class, subcategoryId);
 	}
 }

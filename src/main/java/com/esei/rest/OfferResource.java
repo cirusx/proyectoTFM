@@ -1,5 +1,6 @@
 package com.esei.rest;
 
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import javax.mail.MessagingException;
@@ -255,14 +256,24 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
-		System.out.println(offer.getOfferDescription());
+		
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		User user = requireUser(authHeader, em);
 		Teacher teacher = (Teacher) user;
+		List<Subcategory> subcategoryIds = offer.getOfferSubcategoryList();
+		List<Subcategory> subcategories = new ArrayList<Subcategory>();
+		for (Subcategory subcategoryIdObject : subcategoryIds) {
+			Long subcategoryId = subcategoryIdObject.getSubcategoryId();
+			Subcategory subcategory = getSubcategory(subcategoryId, em);
+			subcategory.getSubcategoryOfferList().add(offer);
+			subcategories.add(subcategory);
+		}
+		
 		try {
 			em.getTransaction().begin();
 			teacher.getOfferList().add(offer);
 			offer.setTeacher(teacher);
+			offer.setOfferSubcategoryList(subcategories);
 			em.persist(offer);
 			em.getTransaction().commit();
 
@@ -381,6 +392,10 @@ public class OfferResource {
 
 	private static User findUser(EntityManager em, String login, String pass) {
 		return em.createQuery("SELECT u FROM User u WHERE u.email = '"+ login +"' and u.password='"+pass+"'", User.class).getSingleResult();
+	}
+	
+	private Subcategory getSubcategory(Long subcategoryId, EntityManager em) {
+		return em.find(Subcategory.class, subcategoryId);
 	}
 
 

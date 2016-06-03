@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity(name="Category")
 public class Category implements Serializable {
 	
@@ -45,8 +47,8 @@ public class Category implements Serializable {
 		this.categoryName = categoryName;
 	}
 	
-	@OneToMany
-	@JoinColumn(name="categoryId", referencedColumnName="categoryId")
+	@OneToMany(mappedBy="category")
+	@JsonIgnore
 	public List<Subcategory> getSubcategories() {
 		return subcategories;
 	}

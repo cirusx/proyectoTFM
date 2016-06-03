@@ -54,15 +54,15 @@
 			<p>
 			<span class="text">Categorias de la oferta:</span> <img
 				ng-repeat="subcategory in offer.offerSubcategoryList"
-				src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+				ng-src="data:{{offer.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px">
 			</p>
 			<p>
 			<span class="text">Contacto: <b>{{offer.teacher.email}}</b></span>
 			</p>
 			<div ng-show="offer.offerPdf != null">
-				<a target="new"
-					ng-href="http://localhost:8080/proyectoTFM/rest/offers/pdf/{{offer.offerId}}"><img
-					class="" src="./resources/img/pdf1.png"></img></a>
+				<a target="new" ng-href="http://localhost:8080/proyectoTFM/rest/offers/pdf/{{offer.offerId}}">
+					<img class="" src="./resources/img/pdf1.png"></img
+				></a>
 			</div>
 		</div>
 		<div ng-hide="offer.offerWithLimit"
@@ -76,7 +76,7 @@
 			</p>
 			<span class="text">Categorias de la oferta:</span> <img
 				ng-repeat="subcategory in offer.offerSubcategoryList"
-				src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+				ng-src="data:{{offer.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px">
 			<div ng-show="offer.offerPdf != null">
 				<a target="new"
 					ng-href="http://localhost:8080/proyectoTFM/rest/offers/pdf/{{offer.offerId}}"><img

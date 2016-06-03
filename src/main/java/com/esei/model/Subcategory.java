@@ -1,15 +1,20 @@
 package com.esei.model;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.Serializable;
-
+import java.net.URLConnection;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,19 +24,31 @@ public class Subcategory implements Serializable {
 	
 	private static final long serialVersionUID = 5222559638191674192L;
 	
-	private Long 				subcategoryId;
-	private String 				subcategoryName;
-	private String 				subcategoryIcon;
-	//private Category   			category;
-	private Long				version;
-	private List<Offer>			subcategoryOfferList;
-	private List<Project>		subcategoryProjectList;
-	
-
-	public Subcategory() {}
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long 				subcategoryId;
+	private String 				subcategoryName;
+	@Lob
+	@Column(length=100000000)
+	private byte[]				subcategoryIcon;
+
+
+	@ManyToOne			
+	private Category   			category;
+	private Long				version;
+	@ManyToMany(mappedBy="offerSubcategoryList")
+	@JsonIgnore
+	private List<Offer>			subcategoryOfferList;
+	@ManyToMany(mappedBy="projectSubcategoryList")
+	@JsonIgnore
+	private List<Project>		subcategoryProjectList;
+	
+	@Transient
+	private String contentMime;
+	
+	public Subcategory() {}
+
+	
 	public Long getSubcategoryId() {
 		return subcategoryId;
 	}
@@ -48,16 +65,22 @@ public class Subcategory implements Serializable {
 		this.subcategoryName = subcategoryName;
 	}
 	
-	public String getSubcategoryIcon() {
+	public byte[] getSubcategoryIcon() {
 		return subcategoryIcon;
 	}
 
-	public void setSubcategoryIcon(String subcategoryIcon) {
+	public void setSubcategoryIcon(byte[] subcategoryIcon) {
 		this.subcategoryIcon = subcategoryIcon;
 	}
 	
-	@ManyToMany(mappedBy="offerSubcategoryList")
-	@JsonIgnore
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
 	public List<Offer> getSubcategoryOfferList() {
 		return subcategoryOfferList;
 	}
@@ -66,8 +89,7 @@ public class Subcategory implements Serializable {
 		this.subcategoryOfferList = subcategoryOfferList;
 	}
 	
-	@ManyToMany(mappedBy="projectSubcategoryList")
-	@JsonIgnore
+	
 	public List<Project> getSubcategoryProjectList() {
 		return subcategoryProjectList;
 	}
@@ -76,6 +98,23 @@ public class Subcategory implements Serializable {
 		this.subcategoryProjectList = subcategoryProjectList;
 	}
 
+	public void setContentMime(String contentMime) {
+		this.contentMime = contentMime;
+	}
+	
+	public String getContentMime() throws IOException {
+		if (this.contentMime!=null){
+			return this.contentMime;
+		}
+		if(subcategoryIcon != null){
+			ByteArrayInputStream bais = new ByteArrayInputStream(this.subcategoryIcon);
+			return URLConnection.guessContentTypeFromStream(bais);
+		}else return "";
+		
+				
+		
+	}
+	
 	@Version
 	protected Long getVersion() {
 		return version;

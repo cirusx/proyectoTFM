@@ -2,9 +2,10 @@ package com.esei.model;
 
 import static javax.persistence.CascadeType.ALL;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.Serializable;
-
-
+import java.net.URLConnection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
-
+import javax.persistence.Transient;
 import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.*;
@@ -44,6 +45,10 @@ public class Project implements Serializable{
 	@Lob
 	@Column(length=100000000)
 	private byte[]				projectDocumentation;
+	@Transient
+	private String contentMime;
+	@Transient
+	private String draftContentMime;
 	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	@JoinColumn(name="teacherId")
 	@JsonIgnore
@@ -59,7 +64,7 @@ public class Project implements Serializable{
 	@JsonIgnore
 	private List<Subcategory>	projectSubcategoryList;
 	@Column
-    @ElementCollection(targetClass=String.class)
+	@ElementCollection
 	@JsonIgnore
 	private List<String>        projectLinks;
 	@Version
@@ -155,6 +160,38 @@ public class Project implements Serializable{
 
 	public void setProjectLinks(List<String> projectLinks) {
 		this.projectLinks = projectLinks;
+	}
+	
+	public String getContentMime() throws IOException {
+		if (this.contentMime!=null){
+			return this.contentMime;
+		}
+		if (projectDocumentation != null) {
+			ByteArrayInputStream bais = new ByteArrayInputStream(this.projectDocumentation);
+			return URLConnection.guessContentTypeFromStream(bais);
+		} else return "";
+				
+		
+	}
+	
+	public void setContentMime(String contentMime) {
+		this.contentMime = contentMime;
+	}
+	
+	public String getDraftContentMime() throws IOException {
+		if (this.draftContentMime!=null){
+			return this.contentMime;
+		}
+		if (projectDraft != null) {
+			ByteArrayInputStream bais = new ByteArrayInputStream(this.projectDraft);
+			return URLConnection.guessContentTypeFromStream(bais);
+		} else return "";
+				
+		
+	}
+	
+	public void setDraftContentMime(String draftContentMime) {
+		this.draftContentMime = draftContentMime;
 	}
 
 	protected Long getVersion() {

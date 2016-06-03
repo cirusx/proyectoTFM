@@ -2,11 +2,14 @@ package com.esei.rest;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.ws.rs.ext.Provider;
 
 import com.esei.model.Offer;
+import com.esei.model.Subcategory;
 
 
 @Provider
@@ -36,6 +39,21 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 		case "description":
 			offer.setOfferDescription(new String(bs));
 			break;
+		case "subcategories":
+			String subcategoryIds = new String(bs);
+			String[] subcategoryIdsSplit = subcategoryIds.split(",");
+			List<Subcategory> subcategories = new ArrayList<Subcategory>();  
+			for (String subcategoryIdStr : subcategoryIdsSplit) {
+				Subcategory subcategory = new Subcategory();
+				if (subcategoryIdStr.compareTo("") != 0 ) {
+					long subcategoryId = Long.valueOf(subcategoryIdStr).longValue();
+					subcategory.setSubcategoryId(subcategoryId);
+					subcategories.add(subcategory);
+				}
+				
+			}
+			offer.setOfferSubcategoryList(subcategories);
+			break;
 		case "id":
 			String offerIdStr = new String(bs);
 			Long offerId = Long.valueOf(offerIdStr);
@@ -49,7 +67,7 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 			break;
 		case "withLimit":
 			String offerWithLimitString = new String(bs);
-			if (offerWithLimitString == "0"){
+			if (offerWithLimitString.compareTo("0") == 0){
 				offer.setOfferWithLimit(false);
 			} else{
 				offer.setOfferWithLimit(true);

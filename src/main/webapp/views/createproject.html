@@ -22,8 +22,7 @@
 					</div>
 					<div class="help-block" role="alert">
 						<div ng-show="projectCreated" class="alert alert-success">Proyecto
-							creado correctamente, necesitará esperar a la activación por
-							parte del administrador</div>
+							creado correctamente.</div>
 					</div>
 
 					<div class="help-block" role="alert">
@@ -119,9 +118,10 @@
 									ng-class="{ 'has-error': createprojectform.student.$touched && createprojectform.student.$invalid }">
 									<select ng-model="project.projectStudent" name="student"
 										class="form-control selectpicker" data-live-search="true">
-										<option ng-repeat="student in students" value="{{student.userId}}">{{student.name}}</option>
+										<option ng-repeat="student in students"
+											value="{{student.userId}}">{{student.name}}</option>
 									</select>
-									
+
 								</div>
 								<div class="help-block"
 									ng-messages="createprojectform.student.$error"
@@ -134,19 +134,10 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="links" class="col-xs-3 control-label">Enlaces externos</label>
-							<div class="col-xs-9">
-								<div class="input-group col-xs-12">
-									<input id="links" type="text" class="form-control"
-										name="links" value="" aria-label="..."
-										placeholder="Enlace,Enlace,Enlace" ng-model="project.projectLinks">
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
 							<label for="inputImage" class="col-xs-3 control-label">Documentación</label>
 							<div class="col-xs-9">
-								<div class="input-group col-xs-12" ng-class="{ 'has-error':createprojectform.filedocumentation.$touched && createprojectform.filedocumentation.$invalid }">
+								<div class="input-group col-xs-12"
+									ng-class="{ 'has-error':createprojectform.filedocumentation.$touched && createprojectform.filedocumentation.$invalid }">
 
 									<input name="filedocumentation" type="file"
 										class="file sgpfc-btn-primary" placeholder="pdf"
@@ -154,7 +145,12 @@
 										ng-disabled="link != null && link.length != 0"
 										file-model="project.projectDocumentation" required>
 
-									<script type="text/javascript">$("#filedocumentation").fileinput({showUpload: false, language: 'es'});</script>
+									<script type="text/javascript">
+										$("#filedocumentation").fileinput({
+											showUpload : false,
+											language : 'es'
+										});
+									</script>
 								</div>
 								<div class="help-block"
 									ng-messages="createprojectform.filedocumentation.$error"
@@ -168,23 +164,58 @@
 						<div class="form-group">
 							<label for="inputImage" class="col-xs-3 control-label">Anteproyecto</label>
 							<div class="col-xs-9">
-								<div class="input-group col-xs-12" ng-class="{ 'has-error': createprojectform.filedraft.$touched && createprojectform.filedraft.$invalid }">
-								<input name="filedraft" type="file" placeholder="pdf"
-									class="file sgpfc-btn-primary"
-									data-allowed-file-extensions='["pdf"]' id="filedraft"
-									ng-disabled="link != null && link.length != 0"
-									file-model="project.projectDraft" required>
+								<div class="input-group col-xs-12"
+									ng-class="{ 'has-error': createprojectform.filedraft.$touched && createprojectform.filedraft.$invalid }">
+									<input name="filedraft" type="file" placeholder="pdf"
+										class="file sgpfc-btn-primary"
+										data-allowed-file-extensions='["pdf"]' id="filedraft"
+										ng-disabled="link != null && link.length != 0"
+										file-model="project.projectDraft" required>
 
-								<script type="text/javascript">$("#filedraft").fileinput({showUpload: false, language: 'es'});</script>
-							</div>
-							<div class="help-block"
-								ng-messages="createprojectform.filedraft.$error"
-								ng-if="createprojectform.filedraft.$touched" role="alert">
-								<div ng-message="required" class="alert alert-danger">Este
-									campo es Obligatorio</div>
+									<script type="text/javascript">
+										$("#filedraft").fileinput({
+											showUpload : false,
+											language : 'es'
+										});
+									</script>
+								</div>
+								<div class="help-block"
+									ng-messages="createprojectform.filedraft.$error"
+									ng-if="createprojectform.filedraft.$touched" role="alert">
+									<div ng-message="required" class="alert alert-danger">Este
+										campo es Obligatorio</div>
+								</div>
 							</div>
 						</div>
-</div>
+						<div class="form-group">
+							<label for="subcategories" class="col-xs-3 control-label">Categorías</label>
+							<div class="col-xs-9">
+								<uib-accordion close-others="oneAtATime"> <uib-accordion-group
+									heading="{{category.categoryName}}"
+									ng-repeat="category in categories">
+
+								<div class="btn-group">
+									<label id="MyProjectSubcategories" class="btn btn-primary"
+										ng-repeat="subcategory in categories[$index].subcategories"
+										ng-model="checkModel[subcategory.subcategoryId]"
+										uib-btn-checkbox>{{subcategory.subcategoryName}}</label>
+								</div>
+								</uib-accordion-group> </uib-accordion>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="links" class="col-xs-3 control-label">Enlaces
+								externos</label>
+							<div class="col-xs-9">
+								<div class="input-group col-xs-12">
+									<input id="links" type="text" class="form-control" name="links"
+										value="" aria-label="..." placeholder="Enlace,Enlace,Enlace"
+										ng-model="project.projectLinks">
+								</div>
+							</div>
+						</div>
+
 						<div class="form-group">
 							<div
 								class="sgpfc-recoverypasswordbox-button col-xs-offset-3 col-xs-9">
