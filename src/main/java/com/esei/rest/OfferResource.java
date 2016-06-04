@@ -327,20 +327,19 @@ public class OfferResource {
 	}
 	
 	@PUT
-	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response editOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
 		System.out.println(offer.getOfferDescription());
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		Teacher user = (Teacher) requireUser(authHeader, em);
-		//Teacher teacher = (Teacher) user;
+		Teacher teacher = (Teacher) requireUser(authHeader, em);
+		
 		try {
 			em.getTransaction().begin();
-			//teacher.getOfferList().add(offer);
-			//offer.setTeacher(teacher);
+			
 			
 			  
 	            Offer editOffer = em.find(Offer.class, offer.getOfferId());
+	            
 	            em.merge(editOffer);
 			
 			em.getTransaction().commit();

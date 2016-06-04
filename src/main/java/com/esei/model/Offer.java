@@ -44,7 +44,7 @@ public class Offer implements Serializable{
 	private String				offerDescription;
 	private String				offerTinyDescription;
 	private boolean             offerWithLimit;
-	private Date                offerTimeLimit;
+	private Date            offerTimeLimit;
 
 	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(

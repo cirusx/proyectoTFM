@@ -1,7 +1,5 @@
 package com.esei.model;
 
-import static javax.persistence.CascadeType.ALL;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.Serializable;

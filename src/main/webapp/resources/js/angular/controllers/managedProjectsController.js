@@ -40,7 +40,8 @@
 		$scope.deleteProject = function(projectId) {
 			$http.delete('http://localhost:8080/proyectoTFM/rest/projects/'+projectId).then(function(del) {
 				$scope.projectDelete = true;
-				$http.get('http://localhost:8080/proyectoTFM/rest/projects/').then(function(del) {
+				$http.get('http://localhost:8080/proyectoTFM/rest/projects/').then(function(projects) {
+					$scope. myManagedProjectList = projects.data;
 				}, function(err) {
 					console.error('ERR', err);
 					// err.status will contain the status code

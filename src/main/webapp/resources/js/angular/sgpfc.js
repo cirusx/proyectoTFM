@@ -12,6 +12,8 @@
 			
 	}]);
 	
+
+	
 	app.config(['$routeProvider', function($routeProvider) {
 		
 		$routeProvider.when('/offers', {
@@ -29,6 +31,9 @@
 		}).when('/projects', {
 			templateUrl: '/proyectoTFM/views/projects.html',
 			controller: 'projectsController'
+		}).when('/projects/teacher/:projectId/edit', {
+			templateUrl: '/proyectoTFM/views/editproject.html',
+			controller: 'editProjectController'
 		}).when('/login', {
 			templateUrl: '/proyectoTFM/views/login.html',
 			controller: 'authController'

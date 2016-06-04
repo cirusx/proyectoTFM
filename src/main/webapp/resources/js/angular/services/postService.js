@@ -31,10 +31,14 @@ app.service('postService', ['$http', function ($http) {
 		fd.append('name', offerName);
 		fd.append('tinydescription', offerTinyDescription);
 		fd.append('description', offerDescription);
-		fd.append('image', offerImage);
+		if (offerImage != undefined) {
+			fd.append('image', offerImage);
+		}
 		fd.append('withLimit', offerWithLimit);
 		fd.append('timeLimit', offerTimeLimit);
-		fd.append('pdf', offerPdf);
+		if (offerPdf != undefined) {
+			fd.append('pdf', offerPdf);
+		}
 		$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId, fd, {
 			transformRequest: angular.identity,
 			headers: {'Content-Type': undefined}
@@ -51,7 +55,9 @@ app.service('postService', ['$http', function ($http) {
 		fd.append('year', projectYear);
 		fd.append('student', projectStudent);
 		fd.append('subcategories', projectSubcategoryList);
-		fd.append('links', projectLinks);
+		if(projectLinks != undefined) {
+			fd.append('links', projectLinks);
+		}
 		fd.append('documentation', projectDocumentation);
 		fd.append('draft', projectDraft);
 		$http.post('http://localhost:8080/proyectoTFM/rest/projects/project', fd, {

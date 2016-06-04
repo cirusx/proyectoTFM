@@ -36,7 +36,7 @@
 					</div>
 
 					<form id="createofferform" name="createofferform"
-						class="form-horizontal" role="form" ng-submit="createOffer()"
+						class="form-horizontal" role="form" ng-submit="editOffer()"
 						novalidate>
 						<div class="form-group">
 							<label for="name" class="col-xs-3 control-label">Nombre</label>
@@ -118,8 +118,9 @@
 								ng-class="{ 'has-error': createofferform.file.$touched && createofferform.file.$invalid }">
 
 								<div class="file-preview">
-									<img ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}"
-										class="file-preview-image" style="width: auto; height: 160px;">
+									<img
+										ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}"
+										class="file-preview-image" id="editphotofile" style="width: auto; height: 120px;">
 
 								</div>
 
@@ -130,14 +131,26 @@
 									placeholder="png o jpg"
 									data-allowed-file-extensions='["jpg", "png"]' id="photofile"
 									ng-disabled="link != null && link.length != 0"
-									file-model="offer.offerImage" required>
+									file-model="offer.offerImage" ng-required>
 
 								<script type="text/javascript">
 									$("#photofile").fileinput({
 										showUpload : false,
 										language : 'es'
 									});
+									
 								</script>
+								<script>$("#photofile").on('change', function(event) {
+									
+									var link = document.getElementById('editphotofile');
+									link.style.display = 'none'; //or
+									link.style.visibility = 'hidden';
+									
+								});</script>
+								
+								<script type="text/javascript">$("#photofile").on('fileclear', function(event) {
+								    console.log("fileclear");
+								});</script>
 							</div>
 							<div class="help-block" ng-messages="createofferform.file.$error"
 								ng-if="createofferform.file.$touched" role="alert">
@@ -150,6 +163,16 @@
 								(opcional)</label>
 							<div class="col-xs-9"
 								ng-class="{ 'has-error': createofferform.filepdf.$touched && createofferform.filepdf.$invalid }">
+
+
+
+								<div id="editPdf" ng-show="offer.offerPdf != null">
+									<a target="new"
+										ng-href="http://localhost:8080/proyectoTFM/rest/offers/pdf/{{offer.offerId}}"><img
+										class="" src="./resources/img/pdf1.png"></img></a>
+								</div>
+
+
 								<input name="filepdf" type="file" class="file sgpfc-btn-primary"
 									placeholder="png o jpg" data-allowed-file-extensions='["pdf"]'
 									id="filepdf" ng-disabled="link != null && link.length != 0"
@@ -161,6 +184,13 @@
 										language : 'es'
 									});
 								</script>
+								<script>$("#filepdf").on('change', function(event) {
+									
+									var link = document.getElementById('editPdf');
+									link.style.display = 'none'; //or
+									link.style.visibility = 'hidden';
+									
+								});</script>
 							</div>
 							<div class="help-block"
 								ng-messages="createofferform.filepdf.$error"

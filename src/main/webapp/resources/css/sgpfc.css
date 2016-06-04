@@ -1,205 +1,224 @@
-.header > .navbar {
-    margin-bottom: 0px;
+.header>.navbar {
+	margin-bottom: 0px;
 }
 
 .header .col-xs-4 {
-    padding-left: 0px;
-    padding-right: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
 }
 
 .header .nav li {
-    margin-top: 10px;
+	margin-top: 10px;
 }
 
 .header img {
-    height: 60px;
+	height: 60px;
 }
 
 .sgpfc-jumbotron {
-   background-color: #0D1E23;
+	background-color: #0D1E23;
 }
 
 .sgpfc-jumbotron h1 {
-    color: #EEEEEE;
-    font-size: 50px;
-    padding: 0px;
-    margin-left: 30px;
+	color: #EEEEEE;
+	font-size: 50px;
+	padding: 0px;
+	margin-left: 30px;
 }
 
 .sgpfc-btn-primary {
 	color: #EEEEEE;
-    background-color: #2BDE73;
-    border-color: #2BDBA1;
+	background-color: #2BDE73;
+	border-color: #2BDBA1;
 }
 
 .sgpfc-btn-seeall {
 	color: #0D1E23;
-    border-color: #0D1E23;
-    margin-top: 15px;
-    font-weight: bold;
-    font-color:#0D1E23;
+	border-color: #0D1E23;
+	margin-top: 15px;
+	font-weight: bold;
+	font-color: #0D1E23;
 }
-	
+
 .sgpfc-header-links-left {
-    font-size: 16px;
-    font-weight: bold;
-    color: #0D1E23;
+	font-size: 16px;
+	font-weight: bold;
+	color: #0D1E23;
 }
 
 .sgpfc-header-left {
-    padding-right: 0px;
-    padding-left: 0px;
+	padding-right: 0px;
+	padding-left: 0px;
 }
 
 .sgpfc-header-links-right {
-    font-size: 16px;
-    font-weight: bold;
-  /*   float: right;
+	font-size: 16px;
+	font-weight: bold;
+	/*   float: right;
     width: 126px; */
-    color: #0D1E23;
+	color: #0D1E23;
 }
 
 .sgpfc-header-right {
-    padding-right: 0px;
-    padding-left: 0px;
+	padding-right: 0px;
+	padding-left: 0px;
 }
 
 .sgpfc-header-right-menu {
-    margin-left: -30px;
+	margin-left: -30px;
 	padding-right: 80px;
 }
 
 .sgpfc-createofferform-nameinput {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .sgpfc-createofferform-descriptioninput {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .sgpfc-createofferform-datelimitinput {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .sgpfc-createofferform-createofferbutton {
-    float: right;
+	float: right;
 }
 
- .st-sort-ascent:before {
-    content: '\25B2';
-  }
-
-  .st-sort-descent:before {
-    content: '\25BC';
-  }
-  
-  .sgpfc-home-recommended {
-  margin-bottom: 15px;
-  }
-  
-  .sgpfc-container-cards {
-    max-width: 1040px;
-    margin-right: auto;
-    margin-left: auto;
-    position: relative;
-  }
-  
-  .sgpfc-card-tall-big {
-    background-color: #EEEEEE;
-    border: solid 1px #D9D9DE;
-    border-radius: 6px;
-    line-height: 1.5;
-    margin-bottom: 10px;
-    position: relative;
-    font-size: 12px;
-    height: 400px;
+.st-sort-ascent:before {
+	content: '\25B2';
 }
 
-@media (min-width: 641px)
+.st-sort-descent:before {
+	content: '\25BC';
+}
+
+.sgpfc-home-recommended {
+	margin-bottom: 15px;
+}
+
+.sgpfc-container-cards {
+	max-width: 1040px;
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+}
+
 .sgpfc-card-tall-big {
-    height: 458px;
+	background-color: #EEEEEE;
+	border: solid 1px #D9D9DE;
+	border-radius: 6px;
+	line-height: 1.5;
+	margin-bottom: 10px;
+	position: relative;
+	font-size: 12px;
+	height: 400px;
+}
+
+@media ( min-width : 641px) .sgpfc-card-tall-big {
+	height
+	:
+	 
+	458
+	px
+	;
+	
+
 }
 
 .sgpfc-card-wrap {
-    clear: both;
+	clear: both;
 }
 
 .sgpfc-card-thumbnail {
-    border-radius: 6px 6px 0 0;
-    overflow: hidden;
-    position: relative;
+	border-radius: 6px 6px 0 0;
+	overflow: hidden;
+	position: relative;
 }
 
 .sgpfc-card-thumbnail-img {
-    display: block;
+	display: block;
 }
 
 .sgpfc-card-thumbnail-img img {
-    display: block;
-    height: 180px;
-    width: 100%
+	display: block;
+	height: 180px;
+	width: 100%
 }
 
 .sgpfc-card-content {
-    padding: 10px;
+	padding: 10px;
 }
 
 .sgpfc-card-title {
-    font-size: 14px;
-    font-weight: bold;
-    webkit-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    white-space: inherit;
-    overflow: hidden;
+	font-size: 14px;
+	font-weight: bold;
+	webkit-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: inherit;
+	overflow: hidden;
 }
 
 .sgpfc-card-title a {
-    color: #0D1E23;
+	color: #0D1E23;
 }
 
 .sgpfc-card-title a:hover {
-    color: #0D1E23;
-    text-decoration: none;
+	color: #0D1E23;
+	text-decoration: none;
 }
 
 .sgpfc-card-teacher {
-    margin-bottom: 10px;
-    webkit-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+	margin-bottom: 10px;
+	webkit-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .sgpfc-card-description {
-    margin-bottom: 0px;
-  /*   webkit-text-overflow: ellipsis;
+	margin-bottom: 0px;
+	/*   webkit-text-overflow: ellipsis;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden; */
 }
 
-@media (min-width: 641px)
-.project-card-footer {
-    position: absolute;
-    padding-top: 45px;
+@media ( min-width : 641px) .project-card-footer {
+	position
+	:
+	 
+	absolute
+	;
+	
+    
+	padding-top
+	:
+	 
+	45
+	px
+	;
+	
+
 }
 
 .sgpfc-card-footer {
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #EEEEEE 26%);
-    border-radius: 0 0 6px 6px;
-    bottom: 0;
-    width: 90%;
-    position: absolute;
-    padding-top: 45px;
+	background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%,
+		#EEEEEE 26%);
+	border-radius: 0 0 6px 6px;
+	bottom: 0;
+	width: 90%;
+	position: absolute;
+	padding-top: 45px;
 }
 
 .sgpfc-btn-offers-search {
 	margin-bottom: 20px;
-    margin-left: 80px;
+	margin-left: 80px;
 }
 
 .sgpfc-loginbox {
-	margin-top:50px;
+	margin-top: 50px;
 }
 
 .sgpfc-loginbox-panel {
@@ -214,27 +233,27 @@
 }
 
 .sgpfc-registerbox {
-	margin-top:50px;
+	margin-top: 50px;
 }
 
-.sgpfc-loginbox-recoverypassword-link > a {
-	float:right; 
-	font-size: 85%; 
-	position: relative; 
-	top:-10px;
+.sgpfc-loginbox-recoverypassword-link>a {
+	float: right;
+	font-size: 85%;
+	position: relative;
+	top: -10px;
 	color: white;
 }
 
-.sgpfc-loginbox-login-link > a {
-	float:right; 
-	font-size: 85%; 
-	position: relative; 
-	top:-10px;
+.sgpfc-loginbox-login-link>a {
+	float: right;
+	font-size: 85%;
+	position: relative;
+	top: -10px;
 	color: white;
 }
 
 .sgpfc-loginbox-panelbody {
-	padding-top:30px;
+	padding-top: 30px;
 	background-color: #EEEEEE;
 }
 
@@ -244,8 +263,8 @@
 
 .sgpfc-loginbox-btn-loginzone {
 	margin: 10 auto;
-	padding-right:0px;
-	padding-left:0px;
+	padding-right: 0px;
+	padding-left: 0px;
 }
 
 .sgpfc-loginbox-loginbutton {
@@ -253,9 +272,9 @@
 }
 
 .sgpfc-loginbox-registerlink {
-	border-top: 1px solid#888; 
-	padding-top:15px; 
-	font-size:85%;
+	border-top: 1px solid #888;
+	padding-top: 15px;
+	font-size: 85%;
 }
 
 .sgpfc-loginbox-registerzone {
@@ -274,88 +293,126 @@
 	margin-left: 10px;
 }
 
-  .sgpfc-container-offer {
-    max-width: 1040px;
-    margin-right: auto;
-    margin-left: auto;
-    position: relative;
-  }
-  
-  .sgpfc-container-offer-titlezone {
-   	text-align: center;
-  }
-  
-  .sgpfc-container-offer-imagezone {
-  	height: 500px;
-  }
-  
-  .sgpfc-container-offer-imagezone > img {
-  	height: 100%;
-  	width: 100%;
-  }
-  
-  .sgpfc-container-offer-applyzone {
-  	height: 500px;
-  }
-  
-  .sgpfc-container-offer-applyzone-number {
-  	font-weight: bold;
-  }
-  
-  .sgpfc-container-offer-applyzone-applybutton {
-  	margin-top: 20px;
-  	margin-bottom: 20px;
-  }
-  
-  .sgpfc-container-offer-descriptionzone {
-  	margin-top: 30px;
-  }
-  
-  .sgpfc-container-offer-teacherzone {
-  	height: 500px;
-  }
-  
-  .sgpfc-offers-offerRecommendedFilterZone > label {
-  	margin-top: 15px;
-  	font-weight: bold;
-  }
-  
-  .sgpfc-offers-offerRecommendedFilterZone {
-  	margin-top: 15px;
-  }
-  
-  .sgpfc-offers-orderFilterZone {
-  	margin-top: 23px;
-  }
-  
-  .sgpfc-projects-pdficon1 {
-  	height: 40px;
-  	margin-left: 30px;
-  }
-  
-   .sgpfc-projects-pdficon2 {
-   	height: 40px;
-  	margin-left: 10px;
-   }
-   
-   .sgpfc-footer {
-   	background-color: #0D1E23;
-   }
-   
-   .sgpfc-header-menuTeacher {
-   	width: 180px;
-   }
-   
-   .sgpfc-offer-description {
-   	margin-bottom: 100px;
-   }
-   
-   .btn-radio > input[type=radio] {
-  position       : absolute;
-  clip           : rect(0, 0, 0, 0);
-  pointer-events : none;
+.sgpfc-container-offer {
+	max-width: 1040px;
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
 }
-  
-  /* .sgpfc-card-panel {
+
+.sgpfc-container-offer-titlezone {
+	text-align: center;
+}
+
+.sgpfc-container-offer-imagezone {
+	height: 500px;
+}
+
+.sgpfc-container-offer-imagezone>img {
+	height: 100%;
+	width: 100%;
+}
+
+.sgpfc-container-offer-applyzone {
+	height: 500px;
+}
+
+.sgpfc-container-offer-applyzone-number {
+	font-weight: bold;
+}
+
+.sgpfc-container-offer-applyzone-applybutton {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.sgpfc-container-offer-descriptionzone {
+	margin-top: 30px;
+}
+
+.sgpfc-container-offer-teacherzone {
+	height: 500px;
+}
+
+.sgpfc-offers-offerRecommendedFilterZone>label {
+	margin-top: 15px;
+	font-weight: bold;
+}
+
+.sgpfc-offers-offerRecommendedFilterZone {
+	margin-top: 15px;
+}
+
+.sgpfc-offers-orderFilterZone {
+	margin-top: 23px;
+}
+
+.sgpfc-projects-pdficon1 {
+	height: 40px;
+	margin-left: 30px;
+}
+
+.sgpfc-projects-pdficon2 {
+	height: 40px;
+	margin-left: 10px;
+}
+
+.sgpfc-footer {
+	background-color: #0D1E23;
+}
+
+.sgpfc-header-menuTeacher {
+	width: 180px;
+}
+
+.sgpfc-offer-description {
+	margin-bottom: 100px;
+}
+
+.btn-radio>input[type=radio] {
+	position: absolute;
+	clip: rect(0, 0, 0, 0);
+	pointer-events: none;
+}
+
+table {
+	table-layout: fixed;
+	width: 200px;
+}
+
+th, td {
+	overflow: hidden;
+	width: 100px;
+}
+
+tr>.projectcodecolumn {
+	width: 70px;
+}
+
+tr>.projectcategoriescolumn {
+	width: 75px;
+}
+
+tr>.projectdraftcolumn {
+	width: 60px;
+}
+
+tr>.projectlinkscolumn {
+	width: 40px;
+}
+
+tr>.projecteditdeletecolumn {
+	width: 60px;
+}
+
+tr>.projectdocumentationcolumn {
+	width: 45px;
+}
+
+tr>.projectyearcolumn {
+	width: 40px;
+}
+
+/* .sgpfc-card-panel {
   	display: none;
   } */

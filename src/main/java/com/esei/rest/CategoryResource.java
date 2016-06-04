@@ -47,6 +47,29 @@ public class CategoryResource {
 	}
 	
 	@GET
+	@Path("full")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Category> getFullCategories() {
+		try{
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		List<Category> categories;
+		try{
+			em.getTransaction().begin();;
+			TypedQuery<Category> query = em.createQuery("SELECT o FROM Category o ", Category.class);
+			categories = query.getResultList();
+			System.out.println("categorias " + categories);
+			em.getTransaction().commit();
+			}finally{
+				em.close();
+			}
+		return categories;
+		}catch(Exception e){
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@GET
 	@Path("subcategories")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Subcategory> getSubcategoriesByCategory(@QueryParam("categoryId") Long categoryId) {
