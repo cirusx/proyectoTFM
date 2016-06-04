@@ -36,8 +36,7 @@
 					</div>
 
 					<form id="createofferform" name="createofferform"
-						class="form-horizontal" role="form" ng-submit="createOffer()"
-						novalidate>
+						class="form-horizontal" role="form" ng-submit="createOffer()">
 						<div class="form-group">
 							<label for="name" class="col-xs-3 control-label">Nombre</label>
 							<div class="col-xs-9">
@@ -143,7 +142,7 @@
 								<input name="filepdf" type="file" class="file sgpfc-btn-primary"
 									placeholder="png o jpg" data-allowed-file-extensions='["pdf"]'
 									id="filepdf" ng-disabled="link != null && link.length != 0"
-									file-model="offer.offerPdf">
+									file-model="offer.offerPdf" required>
 
 								<script type="text/javascript">
 									$("#filepdf").fileinput({

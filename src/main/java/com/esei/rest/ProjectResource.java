@@ -261,7 +261,7 @@ public class ProjectResource {
 	
 	@DELETE
 	@Path("/{projectId}")
-	public String deleteProject(@PathParam("projectId") int projectId) {
+	public String deleteProject(@PathParam("projectId") Long projectId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
         String out;
         try {

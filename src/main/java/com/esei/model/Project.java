@@ -20,6 +20,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.persistence.Version;
@@ -49,11 +50,13 @@ public class Project implements Serializable{
 	private String contentMime;
 	@Transient
 	private String draftContentMime;
-	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+//	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	@ManyToOne
 	@JoinColumn(name="teacherId")
 	@JsonIgnore
 	private Teacher				projectTeacher;
-	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+//	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	@ManyToOne
 	@JoinColumn(name="studentId")
 	@JsonIgnore
 	private Student				projectStudent;
