@@ -5,6 +5,7 @@
 	app.controller('myOfferController',['$scope', '$http', '$location', '$routeParams', '$cookies',
 	                                    function ($scope, $http, $location, $routeParams, $cookies) {
 
+		$scope.incorrectTeacher = false;
 		var offerId = $scope.offerId = $routeParams.offerId;
 		if (offerId != undefined) {
 			$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
@@ -53,30 +54,42 @@
 		}
 
 		$scope.closeOffer = function() {
-			$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/close').then(function(cerrar) {
-				$scope.offer.offerClose = true;
-			}, function(err) {
-				console.error('ERR', err);
-				// err.status will contain the status code
-			});
+			if($cookies.get('user') == $scope.offer.teacher.email) {
+				$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/close').then(function(cerrar) {
+					$scope.offer.offerClose = true;
+				}, function(err) {
+					console.error('ERR', err);
+					// err.status will contain the status code
+				});
+			} else {
+				$scope.incorrectTeacher = true;
+			}
 		}
 
 		$scope.openOffer = function() {
+			if($cookies.get('user') == $scope.offer.teacher.email) {
 			$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/open').then(function(open) {
 				$scope.offer.offerClose = false;
 			}, function(err) {
 				console.error('ERR', err);
 				// err.status will contain the status code
 			});
+			} else {
+				$scope.incorrectTeacher = true;
+			}
 		}
 
 		$scope.deleteOffer = function() {
+			if($cookies.get('user') == $scope.offer.teacher.email) {
 			$http.delete('http://localhost:8080/proyectoTFM/rest/offers/'+offerId).then(function(del) {
 				$scope.offerDelete = true;
 			}, function(err) {
 				console.error('ERR', err);
 				// err.status will contain the status code
 			});
+		} else {
+			$scope.incorrectTeacher = true;
+		}
 		}
 	}]);
 }());

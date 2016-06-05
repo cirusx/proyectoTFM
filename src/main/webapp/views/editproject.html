@@ -32,6 +32,10 @@
 							se puede editar el proyecto (no registrado como profesor o
 							logeado)</div>
 					</div>
+					<div class="help-block" role="alert">
+						<div ng-show="incorrectTeacher" class="alert alert-danger">No
+							se puede editar el proyecto (no eres propietario del proyecto)</div>
+					</div>
 					<form id="editprojectform" name="editprojectform"
 						class="form-horizontal" role="form" ng-submit="editProject()">
 						<div class="form-group">

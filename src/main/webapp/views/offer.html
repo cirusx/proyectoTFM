@@ -85,10 +85,12 @@
 		</div>
 		<div ng-show="registrations"
 			class="col-xs-4 sgpfc-container-offer-listregistrationszone">
-
 			<div class="help-block" role="alert">
 				<div ng-show="offerDelete" class="alert alert-success">Oferta
 					eliminada correctamente</div>
+			</div>
+			<div class="help-block" role="alert">
+				<div ng-show="incorrectTeacher" class="alert alert-danger">No eres el propieatrio de esta oferta</div>
 			</div>
 			<div ng-hide="offerDelete">
 				<a ng-href="#/offers/teacher/{{offer.offerId}}/edit"

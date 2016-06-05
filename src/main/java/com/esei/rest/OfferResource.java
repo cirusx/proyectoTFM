@@ -254,7 +254,6 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
-
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		User user = requireUser(authHeader, em);
 		Teacher teacher = (Teacher) user;
@@ -285,6 +284,7 @@ public class OfferResource {
 	@Path("offer")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response postOffer(@HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		return createOffer(authHeader, offer);
 	}
 
@@ -292,13 +292,16 @@ public class OfferResource {
 	@Path("/{offerId}")
 	public String deleteOffer(@HeaderParam("Authorization") String authHeader, @PathParam("offerId") Long offerId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		String out;
+		Teacher teacher = (Teacher) requireUser(authHeader, em);
+		String out= null;
 		try {
 			em.getTransaction().begin();
 			Offer offer = em.find(Offer.class, offerId);
+			if (teacher.getEmail() == offer.getTeacher().getEmail()){
 			em.remove(offer);
 			em.getTransaction().commit();
 			out = "Oferta eliminada correctamente";
+			}
 		}finally{
 			em.close();
 		}
@@ -308,27 +311,45 @@ public class OfferResource {
 	@PUT
 	@Path("/{offerId}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
+	public Offer editOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
 		System.out.println(offer.getOfferDescription());
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		Teacher teacher = (Teacher) requireUser(authHeader, em);
-
+		Offer editOffer;
 		try {
 			em.getTransaction().begin();	  
-			Offer editOffer = em.find(Offer.class, offer.getOfferId());
-			em.merge(editOffer);
-			em.getTransaction().commit();
-
+			editOffer = em.find(Offer.class, offer.getOfferId());
+			if (teacher.getUserId() == offer.getTeacher().getUserId()){
+				editOffer.setOfferName(offer.getOfferName());
+				editOffer.setOfferDescription(offer.getOfferDescription());
+				editOffer.setOfferTinyDescription(offer.getOfferTinyDescription());
+				editOffer.setOfferWithLimit(offer.isOfferWithLimit());
+				editOffer.setOfferTimeLimit(offer.getOfferTimeLimit());
+				editOffer.setOfferImage(offer.getOfferImage());
+				editOffer.setOfferPdf(offer.getOfferPdf());
+				List<Subcategory> subcategoryIds = offer.getOfferSubcategoryList();
+				List<Subcategory> subcategories = new ArrayList<Subcategory>();
+				for (Subcategory subcategoryIdObject : subcategoryIds) {
+					Long subcategoryId = subcategoryIdObject.getSubcategoryId();
+					Subcategory subcategory = getSubcategory(subcategoryId, em);
+					subcategory.getSubcategoryOfferList().add(editOffer);
+					subcategories.add(subcategory);
+				}
+				editOffer.setOfferSubcategoryList(subcategories);
+				/*em.merge(editOffer);*/
+				em.getTransaction().commit();
+				}
 		}finally{
 			em.close();
 		}
-		return Response.created(null).build();  
+		/*return Response.created(null).build();*/
+		return editOffer;
 	}
 
 	@PUT
 	@Path("/{offerId}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response putOffer(@HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
+	public Offer putOffer(@HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
 		return editOffer(authHeader, offer);
 	}
 
@@ -338,13 +359,16 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Offer closeOffer(@HeaderParam("Authorization") String authHeader, @PathParam("offerId") Long offerId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		Teacher teacher = (Teacher) requireUser(authHeader, em);
+		
 		Offer offer;
 		try {
 			em.getTransaction().begin();;
 			offer = em.find(Offer.class, offerId);
+			if (teacher.getEmail() == offer.getTeacher().getEmail()){
 			offer.setOfferClose(true);
 			em.getTransaction().commit();
-
+			}
 		}finally{
 			em.close();
 		}
@@ -357,13 +381,15 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Offer openOffer(@HeaderParam("Authorization") String authHeader, @PathParam("offerId") Long offerId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		Teacher teacher = (Teacher) requireUser(authHeader, em);
 		Offer offer;
 		try {
 			em.getTransaction().begin();;
 			offer = em.find(Offer.class, offerId);
-			offer.setOfferClose(false);
-			em.getTransaction().commit();
-
+			if (teacher.getEmail() == offer.getTeacher().getEmail()){
+				offer.setOfferClose(false);
+				em.getTransaction().commit();
+				}
 		}finally{
 			em.close();
 		}

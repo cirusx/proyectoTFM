@@ -59,6 +59,7 @@
 				}else{
 					$scope.limit = '0';
 				}
+				
 				$http.get('http://localhost:8080/proyectoTFM/rest/offers/users'+'?offerId='+offerId).then(function(users) {
 					offer.data.offerRegistrationList = users.data;
 					$http.get('http://localhost:8080/proyectoTFM/rest/offers/subcategories'+'?offerId='+offerId).then(function(subcategoriesSelected) {
@@ -82,10 +83,11 @@
 		})
 
 		$scope.editOffer = function() {
+			/*$scope.incorrectTeacher = false;
 			$scope.noEditOffer = false;
 			$scope.offerEdited = false;
 			$scope.noTeacher = false;
-			$scope.noTeacherOrLogged = false;
+			$scope.noTeacherOrLogged = false;*/
 			var login = false;
 			var rol = false;
 			if ($cookies.get('user')) {
@@ -98,24 +100,32 @@
 			} else {
 				$scope.noTeacherOrLogged= true;
 			}
-			if(login & rol) {
+			if($cookies.get('user') == $scope.offer.teacher.email) {
+				$scope.incorrectTeacher = false;
+			} else {
+				$scope.incorrectTeacher = true;
+			}
+			if(login & rol & !$scope.incorrectTeacher) {
 				if($scope.limit == "0") {
 					$scope.offer.offerWithLimit = $scope.limit;
 				}else {
 					$scope.offer.offerTimeLimit = $scope.limit;
 				}
-				postService.putOffer($scope.offer.offerId, $scope.offer.offerName, $scope.offer.offerTinyDescription, $scope.offer.offerDescription, $scope.offer.offerImage, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit, $scope.offer.offerPdf,
+				$scope.offer.teacher = $scope.offer.teacher.userId;
+				$scope.offer.offerDescription = $scope.htmlVariable;
+				$scope.offer.offerSubcategoryList = $scope.checkResults;
+				postService.putOffer($scope.offer.offerId, $scope.offer.offerName, $scope.offer.offerTinyDescription, $scope.offer.offerDescription, $scope.offer.offerImage, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit, $scope.offer.offerPdf, $scope.offer.teacher, $scope.offer.offerSubcategoryList,
 						function(offer){
 					$scope.offerEdited = true;
 					$scope.noEditOffer = false;
 					//$scope.posts.splice(0,0,offer);
-					delete $scope.offer;
+					/*delete $scope.offer;
 					$('#photofile').fileinput('clear');
 					$('#filepdf').fileinput('clear');
 					$scope.htmlVariable = "";
 					$scope.checkResults = [];
 					angular.element(document.querySelectorAll("#MyOfferSubcategories")).removeClass("active");		   			
-					$scope.createofferform.$setUntouched();
+					$scope.createofferform.$setUntouched();*/
 				},
 				function(){
 					$scope.noEditOffer = true;

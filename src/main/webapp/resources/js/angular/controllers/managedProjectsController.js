@@ -14,6 +14,13 @@
 					// err.status will contain the status code
 				})
 
+				$http.get('http://localhost:8080/proyectoTFM/rest/projects/teacher'+'?projectId='+project.projectId).then(function(teacher) {
+					project.projectTeacher = teacher.data
+				}, function(err) {
+					console.error('ERR', err);
+					// err.status will contain the status code
+				})
+
 				$http.get('http://localhost:8080/proyectoTFM/rest/projects/subcategories'+'?projectId='+project.projectId).then(function(subcategories) {
 					project.projectSubcategoryList = subcategories.data
 				}, function(err) {

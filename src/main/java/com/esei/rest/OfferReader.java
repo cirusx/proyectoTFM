@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.List;
 import javax.ws.rs.ext.Provider;
 import com.esei.model.Offer;
+import com.esei.model.Student;
 import com.esei.model.Subcategory;
+import com.esei.model.Teacher;
 
 @Provider
 public class OfferReader extends MultipartMessageBodyReader<Offer> {
@@ -55,6 +57,13 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 			String offerIdStr = new String(bs);
 			Long offerId = Long.valueOf(offerIdStr);
 			offer.setOfferId(offerId);
+			break;
+		case "teacher":
+			Teacher teacher = new Teacher();
+			String userIdStr = new String (bs);
+			long userId = Long.valueOf(userIdStr).longValue();
+			teacher.setUserId(userId);
+			offer.setTeacher(teacher);
 			break;
 		case "image":
 			offer.setOfferImage(bs);

@@ -236,13 +236,16 @@ public class ProjectResource {
 	@Path("/{projectId}")
 	public String deleteProject(@HeaderParam("Authorization") String authHeader, @PathParam("projectId") Long projectId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		String out;
+		Teacher teacher = (Teacher) requireUser(authHeader, em);
+		String out = null;
 		try {
 			em.getTransaction().begin();
 			Project project = em.find(Project.class, projectId);
+			if (teacher.getEmail() == project.getProjectTeacher().getEmail()){
 			em.remove(project);
 			em.getTransaction().commit();
 			out = "Proyecto eliminado correctamente";
+			}
 		}finally{
 			em.close();
 		}
@@ -259,8 +262,10 @@ public class ProjectResource {
 		try {
 			em.getTransaction().begin();	  
 			Project editProject = em.find(Project.class, project.getProjectId());
+			if (teacher.getEmail() == project.getProjectTeacher().getEmail()){
 			em.merge(editProject);
 			em.getTransaction().commit();
+			}
 
 		}finally{
 			em.close();

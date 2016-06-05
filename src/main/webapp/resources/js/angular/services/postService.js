@@ -45,7 +45,7 @@ app.service('postService', ['$http', function ($http) {
 		.error(onError);
 	}
 	
-	this.putOffer = function(offerId, offerName, offerTinyDescription, offerDescription, offerImage, offerWithLimit, offerTimeLimit, offerPdf, onSuccess, onError  ){
+	this.putOffer = function(offerId, offerName, offerTinyDescription, offerDescription, offerImage, offerWithLimit, offerTimeLimit, offerPdf, teacher, offerSubcategories, onSuccess, onError  ){
 		var fd = new FormData();
 		fd.append('id', offerId);
 		fd.append('name', offerName);
@@ -59,6 +59,8 @@ app.service('postService', ['$http', function ($http) {
 		if (offerPdf != undefined) {
 			fd.append('pdf', offerPdf);
 		}
+		fd.append('teacher', teacher);
+		fd.append('subcategories', offerSubcategories);
 		$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId, fd, {
 			transformRequest: angular.identity,
 			headers: {'Content-Type': undefined}

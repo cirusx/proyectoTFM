@@ -85,6 +85,7 @@
 		})
 
 		$scope.editProject = function() {
+			$scope.incorrectTeacher = false;
 			$scope.noEditProject = false;
 			$scope.projectEdited = false;
 			$scope.noTeacher = false;
@@ -101,7 +102,12 @@
 			} else {
 				$scope.noTeacherOrLogged= true;
 			}
-			if(login & rol) {
+			if($cookies.get('user') == $scope.offer.teacher.email) {
+				$scope.incorrectTeacher = false;
+			} else {
+				$scope.incorrectTeacher = true;
+			}
+			if(login & rol & !$scope.incorrectTeacher) {
 				$scope.project.projectSubcategoryList= $scope.checkResults;
 				postService.postProject($scope.project.projectName, $scope.project.projectCode, $scope.project.projectCareer, $scope.project.projectYear, $scope.project.projectStudent, $scope.project.projectSubcategoryList, $scope.project.projectLinks, $scope.project.projectDocumentation, $scope.project.projectDraft,
 						function(project){
