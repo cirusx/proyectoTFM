@@ -1,26 +1,19 @@
 package com.esei.model;
 
 import java.io.Serializable;
-
 import java.util.List;
-
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
 import javax.persistence.Version;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="Category")
 public class Category implements Serializable {
 	
 	private static final long serialVersionUID = -1377888962380332407L;
-	
 	
 	private Long 				categoryId;
 	private String 				categoryName;

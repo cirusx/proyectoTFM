@@ -1,9 +1,6 @@
 package com.esei.model;
 
-import static javax.persistence.CascadeType.ALL;
-
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -11,7 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
-
 import com.fasterxml.jackson.annotation.*;
 
 @Entity(name="Student")
@@ -24,13 +20,9 @@ public class Student extends User {
 	@OneToMany(mappedBy="projectStudent")
 	@JsonIgnore
 	private List<Project>	userProjectList;
-
-	
 	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy="offerRegistrationList")
 	@JsonIgnore
 	private List<Offer>		registerOfferList;
-	
-	
 	
 	public List<Project> getUserProjectList() {
 		return userProjectList;

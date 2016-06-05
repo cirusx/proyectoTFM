@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.URLConnection;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,20 +32,18 @@ public class Subcategory implements Serializable {
 	@Lob
 	@Column(length=100000000)
 	private byte[]				subcategoryIcon;
-
-
 	@ManyToOne			
 	private Category   			category;
-	private Long				version;
 	@ManyToMany(mappedBy="offerSubcategoryList", fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JsonIgnore
 	private List<Offer>			subcategoryOfferList;
 	@ManyToMany(mappedBy="projectSubcategoryList", fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JsonIgnore
 	private List<Project>		subcategoryProjectList;
-	
 	@Transient
 	private String contentMime;
+	@Version
+	private Long				version;
 	
 	public Subcategory() {}
 
@@ -111,13 +108,9 @@ public class Subcategory implements Serializable {
 		if(subcategoryIcon != null){
 			ByteArrayInputStream bais = new ByteArrayInputStream(this.subcategoryIcon);
 			return URLConnection.guessContentTypeFromStream(bais);
-		}else return "";
-		
-				
-		
+		}else return "";	
 	}
 	
-	@Version
 	protected Long getVersion() {
 		return version;
 	}

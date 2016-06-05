@@ -6,7 +6,6 @@ import java.io.Serializable;
 import java.net.URLConnection;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,18 +17,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
 import javax.persistence.Transient;
 import javax.persistence.Version;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.JoinColumn;
-
-import static javax.persistence.CascadeType.ALL;
-
-
-
 
 @Entity(name="Offer")
 public class Offer implements Serializable{
@@ -45,50 +36,38 @@ public class Offer implements Serializable{
 	private String				offerTinyDescription;
 	private boolean             offerWithLimit;
 	private Date            offerTimeLimit;
-
 	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
 	      inverseJoinColumns={@JoinColumn(name = "offerRegistrationList_userId", referencedColumnName = "userId")})
 	@JsonIgnore
 	private List<Student>		offerRegistrationList;
-
-	
 	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
 	      inverseJoinColumns={@JoinColumn(name = "offerSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
 	@JsonIgnore
 	private List<Subcategory>	offerSubcategoryList;
-	
 	@Column(nullable=false, columnDefinition="boolean default false")
 	private boolean				offerClose;
-	
 	@Column(nullable=false, columnDefinition="boolean default false")
 	private boolean				offerRecommended;
-
 	@Column(nullable=false, columnDefinition="boolean default false")
 	private boolean				offerHomeRecommended;
-
-	@Version
-	private Long				version; 
-	
 	@ManyToOne
 	private Teacher				teacher;
-
 	@Lob
 	@Column(length=100000000)
 	private byte[]				offerImage;
-
 	@Transient
 	private String contentMime;
-	
-	@Transient
-	private String pdfContentMime;
-	
 	@Lob
 	@Column(length=100000000)
 	private byte[]				offerPdf;
+	@Transient
+	private String pdfContentMime;
+	@Version
+	private Long				version; 
 	
 	public Offer() {}
 
@@ -232,13 +211,8 @@ public class Offer implements Serializable{
 		if (offerPdf != null) {
 			ByteArrayInputStream bais = new ByteArrayInputStream(this.offerPdf);
 			return URLConnection.guessContentTypeFromStream(bais);
-		} else return "";
-		
-				
-		
+		} else return "";	
 	}
-	
-	
 	
 	public void setOfferPdf(byte[] offerPdf) {
 		this.offerPdf = offerPdf;

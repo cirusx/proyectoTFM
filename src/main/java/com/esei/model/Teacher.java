@@ -1,11 +1,6 @@
 package com.esei.model;
 
-
-
-
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,8 +19,6 @@ public class Teacher extends User {
 	@OneToMany(mappedBy="teacher", fetch=FetchType.LAZY)
 	@JsonIgnore
 	private List<Offer>		offerList;
-
-	
 	@OneToMany(mappedBy="projectTeacher", fetch=FetchType.LAZY)
 	@JsonIgnore
 	private List<Project>  	projectList;

@@ -1,13 +1,10 @@
 package com.esei.model;
 
-import static javax.persistence.CascadeType.ALL;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.URLConnection;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -21,7 +18,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
@@ -172,9 +168,7 @@ public class Project implements Serializable{
 		if (projectDocumentation != null) {
 			ByteArrayInputStream bais = new ByteArrayInputStream(this.projectDocumentation);
 			return URLConnection.guessContentTypeFromStream(bais);
-		} else return "";
-				
-		
+		} else return "";	
 	}
 	
 	public void setContentMime(String contentMime) {
@@ -189,8 +183,6 @@ public class Project implements Serializable{
 			ByteArrayInputStream bais = new ByteArrayInputStream(this.projectDraft);
 			return URLConnection.guessContentTypeFromStream(bais);
 		} else return "";
-				
-		
 	}
 	
 	public void setDraftContentMime(String draftContentMime) {
