@@ -15,7 +15,6 @@
 					<div class="panel-title sgpfc-loginbox-title">Crear Oferta</div>
 				</div>
 				<div class="sgpfc-loginbox-panelbody panel-body">
-
 					<div class="help-block" role="alert">
 						<div ng-show="noCreateOffer" class="alert alert-danger">La
 							oferta no se pudo crear correctamente</div>
@@ -24,17 +23,14 @@
 						<div ng-show="offerCreated" class="alert alert-success">Oferta
 							creada correctamente</div>
 					</div>
-
 					<div class="help-block" role="alert">
 						<div ng-show="noTeacher" class="alert alert-danger">No
 							puedes crear una oferta ya que no eres un profesor</div>
 					</div>
-
 					<div class="help-block" role="alert">
 						<div ng-show="noTeacherOrLogged" class="alert alert-danger">No
 							se puede crear la oferta (no registrado como profesor o logeado)</div>
 					</div>
-
 					<form id="createofferform" name="createofferform"
 						class="form-horizontal" role="form" ng-submit="createOffer()">
 						<div class="form-group">
@@ -74,7 +70,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="form-group">
 							<label for="description" class="col-xs-3 control-label">Descripción</label>
 							<div class="col-xs-9">
@@ -93,14 +88,12 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="form-group">
 							<label for="subcategories" class="col-xs-3 control-label">Categorías</label>
 							<div class="col-xs-9">
 								<uib-accordion close-others="oneAtATime"> <uib-accordion-group
 									heading="{{category.categoryName}}"
 									ng-repeat="category in categories">
-
 								<div class="btn-group">
 									<label id="MyOfferSubcategories" class="btn btn-primary"
 										ng-repeat="subcategory in categories[$index].subcategories"
@@ -110,7 +103,6 @@
 								</uib-accordion-group> </uib-accordion>
 							</div>
 						</div>
-
 						<div class="form-group">
 							<label for="inputImage" class="col-xs-3 control-label">Imagen</label>
 							<div class="col-xs-9"
@@ -176,7 +168,6 @@
 									value="2">Oferta Segundo Cuatrimestre
 								</label>
 							</div>
-
 							<div class="help-block"
 								ng-messages="createofferform.options.$error"
 								ng-if="createofferform.options.$touched" role="alert">

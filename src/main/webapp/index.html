@@ -2,93 +2,119 @@
 <html ng-app="sgpfc">
 <head lang="es">
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />     
-<meta name="viewport" content="width=device-width, initial-scale=1"><title>Oferta</title> 
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oferta</title>
 <title>Sistema de Gestión de Proyectos Universitarios</title>
 
-<link href="./resources/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
-<link href="./resources/bower_components/bootstrap/dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-<link href="./resources/bower_components/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<link
+	href="./resources/bower_components/bootstrap/dist/css/bootstrap.css"
+	rel="stylesheet">
+<link
+	href="./resources/bower_components/bootstrap/dist/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet">
+<link
+	href="./resources/bower_components/bootstrap-fileinput/css/fileinput.min.css"
+	media="all" rel="stylesheet" type="text/css" />
 <link href="./resources/css/sgpfc.css" rel="stylesheet">
-<link href="./resources/bower_components/textAngular/dist/textAngular.css" rel='stylesheet' type="text/css" />
-<link href="./resources/bower_components/font-awesome/css/font-awesome.min.css" rel='stylesheet' type="text/css" />
+<link
+	href="./resources/bower_components/textAngular/dist/textAngular.css"
+	rel='stylesheet' type="text/css" />
+<link
+	href="./resources/bower_components/font-awesome/css/font-awesome.min.css"
+	rel='stylesheet' type="text/css" />
 
 <script src="./resources/bower_components/jquery/dist/jquery.min.js"></script>
 
 <script type="text/javascript">
-	function toggleStatus() {
-		if ($('#offerWithLimit').is(':checked')) {
-			$('#dt :input').removeAttr('disabled');
-			$('#dt :input').attr('required', '');
-		} else {
-			$('#dt :input').attr('disabled', true);
-			$('#dt :input').removeAttr('required');
-		}
-	}
-	
-	 function launchModal() {
+	function launchModal() {
 		$('#confirmDeleteOfferModal').appendTo("body")
 		$('#confirmDeleteProjectModal').appendTo("body")
-		/*$('#createOfferModal').appendTo("body")
-		$('#recoverPasswordModal').appendTo("body") */
-		
-	} 
-	
+	}
 </script>
 </head>
-<body ng-controller="authController" background="./resources/img/debut_light.png">
-	<div ng-controller="authController" ng-include src="'/proyectoTFM/views/header.html'"></div>
+
+<body ng-controller="authController"
+	background="./resources/img/debut_light.png">
+	<div ng-controller="authController" ng-include
+		src="'/proyectoTFM/views/header.html'"></div>
 	<div ng-include src="'/proyectoTFM/views/welcome.html'"></div>
-	
 	<div ng-view></div>
-	
-	<div ng-include src="'/proyectoTFM/views/footer.html'"></div> 
-
-	<script type="text/javascript" src="./resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/moment/min/moment.min.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/moment/locale/es.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/bootstrap/dist/js/transition.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/bootstrap/dist/js/collapse.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/bootstrap/dist/js/bootstrap-datetimepicker.min.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/angular/angular.min.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/angular-route/angular-route.min.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/angular-cookies/angular-cookies.min.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/angular-messages/angular-messages.min.js"></script>
-	
-<script src='./resources/bower_components/textAngular/dist/textAngular-rangy.min.js'></script>
-<script src='./resources/bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
-<script src='./resources/bower_components/textAngular/dist/textAngular.min.js'></script>
+	<div ng-include src="'/proyectoTFM/views/footer.html'"></div>
+	<script type="text/javascript"
+		src="./resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/moment/min/moment.min.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/moment/locale/es.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/bootstrap/dist/js/transition.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/bootstrap/dist/js/collapse.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/bootstrap/dist/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/angular/angular.min.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/angular-cookies/angular-cookies.min.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/angular-messages/angular-messages.min.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/bootstrap-fileinput/js/fileinput_locale_es.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/angular-smart-table/dist/smart-table.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/angular-animate/angular-animate.min.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+	<script type="text/javascript"
+		src="./resources/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script
+		src='./resources/bower_components/textAngular/dist/textAngular-rangy.min.js'></script>
+	<script
+		src='./resources/bower_components/textAngular/dist/textAngular-sanitize.min.js'></script>
+	<script
+		src='./resources/bower_components/textAngular/dist/textAngular.min.js'></script>
 	<script type="text/javascript" src="./resources/js/angular/sgpfc.js"></script>
-	
-	<script type="text/javascript" src="./resources/js/angular/controllers/authController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/homeController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/offerController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/editOfferController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/offersController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/createOfferController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/createProjectController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/registrationsController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/myOffersController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/myOfferController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/projectsController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/managedProjectsController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/myProjectsController.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/controllers/editProjectController.js"></script>
-	
-	<script type="text/javascript" src="./resources/js/angular/directives/filemodel.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/services/postService.js"></script>
-	<script type="text/javascript" src="./resources/js/angular/directives/stringToNumber.js"></script>
-
-	<script type="text/javascript" src="./resources/bower_components/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/bootstrap-fileinput/js/fileinput.min.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/bootstrap-fileinput/js/fileinput_locale_es.js"></script>
-	
-	<script type="text/javascript" src="./resources/bower_components/angular-smart-table/dist/smart-table.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/angular-animate/angular-animate.min.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-	<script type="text/javascript" src="./resources/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-	
-	
-	
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/authController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/homeController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/offerController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/editOfferController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/offersController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/createOfferController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/createProjectController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/registrationsController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/myOffersController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/myOfferController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/projectsController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/managedProjectsController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/myProjectsController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/controllers/editProjectController.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/services/postService.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/directives/stringToNumber.js"></script>
+	<script type="text/javascript"
+		src="./resources/js/angular/directives/filemodel.js"></script>
 </body>
 </html>

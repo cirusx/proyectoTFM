@@ -15,26 +15,22 @@
 					<div class="panel-title sgpfc-loginbox-title">Editar Oferta</div>
 				</div>
 				<div class="sgpfc-loginbox-panelbody panel-body">
-
 					<div class="help-block" role="alert">
 						<div ng-show="noCreateOffer" class="alert alert-danger">La
-							oferta no se pudo crear correctamente</div>
+							oferta no se pudo editar correctamente</div>
 					</div>
 					<div class="help-block" role="alert">
 						<div ng-show="offerCreated" class="alert alert-success">Oferta
-							creada correctamente</div>
+							editada correctamente</div>
 					</div>
-
 					<div class="help-block" role="alert">
 						<div ng-show="noTeacher" class="alert alert-danger">No
-							puedes crear una oferta ya que no eres un profesor</div>
+							puedes editar una oferta ya que no eres un profesor</div>
 					</div>
-
 					<div class="help-block" role="alert">
 						<div ng-show="noTeacherOrLogged" class="alert alert-danger">No
-							se puede crear la oferta (no registrado como profesor o logeado)</div>
+							se puede editar la oferta (no registrado como profesor o logeado)</div>
 					</div>
-
 					<form id="createofferform" name="createofferform"
 						class="form-horizontal" role="form" ng-submit="editOffer()"
 						novalidate>
@@ -75,7 +71,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="form-group">
 							<label for="description" class="col-xs-3 control-label">Descripción</label>
 							<div class="col-xs-9">
@@ -94,7 +89,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="form-group">
 							<label for="subcategories" class="col-xs-3 control-label">Categorías</label>
 							<div class="col-xs-9">
@@ -111,7 +105,6 @@
 								</uib-accordion-group> </uib-accordion>
 							</div>
 						</div>
-
 						<div class="form-group">
 							<label for="inputImage" class="col-xs-3 control-label">Imagen</label>
 							<div class="col-xs-9"
@@ -120,37 +113,37 @@
 								<div class="file-preview">
 									<img
 										ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}"
-										class="file-preview-image" id="editphotofile" style="width: auto; height: 120px;">
-
+										class="file-preview-image" id="editphotofile"
+										style="width: auto; height: 120px;">
 								</div>
-
-
-
-
 								<input name="file" type="file" class="file sgpfc-btn-primary"
 									placeholder="png o jpg"
 									data-allowed-file-extensions='["jpg", "png"]' id="photofile"
 									ng-disabled="link != null && link.length != 0"
 									file-model="offer.offerImage" ng-required>
-
 								<script type="text/javascript">
 									$("#photofile").fileinput({
 										showUpload : false,
 										language : 'es'
 									});
-									
 								</script>
-								<script>$("#photofile").on('change', function(event) {
-									
-									var link = document.getElementById('editphotofile');
-									link.style.display = 'none'; //or
-									link.style.visibility = 'hidden';
-									
-								});</script>
-								
-								<script type="text/javascript">$("#photofile").on('fileclear', function(event) {
-								    console.log("fileclear");
-								});</script>
+								<script>
+									$("#photofile")
+											.on(
+													'change',
+													function(event) {
+														var link = document
+																.getElementById('editphotofile');
+														link.style.display = 'none'; //or
+														link.style.visibility = 'hidden';
+													});
+								</script>
+								<script type="text/javascript">
+									$("#photofile").on('fileclear',
+											function(event) {
+												console.log("fileclear");
+											});
+								</script>
 							</div>
 							<div class="help-block" ng-messages="createofferform.file.$error"
 								ng-if="createofferform.file.$touched" role="alert">
@@ -163,16 +156,11 @@
 								(opcional)</label>
 							<div class="col-xs-9"
 								ng-class="{ 'has-error': createofferform.filepdf.$touched && createofferform.filepdf.$invalid }">
-
-
-
 								<div id="editPdf" ng-show="offer.offerPdf != null">
 									<a target="new"
 										ng-href="http://localhost:8080/proyectoTFM/rest/offers/pdf/{{offer.offerId}}"><img
 										class="" src="./resources/img/pdf1.png"></img></a>
 								</div>
-
-
 								<input name="filepdf" type="file" class="file sgpfc-btn-primary"
 									placeholder="png o jpg" data-allowed-file-extensions='["pdf"]'
 									id="filepdf" ng-disabled="link != null && link.length != 0"
@@ -184,13 +172,17 @@
 										language : 'es'
 									});
 								</script>
-								<script>$("#filepdf").on('change', function(event) {
-									
-									var link = document.getElementById('editPdf');
-									link.style.display = 'none'; //or
-									link.style.visibility = 'hidden';
-									
-								});</script>
+								<script>
+									$("#filepdf")
+											.on(
+													'change',
+													function(event) {
+														var link = document
+																.getElementById('editPdf');
+														link.style.display = 'none'; //or
+														link.style.visibility = 'hidden';
+													});
+								</script>
 							</div>
 							<div class="help-block"
 								ng-messages="createofferform.filepdf.$error"
@@ -217,7 +209,6 @@
 									value="2">Oferta Segundo Cuatrimestre
 								</label>
 							</div>
-
 							<div class="help-block"
 								ng-messages="createofferform.options.$error"
 								ng-if="createofferform.options.$touched" role="alert">

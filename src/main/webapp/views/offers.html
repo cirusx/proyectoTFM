@@ -27,20 +27,20 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<form class="form" role="form">
-						
-						
 							<div class="col-xs-6">
 								<label class="filter-col" style="margin-right: 0;"
 									for="pref-search">Nombre Oferta:</label> <input type="text"
 									class="sgpfc-filter-title form-control input-sm"
-									id="pref-search" ng-model="search.offerName" placeholder="Nombre">
+									id="pref-search" ng-model="search.offerName"
+									placeholder="Nombre">
 							</div>
 							<!-- form group [search] -->
 							<div class="col-xs-6">
 								<label class="filter-col" style="margin-right: 0;"
 									for="pref-search">Descripción:</label> <input type="text"
 									class="sgpfc-filter-title form-control input-sm"
-									id="pref-search" ng-model="search.offerDescription" placeholder="Descripción">
+									id="pref-search" ng-model="search.offerDescription"
+									placeholder="Descripción">
 							</div>
 							<!-- form group [search] -->
 							<div class="col-xs-6">
@@ -59,27 +59,14 @@
 									Orden</button>
 								<span class="sortorder" ng-show="predicate === 'offerId'"
 									ng-class="{reverse:reverse}"></span>
-								<!-- <label class="filter-col" style="margin-right:0;" for="pref-orderby">Orden:</label>
-                            <select id="pref-orderby" class="form-control" ng-model="search.order">
-                                <option value="true">Nuevas Primero</option>
-                                <option value="false">Antiguas primero</option>
-                            </select>         -->
+
 							</div>
 							<!-- form group [order by] -->
-							
 							<div class="col-xs-2 sgpfc-offers-offerRecommendedFilterZone">
-								<!--  <div class="checkbox" style="margin-left:10px; margin-right:10px;">
-                                <label><input type="checkbox" ng-model="search.offerRecommended"> Ofertas recomendadas</label>
-                            </div> -->
-
-								<!--  <input ng-model="search.offerRecommended" type="radio" name="offerRecommended" value="" checked> Todas las ofertas<br>
-  							<input ng-model="search.offerRecommended" type="radio" name="offerRecommended" value="true"> Ofertas recomendadas<br>
-  							<input ng-model="search.offerRecommended" type="radio" name="offerRecommended" value="false"> Otras ofertas -->
-
 								<label class="radio"> <input type="radio"
 									name="offerRecommended" id="inlineRadio1"
-									ng-model="search.offerRecommended" value=""> Todas
-									las ofertas
+									ng-model="search.offerRecommended" value=""> Todas las
+									ofertas
 								</label> <label class="radio"> <input type="radio"
 									name="offerRecommended" id="inlineRadio2"
 									ng-model="search.offerRecommended" value=true> Ofertas
@@ -89,42 +76,30 @@
 									ng-model="search.offerRecommended" value=false> Otras
 									ofertas
 								</label>
-
-								<!-- <button type="button" class="btn btn-default filter-col">
-									<span class="glyphicon glyphicon-erase" ng-click="resetOfferRecommendedFilter()"></span> Reset
-								</button> -->
 							</div>
-							<!-- <div class="form-group">
-                            <label class="filter-col" style="margin-right:0;" for="pref-perpage">Resultados por Página:</label>
-                            <select id="pref-perpage" class="form-control">
-                                <option value="8">8</option>
-                                <option selected="selected" value="16">16</option>
-                                <option value="24">24</option>
-                                <option value="32">32</option>
-                                <option value="40">40</option>
-                            </select>                                
-                        </div> form group [rows] -->
-						</form>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	</div>
 	<div class="row sgpfc-container-cards .sgpfc-card-wrap">
 		<div class="col-xs-3 img-responsive"
 			ng-repeat="offer in activeOfferList | filter:search:strict | orderBy :offerId:reverse">
 			<div class="panel panel-default sgpfc-card-tall-big sgpfc-card-panel">
 				<div
 					class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
-					<a ng-href="#/offers/{{offer.offerId}}">
-					<img ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}" class="img-responsive">
+					<a ng-href="#/offers/{{offer.offerId}}"> <img
+						ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}"
+						class="img-responsive">
 					</a>
 				</div>
 				<div class="panel-body sgpfc-card-content">
 					<div class="panel-body sgpfc-card-content">
 						<p class="sgpfc-card-title">
-							<a ng-href="#/offers/{{offer.offerId}}" class="sgpfc-card-title a">{{offer.offerName}}</a>
+							<a ng-href="#/offers/{{offer.offerId}}"
+								class="sgpfc-card-title a">{{offer.offerName}}</a>
 						</p>
 						<p class="lead sgpfc-card-teacher">
 							<a class="sgpfc-card-teacher">{{offer.offerTeacher}}</a>
@@ -133,21 +108,16 @@
 						<p class="sgpfc-card-footer">
 							<img
 								ng-repeat="subcategory in offer.offerSubcategoryList | filter:search:strict"
-								ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+								ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}"
+								width="28px" height="28px">
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12" >
-			<a class="btn sgpfc-btn-seeall col-xs-offset-5" id="load">Cargar más</a>
+		<div class="col-xs-12">
+			<a class="btn sgpfc-btn-seeall col-xs-offset-5" id="load">Cargar
+				más</a>
 		</div>
-		
-
-		<!-- 	<script type="text/javascript">$('.sgpfc-filter-title').change( function () { 
- 		    $('.panel').show();
- 			var filter = $(this).val(); // get the value of the input, which we filter on
- 		    $('.sgpfc-container-cards').find(".sgpfc-card-title:not(:contains(" + filter + "))").parent().parent().parent().css('display','none');
- 		});</script> -->
 </body>
 </html>

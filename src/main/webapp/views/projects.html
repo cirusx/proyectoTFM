@@ -2,79 +2,84 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Proyectos</title>
 </head>
 <body>
-<div class="container-fluid col-xs-offset-1 col-xs-10">
-	<table st-table="displayProjectList" st-safe-src="projectList"
-		 class="table table-striped">
-<!-- 		 st-set-filter="" -->
-		<thead>
-			<tr>
- 				<th st-sort="projectCode">Código</th>
-				<th st-sort="projectName">Nombre</th>
-				<th st-sort="projectSubcategoryList">Categorias</th>
-				<th st-sort="projectStudent.name">Autor</th>
-				<th st-sort="projectTeacher.name">Tutor</th>
-				<th st-sort="projectCareer">Titulación</th>
-				<th st-sort="projectYear">Año</th>
- 				<th st-sort="projectLinks">Enlaces</th> 
-				<th st-sort="projectDraft">Anteproyecto</th>
-				<th st-sort="projectDocumentation">Proyecto</th>
-				
-				
-			</tr>
-			<tr>
-				 <th><input st-search="projectCode"
-					placeholder="Buscar por código" class="input-sm form-control"
-					type="search" /></th> 
-				<th><input st-search="projectName"
-					placeholder="Buscar por nombre" class="input-sm form-control"
-					type="search" /></th>
-				<th></th>
-				<th><input st-search="projectStudent.name"
-					placeholder="Buscar por autor" class="input-sm form-control"
-					type="search" /></th>
-				<th><input st-search="projectTeacher.name"
-					placeholder="Buscar por profesor" class="input-sm form-control"
-					type="search" /></th>
-				<th><input st-search="projectCareer"
-					placeholder="Buscar por titulación" class="input-sm form-control"
-					type="search" /></th>
-				<th><input st-search="projectYear"
-					placeholder="Buscar por año" class="input-sm form-control"
-					type="search" /></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				
-			</tr>
-		</thead>
-		<tbody>
-			<tr
-				ng-repeat="project in displayProjectList">
- 				<td>{{project.projectCode}}</td>
-				<td>{{project.projectName}}</td>
-				<td><img ng-repeat="subcategory in project.projectSubcategoryList" ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px"><span ng-hide="true">{{subcategory.subcategoryName}}</span></img></td>
-				<td>{{project.projectStudent.name}}</td>
-				<td>{{project.projectTeacher.name}}</td>
-				<td>{{project.projectCareer}}</td>
-				<td>{{project.projectYear}}</td>
-				<td><div ng-repeat="link in project.projectLinks"><a target="new" href="{{link}}">Link</a></div></td>
-				<td><a target="new" ng-href="http://localhost:8080/proyectoTFM/rest/projects/pdf/draft/{{project.projectId}}"><img class="sgpfc-projects-pdficon1" src="./resources/img/pdf1.png"></img></a></td>
-				<td><a target="new" ng-href="http://localhost:8080/proyectoTFM/rest/projects/pdf/documentation/{{project.projectId}}"><img class="sgpfc-projects-pdficon2" src="./resources/img/pdf1.png"></img></a></td>
-			</tr>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="10" class="text-center">
-					<div st-pagination="" st-items-by-page="8" st-displayed-pages="10"></div>
-				</td>
-			</tr>
-		</tfoot>
-	</table>
+	<div class="container-fluid col-xs-offset-1 col-xs-10">
+		<table st-table="displayProjectList" st-safe-src="projectList"
+			class="table table-striped">
+			<!-- 		 st-set-filter="" -->
+			<thead>
+				<tr>
+					<th st-sort="projectCode">Código</th>
+					<th st-sort="projectName">Nombre</th>
+					<th st-sort="projectSubcategoryList">Categorias</th>
+					<th st-sort="projectStudent.name">Autor</th>
+					<th st-sort="projectTeacher.name">Tutor</th>
+					<th st-sort="projectCareer">Titulación</th>
+					<th st-sort="projectYear">Año</th>
+					<th st-sort="projectLinks">Enlaces</th>
+					<th st-sort="projectDraft">Anteproyecto</th>
+					<th st-sort="projectDocumentation">Proyecto</th>
+				</tr>
+				<tr>
+					<th><input st-search="projectCode"
+						placeholder="Buscar por código" class="input-sm form-control"
+						type="search" /></th>
+					<th><input st-search="projectName"
+						placeholder="Buscar por nombre" class="input-sm form-control"
+						type="search" /></th>
+					<th></th>
+					<th><input st-search="projectStudent.name"
+						placeholder="Buscar por autor" class="input-sm form-control"
+						type="search" /></th>
+					<th><input st-search="projectTeacher.name"
+						placeholder="Buscar por profesor" class="input-sm form-control"
+						type="search" /></th>
+					<th><input st-search="projectCareer"
+						placeholder="Buscar por titulación" class="input-sm form-control"
+						type="search" /></th>
+					<th><input st-search="projectYear"
+						placeholder="Buscar por año" class="input-sm form-control"
+						type="search" /></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="project in displayProjectList">
+					<td>{{project.projectCode}}</td>
+					<td>{{project.projectName}}</td>
+					<td><img
+						ng-repeat="subcategory in project.projectSubcategoryList"
+						ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}"
+						width="28px" height="28px"><span ng-hide="true">{{subcategory.subcategoryName}}</span></img></td>
+					<td>{{project.projectStudent.name}}</td>
+					<td>{{project.projectTeacher.name}}</td>
+					<td>{{project.projectCareer}}</td>
+					<td>{{project.projectYear}}</td>
+					<td><div ng-repeat="link in project.projectLinks">
+							<a target="new" href="{{link}}">Link</a>
+						</div></td>
+					<td><a target="new"
+						ng-href="http://localhost:8080/proyectoTFM/rest/projects/pdf/draft/{{project.projectId}}"><img
+							class="sgpfc-projects-pdficon1" src="./resources/img/pdf1.png"></img></a></td>
+					<td><a target="new"
+						ng-href="http://localhost:8080/proyectoTFM/rest/projects/pdf/documentation/{{project.projectId}}"><img
+							class="sgpfc-projects-pdficon2" src="./resources/img/pdf1.png"></img></a></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="10" class="text-center">
+						<div st-pagination="" st-items-by-page="8" st-displayed-pages="10"></div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
 	</div>
 </body>
 </html>

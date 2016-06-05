@@ -15,7 +15,6 @@
 					<div class="panel-title sgpfc-loginbox-title">Crear Proyecto</div>
 				</div>
 				<div class="sgpfc-loginbox-panelbody panel-body">
-
 					<div class="help-block" role="alert">
 						<div ng-show="noCreateProject" class="alert alert-danger">El
 							proyecto no se pudo crear correctamente</div>
@@ -24,22 +23,17 @@
 						<div ng-show="projectCreated" class="alert alert-success">Proyecto
 							creado correctamente.</div>
 					</div>
-
 					<div class="help-block" role="alert">
 						<div ng-show="noTeacher" class="alert alert-danger">No
 							puedes crear un proyecto ya que no eres un profesor</div>
 					</div>
-
 					<div class="help-block" role="alert">
 						<div ng-show="noTeacherOrLogged" class="alert alert-danger">No
 							se puede crear el proyecto (no registrado como profesor o
 							logeado)</div>
 					</div>
-
-
 					<form id="createprojectform" name="createprojectform"
 						class="form-horizontal" role="form" ng-submit="createProject()">
-
 						<div class="form-group">
 							<label for="name" class="col-xs-3 control-label">Nombre</label>
 							<div class="col-xs-9">
@@ -121,7 +115,6 @@
 										<option ng-repeat="student in students | orderBy: 'name'"
 											value="{{student.userId}}">{{student.name}}</option>
 									</select>
-
 								</div>
 								<div class="help-block"
 									ng-messages="createprojectform.student.$error"
@@ -138,13 +131,11 @@
 							<div class="col-xs-9">
 								<div class="input-group col-xs-12"
 									ng-class="{ 'has-error':createprojectform.filedocumentation.$touched && createprojectform.filedocumentation.$invalid }">
-
 									<input name="filedocumentation" type="file"
 										class="file sgpfc-btn-primary" placeholder="pdf"
 										data-allowed-file-extensions='["pdf"]' id="filedocumentation"
 										ng-disabled="link != null && link.length != 0"
 										file-model="project.projectDocumentation" required>
-
 									<script type="text/javascript">
 										$("#filedocumentation").fileinput({
 											showUpload : false,
@@ -171,7 +162,6 @@
 										data-allowed-file-extensions='["pdf"]' id="filedraft"
 										ng-disabled="link != null && link.length != 0"
 										file-model="project.projectDraft" required>
-
 									<script type="text/javascript">
 										$("#filedraft").fileinput({
 											showUpload : false,
@@ -193,7 +183,6 @@
 								<uib-accordion close-others="oneAtATime"> <uib-accordion-group
 									heading="{{category.categoryName}}"
 									ng-repeat="category in categories">
-
 								<div class="btn-group">
 									<label id="MyProjectSubcategories" class="btn btn-primary"
 										ng-repeat="subcategory in categories[$index].subcategories"
@@ -203,7 +192,6 @@
 								</uib-accordion-group> </uib-accordion>
 							</div>
 						</div>
-
 						<div class="form-group">
 							<label for="links" class="col-xs-3 control-label">Enlaces
 								externos</label>
@@ -215,7 +203,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="form-group">
 							<div
 								class="sgpfc-recoverypasswordbox-button col-xs-offset-3 col-xs-9">

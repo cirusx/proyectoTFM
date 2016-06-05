@@ -7,16 +7,6 @@
 <title>Mis Inscripciones</title>
 </head>
 <body>
-	 <!-- <script type="text/javascript"> $(function(){ 
-		$(".sgpfc-card-panel").slice(0, 4).show(); // select the first ten
-	    $("#load").click(function(e){ // click event for load more
-	        e.preventDefault();
-	        $(".sgpfc-card-panel:hidden").slice(0, 4).show(); // select next 10 hidden divs and show them
-	        if($(".sgpfc-card-panel:hidden").length == 0){ // check if any hidden divs still exist
-	            alert("No more divs"); // alert if there are none left
-	        }
-	    });});</script> -->
-
 	<div class="row sgpfc-home-recommended sgpfc-container-cards">
 		<h2 class="col-xs-6">Mis Inscripciones</h2>
 	</div>
@@ -26,14 +16,16 @@
 			<div class="panel panel-default sgpfc-card-tall-big sgpfc-card-panel">
 				<div
 					class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
-					<a ng-href="#/offers/{{offer.offerId}}">
-					<img ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}" class="img-responsive">
+					<a ng-href="#/offers/{{offer.offerId}}"> <img
+						ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}"
+						class="img-responsive">
 					</a>
 				</div>
 				<div class="panel-body sgpfc-card-content">
 					<div class="panel-body sgpfc-card-content">
 						<p class="sgpfc-card-title">
-							<a ng-href="#/offers/{{offer.offerId}}" class="sgpfc-card-title a">{{offer.offerName}}</a>
+							<a ng-href="#/offers/{{offer.offerId}}"
+								class="sgpfc-card-title a">{{offer.offerName}}</a>
 						</p>
 						<p class="lead sgpfc-card-teacher">
 							<a class="sgpfc-card-teacher">{{offer.offerTeacher}}</a>
@@ -48,8 +40,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12" >
-			<a class="btn sgpfc-btn-seeall col-xs-offset-5" id="load">Cargar más</a>
+		<div class="col-xs-12">
+			<a class="btn sgpfc-btn-seeall col-xs-offset-5" id="load">Cargar
+				más</a>
 		</div>
 </body>
 </html>

@@ -18,18 +18,17 @@
 					</div>
 				</div>
 				<div class="sgpfc-loginbox-panelbody panel-body">
-				
-				<div class="help-block" role="alert">
-								<div ng-show="emailUsed" class="alert alert-danger">Lo sentimos, pero esta intentando registrarse con un email en uso</div>
-							</div>
-							
 					<div class="help-block" role="alert">
-								<div ng-show="userCreated" class="alert alert-success">Usuario registrado correctamente, necesitará esperar a la activación de cuenta por parte del administrador</div>
-							</div>
-				
+						<div ng-show="emailUsed" class="alert alert-danger">Lo
+							sentimos, pero esta intentando registrarse con un email en uso</div>
+					</div>
+					<div class="help-block" role="alert">
+						<div ng-show="userCreated" class="alert alert-success">Usuario
+							registrado correctamente, necesitará esperar a la activación de
+							cuenta por parte del administrador</div>
+					</div>
 					<form id="registerform" name="registerform" class="form-horizontal"
 						role="form" ng-submit="register()" novalidate>
-
 						<div class="form-group">
 							<div class="col-xs-12">
 								<div class="input-group"
@@ -71,14 +70,17 @@
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12">
-								<div class="input-group" ng-class="{ 'has-error': registerform.password.$dirty && registerform.password.$invalid }">
+								<div class="input-group"
+									ng-class="{ 'has-error': registerform.password.$dirty && registerform.password.$invalid }">
 									<span class="input-group-addon"><i
 										class="glyphicon glyphicon-lock"></i></span> <input
 										id="login-password" type="password" class="form-control"
 										name="password" placeholder="Contraseña"
-										ng-model="user.password" required ng-minlength="6" ng-maxlength="20">
+										ng-model="user.password" required ng-minlength="6"
+										ng-maxlength="20">
 								</div>
-								<div class="help-block" ng-messages="registerform.password.$error"
+								<div class="help-block"
+									ng-messages="registerform.password.$error"
 									ng-if="registerform.password.$dirty" role="alert">
 									<div ng-message="required" class="alert alert-danger">Este
 										campo es Obligatorio</div>
@@ -87,24 +89,28 @@
 									<div ng-message="minlength" class="alert alert-danger">Contraseña
 										demasiado corta</div>
 								</div>
-								
+
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-xs-12">
-								<div class="input-group" ng-class="{ 'has-error': registerform.confirmpassword.$dirty && registerform.confirmpassword.$invalid }">
+								<div class="input-group"
+									ng-class="{ 'has-error': registerform.confirmpassword.$dirty && registerform.confirmpassword.$invalid }">
 									<span class="input-group-addon"><i
 										class="glyphicon glyphicon-lock"></i></span> <input
 										id="login-confirmpassword" type="password"
 										class="form-control" name="confirmpassword"
-										placeholder="Confirmar Contraseña" required ng-pattern="{{user.password}}" ng-model="confirmpassword" ng-minlength="6" ng-maxlength="20">
+										placeholder="Confirmar Contraseña" required
+										ng-pattern="{{user.password}}" ng-model="confirmpassword"
+										ng-minlength="6" ng-maxlength="20">
 								</div>
-								
-								<div class="help-block" ng-messages="registerform.confirmpassword.$error"
+								<div class="help-block"
+									ng-messages="registerform.confirmpassword.$error"
 									ng-if="registerform.confirmpassword.$dirty" role="alert">
 									<div ng-message="required" class="alert alert-danger">Este
 										campo es Obligatorio</div>
-									<div ng-message="pattern" class="alert alert-danger">Las contraseñas no coinciden</div>
+									<div ng-message="pattern" class="alert alert-danger">Las
+										contraseñas no coinciden</div>
 									<div ng-message="maxlength" class="alert alert-danger">Contraseña
 										demasiado larga</div>
 									<div ng-message="minlength" class="alert alert-danger">Contraseña
@@ -115,7 +121,8 @@
 						<div class="form-group">
 							<div class="col-xs-12">
 								<button id="btn-signup" type="submit"
-									class="btn sgpfc-btn-primary btn-block" ng-disabled="registerform.$invalid">
+									class="btn sgpfc-btn-primary btn-block"
+									ng-disabled="registerform.$invalid">
 									<i class="icon-hand-right"></i>Registrar
 								</button>
 							</div>

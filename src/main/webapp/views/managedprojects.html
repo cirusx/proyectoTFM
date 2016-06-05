@@ -2,102 +2,111 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" /> 
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Mis Proyectos Dirigidos</title>
 </head>
 <body>
-<div class="container-fluid col-xs-offset-1 col-xs-10">
-	<h2>Mis proyectos dirigidos</h2>
-	<table st-table="displayMyManagedProjectList" st-safe-src="myManagedProjectList"
-		 class="table table-striped">
-<!-- 		 st-set-filter="" -->
-		<thead>
-			<tr>
- 				<th class="projectcodecolumn" st-sort="projectCode">Código</th>
-				<th class="projectnamecolumn" st-sort="projectName">Nombre</th>
-				<th class="projectcategoriescolumn" st-sort="projectSubcategoryList">Categorias</th>
-				<th class="projectstudentcolumn" st-sort="projectStudent.name">Autor</th>
-				<th class="projectcareercolumn" st-sort="projectCareer">Titulación</th>
-				<th class="projectyearcolumn" st-sort="projectYear">Año</th>
- 				<th class="projectlinkscolumn" st-sort="projectLinks">Enlaces</th> 
-				<th class="projectdraftcolumn" st-sort="projectDraft">Anteproyecto</th>
-				<th class="projectdocumentationcolumn" st-sort="projectDocumentation">Proyecto</th>
-				<th class="projecteditdeletecolumn"></th>
-<!-- 				<th st-sort="projectDocumentation">Proyecto</th> -->
-				
-				
-			</tr>
-			<tr>
-				 <th><input st-search="projectCode"
-					placeholder="Código" class="input-sm form-control"
-					type="search" /></th> 
-				<th><input st-search="projectName"
-					placeholder="Nombre" class="input-sm form-control"
-					type="search" /></th>
-				<th></th>
-				<th><input st-search="projectStudent.name"
-					placeholder="Autor" class="input-sm form-control"
-					type="search" /></th>
-				<th><input st-search="projectCareer"
-					placeholder="Titulación" class="input-sm form-control"
-					type="search" /></th>
-				<th><input st-search="projectYear"
-					placeholder="Año" class="input-sm form-control"
-					type="search" /></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
-				
-			</tr>
-		</thead>
-		<tbody>
-			<tr
-				ng-repeat="project in displayMyManagedProjectList">
- 				<td>{{project.projectCode}}</td>
-				<td>{{project.projectName}}</td>
-				<td><img ng-repeat="subcategory in project.projectSubcategoryList" ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px"></img></td>
-				<td>{{project.projectStudent.name}}</td>
-				<td>{{project.projectCareer}}</td>
-				<td>{{project.projectYear}}</td>
-				<td><div ng-repeat="link in project.projectLinks"><a target="new" href="{{link}}">Link</a></div></td>
-				<td><a target="new" ng-href="http://localhost:8080/proyectoTFM/rest/projects/pdf/draft/{{project.projectId}}"><img class="sgpfc-projects-pdficon1" src="./resources/img/pdf1.png"></img></a></td>
-				<td><a target="new" ng-href="http://localhost:8080/proyectoTFM/rest/projects/pdf/documentation/{{project.projectId}}"><img class="sgpfc-projects-pdficon2" src="./resources/img/pdf1.png"></img></a></td>
-				<td>
-					<a ng-href="#/projects/teacher/{{project.projectId}}/edit" class="btn sgpfc-btn-primary sgpfc-container-offer-applyzone-applybutton"><i class="glyphicon glyphicon-pencil"></i></a>	
-					<button class="btn btn-danger sgpfc-container-offer-applyzone-applybutton" data-toggle="modal" data-target="#confirmDeleteProjectModal" 
-					ng-click="setProjectId(project.projectId)"><i class="glyphicon glyphicon-trash"></i></button>
-					
-				
-				
-				<div class=" modal fade" id="confirmDeleteProjectModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteProjectModalLabel">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header"><b>¿Esta seguro que desea eliminar este proyecto?</b>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="col-xs-offset-8 modal-body">
-									<button type="button" data-dismiss="modal" class="btn btn-danger"
-										id="delete" data="{{project.projectId}}" ng-click="deleteProject(projectId)">Eliminar</button>
-									<button type="button" data-dismiss="modal" class="btn btn-default">Cancelar</button>
+	<div class="container-fluid col-xs-offset-1 col-xs-10">
+		<h2>Mis proyectos dirigidos</h2>
+		<table st-table="displayMyManagedProjectList"
+			st-safe-src="myManagedProjectList" class="table table-striped">
+			<!-- 		 st-set-filter="" -->
+			<thead>
+				<tr>
+					<th class="projectcodecolumn" st-sort="projectCode">Código</th>
+					<th class="projectnamecolumn" st-sort="projectName">Nombre</th>
+					<th class="projectcategoriescolumn"
+						st-sort="projectSubcategoryList">Categorias</th>
+					<th class="projectstudentcolumn" st-sort="projectStudent.name">Autor</th>
+					<th class="projectcareercolumn" st-sort="projectCareer">Titulación</th>
+					<th class="projectyearcolumn" st-sort="projectYear">Año</th>
+					<th class="projectlinkscolumn" st-sort="projectLinks">Enlaces</th>
+					<th class="projectdraftcolumn" st-sort="projectDraft">Anteproyecto</th>
+					<th class="projectdocumentationcolumn"
+						st-sort="projectDocumentation">Proyecto</th>
+					<th class="projecteditdeletecolumn"></th>
+				</tr>
+				<tr>
+					<th><input st-search="projectCode" placeholder="Código"
+						class="input-sm form-control" type="search" /></th>
+					<th><input st-search="projectName" placeholder="Nombre"
+						class="input-sm form-control" type="search" /></th>
+					<th></th>
+					<th><input st-search="projectStudent.name" placeholder="Autor"
+						class="input-sm form-control" type="search" /></th>
+					<th><input st-search="projectCareer" placeholder="Titulación"
+						class="input-sm form-control" type="search" /></th>
+					<th><input st-search="projectYear" placeholder="Año"
+						class="input-sm form-control" type="search" /></th>
+					<th></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="project in displayMyManagedProjectList">
+					<td>{{project.projectCode}}</td>
+					<td>{{project.projectName}}</td>
+					<td><img
+						ng-repeat="subcategory in project.projectSubcategoryList"
+						ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}"
+						width="28px" height="28px"></img></td>
+					<td>{{project.projectStudent.name}}</td>
+					<td>{{project.projectCareer}}</td>
+					<td>{{project.projectYear}}</td>
+					<td><div ng-repeat="link in project.projectLinks">
+							<a target="new" href="{{link}}">Link</a>
+						</div></td>
+					<td><a target="new"
+						ng-href="http://localhost:8080/proyectoTFM/rest/projects/pdf/draft/{{project.projectId}}"><img
+							class="sgpfc-projects-pdficon1" src="./resources/img/pdf1.png"></img></a></td>
+					<td><a target="new"
+						ng-href="http://localhost:8080/proyectoTFM/rest/projects/pdf/documentation/{{project.projectId}}"><img
+							class="sgpfc-projects-pdficon2" src="./resources/img/pdf1.png"></img></a></td>
+					<td><a ng-href="#/projects/teacher/{{project.projectId}}/edit"
+						class="btn sgpfc-btn-primary sgpfc-container-offer-applyzone-applybutton"><i
+							class="glyphicon glyphicon-pencil"></i></a>
+						<button
+							class="btn btn-danger sgpfc-container-offer-applyzone-applybutton"
+							data-toggle="modal" data-target="#confirmDeleteProjectModal"
+							ng-click="setProjectId(project.projectId)">
+							<i class="glyphicon glyphicon-trash"></i>
+						</button>
+						<div class=" modal fade" id="confirmDeleteProjectModal"
+							tabindex="-1" role="dialog"
+							aria-labelledby="confirmDeleteProjectModalLabel">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<b>¿Esta seguro que desea eliminar este proyecto?</b>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="col-xs-offset-8 modal-body">
+										<button type="button" data-dismiss="modal"
+											class="btn btn-danger" id="delete"
+											data="{{project.projectId}}"
+											ng-click="deleteProject(projectId)">Eliminar</button>
+										<button type="button" data-dismiss="modal"
+											class="btn btn-default">Cancelar</button>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</td>
-			</tr>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="10" class="text-center">
-					<div st-pagination="" st-items-by-page="8" st-displayed-pages="10"></div>
-				</td>
-			</tr>
-		</tfoot>
-	</table>
+						</div></td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="10" class="text-center">
+						<div st-pagination="" st-items-by-page="8" st-displayed-pages="10"></div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
 	</div>
 </body>
 </html>

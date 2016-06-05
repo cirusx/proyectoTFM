@@ -2,68 +2,81 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />    
-<meta name="viewport" content="width=device-width, initial-scale=1"><title>Oferta</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oferta</title>
 <title>Home</title>
 </head>
 <body>
-
-<!-- ng-init="getHomeRecommendedOffers()" -->
+	<!-- ng-init="getHomeRecommendedOffers()" -->
 	<div class="row sgpfc-home-recommended sgpfc-container-cards">
 		<h2 class="col-xs-6">Ofertas Recomendadas</h2>
-<!-- 		<a class="btn sgpfc-btn-seeall col-xs-offset-4">Ver todas</a> -->
+		<!-- 		<a class="btn sgpfc-btn-seeall col-xs-offset-4">Ver todas</a> -->
 	</div>
 	<div class="row sgpfc-container-cards .sgpfc-card-wrap">
-		<div class="col-xs-4 img-responsive" ng-repeat="offer in homeRecommendedOfferList">
+		<div class="col-xs-4 img-responsive"
+			ng-repeat="offer in homeRecommendedOfferList">
 			<div class="panel panel-default sgpfc-card-tall-big">
-				<div class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
-					<a ng-href="#/offers/{{offer.offerId}}">
-						<img ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}" class="img-responsive">
+				<div
+					class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
+					<a ng-href="#/offers/{{offer.offerId}}"> <img
+						ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}"
+						class="img-responsive">
 					</a>
 				</div>
 				<div class="panel-body sgpfc-card-content">
 					<div class="panel-body sgpfc-card-content">
 						<p class="sgpfc-card-title">
-							<a ng-href="#/offers/{{offer.offerId}}" class="sgpfc-card-title a">{{offer.offerName}}</a>
+							<a ng-href="#/offers/{{offer.offerId}}"
+								class="sgpfc-card-title a">{{offer.offerName}}</a>
 						</p>
 						<p class="lead sgpfc-card-teacher">
 							<a class="sgpfc-card-teacher">{{offer.offerTeacher}}</a>
 						</p>
 						<p class="sgpfc-card-description">{{offer.offerTinyDescription}}</p>
 						<p class="sgpfc-card-footer">
-							<img ng-repeat="subcategory in offer.offerSubcategoryList" ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+							<img ng-repeat="subcategory in offer.offerSubcategoryList"
+								ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}"
+								width="28px" height="28px">
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-<!-- 	ng-init="getLastOffers()" -->
+	<!-- 	ng-init="getLastOffers()" -->
 	<div class="row sgpfc-home-recommended sgpfc-container-cards">
 		<h2 class="col-xs-6">Últimas Ofertas</h2>
-		<a class="btn sgpfc-btn-seeall col-xs-offset-4" ng-href="#/offers">Ver todas</a>
+		<a class="btn sgpfc-btn-seeall col-xs-offset-4" ng-href="#/offers">Ver
+			todas</a>
 	</div>
 	<div class="row sgpfc-container-cards .sgpfc-card-wrap">
-		<div class="col-xs-4 img-responsive" ng-repeat="offer in lastOfferList">
+		<div class="col-xs-4 img-responsive"
+			ng-repeat="offer in lastOfferList">
 			<div class="panel panel-default sgpfc-card-tall-big">
-				<div class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
-<!-- 				 ng-click="getOffer(offer.offerId)" -->
-					<a ng-href="#/offers/{{offer.offerId}}">
-						<img ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}" class="img-responsive">
+				<div
+					class="panel-thumbnail sgpfc-card-thumbnail sgpfc-card-thumbnail-img">
+					<!-- 				 ng-click="getOffer(offer.offerId)" -->
+					<a ng-href="#/offers/{{offer.offerId}}"> <img
+						ng-src="data:{{offer.contentMime}};base64,{{offer.offerImage}}"
+						class="img-responsive">
 					</a>
-					<div ng-repeat="item in offer.subitems"> {{item}}</div>
+					<div ng-repeat="item in offer.subitems">{{item}}</div>
 				</div>
 				<div class="panel-body sgpfc-card-content">
 					<div class="panel-body sgpfc-card-content">
 						<p class="sgpfc-card-title">
-							<a ng-href="#/offers/{{offer.offerId}}" class="sgpfc-card-title a">{{offer.offerName}}</a>
+							<a ng-href="#/offers/{{offer.offerId}}"
+								class="sgpfc-card-title a">{{offer.offerName}}</a>
 						</p>
 						<p class="lead sgpfc-card-teacher">
 							<a class="sgpfc-card-teacher">{{offer.offerTeacher}}</a>
 						</p>
 						<p class="sgpfc-card-description">{{offer.offerTinyDescription}}</p>
 						<p class="sgpfc-card-footer">
-							<img ng-repeat="subcategory in offer.offerSubcategoryList" ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+							<img ng-repeat="subcategory in offer.offerSubcategoryList"
+								ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}"
+								width="28px" height="28px">
 						</p>
 					</div>
 				</div>
