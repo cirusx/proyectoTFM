@@ -22,9 +22,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="Subcategory")
 public class Subcategory implements Serializable {
-	
+
 	private static final long serialVersionUID = 5222559638191674192L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long 				subcategoryId;
@@ -44,10 +44,10 @@ public class Subcategory implements Serializable {
 	private String contentMime;
 	@Version
 	private Long				version;
-	
+
 	public Subcategory() {}
 
-	
+
 	public Long getSubcategoryId() {
 		return subcategoryId;
 	}
@@ -63,7 +63,7 @@ public class Subcategory implements Serializable {
 	public void setSubcategoryName(String subcategoryName) {
 		this.subcategoryName = subcategoryName;
 	}
-	
+
 	public byte[] getSubcategoryIcon() {
 		return subcategoryIcon;
 	}
@@ -71,7 +71,7 @@ public class Subcategory implements Serializable {
 	public void setSubcategoryIcon(byte[] subcategoryIcon) {
 		this.subcategoryIcon = subcategoryIcon;
 	}
-	
+
 	public Category getCategory() {
 		return category;
 	}
@@ -79,7 +79,7 @@ public class Subcategory implements Serializable {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
+
 	public List<Offer> getSubcategoryOfferList() {
 		return subcategoryOfferList;
 	}
@@ -87,8 +87,8 @@ public class Subcategory implements Serializable {
 	public void setSubcategoryOfferList(List<Offer> subcategoryOfferList) {
 		this.subcategoryOfferList = subcategoryOfferList;
 	}
-	
-	
+
+
 	public List<Project> getSubcategoryProjectList() {
 		return subcategoryProjectList;
 	}
@@ -100,7 +100,7 @@ public class Subcategory implements Serializable {
 	public void setContentMime(String contentMime) {
 		this.contentMime = contentMime;
 	}
-	
+
 	public String getContentMime() throws IOException {
 		if (this.contentMime!=null){
 			return this.contentMime;
@@ -110,7 +110,7 @@ public class Subcategory implements Serializable {
 			return URLConnection.guessContentTypeFromStream(bais);
 		}else return "";	
 	}
-	
+
 	protected Long getVersion() {
 		return version;
 	}

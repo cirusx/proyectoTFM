@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.*;
 public class Project implements Serializable{
 
 	private static final long serialVersionUID = -542889196789595703L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long 				projectId;
@@ -46,20 +46,20 @@ public class Project implements Serializable{
 	private String contentMime;
 	@Transient
 	private String draftContentMime;
-//	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	//	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	@ManyToOne
 	@JoinColumn(name="teacherId")
 	@JsonIgnore
 	private Teacher				projectTeacher;
-//	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
+	//	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	@ManyToOne
 	@JoinColumn(name="studentId")
 	@JsonIgnore
 	private Student				projectStudent;
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
 	@JoinTable(
-	      joinColumns={@JoinColumn(name = "Project_projectId", referencedColumnName = "projectId")},
-	      inverseJoinColumns={@JoinColumn(name = "projectSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
+			joinColumns={@JoinColumn(name = "Project_projectId", referencedColumnName = "projectId")},
+			inverseJoinColumns={@JoinColumn(name = "projectSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
 	@JsonIgnore
 	private List<Subcategory>	projectSubcategoryList;
 	@Column
@@ -86,7 +86,7 @@ public class Project implements Serializable{
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
-	
+
 	public String getProjectCode() {
 		return projectCode;
 	}
@@ -102,7 +102,7 @@ public class Project implements Serializable{
 	public void setProjectCareer(String projectCareer) {
 		this.projectCareer = projectCareer;
 	}
-	
+
 	public String getProjectYear() {
 		return projectYear;
 	}
@@ -110,7 +110,7 @@ public class Project implements Serializable{
 	public void setProjectYear(String projectYear) {
 		this.projectYear = projectYear;
 	}
-	
+
 	public byte[] getProjectDraft() {
 		return projectDraft;
 	}
@@ -118,7 +118,7 @@ public class Project implements Serializable{
 	public void setProjectDraft(byte[] projectDraft) {
 		this.projectDraft = projectDraft;
 	}
-	
+
 	public byte[] getProjectDocumentation() {
 		return projectDocumentation;
 	}
@@ -126,8 +126,8 @@ public class Project implements Serializable{
 	public void setProjectDocumentation(byte[] projectDocumentation) {
 		this.projectDocumentation = projectDocumentation;
 	}
-	
-	
+
+
 	public Teacher getProjectTeacher() {
 		return projectTeacher;
 	}
@@ -135,8 +135,8 @@ public class Project implements Serializable{
 	public void setProjectTeacher(Teacher projectTeacher) {
 		this.projectTeacher = projectTeacher;
 	}
-	
-	
+
+
 	public Student getProjectStudent() {
 		return projectStudent;
 	}
@@ -144,7 +144,7 @@ public class Project implements Serializable{
 	public void setProjectStudent(Student projectStudent) {
 		this.projectStudent = projectStudent;
 	}
-	
+
 	public List<Subcategory> getProjectSubcategoryList() {
 		return projectSubcategoryList;
 	}
@@ -160,7 +160,7 @@ public class Project implements Serializable{
 	public void setProjectLinks(List<String> projectLinks) {
 		this.projectLinks = projectLinks;
 	}
-	
+
 	public String getContentMime() throws IOException {
 		if (this.contentMime!=null){
 			return this.contentMime;
@@ -170,11 +170,11 @@ public class Project implements Serializable{
 			return URLConnection.guessContentTypeFromStream(bais);
 		} else return "";	
 	}
-	
+
 	public void setContentMime(String contentMime) {
 		this.contentMime = contentMime;
 	}
-	
+
 	public String getDraftContentMime() throws IOException {
 		if (this.draftContentMime!=null){
 			return this.contentMime;
@@ -184,7 +184,7 @@ public class Project implements Serializable{
 			return URLConnection.guessContentTypeFromStream(bais);
 		} else return "";
 	}
-	
+
 	public void setDraftContentMime(String draftContentMime) {
 		this.draftContentMime = draftContentMime;
 	}

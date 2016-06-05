@@ -3,7 +3,6 @@ package com.esei.rest;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
-
 import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -21,7 +20,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-
+import com.esei.model.Offer;
 import com.esei.model.Project;
 import com.esei.model.Student;
 import com.esei.model.Subcategory;
@@ -30,56 +29,55 @@ import com.esei.model.User;
 
 @Path("projects")
 public class ProjectResource {
-	
-	
+
 	@Path("/pdf/draft/{projectId}")
 	@GET
 	public Response getDraftPDF(@PathParam("projectId") Long projectId) throws Exception {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		Project project= em.find(Project.class, projectId);
-	    
-	    return Response
-	            .ok()
-	            .type("application/pdf")
-	            .entity(project.getProjectDraft()) // Assumes document is a byte array in the domain object.
-	            .build();
+
+		return Response
+				.ok()
+				.type("application/pdf")
+				.entity(project.getProjectDraft()) // Assumes document is a byte array in the domain object.
+				.build();
 	}
-	
+
 	@Path("/pdf/documentation/{projectId}")
 	@GET
 	public Response getDocumentationPDF(@PathParam("projectId") Long projectId) throws Exception {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		Project project= em.find(Project.class, projectId);
-	    
-	    return Response
-	            .ok()
-	            .type("application/pdf")
-	            .entity(project.getProjectDocumentation()) // Assumes document is a byte array in the domain object.
-	            .build();
+
+		return Response
+				.ok()
+				.type("application/pdf")
+				.entity(project.getProjectDocumentation()) // Assumes document is a byte array in the domain object.
+				.build();
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Project> getProjects() {
 		try{
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		List<Project> projects;
-		try{
-			em.getTransaction().begin();;
-			TypedQuery<Project> query = em.createQuery("SELECT o FROM Project o ", Project.class);
-			projects = query.getResultList();
-			System.out.println("proyectos " + projects);
-			em.getTransaction().commit();
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<Project> projects;
+			try{
+				em.getTransaction().begin();;
+				TypedQuery<Project> query = em.createQuery("SELECT o FROM Project o ", Project.class);
+				projects = query.getResultList();
+				System.out.println("proyectos " + projects);
+				em.getTransaction().commit();
 			}finally{
 				em.close();
 			}
-		return projects;
+			return projects;
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("subcategories")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -103,7 +101,7 @@ public class ProjectResource {
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("links")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -129,7 +127,7 @@ public class ProjectResource {
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("student")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -153,7 +151,7 @@ public class ProjectResource {
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("teacher")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -177,31 +175,7 @@ public class ProjectResource {
 			throw e;
 		}
 	}
-	
-	
-	@GET
-	@Path("lastprojects")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Project> getLastProjects() {
-		try{
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		List<Project> lastProjects;
-		try{
-			em.getTransaction().begin();;
-			TypedQuery<Project> query = em.createQuery("SELECT o FROM Project o ORDER BY o.projectId DESC", Project.class);
-			lastProjects = query.setMaxResults(4).getResultList();
-			System.out.println("proyectos " + lastProjects);
-			em.getTransaction().commit();
-			}finally{
-				em.close();
-			}
-		return lastProjects;
-		}catch(Exception e){
-			e.printStackTrace();
-			throw e;
-		}
-	}
-	 
+
 	@GET
 	@Path("{projectId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -212,12 +186,12 @@ public class ProjectResource {
 			em.getTransaction().begin();;
 			project = em.find(Project.class, projectId);
 			em.getTransaction().commit();
-			}finally{
-				em.close();
-			}
+		}finally{
+			em.close();
+		}
 		return project;
 	}
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -244,55 +218,63 @@ public class ProjectResource {
 			project.setProjectSubcategoryList(subcategories);
 			em.persist(project);
 			em.getTransaction().commit();
+		}finally{
+			em.close();
+		}
+		return Response.created(null).build();  
+	}
+
+	@POST
+	@Path("project")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response postProject( @HeaderParam("Authorization") String authHeader, Project project) throws MessagingException {
+		return createProject(authHeader, project);
+
+	}
+
+	@DELETE
+	@Path("/{projectId}")
+	public String deleteProject(@HeaderParam("Authorization") String authHeader, @PathParam("projectId") Long projectId) {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		String out;
+		try {
+			em.getTransaction().begin();
+			Project project = em.find(Project.class, projectId);
+			em.remove(project);
+			em.getTransaction().commit();
+			out = "Proyecto eliminado correctamente";
+		}finally{
+			em.close();
+		}
+		return out;  
+	}
+
+	@PUT
+	@Path("/{projectId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response editProject(@HeaderParam("Authorization") String authHeader, Project project){
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		Teacher teacher = (Teacher) requireUser(authHeader, em);
+
+		try {
+			em.getTransaction().begin();	  
+			Project editProject = em.find(Project.class, project.getProjectId());
+			em.merge(editProject);
+			em.getTransaction().commit();
 
 		}finally{
 			em.close();
 		}
 		return Response.created(null).build();  
 	}
-	
-	@POST
-	@Path("project")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response postProject( @HeaderParam("Authorization") String authHeader, Project project) throws MessagingException {
-	        return createProject(authHeader, project);
 
-	}
-	
-	@DELETE
-	@Path("/{projectId}")
-	public String deleteProject(@PathParam("projectId") Long projectId) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        String out;
-        try {
-            em.getTransaction().begin();
-            Project project = em.find(Project.class, projectId);
-            em.remove(project);
-            em.getTransaction().commit();
-            out = "Proyecto eliminado correctamente";
-        }finally{
-        	em.close();
-        }
-        return out;  
-	}
-	
 	@PUT
 	@Path("/{projectId}")
-	public String updateProject(Project project) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        String out;
-        try {
-            em.getTransaction().begin();
-            Project project2 = em.find(Project.class, project.getProjectId());
-            em.merge(project2);
-            em.getTransaction().commit();
-            out = "Proyecto actualizado correctamente";
-        }finally{
-        	em.close();
-        }
-        return out;  
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response putProject(@HeaderParam("Authorization") String authHeader, Project project) throws MessagingException {
+		return editProject(authHeader, project);
 	}
-	
+
 	private User requireUser(String authHeader, EntityManager em) {
 		String authString = new String(Base64.getDecoder().decode(authHeader.replace("Basic ","").getBytes()));
 		String login = authString.split(":")[0];
@@ -308,11 +290,11 @@ public class ProjectResource {
 	private static User findUser(EntityManager em, String login, String pass) {
 		return em.createQuery("SELECT u FROM User u WHERE u.email = '"+ login +"' and u.password='"+pass+"'", User.class).getSingleResult();
 	}
-	
+
 	private User getStudent(Long userId, EntityManager em) {
 		return em.find(User.class, userId);
 	}
-	
+
 	private Subcategory getSubcategory(Long subcategoryId, EntityManager em) {
 		return em.find(Subcategory.class, subcategoryId);
 	}

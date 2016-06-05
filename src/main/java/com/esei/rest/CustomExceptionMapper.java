@@ -18,6 +18,6 @@ public class CustomExceptionMapper implements ExceptionMapper<RuntimeException> 
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).header("x-reason", exception.getMessage()).entity("Internal error").type("text/plain").build();
 		}
 	}
-	
+
 
 }

@@ -12,14 +12,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name="Category")
 public class Category implements Serializable {
-	
+
 	private static final long serialVersionUID = -1377888962380332407L;
-	
+
 	private Long 				categoryId;
 	private String 				categoryName;
 	private List<Subcategory>   subcategories;
 	private Long				version;
-	
+
 	public Category() {}
 
 	@Id
@@ -39,7 +39,7 @@ public class Category implements Serializable {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	
+
 	@OneToMany(mappedBy="category")
 	@JsonIgnore
 	public List<Subcategory> getSubcategories() {

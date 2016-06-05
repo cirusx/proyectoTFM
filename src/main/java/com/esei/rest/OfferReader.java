@@ -5,12 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.ws.rs.ext.Provider;
-
 import com.esei.model.Offer;
 import com.esei.model.Subcategory;
-
 
 @Provider
 public class OfferReader extends MultipartMessageBodyReader<Offer> {
@@ -18,7 +15,7 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 
 	static final String FIRST_QUARTER_LIMIT_DATETIME = "2020/01/19 07:00";
 	static final String SECOND_QUARTER_LIMIT_DATETIME = "2020/05/19 07:00";
-	
+
 	private Offer offer;
 
 	@Override
@@ -50,7 +47,7 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 					subcategory.setSubcategoryId(subcategoryId);
 					subcategories.add(subcategory);
 				}
-				
+
 			}
 			offer.setOfferSubcategoryList(subcategories);
 			break;
@@ -89,12 +86,12 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 					datetime = dateFormat.parse(SECOND_QUARTER_LIMIT_DATETIME);
 					offer.setOfferTimeLimit(datetime);
 				} catch (ParseException e) {
-					
+
 					e.printStackTrace();
 				}
-				}else{
-					offer.setOfferTimeLimit(null);
-				}
+			}else{
+				offer.setOfferTimeLimit(null);
+			}
 			break;  
 		}
 	}

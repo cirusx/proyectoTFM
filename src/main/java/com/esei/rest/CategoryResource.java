@@ -1,7 +1,6 @@
 package com.esei.rest;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.Consumes;
@@ -15,60 +14,35 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import com.esei.model.Category;
 import com.esei.model.Subcategory;
 
-
 @Path("categories")
 public class CategoryResource {
-	
-	
+
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Category> getCategories() {
 		try{
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		List<Category> categories;
-		try{
-			em.getTransaction().begin();;
-			TypedQuery<Category> query = em.createQuery("SELECT o FROM Category o ", Category.class);
-			categories = query.getResultList();
-			System.out.println("categorias " + categories);
-			em.getTransaction().commit();
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<Category> categories;
+			try{
+				em.getTransaction().begin();;
+				TypedQuery<Category> query = em.createQuery("SELECT o FROM Category o ", Category.class);
+				categories = query.getResultList();
+				System.out.println("categorias " + categories);
+				em.getTransaction().commit();
 			}finally{
 				em.close();
 			}
-		return categories;
+			return categories;
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
 		}
 	}
-	
-	@GET
-	@Path("full")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Category> getFullCategories() {
-		try{
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		List<Category> categories;
-		try{
-			em.getTransaction().begin();;
-			TypedQuery<Category> query = em.createQuery("SELECT o FROM Category o ", Category.class);
-			categories = query.getResultList();
-			System.out.println("categorias " + categories);
-			em.getTransaction().commit();
-			}finally{
-				em.close();
-			}
-		return categories;
-		}catch(Exception e){
-			e.printStackTrace();
-			throw e;
-		}
-	}
-	
+
 	@GET
 	@Path("subcategories")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -92,7 +66,7 @@ public class CategoryResource {
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("/{categoryId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -103,61 +77,60 @@ public class CategoryResource {
 			em.getTransaction().begin();;
 			category = em.find(Category.class, categoryId);
 			em.getTransaction().commit();
-			}finally{
-				em.close();
-			}
+		}finally{
+			em.close();
+		}
 		return category;
 	}
-	
+
 	@POST
-	@Path("create")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createCategory(Category category){
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(category);
-            em.getTransaction().commit();
-           
-        }finally{
-        	em.close();
-        }
-        return Response.created(null).build();  
-     }
-	
+		try {
+			em.getTransaction().begin();
+			em.persist(category);
+			em.getTransaction().commit();
+
+		}finally{
+			em.close();
+		}
+		return Response.created(null).build();  
+	}
+
 	@DELETE
 	@Path("/{categoryId}")
 	public String deleteCategory(@PathParam("categoryId") int categoryId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        String out;
-        try {
-            em.getTransaction().begin();
-            Category category = em.find(Category.class, categoryId);
-            em.remove(category);
-            em.getTransaction().commit();
-            out = "Oferta eliminada correctamente";
-        }finally{
-        	em.close();
-        }
-        return out;  
+		String out;
+		try {
+			em.getTransaction().begin();
+			Category category = em.find(Category.class, categoryId);
+			em.remove(category);
+			em.getTransaction().commit();
+			out = "Oferta eliminada correctamente";
+		}finally{
+			em.close();
+		}
+		return out;  
 	}
-	
+
 	@PUT
 	@Path("/{categoryId}")
 	public String updateCategory(Category category) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        String out;
-        try {
-            em.getTransaction().begin();
-            Category category2 = em.find(Category.class, category.getCategoryId());
-            em.merge(category2);
-            em.getTransaction().commit();
-            out = "Oferta actualizada correctamente";
-        }finally{
-        	em.close();
-        }
-        return out;  
+		String out;
+		try {
+			em.getTransaction().begin();
+			Category category2 = em.find(Category.class, category.getCategoryId());
+			em.merge(category2);
+			em.getTransaction().commit();
+			out = "Oferta actualizada correctamente";
+		}finally{
+			em.close();
+		}
+		return out;  
 	}
 
 }

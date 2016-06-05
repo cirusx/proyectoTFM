@@ -1,24 +1,15 @@
 package com.esei.rest;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ws.rs.ext.Provider;
-
-
 import com.esei.model.Project;
 import com.esei.model.Student;
 import com.esei.model.Subcategory;
 
-
 @Provider
 public class ProjectReader extends MultipartMessageBodyReader<Project> {
 
-
-
-	
 	private Project project;
 
 	@Override
@@ -68,7 +59,7 @@ public class ProjectReader extends MultipartMessageBodyReader<Project> {
 			String linksString = new String (bs);
 			String[] linkArray = linksString.split(",");
 			for ( String link : linkArray ) {
-                  links.add(link);
+				links.add(link);
 			}
 			project.setProjectLinks(links);
 			break;

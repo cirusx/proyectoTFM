@@ -26,7 +26,7 @@ import javax.persistence.JoinColumn;
 public class Offer implements Serializable{
 
 	private static final long serialVersionUID = -7829559240923524678L;
-	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long 				offerId;
@@ -38,14 +38,14 @@ public class Offer implements Serializable{
 	private Date            offerTimeLimit;
 	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
-	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
-	      inverseJoinColumns={@JoinColumn(name = "offerRegistrationList_userId", referencedColumnName = "userId")})
+			joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
+			inverseJoinColumns={@JoinColumn(name = "offerRegistrationList_userId", referencedColumnName = "userId")})
 	@JsonIgnore
 	private List<Student>		offerRegistrationList;
 	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
-	      joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
-	      inverseJoinColumns={@JoinColumn(name = "offerSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
+			joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
+			inverseJoinColumns={@JoinColumn(name = "offerSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
 	@JsonIgnore
 	private List<Subcategory>	offerSubcategoryList;
 	@Column(nullable=false, columnDefinition="boolean default false")
@@ -68,7 +68,7 @@ public class Offer implements Serializable{
 	private String pdfContentMime;
 	@Version
 	private Long				version; 
-	
+
 	public Offer() {}
 
 	public Long getOfferId() {
@@ -94,7 +94,7 @@ public class Offer implements Serializable{
 	public void setOfferDescription(String offerDescription) {
 		this.offerDescription = offerDescription;
 	}
-	
+
 	public String getOfferTinyDescription() {
 		return offerTinyDescription;
 	}
@@ -127,7 +127,7 @@ public class Offer implements Serializable{
 	public void setOfferRegistrationList(List<Student> offerRegistrationList) {
 		this.offerRegistrationList = offerRegistrationList;
 	}
-	
+
 	public List<Subcategory> getOfferSubcategoryList() {
 		return offerSubcategoryList;
 	}
@@ -135,7 +135,7 @@ public class Offer implements Serializable{
 	public void setOfferSubcategoryList(List<Subcategory> offerSubcategoryList) {
 		this.offerSubcategoryList = offerSubcategoryList;
 	}
-	
+
 	public boolean isOfferClose() {
 		return offerClose;
 	}
@@ -143,7 +143,7 @@ public class Offer implements Serializable{
 	public void setOfferClose(boolean offerClose) {
 		this.offerClose = offerClose;
 	}
-	
+
 	public boolean isOfferRecommended() {
 		return offerRecommended;
 	}
@@ -151,7 +151,7 @@ public class Offer implements Serializable{
 	public void setOfferRecommended(boolean offerRecommended) {
 		this.offerRecommended = offerRecommended;
 	}
-	
+
 	public boolean isOfferHomeRecommended() {
 		return offerHomeRecommended;
 	}
@@ -167,7 +167,7 @@ public class Offer implements Serializable{
 	protected void setVersion(Long version) {
 		this.version = version;
 	}
-	
+
 	public Teacher getTeacher() {
 		return teacher;
 	}
@@ -175,7 +175,7 @@ public class Offer implements Serializable{
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
-	
+
 	public void setOfferImage(byte[] offerImage) {
 		this.offerImage = offerImage;
 	}
@@ -192,18 +192,18 @@ public class Offer implements Serializable{
 			ByteArrayInputStream bais = new ByteArrayInputStream(this.offerImage);
 			return URLConnection.guessContentTypeFromStream(bais);
 		} else return "";
-				
-		
+
+
 	}
-	
+
 	public void setContentMime(String contentMime) {
 		this.contentMime = contentMime;
 	}
-	
+
 	public void setPdfContentMime(String pdfContentMime) {
 		this.pdfContentMime = pdfContentMime;
 	}
-	
+
 	public String getPdfContentMime() throws IOException {
 		if (this.pdfContentMime!=null){
 			return this.pdfContentMime;
@@ -213,7 +213,7 @@ public class Offer implements Serializable{
 			return URLConnection.guessContentTypeFromStream(bais);
 		} else return "";	
 	}
-	
+
 	public void setOfferPdf(byte[] offerPdf) {
 		this.offerPdf = offerPdf;
 	}

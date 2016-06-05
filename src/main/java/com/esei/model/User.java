@@ -32,8 +32,8 @@ public class User implements Serializable {
 	private Long				version;
 
 	public User() {}
-	
-	
+
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -49,17 +49,17 @@ public class User implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
-	
+
 	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public  String getEmail() {
 		return email;
 	}
@@ -67,7 +67,7 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public boolean isEnable() {
 		return enable;
 	}
@@ -75,12 +75,12 @@ public class User implements Serializable {
 	public void setEnable(boolean enable) {
 		this.enable = enable;
 	}
-	
+
 	public String getUserType() {
 		return this.getClass().getSimpleName();
 	}
 
-	
+
 	protected Long getVersion() {
 		return version;
 	}

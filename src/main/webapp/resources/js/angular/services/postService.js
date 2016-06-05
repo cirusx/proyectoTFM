@@ -1,7 +1,6 @@
 
 var app = angular.module('sgpfc');
 
-
 app.service('postService', ['$http', function ($http) {
 	this.postOffer = function(offerName, offerTinyDescription, offerDescription, offerSubcategoryList, offerImage, offerWithLimit, offerTimeLimit, offerPdf, onSuccess, onError  ){
 		var fd = new FormData();
@@ -18,6 +17,27 @@ app.service('postService', ['$http', function ($http) {
 			fd.append('pdf', offerPdf);
 		}
 		$http.post('http://localhost:8080/proyectoTFM/rest/offers/offer', fd, {
+			transformRequest: angular.identity,
+			headers: {'Content-Type': undefined}
+		})
+		.success(onSuccess)
+		.error(onError);
+	}
+	
+	this.postProject = function(projectName, projectCode, projectCareer, projectYear, projectStudent, projectSubcategoryList, projectLinks, projectDocumentation, projectDraft, onSuccess, onError  ){
+		var fd = new FormData();
+		fd.append('name', projectName);
+		fd.append('code', projectCode);
+		fd.append('career', projectCareer);
+		fd.append('year', projectYear);
+		fd.append('student', projectStudent);
+		fd.append('subcategories', projectSubcategoryList);
+		if(projectLinks != undefined) {
+			fd.append('links', projectLinks);
+		}
+		fd.append('documentation', projectDocumentation);
+		fd.append('draft', projectDraft);
+		$http.post('http://localhost:8080/proyectoTFM/rest/projects/project', fd, {
 			transformRequest: angular.identity,
 			headers: {'Content-Type': undefined}
 		})
@@ -47,8 +67,9 @@ app.service('postService', ['$http', function ($http) {
 		.error(onError);
 	}
 	
-	this.postProject = function(projectName, projectCode, projectCareer, projectYear, projectStudent, projectSubcategoryList, projectLinks, projectDocumentation, projectDraft, onSuccess, onError  ){
+	this.putProject = function(projectId, projectName, projectCode, projectCareer, projectYear, projectStudent, projectSubcategoryList, projectLinks, projectDocumentation, projectDraft, onSuccess, onError  ){
 		var fd = new FormData();
+		fd.append('id', projectId);
 		fd.append('name', projectName);
 		fd.append('code', projectCode);
 		fd.append('career', projectCareer);
@@ -58,13 +79,18 @@ app.service('postService', ['$http', function ($http) {
 		if(projectLinks != undefined) {
 			fd.append('links', projectLinks);
 		}
-		fd.append('documentation', projectDocumentation);
-		fd.append('draft', projectDraft);
-		$http.post('http://localhost:8080/proyectoTFM/rest/projects/project', fd, {
+		if (projectDocumentation != undefined) {
+			fd.append('documentation', projectDocumentation);
+		}
+		if (projectDraft != undefined) {
+			fd.append('draft', projectDraft);
+		}
+		$http.put('http://localhost:8080/proyectoTFM/rest/projects'+ projectId, fd, {
 			transformRequest: angular.identity,
 			headers: {'Content-Type': undefined}
 		})
 		.success(onSuccess)
 		.error(onError);
 	}
+	
 }]);

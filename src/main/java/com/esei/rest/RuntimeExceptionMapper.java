@@ -12,5 +12,4 @@ public class RuntimeExceptionMapper implements ExceptionMapper<RuntimeException>
 	public Response toResponse(RuntimeException exception) {
 		return Response.status(Status.INTERNAL_SERVER_ERROR).header("x-reason", exception.getMessage()).build();
 	}
-
 }

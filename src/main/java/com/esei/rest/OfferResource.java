@@ -19,13 +19,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import com.esei.model.Offer;
 import com.esei.model.Student;
 import com.esei.model.Subcategory;
 import com.esei.model.Teacher;
 import com.esei.model.User;
-
 
 @Path("offers")
 public class OfferResource {
@@ -36,14 +34,14 @@ public class OfferResource {
 	public Response getofferPDF(@PathParam("offerId") Long offerId) throws Exception {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		Offer offer= em.find(Offer.class, offerId);
-	    
-	    return Response
-	            .ok()
-	            .type("application/pdf")
-	            .entity(offer.getOfferPdf()) // Assumes document is a byte array in the domain object.
-	            .build();
+
+		return Response
+				.ok()
+				.type("application/pdf")
+				.entity(offer.getOfferPdf()) // Assumes document is a byte array in the domain object.
+				.build();
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getOffers() {
@@ -181,7 +179,7 @@ public class OfferResource {
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("users")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -221,7 +219,7 @@ public class OfferResource {
 		}
 		return offer;
 	}
-	
+
 	@POST
 	@Path("/{offerId}/students")
 	public Offer addStudent(@PathParam("offerId") Long offerId, @HeaderParam("Authorization") String authHeader) {
@@ -229,7 +227,7 @@ public class OfferResource {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		Offer offer;
 		User user = requireUser(authHeader, em);
-		
+
 		try{
 			em.getTransaction().begin();;
 			System.err.println(user.getClass());
@@ -251,12 +249,12 @@ public class OfferResource {
 		}
 		return offer;
 	}
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
-		
+
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		User user = requireUser(authHeader, em);
 		Teacher teacher = (Teacher) user;
@@ -268,7 +266,7 @@ public class OfferResource {
 			subcategory.getSubcategoryOfferList().add(offer);
 			subcategories.add(subcategory);
 		}
-		
+
 		try {
 			em.getTransaction().begin();
 			teacher.getOfferList().add(offer);
@@ -282,18 +280,17 @@ public class OfferResource {
 		}
 		return Response.created(null).build();  
 	}
-	
+
 	@POST
 	@Path("offer")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response postOffer( @HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
-	        return createOffer(authHeader, offer);
-
+	public Response postOffer(@HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
+		return createOffer(authHeader, offer);
 	}
 
 	@DELETE
 	@Path("/{offerId}")
-	public String deleteOffer(@PathParam("offerId") Long offerId) {
+	public String deleteOffer(@HeaderParam("Authorization") String authHeader, @PathParam("offerId") Long offerId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		String out;
 		try {
@@ -311,37 +308,15 @@ public class OfferResource {
 	@PUT
 	@Path("/{offerId}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String updateOffer(Offer offer) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		String out;
-		try {
-			em.getTransaction().begin();
-			Offer offer2 = em.find(Offer.class, offer.getOfferId());
-			em.merge(offer2);
-			em.getTransaction().commit();
-			out = "Oferta actualizada correctamente";
-		}finally{
-			em.close();
-		}
-		return out;  
-	}
-	
-	@PUT
-	@Consumes(MediaType.APPLICATION_JSON)
 	public Response editOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
 		System.out.println(offer.getOfferDescription());
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		Teacher teacher = (Teacher) requireUser(authHeader, em);
-		
+
 		try {
-			em.getTransaction().begin();
-			
-			
-			  
-	            Offer editOffer = em.find(Offer.class, offer.getOfferId());
-	            
-	            em.merge(editOffer);
-			
+			em.getTransaction().begin();	  
+			Offer editOffer = em.find(Offer.class, offer.getOfferId());
+			em.merge(editOffer);
 			em.getTransaction().commit();
 
 		}finally{
@@ -349,20 +324,19 @@ public class OfferResource {
 		}
 		return Response.created(null).build();  
 	}
-	
+
 	@PUT
 	@Path("/{offerId}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response putOffer( @HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
-	        return editOffer(authHeader, offer);
-
+	public Response putOffer(@HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
+		return editOffer(authHeader, offer);
 	}
-	
+
 	@PUT
 	@Path("/{offerId}/close")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Offer closeOffer(@PathParam("offerId") Long offerId) {
+	public Offer closeOffer(@HeaderParam("Authorization") String authHeader, @PathParam("offerId") Long offerId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		Offer offer;
 		try {
@@ -370,18 +344,18 @@ public class OfferResource {
 			offer = em.find(Offer.class, offerId);
 			offer.setOfferClose(true);
 			em.getTransaction().commit();
-			
+
 		}finally{
 			em.close();
 		}
 		return offer;  
 	}
-	
+
 	@PUT
 	@Path("/{offerId}/open")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Offer openOffer(@PathParam("offerId") Long offerId) {
+	public Offer openOffer(@HeaderParam("Authorization") String authHeader, @PathParam("offerId") Long offerId) {
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		Offer offer;
 		try {
@@ -389,13 +363,13 @@ public class OfferResource {
 			offer = em.find(Offer.class, offerId);
 			offer.setOfferClose(false);
 			em.getTransaction().commit();
-			
+
 		}finally{
 			em.close();
 		}
 		return offer;  
 	}
-	
+
 	private User requireUser(String authHeader, EntityManager em) {
 		String authString = new String(Base64.getDecoder().decode(authHeader.replace("Basic ","").getBytes()));
 		String login = authString.split(":")[0];
@@ -411,10 +385,9 @@ public class OfferResource {
 	private static User findUser(EntityManager em, String login, String pass) {
 		return em.createQuery("SELECT u FROM User u WHERE u.email = '"+ login +"' and u.password='"+pass+"'", User.class).getSingleResult();
 	}
-	
+
 	private Subcategory getSubcategory(Long subcategoryId, EntityManager em) {
 		return em.find(Subcategory.class, subcategoryId);
 	}
-
 
 }

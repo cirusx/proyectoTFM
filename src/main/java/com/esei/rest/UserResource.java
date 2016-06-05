@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -27,42 +26,37 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import com.esei.model.Offer;
 import com.esei.model.Project;
 import com.esei.model.Student;
-
 import com.esei.model.Teacher;
 import com.esei.model.User;
 
-
 @Path("users")
 public class UserResource {
-	
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getUsers() {
 		try{
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		List<User> users;
-		try{
-			em.getTransaction().begin();;
-			TypedQuery<User> query = em.createQuery("SELECT o FROM User o ", User.class);
-			users = query.getResultList();
-			System.out.println("usuarios " + users);
-			em.getTransaction().commit();
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<User> users;
+			try{
+				em.getTransaction().begin();;
+				TypedQuery<User> query = em.createQuery("SELECT o FROM User o ", User.class);
+				users = query.getResultList();
+				System.out.println("usuarios " + users);
+				em.getTransaction().commit();
 			}finally{
 				em.close();
 			}
-		//return users;
-		return new ArrayList<>();
+			return new ArrayList<>();
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("/search/{userId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -78,7 +72,7 @@ public class UserResource {
 		}
 		return user;
 	}
-	
+
 	@GET
 	@Path("teacher")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -102,7 +96,7 @@ public class UserResource {
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("/check/{email}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -125,30 +119,30 @@ public class UserResource {
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("students")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getStudents() {
 		try{
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		List<User> students;
-		try{
-			em.getTransaction().begin();;
-			TypedQuery<User> query = em.createQuery("SELECT o FROM User o INNER JOIN Student s ON o.userId = s.userId", User.class);
-			students = query.getResultList();
-			System.out.println("estudiantes " + students);
-			em.getTransaction().commit();
+			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			List<User> students;
+			try{
+				em.getTransaction().begin();;
+				TypedQuery<User> query = em.createQuery("SELECT o FROM User o INNER JOIN Student s ON o.userId = s.userId", User.class);
+				students = query.getResultList();
+				System.out.println("estudiantes " + students);
+				em.getTransaction().commit();
 			}finally{
 				em.close();
 			}
-		return students;
+			return students;
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("myregistrations")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -173,7 +167,7 @@ public class UserResource {
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("myoffers")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -198,7 +192,7 @@ public class UserResource {
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("mymanagedprojects")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -223,7 +217,7 @@ public class UserResource {
 			throw e;
 		}
 	}
-	
+
 	@GET
 	@Path("myprojects")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -248,81 +242,23 @@ public class UserResource {
 			throw e;
 		}
 	}
-	
-	@GET
-	@Path("teachers")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getTeachers() {
-		try{
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-		List<User> teachers;
-		try{
-			em.getTransaction().begin();;
-			TypedQuery<User> query = em.createQuery("SELECT o FROM User o INNER JOIN Teacher t ON o.userId = t.userId", User.class);
-			teachers = query.getResultList();
-			System.out.println("profesores " + teachers);
-			em.getTransaction().commit();
-			}finally{
-				em.close();
-			}
-		return teachers;
-		}catch(Exception e){
-			e.printStackTrace();
-			throw e;
-		}
-	}
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createUser(User user){
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            em.persist(user);
-            em.getTransaction().commit();
-           
-        }finally{
-        	em.close();
-        }
-        return Response.created(null).build();  
-     }
+		try {
+			em.getTransaction().begin();
+			em.persist(user);
+			em.getTransaction().commit();
 
-	
-	@DELETE
-	@Path("/{userId}")
-	public String deleteUser(@PathParam("userId") int userId) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        String out;
-        try {
-            em.getTransaction().begin();
-            User user = em.find(User.class, userId);
-            em.remove(user);
-            em.getTransaction().commit();
-            out = "Usuario eliminado correctamente";
-        }finally{
-        	em.close();
-        }
-        return out;  
+		}finally{
+			em.close();
+		}
+		return Response.created(null).build();  
 	}
-	
-	@PUT
-	@Path("/{userId}")
-	public String updateUser(User user) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
-        String out;
-        try {
-            em.getTransaction().begin();
-            User userModified = em.find(User.class, user.getUserId());
-            em.merge(userModified);
-            em.getTransaction().commit();
-            out = "Usuario actualizado correctamente";
-        }finally{
-        	em.close();
-        }
-        return out;  
-	}
-	
+
 	@GET
 	@Path("/recovery/{email}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -334,7 +270,7 @@ public class UserResource {
 		}
 		return user;
 	}
-	 
+
 	@GET
 	@Path("{email}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -343,7 +279,41 @@ public class UserResource {
 		User user = requireUser(authHeader, em);
 		return user;
 	}
-	
+
+	@DELETE
+	@Path("/{userId}")
+	public String deleteUser(@PathParam("userId") int userId) {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		String out;
+		try {
+			em.getTransaction().begin();
+			User user = em.find(User.class, userId);
+			em.remove(user);
+			em.getTransaction().commit();
+			out = "Usuario eliminado correctamente";
+		}finally{
+			em.close();
+		}
+		return out;  
+	}
+
+	@PUT
+	@Path("/{userId}")
+	public String updateUser(User user) {
+		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		String out;
+		try {
+			em.getTransaction().begin();
+			User userModified = em.find(User.class, user.getUserId());
+			em.merge(userModified);
+			em.getTransaction().commit();
+			out = "Usuario actualizado correctamente";
+		}finally{
+			em.close();
+		}
+		return out;  
+	}
+
 	private User requireUser(String authHeader, EntityManager em) {
 		String authString = new String(Base64.getDecoder().decode(authHeader.replace("Basic ","").getBytes()));
 		String login = authString.split(":")[0];
@@ -355,9 +325,8 @@ public class UserResource {
 			throw new SecurityException("user is not correct");
 		}
 	}
-	
+
 	private User requireUserRecovery(String email, EntityManager em) {
-		
 		try {
 			return em.createQuery("SELECT u FROM User u WHERE u.email='"+ email +"'", User.class).getSingleResult();
 		} catch(NoResultException e) {
@@ -365,15 +334,13 @@ public class UserResource {
 			throw new SecurityException("user is not correct");
 		}
 	}
-	
+
 	static Properties mailServerProperties;
 	static Session getMailSession;
 	static MimeMessage generateMailMessage;
- 
 
- 
 	private static void generateAndSendEmail(User user) throws AddressException, MessagingException {
- 
+
 		// Step1
 		System.out.println("\n 1st ===> setup Mail Server Properties..");
 		mailServerProperties = System.getProperties();
@@ -381,7 +348,7 @@ public class UserResource {
 		mailServerProperties.put("mail.smtp.auth", "true");
 		mailServerProperties.put("mail.smtp.starttls.enable", "true");
 		System.out.println("Mail Server Properties have been setup successfully..");
- 
+
 		// Step2
 		System.out.println("\n\n 2nd ===> get Mail Session..");
 		getMailSession = Session.getDefaultInstance(mailServerProperties, null);
@@ -392,19 +359,15 @@ public class UserResource {
 		String emailBody = "Recuperación de contraseña. " + "<br><br> Usuario: " + user.getEmail() + "<br>Contraseña: "+user.getPassword();
 		generateMailMessage.setContent(emailBody, "text/html");
 		System.out.println("Mail Session has been created successfully..");
- 
+
 		// Step3
 		System.out.println("\n\n 3rd ===> Get Session and Send mail");
 		Transport transport = getMailSession.getTransport("smtp");
- 
+
 		// Enter your correct gmail UserID and Password
 		// if you have 2FA enabled then provide App Specific Password
 		transport.connect("smtp.gmail.com", "sgpfc.project@gmail.com", "proyectosgpfc");
 		transport.sendMessage(generateMailMessage, generateMailMessage.getAllRecipients());
 		transport.close();
 	}
-	
-	
-
 }
-
