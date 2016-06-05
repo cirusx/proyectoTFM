@@ -4,7 +4,7 @@
 	var app= angular.module('sgpfc');
 
 	app.controller('editProjectController',['$scope', '$http', '$location', '$cookies', '$routeParams', 'postService',
-	                                      function ($scope, $http, $location, $cookies, $routeParams, postService) {
+	                                        function ($scope, $http, $location, $cookies, $routeParams, postService) {
 
 		var projectId =$routeParams.projectId;
 		$scope.noEditOffer= false;
@@ -44,20 +44,12 @@
 			console.error('ERR', err);  
 		})
 
-
-
-
-
 		$http.get('http://localhost:8080/proyectoTFM/rest/projects/'+ projectId).then(function(project) {
 			if (project.data.projectId==null) {
 				$location.path("/");
 			}else {
-				
-				/*var projectYearInt = parseInt(project.data.projectYear);*/
-				
 				$scope.project = project.data;
-				/*$scope.project.projectyear = projectYearInt;*/
-				
+
 				$http.get('http://localhost:8080/proyectoTFM/rest/projects/student'+'?projectId='+projectId).then(function(student) {
 					project.projectStudent = student.data
 				}, function(err) {
@@ -78,7 +70,7 @@
 					console.error('ERR', err);
 					// err.status will contain the status code
 				})
-				
+
 				$http.get('http://localhost:8080/proyectoTFM/rest/projects/links'+'?projectId='+projectId).then(function(links) {
 					project.projectLinks = links.data
 				}, function(err) {
@@ -92,10 +84,7 @@
 			// err.status will contain the status code
 		})
 
-
-
-$scope.editProject = function() {
-			
+		$scope.editProject = function() {
 			$scope.noEditProject = false;
 			$scope.projectEdited = false;
 			$scope.noTeacher = false;
@@ -129,8 +118,7 @@ $scope.editProject = function() {
 				function(){
 					$scope.noEditProject = true;
 					$scope.projectEdited = false; 
-				}
-				);
+				});
 			}
 		};
 	}]);

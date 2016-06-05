@@ -9,13 +9,11 @@
 			$rootScope.loggedType = rol;
 			$http.defaults.headers.common.Authorization = 'Basic '+btoa($cookies.get('user')+':'+$cookies.get('password'));	
 		}
-			
-	}]);
-	
 
-	
+	}]);
+
 	app.config(['$routeProvider', function($routeProvider) {
-		
+
 		$routeProvider.when('/offers', {
 			templateUrl: '/proyectoTFM/views/offers.html',
 			controller: 'offersController'
@@ -70,7 +68,7 @@
 			controller: 'homeController'	
 		})
 	}]);
-	
+
 	app.controller('sgpfcCtrl',['$scope', '$http', '$cookies', '$location', function($scope, $http, $cookies, $location){
 	}]);
 

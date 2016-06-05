@@ -5,7 +5,6 @@
 	app.controller('myOfferController',['$scope', '$http', '$location', '$routeParams', '$cookies',
 	                                    function ($scope, $http, $location, $routeParams, $cookies) {
 
-		//Get ID out of current URL
 		var offerId = $scope.offerId = $routeParams.offerId;
 		if (offerId != undefined) {
 			$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
@@ -45,7 +44,6 @@
 							// err.status will contain the status code
 						});
 					}
-
 					$scope.offer = offer.data;
 				}
 			}, function(err) {
@@ -62,7 +60,7 @@
 				// err.status will contain the status code
 			});
 		}
-		
+
 		$scope.openOffer = function() {
 			$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/open').then(function(open) {
 				$scope.offer.offerClose = false;
@@ -71,7 +69,7 @@
 				// err.status will contain the status code
 			});
 		}
-		
+
 		$scope.deleteOffer = function() {
 			$http.delete('http://localhost:8080/proyectoTFM/rest/offers/'+offerId).then(function(del) {
 				$scope.offerDelete = true;
@@ -80,6 +78,5 @@
 				// err.status will contain the status code
 			});
 		}
-
 	}]);
 }());

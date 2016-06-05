@@ -98,7 +98,7 @@
 								<div class="input-group col-xs-12"
 									ng-class="{ 'has-error': editprojectform.year.$touched && editprojectform.year.$invalid }">
 									<input string-to-number id="year" type="number" class="form-control" name="year"
-										aria-label="..." placeholder="Año"
+										aria-label="..." placeholder="Año" min="1950" max="3000"
 										data-ng-model="project.projectYear" required>
 								</div>
 								<div class="help-block"

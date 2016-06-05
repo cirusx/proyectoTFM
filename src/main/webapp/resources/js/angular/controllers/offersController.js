@@ -13,7 +13,6 @@
 					console.error('ERR', err);
 					// err.status will contain the status code
 				})
-
 				$scope.activeOfferList = activeOffers.data;
 			});
 		}, function(err) {

@@ -4,49 +4,48 @@
 	var app= angular.module('sgpfc');
 
 	app.controller('createProjectController',['$scope', '$http', '$location', '$cookies', 'postService',
-	                                        function ($scope, $http, $location, $cookies, postService) {
-		
+	                                          function ($scope, $http, $location, $cookies, postService) {
+
 		$http.get('http://localhost:8080/proyectoTFM/rest/users/students').then(function(students) {
 			$scope.students = students.data;
 		}, function(err) {
 			console.error('ERR', err);
 			// err.status will contain the status code
 		});
-		
+
 		$scope.checkModel = {};
-		  $scope.checkResults = [];
-		  $scope.oneAtATime = true;
-		  $scope.$watchCollection('checkModel', function () {
-		    $scope.checkResults = [];
-		    angular.forEach($scope.checkModel, function (value, key) {
-		      if (value) {
-		        $scope.checkResults.push(key);
-		      }
-		    });
-		  });
-		  $scope.status = {
-		    isCustomHeaderOpen: false,
-		    isFirstOpen: true,
-		    isFirstDisabled: false
-		  };
+		$scope.checkResults = [];
+		$scope.oneAtATime = true;
+		$scope.$watchCollection('checkModel', function () {
+			$scope.checkResults = [];
+			angular.forEach($scope.checkModel, function (value, key) {
+				if (value) {
+					$scope.checkResults.push(key);
+				}
+			});
+		});
+		$scope.status = {
+				isCustomHeaderOpen: false,
+				isFirstOpen: true,
+				isFirstDisabled: false
+		};
 		var i = 0;
-		 $http.get('http://localhost:8080/proyectoTFM/rest/categories').then(function(categories) {
-		    	$scope.categories = categories.data;
-		    	categories.data.forEach(function(category){
-		    		$http.get('http://localhost:8080/proyectoTFM/rest/categories/subcategories'+'?categoryId='+category.categoryId).then(function(subcategories) {
-				    	$scope.categories[i].subcategories = subcategories.data;
-				    	i++;
-					}, function(err) {
-						console.error('ERR', err);  
-					})
-		    	})
-		    	 
-			}, function(err) {
-				console.error('ERR', err);  
+		$http.get('http://localhost:8080/proyectoTFM/rest/categories').then(function(categories) {
+			$scope.categories = categories.data;
+			categories.data.forEach(function(category){
+				$http.get('http://localhost:8080/proyectoTFM/rest/categories/subcategories'+'?categoryId='+category.categoryId).then(function(subcategories) {
+					$scope.categories[i].subcategories = subcategories.data;
+					i++;
+				}, function(err) {
+					console.error('ERR', err);  
+				})
 			})
 
+		}, function(err) {
+			console.error('ERR', err);  
+		})
+
 		$scope.createProject = function() {
-			
 			$scope.noCreateProject = false;
 			$scope.projectCreated = false;
 			$scope.noTeacher = false;

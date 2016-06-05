@@ -5,7 +5,6 @@
 	app.controller('offerController',['$scope', '$http', '$location', '$routeParams', '$cookies',
 	                                  function ($scope, $http, $location, $routeParams, $cookies) {
 
-		//Get ID out of current URL
 		var offerId = $scope.offerId = $routeParams.offerId;
 		if (offerId != undefined) {
 			$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
@@ -21,7 +20,6 @@
 
 					$http.get('http://localhost:8080/proyectoTFM/rest/offers/users'+'?offerId='+offerId).then(function(users) {
 						offer.data.offerRegistrationList = users.data
-
 						$scope.offerRegisterButton = 1;
 						if ($cookies.get('user')) {
 							var rol = $cookies.get('rol');
@@ -41,11 +39,10 @@
 						console.error('ERR', err);
 						// err.status will contain the status code
 					});
-					
+
 					if(offer.data.offerWithLimit == true) {
 						var offerTimeLimit = offer.data.offerTimeLimit;
 						var actualDate = Date.now();
-
 						if (actualDate >= offerTimeLimit){
 							offer.data.offerClose = true;
 							$scope.offer = offer.data;
@@ -57,7 +54,6 @@
 							});
 						}
 					}
-
 					$scope.offer = offer.data;
 				}
 			}, function(err) {
@@ -99,8 +95,7 @@
 						},
 						function (offer) {
 							$scope.offerRegisterError = true;
-						}
-				);
+						});
 			}
 		}
 	}]);

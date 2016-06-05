@@ -46,10 +46,6 @@
 			console.error('ERR', err);  
 		})
 
-
-
-
-
 		$http.get('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId).then(function(offer) {
 			if (offer.data.offerId==null) {
 				$location.path("/");
@@ -85,10 +81,7 @@
 			// err.status will contain the status code
 		})
 
-
-
 		$scope.editOffer = function() {
-
 			$scope.noEditOffer = false;
 			$scope.offerEdited = false;
 			$scope.noTeacher = false;
@@ -127,8 +120,7 @@
 				function(){
 					$scope.noEditOffer = true;
 					$scope.offerEdited = false; 
-				}
-				);
+				});
 			}
 		};
 	}]);
