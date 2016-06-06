@@ -69,7 +69,7 @@ app.service('postService', ['$http', function ($http) {
 		.error(onError);
 	}
 	
-	this.putProject = function(projectId, projectName, projectCode, projectCareer, projectYear, projectStudent, projectSubcategoryList, projectLinks, projectDocumentation, projectDraft, onSuccess, onError  ){
+	this.putProject = function(projectId, projectName, projectCode, projectCareer, projectYear, projectStudent, projectSubcategoryList, projectLinks, projectDocumentation, projectDraft, projectTeacher, onSuccess, onError  ){
 		var fd = new FormData();
 		fd.append('id', projectId);
 		fd.append('name', projectName);
@@ -87,7 +87,8 @@ app.service('postService', ['$http', function ($http) {
 		if (projectDraft != undefined) {
 			fd.append('draft', projectDraft);
 		}
-		$http.put('http://localhost:8080/proyectoTFM/rest/projects'+ projectId, fd, {
+		fd.append('teacher', projectTeacher);
+		$http.put('http://localhost:8080/proyectoTFM/rest/projects/'+ projectId, fd, {
 			transformRequest: angular.identity,
 			headers: {'Content-Type': undefined}
 		})

@@ -6,6 +6,7 @@ import javax.ws.rs.ext.Provider;
 import com.esei.model.Project;
 import com.esei.model.Student;
 import com.esei.model.Subcategory;
+import com.esei.model.Teacher;
 
 @Provider
 public class ProjectReader extends MultipartMessageBodyReader<Project> {
@@ -33,12 +34,24 @@ public class ProjectReader extends MultipartMessageBodyReader<Project> {
 		case "year":
 			project.setProjectYear(new String(bs));
 			break;
+		case "id":
+			String projectIdStr = new String(bs);
+			Long projectId = Long.valueOf(projectIdStr);
+			project.setProjectId(projectId);
+			break;
 		case "student":
 			Student student = new Student();
 			String userIdStr = new String (bs);
 			long userId = Long.valueOf(userIdStr).longValue();
 			student.setUserId(userId);
 			project.setProjectStudent(student);
+			break;
+		case "teacher":
+			Teacher teacher = new Teacher();
+			String teacherIdStr = new String (bs);
+			long teacherId = Long.valueOf(teacherIdStr).longValue();
+			teacher.setUserId(teacherId);
+			project.setProjectTeacher(teacher);
 			break;
 		case "subcategories":
 			String subcategoryIds = new String(bs);

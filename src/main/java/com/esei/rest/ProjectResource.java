@@ -254,29 +254,48 @@ public class ProjectResource {
 
 	@PUT
 	@Path("/{projectId}")
+	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response editProject(@HeaderParam("Authorization") String authHeader, Project project){
+	public Project editProject(@HeaderParam("Authorization") String authHeader, Project project){
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		Teacher teacher = (Teacher) requireUser(authHeader, em);
-
+		Student student = (Student) getStudent(project.getProjectStudent().getUserId(),em);
+		Project editProject;
 		try {
 			em.getTransaction().begin();	  
-			Project editProject = em.find(Project.class, project.getProjectId());
-			if (teacher.getEmail() == project.getProjectTeacher().getEmail()){
-			em.merge(editProject);
+			editProject = em.find(Project.class, project.getProjectId());
+			if (teacher.getUserId() == project.getProjectTeacher().getUserId()){
+				editProject.setProjectName(project.getProjectName());
+				editProject.setProjectCode(project.getProjectCode());
+				editProject.setProjectCareer(project.getProjectCareer());
+				editProject.setProjectYear(project.getProjectYear());
+				
+				editProject.setProjectStudent(student);
+				editProject.setProjectDocumentation(project.getProjectDocumentation());
+				editProject.setProjectDraft(project.getProjectDraft());
+				List<Subcategory> subcategoryIds = project.getProjectSubcategoryList();
+				List<Subcategory> subcategories = new ArrayList<Subcategory>();
+				for (Subcategory subcategoryIdObject : subcategoryIds) {
+					Long subcategoryId = subcategoryIdObject.getSubcategoryId();
+					Subcategory subcategory = getSubcategory(subcategoryId, em);
+					subcategory.getSubcategoryProjectList().add(editProject);
+					subcategories.add(subcategory);
+				}
+				editProject.setProjectSubcategoryList(subcategories);
+				editProject.setProjectLinks(project.getProjectLinks());
 			em.getTransaction().commit();
 			}
 
 		}finally{
 			em.close();
 		}
-		return Response.created(null).build();  
+		return editProject;  
 	}
 
 	@PUT
 	@Path("/{projectId}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response putProject(@HeaderParam("Authorization") String authHeader, Project project) throws MessagingException {
+	public Project putProject(@HeaderParam("Authorization") String authHeader, Project project) throws MessagingException {
 		return editProject(authHeader, project);
 	}
 

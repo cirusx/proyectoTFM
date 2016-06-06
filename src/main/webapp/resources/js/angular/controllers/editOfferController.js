@@ -30,13 +30,9 @@
 				isFirstDisabled: false
 		};
 
-		/*var i = 0;*/
 		$http.get('http://localhost:8080/proyectoTFM/rest/categories').then(function(categories) {
-			/*$scope.categories = categories.data;*/
 			categories.data.forEach(function(category){
 				$http.get('http://localhost:8080/proyectoTFM/rest/categories/subcategories'+'?categoryId='+category.categoryId).then(function(subcategories) {
-					/*$scope.categories[i].subcategories = subcategories.data;*/
-					/*i++;*/
 					category.subcategories = subcategories.data
 				}, function(err) {
 					console.error('ERR', err);  
@@ -86,11 +82,6 @@
 		})
 
 		$scope.editOffer = function() {
-			/*$scope.incorrectTeacher = false;
-			$scope.noEditOffer = false;
-			$scope.offerEdited = false;
-			$scope.noTeacher = false;
-			$scope.noTeacherOrLogged = false;*/
 			var login = false;
 			var rol = false;
 			if ($cookies.get('user')) {
