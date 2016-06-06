@@ -28,21 +28,29 @@
 				isFirstDisabled: false
 		};
 
-		var i = 0;
+		/*var i = 0;*/
 		$http.get('http://localhost:8080/proyectoTFM/rest/categories').then(function(categories) {
-			$scope.categories = categories.data;
+			/*$scope.categories = categories.data;*/
 			categories.data.forEach(function(category){
 				$http.get('http://localhost:8080/proyectoTFM/rest/categories/subcategories'+'?categoryId='+category.categoryId).then(function(subcategories) {
-					$scope.categories[i].subcategories = subcategories.data;
-					i++;
+					/*$scope.categories[i].subcategories = subcategories.data;*/
+					/*i++;*/
+					category.subcategories = subcategories.data
 				}, function(err) {
 					console.error('ERR', err);  
 				})
 			})
-
+			$scope.categories = categories.data;
 		}, function(err) {
 			console.error('ERR', err);  
 		})
+		
+		$http.get('http://localhost:8080/proyectoTFM/rest/users/students').then(function(students) {
+					$scope.students = students.data
+				}, function(err) {
+					console.error('ERR', err);
+					// err.status will contain the status code
+				})
 
 		$http.get('http://localhost:8080/proyectoTFM/rest/projects/'+ projectId).then(function(project) {
 			if (project.data.projectId==null) {
@@ -51,28 +59,39 @@
 				$scope.project = project.data;
 
 				$http.get('http://localhost:8080/proyectoTFM/rest/projects/student'+'?projectId='+projectId).then(function(student) {
-					project.projectStudent = student.data
+					project.data.projectStudent = student.data
 				}, function(err) {
 					console.error('ERR', err);
 					// err.status will contain the status code
 				})
 
 				$http.get('http://localhost:8080/proyectoTFM/rest/projects/teacher'+'?projectId='+projectId).then(function(teacher) {
-					project.projectTeacher = teacher.data
+					project.data.projectTeacher = teacher.data
 				}, function(err) {
 					console.error('ERR', err);
 					// err.status will contain the status code
 				})
 
-				$http.get('http://localhost:8080/proyectoTFM/rest/projects/subcategories'+'?projectId='+projectId).then(function(subcategories) {
-					project.projectSubcategoryList = subcategories.data
+			/*	$http.get('http://localhost:8080/proyectoTFM/rest/projects/subcategories'+'?projectId='+projectId).then(function(subcategories) {
+					project.data.projectSubcategoryList = subcategories.data
 				}, function(err) {
 					console.error('ERR', err);
 					// err.status will contain the status code
-				})
+				})*/
+				
+				
+		$http.get('http://localhost:8080/proyectoTFM/rest/projects/subcategories'+'?projectId='+projectId).then(function(subcategoriesSelected) {
+						project.data.projectSubcategoryList = subcategoriesSelected.data
+						subcategoriesSelected.data.forEach(function(subcategorySelected){
+							$scope.checkModel[subcategorySelected.subcategoryId]= true;
+						})
+					}, function(err) {
+						console.error('ERR', err);
+						// err.status will contain the status code
+					})
 
 				$http.get('http://localhost:8080/proyectoTFM/rest/projects/links'+'?projectId='+projectId).then(function(links) {
-					project.projectLinks = links.data
+					project.data.projectLinks = links.data
 				}, function(err) {
 					console.error('ERR', err);
 					// err.status will contain the status code

@@ -28,18 +28,19 @@
 				isFirstOpen: true,
 				isFirstDisabled: false
 		};
-		var i = 0;
+		/*var i = 0;*/
 		$http.get('http://localhost:8080/proyectoTFM/rest/categories').then(function(categories) {
-			$scope.categories = categories.data;
+			/*$scope.categories = categories.data;*/
 			categories.data.forEach(function(category){
 				$http.get('http://localhost:8080/proyectoTFM/rest/categories/subcategories'+'?categoryId='+category.categoryId).then(function(subcategories) {
-					$scope.categories[i].subcategories = subcategories.data;
-					i++;
+					/*$scope.categories[i].subcategories = subcategories.data;*/
+					/*i++;*/
+					category.subcategories = subcategories.data
 				}, function(err) {
 					console.error('ERR', err);  
 				})
 			})
-
+			$scope.categories = categories.data;
 		}, function(err) {
 			console.error('ERR', err);  
 		})

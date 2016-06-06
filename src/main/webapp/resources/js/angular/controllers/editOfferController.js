@@ -30,18 +30,19 @@
 				isFirstDisabled: false
 		};
 
-		var i = 0;
+		/*var i = 0;*/
 		$http.get('http://localhost:8080/proyectoTFM/rest/categories').then(function(categories) {
-			$scope.categories = categories.data;
+			/*$scope.categories = categories.data;*/
 			categories.data.forEach(function(category){
 				$http.get('http://localhost:8080/proyectoTFM/rest/categories/subcategories'+'?categoryId='+category.categoryId).then(function(subcategories) {
-					$scope.categories[i].subcategories = subcategories.data;
-					i++;
+					/*$scope.categories[i].subcategories = subcategories.data;*/
+					/*i++;*/
+					category.subcategories = subcategories.data
 				}, function(err) {
 					console.error('ERR', err);  
 				})
 			})
-
+			$scope.categories = categories.data;
 		}, function(err) {
 			console.error('ERR', err);  
 		})
@@ -62,7 +63,12 @@
 				
 				$http.get('http://localhost:8080/proyectoTFM/rest/offers/users'+'?offerId='+offerId).then(function(users) {
 					offer.data.offerRegistrationList = users.data;
-					$http.get('http://localhost:8080/proyectoTFM/rest/offers/subcategories'+'?offerId='+offerId).then(function(subcategoriesSelected) {
+				}, function(err) {
+					console.error('ERR', err);
+					// err.status will contain the status code
+				})
+				
+				$http.get('http://localhost:8080/proyectoTFM/rest/offers/subcategories'+'?offerId='+offerId).then(function(subcategoriesSelected) {
 						offer.data.offerSubcategoryList = subcategoriesSelected.data
 						subcategoriesSelected.data.forEach(function(subcategorySelected){
 							$scope.checkModel[subcategorySelected.subcategoryId]= true;
@@ -71,10 +77,7 @@
 						console.error('ERR', err);
 						// err.status will contain the status code
 					})
-				}, function(err) {
-					console.error('ERR', err);
-					// err.status will contain the status code
-				})
+				
 				$scope.offer = offer.data;
 			}
 		}, function(err) {

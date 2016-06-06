@@ -136,6 +136,11 @@
 							<div class="col-xs-9">
 								<div class="input-group col-xs-12"
 									ng-class="{ 'has-error':editprojectform.filedocumentation.$touched && editprojectform.filedocumentation.$invalid }">
+									<div id="editDocumentation" ng-show="project.projectDocumentation != null">
+									<a target="new"
+										ng-href="http://localhost:8080/proyectoTFM/rest/projects/pdf/documentation/{{project.projectId}}"><img
+										class="" src="./resources/img/pdf1.png"></img></a>
+								</div>
 									<input name="filedocumentation" type="file"
 										class="file sgpfc-btn-primary" placeholder="pdf"
 										data-allowed-file-extensions='["pdf"]' id="filedocumentation"
@@ -147,6 +152,17 @@
 											language : 'es'
 										});
 									</script>
+										<script>
+									$("#filedocumentation")
+											.on(
+													'change',
+													function(event) {
+														var link = document
+																.getElementById('editDocumentation');
+														link.style.display = 'none'; //or
+														link.style.visibility = 'hidden';
+													});
+								</script>
 								</div>
 								<div class="help-block"
 									ng-messages="editprojectform.filedocumentation.$error"
@@ -161,6 +177,11 @@
 							<div class="col-xs-9">
 								<div class="input-group col-xs-12"
 									ng-class="{ 'has-error': editprojectform.filedraft.$touched && editprojectform.filedraft.$invalid }">
+											<div id="editDraft" ng-show="project.projectDraft != null">
+									<a target="new"
+										ng-href="http://localhost:8080/proyectoTFM/rest/projects/pdf/draft/{{project.projectId}}"><img
+										class="" src="./resources/img/pdf1.png"></img></a>
+								</div>
 									<input name="filedraft" type="file" placeholder="pdf"
 										class="file sgpfc-btn-primary"
 										data-allowed-file-extensions='["pdf"]' id="filedraft"
@@ -172,6 +193,17 @@
 											language : 'es'
 										});
 									</script>
+											<script>
+									$("#filedraft")
+											.on(
+													'change',
+													function(event) {
+														var link = document
+																.getElementById('editDraft');
+														link.style.display = 'none'; //or
+														link.style.visibility = 'hidden';
+													});
+								</script>
 								</div>
 								<div class="help-block"
 									ng-messages="editprojectform.filedraft.$error"

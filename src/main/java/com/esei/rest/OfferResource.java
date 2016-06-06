@@ -312,7 +312,6 @@ public class OfferResource {
 	@Path("/{offerId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Offer editOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
-		System.out.println(offer.getOfferDescription());
 		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		Teacher teacher = (Teacher) requireUser(authHeader, em);
 		Offer editOffer;
