@@ -23,18 +23,18 @@
 				</div>
 				<div class="panel-body sgpfc-card-content">
 					<div class="panel-body sgpfc-card-content">
-						<p class="sgpfc-card-title">
+						<p class="sgpfc-littlecard-title">
 							<a ng-href="#/offers/{{offer.offerId}}"
 								class="sgpfc-card-title a">{{offer.offerName}}</a>
 						</p>
 						<p class="lead sgpfc-card-teacher">
-							<a class="sgpfc-card-teacher">{{offer.offerTeacher}}</a>
+							<a class="sgpfc-card-teacher">{{offer.teacher}}</a>
 						</p>
-						<p class="sgpfc-card-description">{{offer.offerTinyDescription}}</p>
+						<p class="sgpfc-littlecard-description">{{offer.offerTinyDescription}}</p>
 						<p class="sgpfc-card-footer">
 							<img
 								ng-repeat="subcategory in offer.offerSubcategoryList | filter:search:strict"
-								src="{{subcategory.subcategoryIcon}}" width="28px" height="28px">
+								ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}" width="28px" height="28px">
 						</p>
 					</div>
 				</div>
