@@ -163,6 +163,15 @@
 	overflow: hidden;
 }
 
+.sgpfc-littlecard-title {
+	font-size: 12px;
+	font-weight: bold;
+	webkit-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	white-space: inherit;
+	overflow: hidden;
+}
+
 .sgpfc-card-title a {
 	color: #0D1E23;
 }
@@ -186,6 +195,15 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden; */
+}
+
+.sgpfc-littlecard-description {
+	margin-bottom: 0px;
+	webkit-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 85px;
 }
 
 @media ( min-width : 641px) .project-card-footer {

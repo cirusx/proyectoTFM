@@ -1,5 +1,6 @@
 package com.esei.rest;
 
+import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,7 +28,6 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 
 	@Override
 	protected void add(String name, byte[] bs){
-
 		switch(name) {
 		case "name":
 			offer.setOfferName(new String(bs));
