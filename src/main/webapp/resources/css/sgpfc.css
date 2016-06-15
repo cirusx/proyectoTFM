@@ -116,18 +116,7 @@
 }
 
 @media ( min-width : 641px) .sgpfc-card-tall-big {
-	height
-	
-	
-	:
-	
-	 
-	
-	458
-	px
-	
-	
-	;
+	height: 458px;
 }
 
 .sgpfc-card-wrap {
@@ -207,29 +196,8 @@
 }
 
 @media ( min-width : 641px) .project-card-footer {
-	position
-	
-	
-	:
-	
-	 
-	
-	absolute
-	
-	
-	;
-	padding-top
-	
-	
-	:
-	
-	 
-	
-	45
-	px
-	
-	
-	;
+	position:absolute;
+	padding-top:45px;
 }
 
 .sgpfc-card-footer {
