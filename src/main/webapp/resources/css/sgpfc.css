@@ -165,6 +165,10 @@
 	color: #0D1E23;
 }
 
+.sgpfc-littlecard-title a {
+	color: #0D1E23;
+}
+
 .sgpfc-card-title a:hover {
 	color: #0D1E23;
 	text-decoration: none;
@@ -180,17 +184,11 @@
 
 .sgpfc-card-description {
 	margin-bottom: 0px;
-	/*   webkit-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden; */
+    overflow: hidden;
 }
 
 .sgpfc-littlecard-description {
 	margin-bottom: 0px;
-	webkit-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     overflow: hidden;
     height: 85px;
 }
@@ -384,33 +382,108 @@ th, td {
 }
 
 tr>.projectcodecolumn {
-	width: 70px;
+	width: 60px;
 }
 
 tr>.projectcategoriescolumn {
-	width: 75px;
+	width: 60px;
 }
 
 tr>.projectdraftcolumn {
-	width: 60px;
+	width: 47px;
 }
 
 tr>.projectlinkscolumn {
-	width: 40px;
-}
-
-tr>.projecteditdeletecolumn {
-	width: 60px;
+	width: 30px;
 }
 
 tr>.projectdocumentationcolumn {
-	width: 45px;
+	width: 35px;
 }
 
 tr>.projectyearcolumn {
+	width: 32px;
+}
+
+tr>.projectnamecolumn {
+	width: 125px;
+}
+
+tr>.projectcareercolumn {
+	width: 125px;
+}
+
+tr>.projectstudentcolumn {
+	width: 110px;
+}
+
+tr>.projectteachercolumn {
+	width: 110px;
+}
+
+tr>.managedprojectcodecolumn {
+	width: 70px;
+}
+
+tr>.managedprojectcategoriescolumn {
+	width: 75px;
+}
+
+tr>.managedprojectdraftcolumn {
+	width: 60px;
+}
+
+tr>.managedprojectlinkscolumn {
 	width: 40px;
 }
 
+tr>.managedprojecteditdeletecolumn {
+	width: 60px;
+}
+
+tr>.managedprojectdocumentationcolumn {
+	width: 45px;
+}
+
+tr>.managedprojectyearcolumn {
+	width: 40px;
+}
+
+tr>.myprojectcodecolumn {
+	width: 130px;
+}
+
+tr>.myprojectnamecolumn {
+	width: 350px;
+}
+
+tr>.myprojectcategoriescolumn {
+	width: 130px;
+}
+
+tr>.myprojectdraftcolumn {
+	width: 110px;
+}
+
+tr>.myprojectlinkscolumn {
+	width: 70px;
+}
+
+tr>.myprojectdocumentationcolumn {
+	width: 75px;
+}
+
+tr>.myprojectteachercolumn {
+	width: 300px;
+}
+
+tr>.myprojectcareercolumn {
+	width: 350px;
+}
+
+tr>.myprojectyearcolumn {
+	width: 75px;
+}
 /* .sgpfc-card-panel {
   	display: none;
   } */
