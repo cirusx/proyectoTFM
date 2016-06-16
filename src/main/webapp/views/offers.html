@@ -107,7 +107,7 @@
 						<p class="sgpfc-littlecard-description">{{offer.offerTinyDescription}}</p>
 						<p class="sgpfc-card-footer">
 							<img
-								ng-repeat="subcategory in offer.offerSubcategoryList | filter:search:strict"
+								ng-repeat="subcategory in offer.offerSubcategoryList"
 								ng-src="data:{{subcategory.contentMime}};base64,{{subcategory.subcategoryIcon}}"
 								width="28px" height="28px">
 						</p>
