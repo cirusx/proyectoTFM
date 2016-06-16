@@ -1,5 +1,6 @@
 package com.esei.rest;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.ext.Provider;
@@ -11,6 +12,7 @@ import com.esei.model.Teacher;
 @Provider
 public class ProjectReader extends MultipartMessageBodyReader<Project> {
 
+	static final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 	private Project project;
 
 	@Override
@@ -23,13 +25,13 @@ public class ProjectReader extends MultipartMessageBodyReader<Project> {
 
 		switch(name) {
 		case "name":
-			project.setProjectName(new String(bs));
+			project.setProjectName(new String(bs,UTF8_CHARSET));
 			break;
 		case "code":
-			project.setProjectCode(new String(bs));
+			project.setProjectCode(new String(bs,UTF8_CHARSET));
 			break;
 		case "career":
-			project.setProjectCareer(new String(bs));
+			project.setProjectCareer(new String(bs,UTF8_CHARSET));
 			break;        
 		case "year":
 			project.setProjectYear(new String(bs));
@@ -69,7 +71,7 @@ public class ProjectReader extends MultipartMessageBodyReader<Project> {
 			break;
 		case "links":
 			List<String> links = new ArrayList<String>();
-			String linksString = new String (bs);
+			String linksString = new String (bs,UTF8_CHARSET);
 			String[] linkArray = linksString.split(",");
 			for ( String link : linkArray ) {
 				links.add(link);

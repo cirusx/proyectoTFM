@@ -1,5 +1,6 @@
 package com.esei.rest;
 
+import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import com.esei.model.Teacher;
 @Provider
 public class OfferReader extends MultipartMessageBodyReader<Offer> {
 
-
+	static final Charset UTF8_CHARSET = Charset.forName("UTF-8");
 	static final String FIRST_QUARTER_LIMIT_DATETIME = "2020/01/19 07:00";
 	static final String SECOND_QUARTER_LIMIT_DATETIME = "2020/05/19 07:00";
 
@@ -28,13 +29,13 @@ public class OfferReader extends MultipartMessageBodyReader<Offer> {
 	protected void add(String name, byte[] bs){
 		switch(name) {
 		case "name":
-			offer.setOfferName(new String(bs));
+			offer.setOfferName(new String(bs,UTF8_CHARSET));
 			break;
 		case "tinydescription":
-			offer.setOfferTinyDescription(new String(bs));
+			offer.setOfferTinyDescription(new String(bs,UTF8_CHARSET));
 			break;
 		case "description":
-			offer.setOfferDescription(new String(bs));
+			offer.setOfferDescription(new String(bs,UTF8_CHARSET));
 			break;
 		case "subcategories":
 			String subcategoryIds = new String(bs);
