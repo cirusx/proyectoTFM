@@ -32,18 +32,19 @@
 						}
 					}
 
-					var offerTimeLimit = offer.data.offerTimeLimit;
-					var actualDate = Date.now();
-
-					if (actualDate >= offerTimeLimit){
-						offer.data.offerClose = true;
-						$scope.offer = offer.data;
-						$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/close').then(function(cerrar) {
-							$scope.offerClose = true;
-						}, function(err) {
-							console.error('ERR', err);
-							// err.status will contain the status code
-						});
+					if(offer.data.offerWithLimit == true) {
+						var offerTimeLimit = offer.data.offerTimeLimit;
+						var actualDate = Date.now();
+						if (actualDate >= offerTimeLimit){
+							offer.data.offerClose = true;
+							$scope.offer = offer.data;
+							$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/close').then(function(cerrar) {
+								$scope.offerClose = true;
+							}, function(err) {
+								console.error('ERR', err);
+								// err.status will contain the status code
+							});
+						}
 					}
 					$scope.offer = offer.data;
 				}

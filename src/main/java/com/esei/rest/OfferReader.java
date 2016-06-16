@@ -1,6 +1,5 @@
 package com.esei.rest;
 
-import java.nio.charset.Charset;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 import javax.ws.rs.ext.Provider;
 import com.esei.model.Offer;
-import com.esei.model.Student;
 import com.esei.model.Subcategory;
 import com.esei.model.Teacher;
 

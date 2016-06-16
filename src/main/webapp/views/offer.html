@@ -64,7 +64,7 @@
 				</a>
 			</div>
 		</div>
-		<div ng-hide="offer.offerWithLimit"
+		<div ng-hide="offer.offerWithLimit || registrations"
 			class="col-xs-4 sgpfc-container-offer-teacherzone">
 			<h1 class="sgpfc-container-offer-applyzone-number">Contacto</h1>
 			<p>
@@ -130,7 +130,7 @@
 				<button ng-show="offer.offerClose"
 					class="btn btn-danger btn-block sgpfc-container-offer-applyzone-applybutton">Oferta
 					Finalizada</button>
-				<h2 class="">Usuarios Inscritos</h2>
+				<h2 ng-show="offer.offerWithLimit" class="">Usuarios Inscritos</h2>
 				<div ng-repeat="user in offer.offerRegistrationList">
 					<p>{{user.name}} - {{user.email}}</p>
 				</div>

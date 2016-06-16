@@ -284,7 +284,6 @@ public class OfferResource {
 	@Path("offer")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response postOffer(@HeaderParam("Authorization") String authHeader, Offer offer) throws MessagingException {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
 		return createOffer(authHeader, offer);
 	}
 
