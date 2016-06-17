@@ -269,8 +269,12 @@ public class ProjectResource {
 				editProject.setProjectYear(project.getProjectYear());
 				
 				editProject.setProjectStudent(student);
+				if (project.getProjectDocumentation() != null) {
 				editProject.setProjectDocumentation(project.getProjectDocumentation());
+				}
+				if (project.getProjectDocumentation() != null) {
 				editProject.setProjectDraft(project.getProjectDraft());
+				}
 				List<Subcategory> subcategoryIds = project.getProjectSubcategoryList();
 				List<Subcategory> subcategories = new ArrayList<Subcategory>();
 				for (Subcategory subcategoryIdObject : subcategoryIds) {

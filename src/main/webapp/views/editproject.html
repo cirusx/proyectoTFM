@@ -145,7 +145,7 @@
 										class="file sgpfc-btn-primary" placeholder="pdf"
 										data-allowed-file-extensions='["pdf"]' id="filedocumentation"
 										ng-disabled="link != null && link.length != 0"
-										file-model="project.projectDocumentation" required>
+										file-model="projectDocumentationFile">
 									<script type="text/javascript">
 										$("#filedocumentation").fileinput({
 											showUpload : false,
@@ -186,7 +186,7 @@
 										class="file sgpfc-btn-primary"
 										data-allowed-file-extensions='["pdf"]' id="filedraft"
 										ng-disabled="link != null && link.length != 0"
-										file-model="project.projectDraft" required>
+										file-model="projectDraftFile">
 									<script type="text/javascript">
 										$("#filedraft").fileinput({
 											showUpload : false,

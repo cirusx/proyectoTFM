@@ -323,7 +323,9 @@ public class OfferResource {
 				editOffer.setOfferTinyDescription(offer.getOfferTinyDescription());
 				editOffer.setOfferWithLimit(offer.isOfferWithLimit());
 				editOffer.setOfferTimeLimit(offer.getOfferTimeLimit());
-				editOffer.setOfferImage(offer.getOfferImage());
+				if (offer.getOfferImage() != null) {
+					editOffer.setOfferImage(offer.getOfferImage());
+				}
 				editOffer.setOfferPdf(offer.getOfferPdf());
 				List<Subcategory> subcategoryIds = offer.getOfferSubcategoryList();
 				List<Subcategory> subcategories = new ArrayList<Subcategory>();

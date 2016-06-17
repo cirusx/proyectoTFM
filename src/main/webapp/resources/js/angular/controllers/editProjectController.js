@@ -113,7 +113,7 @@
 				$scope.project.projectTeacher = $scope.project.projectTeacher.userId;
 				$scope.project.projectStudent = $scope.project.projectStudent.userId;
 				$scope.project.projectSubcategoryList= $scope.checkResults;
-				postService.putProject($scope.project.projectId, $scope.project.projectName, $scope.project.projectCode, $scope.project.projectCareer, $scope.project.projectYear, $scope.project.projectStudent, $scope.project.projectSubcategoryList, $scope.project.projectLinks, $scope.project.projectDocumentation, $scope.project.projectDraft,$scope.project.projectTeacher,
+				postService.putProject($scope.project.projectId, $scope.project.projectName, $scope.project.projectCode, $scope.project.projectCareer, $scope.project.projectYear, $scope.project.projectStudent, $scope.project.projectSubcategoryList, $scope.project.projectLinks, $scope.projectDocumentationFile, $scope.projectDraftFile,$scope.project.projectTeacher,
 						function(project){
 					$scope.projectEdited = true;
 					$scope.noEditProject = false;

@@ -124,7 +124,7 @@
 									placeholder="png o jpg"
 									data-allowed-file-extensions='["jpg", "png"]' id="photofile"
 									ng-disabled="link != null && link.length != 0"
-									file-model="offer.offerImage" ng-required>
+									file-model="offerImageFile">
 								<script type="text/javascript">
 									$("#photofile").fileinput({
 										showUpload : false,
@@ -168,7 +168,7 @@
 								<input name="filepdf" type="file" class="file sgpfc-btn-primary"
 									placeholder="png o jpg" data-allowed-file-extensions='["pdf"]'
 									id="filepdf" ng-disabled="link != null && link.length != 0"
-									file-model="offer.offerPdf">
+									file-model="offerPdfFile">
 
 								<script type="text/javascript">
 									$("#filepdf").fileinput({

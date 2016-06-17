@@ -108,7 +108,7 @@
 				$scope.offer.teacher = $scope.offer.teacher.userId;
 				$scope.offer.offerDescription = $scope.htmlVariable;
 				$scope.offer.offerSubcategoryList = $scope.checkResults;
-				postService.putOffer($scope.offer.offerId, $scope.offer.offerName, $scope.offer.offerTinyDescription, $scope.offer.offerDescription, $scope.offer.offerImage, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit, $scope.offer.offerPdf, $scope.offer.teacher, $scope.offer.offerSubcategoryList,
+				postService.putOffer($scope.offer.offerId, $scope.offer.offerName, $scope.offer.offerTinyDescription, $scope.offer.offerDescription, $scope.offerImageFile, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit, $scope.offerPdfFile, $scope.offer.teacher, $scope.offer.offerSubcategoryList,
 						function(offer){
 					$scope.offerEdited = true;
 					$scope.noEditOffer = false;
