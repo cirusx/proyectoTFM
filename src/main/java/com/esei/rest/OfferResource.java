@@ -1,6 +1,7 @@
 package com.esei.rest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import javax.mail.MessagingException;
@@ -326,7 +327,15 @@ public class OfferResource {
 				if (offer.getOfferImage() != null) {
 					editOffer.setOfferImage(offer.getOfferImage());
 				}
-				editOffer.setOfferPdf(offer.getOfferPdf());
+				if (offer.getOfferPdf() != null){
+					String deleteOfferPdfStr = "true";
+					byte[] deleteOfferPdf = deleteOfferPdfStr.getBytes();
+					if (Arrays.equals(offer.getOfferPdf(), deleteOfferPdf)) {
+						editOffer.setOfferPdf(null);
+					} else {
+					editOffer.setOfferPdf(offer.getOfferPdf());
+					}
+				}
 				List<Subcategory> subcategoryIds = offer.getOfferSubcategoryList();
 				List<Subcategory> subcategories = new ArrayList<Subcategory>();
 				for (Subcategory subcategoryIdObject : subcategoryIds) {

@@ -20,10 +20,6 @@
 							oferta no se pudo editar correctamente</div>
 					</div>
 					<div class="help-block" role="alert">
-						<div ng-show="offerEdited" class="alert alert-success">Oferta
-							editada correctamente</div>
-					</div>
-					<div class="help-block" role="alert">
 						<div ng-show="noTeacher" class="alert alert-danger">No
 							puedes editar una oferta ya que no eres un profesor</div>
 					</div>
@@ -47,8 +43,7 @@
 										aria-label="..." placeholder="Nombre"
 										ng-model="offer.offerName" required>
 								</div>
-								<div class="help-block"
-									ng-messages="editofferform.name.$error"
+								<div class="help-block" ng-messages="editofferform.name.$error"
 									ng-if="editofferform.name.$touched" role="alert">
 									<div ng-message="required" class="alert alert-danger">Este
 										campo es Obligatorio</div>
@@ -94,7 +89,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="subcategories" class="col-xs-3 control-label">Categorías (*)</label>
+							<label for="subcategories" class="col-xs-3 control-label">Categorías
+								(*)</label>
 							<div class="col-xs-9">
 								<uib-accordion close-others="oneAtATime"> <uib-accordion-group
 									heading="{{category.categoryName}}"
@@ -160,14 +156,21 @@
 								(*)</label>
 							<div class="col-xs-9"
 								ng-class="{ 'has-error': editofferform.filepdf.$touched && editofferform.filepdf.$invalid }">
-								<div id="editPdf" ng-show="offer.offerPdf != null">
+								<div class="col-xs-12" id="editPdf"
+									ng-show="offer.offerPdf != null">
 									<a target="new"
 										ng-href="http://localhost:8080/proyectoTFM/rest/offers/pdf/{{offer.offerId}}"><img
-										class="" src="./resources/img/pdf1.png"></img></a>
+										class="col-xs-2" src="./resources/img/pdf1.png"></img></a>
+									<div class="checkbox col-xs-10">
+										<label> <input ng-model="deleteOfferPdf"
+											type="checkbox"> Eliminar pdf
+										</label>
+									</div>
 								</div>
-								<input name="filepdf" type="file" class="file sgpfc-btn-primary"
-									placeholder="png o jpg" data-allowed-file-extensions='["pdf"]'
-									id="filepdf" ng-disabled="link != null && link.length != 0"
+								<input class="col-xs-12" name="filepdf" type="file"
+									class="file sgpfc-btn-primary" placeholder="png o jpg"
+									data-allowed-file-extensions='["pdf"]' id="filepdf"
+									ng-disabled="link != null && link.length != 0"
 									file-model="offerPdfFile">
 
 								<script type="text/javascript">
@@ -227,11 +230,27 @@
 								<button id="btn-recoverpassword" type="submit"
 									class="btn sgpfc-btn-primary btn-block"
 									ng-disabled="editofferform.$invalid">
-									<i class="icon-hand-right"></i>Editar Oferta
+									<i class="icon-hand-right"></i>Guardar Oferta
 								</button>
 							</div>
 						</div>
 					</form>
+				</div>
+			</div>
+		</div>
+		<!-- 		<a ng-hide="true" href="" data-toggle="modal" data-target="#confirmEditOfferModal" id="myModalShower"></a> -->
+		<div class=" modal fade" id="confirmEditOfferModal" tabindex="-1"
+			role="dialog" aria-labelledby="confirmEditOfferModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						<div class="col-xs-12 help-block" role="alert">
+							<div ng-show="offerEdited" class="alert alert-success">Oferta
+								editada correctamente</div>
+						</div>
+						<button type="button" data-dismiss="modal"
+							class=" col-xs-offset-10 btn sgpfc-btn-primary" id="editOk">Aceptar</button>
+					</div>
 				</div>
 			</div>
 		</div>

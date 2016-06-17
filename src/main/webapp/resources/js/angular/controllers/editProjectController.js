@@ -117,6 +117,10 @@
 						function(project){
 					$scope.projectEdited = true;
 					$scope.noEditProject = false;
+					$('#confirmEditProjectModal').modal('show');
+					$('#confirmEditProjectModal').appendTo("body");
+					$location.path("/projects/mymanagedprojects");
+					
 					//$scope.posts.splice(0,0,offer);
 					/*delete $scope.project;
 					$('#filedocumentation').fileinput('clear');
