@@ -17,7 +17,7 @@
 					<th class="managedprojectcodecolumn" st-sort="projectCode">Código</th>
 					<th class="managedprojectnamecolumn" st-sort="projectName">Nombre</th>
 					<th class="managedprojectcategoriescolumn"
-						st-sort="managedprojectSubcategoryList">Categorias</th>
+						st-sort="categories">Categorias</th>
 					<th class="managedprojectstudentcolumn" st-sort="projectStudent.name">Autor</th>
 					<th class="managedprojectcareercolumn" st-sort="projectCareer">Titulación</th>
 					<th class="managedprojectyearcolumn" st-sort="projectYear">Año</th>
@@ -32,7 +32,9 @@
 						class="input-sm form-control" type="search" /></th>
 					<th><input st-search="projectName" placeholder="Nombre"
 						class="input-sm form-control" type="search" /></th>
-					<th></th>
+					<th><input st-search="subcategories"
+						placeholder="Categorías" class="input-sm form-control"
+						type="search" /></th>
 					<th><input st-search="projectStudent.name" placeholder="Autor"
 						class="input-sm form-control" type="search" /></th>
 					<th><input st-search="projectCareer" placeholder="Titulación"

@@ -21,15 +21,20 @@
 					// err.status will contain the status code
 				})
 
-				$http.get('http://localhost:8080/proyectoTFM/rest/projects/subcategories'+'?projectId='+project.projectId).then(function(subcategories) {
-					project.projectSubcategoryList = subcategories.data
+				$http.get('http://localhost:8080/proyectoTFM/rest/projects/links'+'?projectId='+project.projectId).then(function(links) {
+					project.projectLinks = links.data
 				}, function(err) {
 					console.error('ERR', err);
 					// err.status will contain the status code
 				})
-
-				$http.get('http://localhost:8080/proyectoTFM/rest/projects/links'+'?projectId='+project.projectId).then(function(links) {
-					project.projectLinks = links.data
+				
+				$http.get('http://localhost:8080/proyectoTFM/rest/projects/subcategories'+'?projectId='+project.projectId).then(function(subcategories) {
+					project.projectSubcategoryList = subcategories.data
+					var subcategoryNames = "";
+					subcategories.data.forEach(function(subcategory) {
+						subcategoryNames = subcategoryNames + subcategory.subcategoryName +",";
+					})
+					project.subcategories = subcategoryNames;
 				}, function(err) {
 					console.error('ERR', err);
 					// err.status will contain the status code

@@ -16,7 +16,7 @@
 				<tr>
 					<th class="myprojectcodecolumn" st-sort="projectCode">Código</th>
 					<th class="myprojectnamecolumn" st-sort="projectName">Nombre</th>
-					<th class="myprojectcategoriescolumn" st-sort="projectSubcategoryList">Categorias</th>
+					<th class="myprojectcategoriescolumn" st-sort="subcategories">Categorias</th>
 					<th class="myprojectteachercolumn" st-sort="projectTeacher.name">Tutor</th>
 					<th class="myprojectcareercolumn" st-sort="projectCareer">Titulación</th>
 					<th class="myprojectyearcolumn" st-sort="projectYear">Año</th>
@@ -31,7 +31,9 @@
 					<th><input st-search="projectName"
 						placeholder="Nombre" class="input-sm form-control"
 						type="search" /></th>
-					<th></th>
+					<th><input st-search="subcategories"
+						placeholder="Categorías" class="input-sm form-control"
+						type="search" /></th>
 					<th><input st-search="projectTeacher.name"
 						placeholder="Tutor" class="input-sm form-control"
 						type="search" /></th>
