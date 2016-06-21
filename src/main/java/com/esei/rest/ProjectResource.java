@@ -31,7 +31,7 @@ public class ProjectResource {
 	@Path("/pdf/draft/{projectId}")
 	@GET
 	public Response getDraftPDF(@PathParam("projectId") Long projectId) throws Exception {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Project project= em.find(Project.class, projectId);
 
 		return Response
@@ -44,7 +44,7 @@ public class ProjectResource {
 	@Path("/pdf/documentation/{projectId}")
 	@GET
 	public Response getDocumentationPDF(@PathParam("projectId") Long projectId) throws Exception {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Project project= em.find(Project.class, projectId);
 
 		return Response
@@ -58,7 +58,7 @@ public class ProjectResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Project> getProjects() {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<Project> projects;
 			try{
 				em.getTransaction().begin();;
@@ -81,7 +81,7 @@ public class ProjectResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Subcategory> getSubcategoriesByProject(@QueryParam("projectId") Long projectId) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<Subcategory> subcategories;
 			try{
 				em.getTransaction().begin();
@@ -105,7 +105,7 @@ public class ProjectResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<String> getLinksByProject(@QueryParam("projectId") Long projectId) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<String> links;
 			Project project;
 			try{
@@ -131,7 +131,7 @@ public class ProjectResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Student getStudentByProject(@QueryParam("projectId") Long projectId) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			Student student;
 			try{
 				em.getTransaction().begin();
@@ -155,7 +155,7 @@ public class ProjectResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Teacher getTeacherByProject(@QueryParam("projectId") Long projectId) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			Teacher teacher;
 			try{
 				em.getTransaction().begin();
@@ -178,7 +178,7 @@ public class ProjectResource {
 	@Path("{projectId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Project getProject(@PathParam("projectId") Long projectId) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Project project;
 		try{
 			em.getTransaction().begin();;
@@ -194,7 +194,7 @@ public class ProjectResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createProject(@HeaderParam("Authorization") String authHeader, Project project){
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		User user = requireUser(authHeader, em);
 		Teacher teacher = (Teacher) user;
 		Long userId = project.getProjectStudent().getUserId();
@@ -233,7 +233,7 @@ public class ProjectResource {
 	@DELETE
 	@Path("/{projectId}")
 	public String deleteProject(@HeaderParam("Authorization") String authHeader, @PathParam("projectId") Long projectId) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Teacher teacher = (Teacher) requireUser(authHeader, em);
 		String out = null;
 		try {
@@ -255,7 +255,7 @@ public class ProjectResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Project editProject(@HeaderParam("Authorization") String authHeader, Project project){
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Teacher teacher = (Teacher) requireUser(authHeader, em);
 		Student student = (Student) getStudent(project.getProjectStudent().getUserId(),em);
 		Project editProject;

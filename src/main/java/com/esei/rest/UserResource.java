@@ -39,7 +39,7 @@ public class UserResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getUsers() {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<User> users;
 			try{
 				em.getTransaction().begin();;
@@ -61,7 +61,7 @@ public class UserResource {
 	@Path("/search/{userId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUserById(@PathParam("userId") Long userId) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		User user;
 		try{
 			em.getTransaction().begin();
@@ -78,7 +78,7 @@ public class UserResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Project> getProjectsByTeacher(@QueryParam("userId") Long userId) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<Project> projects;
 			try{
 				em.getTransaction().begin();
@@ -102,7 +102,7 @@ public class UserResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUserByEmail(@PathParam("email") String email) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			User user;
 			try{
 				em.getTransaction().begin();
@@ -125,7 +125,7 @@ public class UserResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getStudents() {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<User> students;
 			try{
 				em.getTransaction().begin();;
@@ -148,7 +148,7 @@ public class UserResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getRegistrations(@HeaderParam("Authorization") String authHeader) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			Student student = (Student) requireUser(authHeader, em);
 			List<Offer> myregistrations;
 			try{
@@ -173,7 +173,7 @@ public class UserResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getMyOffers(@HeaderParam("Authorization") String authHeader) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			Teacher teacher = (Teacher) requireUser(authHeader, em);
 			List<Offer> myOffers;
 			try{
@@ -198,7 +198,7 @@ public class UserResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Project> getMyManagedProjects(@HeaderParam("Authorization") String authHeader) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			Teacher teacher = (Teacher) requireUser(authHeader, em);
 			List<Project> myProjects;
 			try{
@@ -223,7 +223,7 @@ public class UserResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Project> getMyProjects(@HeaderParam("Authorization") String authHeader) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			Student student = (Student) requireUser(authHeader, em);
 			List<Project> myProjects;
 			try{
@@ -247,7 +247,7 @@ public class UserResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createUser(User user){
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		try {
 			em.getTransaction().begin();
 			em.persist(user);
@@ -263,7 +263,7 @@ public class UserResource {
 	@Path("/recovery/{email}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getRecoveryPassword(@PathParam("email") String email) throws AddressException, MessagingException {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		User user = requireUserRecovery(email, em);
 		if (user != null) {
 			generateAndSendEmail(user);
@@ -275,7 +275,7 @@ public class UserResource {
 	@Path("{email}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUser(@PathParam("email") String email, @HeaderParam("Authorization") String authHeader) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		User user = requireUser(authHeader, em);
 		return user;
 	}
@@ -283,7 +283,7 @@ public class UserResource {
 	@DELETE
 	@Path("/{userId}")
 	public String deleteUser(@PathParam("userId") int userId) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		String out;
 		try {
 			em.getTransaction().begin();
@@ -300,7 +300,7 @@ public class UserResource {
 	@PUT
 	@Path("/{userId}")
 	public String updateUser(User user) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		String out;
 		try {
 			em.getTransaction().begin();

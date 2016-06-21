@@ -33,7 +33,7 @@ public class OfferResource {
 	@Path("/pdf/{offerId}")
 	@GET
 	public Response getofferPDF(@PathParam("offerId") Long offerId) throws Exception {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Offer offer= em.find(Offer.class, offerId);
 
 		return Response
@@ -47,7 +47,7 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getOffers() {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<Offer> offers;
 			try{
 				em.getTransaction().begin();;
@@ -70,7 +70,7 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getActiveOffers() {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<Offer> activeOffers;
 			try{
 				em.getTransaction().begin();;
@@ -93,7 +93,7 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getRecommendedOffers() {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<Offer> recommendedOffers;
 			try{
 				em.getTransaction().begin();;
@@ -116,7 +116,7 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getHomeRecommendedOffers() {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<Offer> homeRecommendedOffers;
 			try{
 				em.getTransaction().begin();;
@@ -139,7 +139,7 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Offer> getLastOffers() {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<Offer> lastOffers;
 			try{
 				em.getTransaction().begin();;
@@ -162,7 +162,7 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Subcategory> getSubcategoriesByOffer(@QueryParam("offerId") Long offerId) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<Subcategory> subcategories;
 			try{
 				em.getTransaction().begin();
@@ -186,7 +186,7 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Student> getStudentsByOffer(@QueryParam("offerId") Long offerId) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<Student> students;
 			try{
 				em.getTransaction().begin();
@@ -209,7 +209,7 @@ public class OfferResource {
 	@Path("/{offerId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Offer getOffer(@PathParam("offerId") Long offerId) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Offer offer;
 		try{
 			em.getTransaction().begin();
@@ -225,7 +225,7 @@ public class OfferResource {
 	@Path("/{offerId}/students")
 	public Offer addStudent(@PathParam("offerId") Long offerId, @HeaderParam("Authorization") String authHeader) {
 		System.err.println("añadiendo a offer "+offerId);
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Offer offer;
 		User user = requireUser(authHeader, em);
 
@@ -255,7 +255,7 @@ public class OfferResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		User user = requireUser(authHeader, em);
 		Teacher teacher = (Teacher) user;
 		List<Subcategory> subcategoryIds = offer.getOfferSubcategoryList();
@@ -291,7 +291,7 @@ public class OfferResource {
 	@DELETE
 	@Path("/{offerId}")
 	public String deleteOffer(@HeaderParam("Authorization") String authHeader, @PathParam("offerId") Long offerId) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Teacher teacher = (Teacher) requireUser(authHeader, em);
 		String out= null;
 		try {
@@ -312,7 +312,7 @@ public class OfferResource {
 	@Path("/{offerId}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Offer editOffer(@HeaderParam("Authorization") String authHeader, Offer offer){
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Teacher teacher = (Teacher) requireUser(authHeader, em);
 		Offer editOffer;
 		try {
@@ -367,7 +367,7 @@ public class OfferResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Offer closeOffer(@HeaderParam("Authorization") String authHeader, @PathParam("offerId") Long offerId) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Teacher teacher = (Teacher) requireUser(authHeader, em);
 		
 		Offer offer;
@@ -389,7 +389,7 @@ public class OfferResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Offer openOffer(@HeaderParam("Authorization") String authHeader, @PathParam("offerId") Long offerId) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Teacher teacher = (Teacher) requireUser(authHeader, em);
 		Offer offer;
 		try {

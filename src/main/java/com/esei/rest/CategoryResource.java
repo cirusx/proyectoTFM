@@ -25,7 +25,7 @@ public class CategoryResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Category> getCategories() {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<Category> categories;
 			try{
 				em.getTransaction().begin();;
@@ -48,7 +48,7 @@ public class CategoryResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Subcategory> getSubcategoriesByCategory(@QueryParam("categoryId") Long categoryId) {
 		try{
-			EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+			EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 			List<Subcategory> subcategories;
 			try{
 				em.getTransaction().begin();
@@ -71,7 +71,7 @@ public class CategoryResource {
 	@Path("/{categoryId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Category getSubcategory(@PathParam("categoryId") Long categoryId) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		Category category;
 		try{
 			em.getTransaction().begin();;
@@ -87,7 +87,7 @@ public class CategoryResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createCategory(Category category){
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		try {
 			em.getTransaction().begin();
 			em.persist(category);
@@ -102,7 +102,7 @@ public class CategoryResource {
 	@DELETE
 	@Path("/{categoryId}")
 	public String deleteCategory(@PathParam("categoryId") int categoryId) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		String out;
 		try {
 			em.getTransaction().begin();
@@ -119,7 +119,7 @@ public class CategoryResource {
 	@PUT
 	@Path("/{categoryId}")
 	public String updateCategory(Category category) {
-		EntityManager em = EntityManagerFactorySingleton.emf.createEntityManager();
+		EntityManager em = EntityManagerFactorySingleton.createEntityManager();
 		String out;
 		try {
 			em.getTransaction().begin();
