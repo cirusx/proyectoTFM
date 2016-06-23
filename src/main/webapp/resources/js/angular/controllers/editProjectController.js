@@ -113,8 +113,28 @@
 				$scope.project.projectTeacher = $scope.project.projectTeacher.userId;
 				$scope.project.projectStudent = $scope.project.projectStudent.userId;
 				$scope.project.projectSubcategoryList= $scope.checkResults;
-				postService.putProject($scope.project.projectId, $scope.project.projectName, $scope.project.projectCode, $scope.project.projectCareer, $scope.project.projectYear, $scope.project.projectStudent, $scope.project.projectSubcategoryList, $scope.project.projectLinks, $scope.projectDocumentationFile, $scope.projectDraftFile,$scope.project.projectTeacher,
-						function(project){
+				var fd = new FormData();
+				fd.append('id', $scope.project.projectId);
+				fd.append('name', $scope.project.projectName);
+				fd.append('code', $scope.project.projectCode);
+				fd.append('career', $scope.project.projectCareer);
+				fd.append('year', $scope.project.projectYear);
+				fd.append('student', $scope.project.projectStudent);
+				fd.append('subcategories', $scope.project.projectSubcategoryList);
+				if($scope.project.projectLinks != undefined) {
+					fd.append('links', $scope.project.projectLinks);
+				}
+				if ($scope.projectDocumentationFile != undefined) {
+					fd.append('documentation', $scope.projectDocumentationFile);
+				}
+				if ($scope.projectDraftFile != undefined) {
+					fd.append('draft', $scope.project.projectDraftFile);
+				}
+				fd.append('teacher', $scope.project.projectTeacher);
+				$http.put('http://localhost:8080/proyectoTFM/rest/projects/'+ projectId, fd, {
+					transformRequest: angular.identity,
+					headers: {'Content-Type': undefined}
+				}).then(function(project) {
 					$scope.projectEdited = true;
 					$scope.noEditProject = false;
 					$scope.checkResults = [];
@@ -123,12 +143,11 @@
 					$('#confirmEditProjectModal').modal('show');
 					$('#confirmEditProjectModal').appendTo("body");
 					$location.path("/projects/mymanagedprojects");
-					
-				},
-				function(){
+				}, function(err) {
+					console.error('ERR', err);
 					$scope.noEditProject = true;
-					$scope.projectEdited = false; 
-				});
+					$scope.projectEdited = false;
+				})
 			}
 		};
 	}]);

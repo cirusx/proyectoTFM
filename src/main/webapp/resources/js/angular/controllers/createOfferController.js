@@ -62,8 +62,24 @@
 				}
 				$scope.offer.offerSubcategoryList= $scope.checkResults;
 				$scope.offer.offerDescription = $scope.htmlVariable;
-				postService.postOffer($scope.offer.offerName, $scope.offer.offerTinyDescription, $scope.offer.offerDescription, $scope.offer.offerSubcategoryList, $scope.offer.offerImage, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit, $scope.offer.offerPdf,
-						function(offer){
+				
+				var fd = new FormData();
+				fd.append('name', $scope.offer.offerName);
+				fd.append('tinydescription', $scope.offer.offerTinyDescription);
+				fd.append('description', $scope.offer.offerDescription);
+				fd.append('subcategories', $scope.offer.offerSubcategoryList);
+				if ($scope.offer.offerImage != undefined) {
+					fd.append('image', $scope.offer.offerImage);
+				}
+				fd.append('withLimit', $scope.offer.offerWithLimit);
+				fd.append('timeLimit', $scope.offer.offerTimeLimit);
+				if ($scope.offer.offerPdf != undefined) {
+					fd.append('pdf', $scope.offer.offerPdf);
+				}
+				$http.post('http://localhost:8080/proyectoTFM/rest/offers/offer', fd, {
+					transformRequest: angular.identity,
+					headers: {'Content-Type': undefined}
+				}).then(function(offer) {
 					$scope.offerCreated = true;
 					$scope.noCreateOffer = false;
 					delete $scope.offer;
@@ -74,12 +90,11 @@
 					$scope.checkModel = {};
 					angular.element(document.querySelectorAll("#MyOfferSubcategories")).removeClass("active");		   			
 					$scope.createofferform.$setUntouched();
-				},
-				function(){
+				}, function(err) {
+					console.error('ERR', err);  
 					$scope.noCreateOffer = true;
-					$scope.offerCreated = false; 
-				}
-				);
+					$scope.offerCreated = false;
+				})
 			}
 		};
 	}]);

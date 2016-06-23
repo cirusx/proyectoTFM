@@ -111,8 +111,25 @@
 				if ($scope.deleteOfferPdf == true) {
 					$scope.offerPdfFile = true;
 				}
-				postService.putOffer($scope.offer.offerId, $scope.offer.offerName, $scope.offer.offerTinyDescription, $scope.offer.offerDescription, $scope.offerImageFile, $scope.offer.offerWithLimit, $scope.offer.offerTimeLimit, $scope.offerPdfFile, $scope.offer.teacher, $scope.offer.offerSubcategoryList,
-						function(offer){
+				var fd = new FormData();
+				fd.append('id', $scope.offer.offerId);
+				fd.append('name', $scope.offer.offerName);
+				fd.append('tinydescription', $scope.offer.offerTinyDescription);
+				fd.append('description', $scope.offer.offerDescription);
+				if ($scope.offerImageFile != undefined) {
+					fd.append('image', $scope.offerImageFile);
+				}
+				fd.append('withLimit', $scope.offer.offerWithLimit);
+				fd.append('timeLimit', $scope.offer.offerTimeLimit);
+				if ($scope.offerPdfFile != undefined) {
+					fd.append('pdf', $scope.offerPdfFile);
+				}
+				fd.append('teacher', $scope.offer.teacher);
+				fd.append('subcategories', $scope.offer.offerSubcategoryList);
+				$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+ offerId, fd, {
+					transformRequest: angular.identity,
+					headers: {'Content-Type': undefined}
+				}).then(function(offer) {
 					$scope.offerEdited = true;
 					$scope.noEditOffer = false;
 					$scope.checkResults = [];
@@ -120,12 +137,12 @@
 					$('#confirmEditOfferModal').modal('show');
 					$('#confirmEditOfferModal').appendTo("body");
 					$location.path("/users/myoffers");
-	
-				},
-				function(){
+					
+				}, function(err) {
+					console.error('ERR', err);
 					$scope.noEditOffer = true;
 					$scope.offerEdited = false; 
-				});
+				})
 			}
 		};
 	}]);

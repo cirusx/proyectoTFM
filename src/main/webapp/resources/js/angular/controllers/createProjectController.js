@@ -61,8 +61,23 @@
 			}
 			if(login & rol) {
 				$scope.project.projectSubcategoryList= $scope.checkResults;
-				postService.postProject($scope.project.projectName, $scope.project.projectCode, $scope.project.projectCareer, $scope.project.projectYear, $scope.project.projectStudent, $scope.project.projectSubcategoryList, $scope.project.projectLinks, $scope.project.projectDocumentation, $scope.project.projectDraft,
-						function(project){
+				
+				var fd = new FormData();
+				fd.append('name', $scope.project.projectName);
+				fd.append('code', $scope.project.projectCode);
+				fd.append('career', $scope.project.projectCareer);
+				fd.append('year', $scope.project.projectYear);
+				fd.append('student', $scope.project.projectStudent);
+				fd.append('subcategories', $scope.project.projectSubcategoryList);
+				if($scope.project.projectLinks != undefined) {
+					fd.append('links', $scope.project.projectLinks);
+				}
+				fd.append('documentation', $scope.project.projectDocumentation);
+				fd.append('draft', $scope.project.projectDraft);
+				$http.post('http://localhost:8080/proyectoTFM/rest/projects/project', fd, {
+					transformRequest: angular.identity,
+					headers: {'Content-Type': undefined}
+				}).then(function(project) {
 					$scope.projectCreated = true;
 					$scope.noCreateProject = false;
 					//$scope.posts.splice(0,0,offer);
@@ -73,12 +88,11 @@
 					$scope.checkModel = {};
 					angular.element(document.querySelectorAll("#MyProjectSubcategories")).removeClass("active");
 					$scope.createprojectform.$setUntouched();
-				},
-				function(){
+				}, function(err) {
+					console.error('ERR', err); 
 					$scope.noCreateProject = true;
-					$scope.projectCreated = false; 
-				}
-				);
+					$scope.projectCreated = false;
+				})
 			}
 		};
 	}]);
