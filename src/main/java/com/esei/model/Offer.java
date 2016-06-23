@@ -38,14 +38,14 @@ public class Offer implements Serializable{
 	private Date            offerTimeLimit;
 	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
-			joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
-			inverseJoinColumns={@JoinColumn(name = "offerRegistrationList_userId", referencedColumnName = "userId")})
+			joinColumns={@JoinColumn(name = "offer_offerId", referencedColumnName = "offerId")},
+			inverseJoinColumns={@JoinColumn(name = "student_userId", referencedColumnName = "userId")})
 	@JsonIgnore
 	private List<Student>		offerRegistrationList;
 	@ManyToMany(fetch=FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
-			joinColumns={@JoinColumn(name = "Offer_offerId", referencedColumnName = "offerId")},
-			inverseJoinColumns={@JoinColumn(name = "offerSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
+			joinColumns={@JoinColumn(name = "offer_offerId", referencedColumnName = "offerId")},
+			inverseJoinColumns={@JoinColumn(name = "subcategory_subcategoryId", referencedColumnName = "subcategoryId")})
 	@JsonIgnore
 	private List<Subcategory>	offerSubcategoryList;
 	@Column(nullable=false, columnDefinition="boolean default false")

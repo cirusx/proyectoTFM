@@ -48,18 +48,18 @@ public class Project implements Serializable{
 	private String draftContentMime;
 	//	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	@ManyToOne
-	@JoinColumn(name="teacherId")
+	@JoinColumn(name="teacher_userId")
 	@JsonIgnore
 	private Teacher				projectTeacher;
 	//	@OneToOne(fetch=FetchType.LAZY, cascade ={CascadeType.PERSIST, CascadeType.REMOVE})
 	@ManyToOne
-	@JoinColumn(name="studentId")
+	@JoinColumn(name="student_userId")
 	@JsonIgnore
 	private Student				projectStudent;
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch=FetchType.LAZY)
 	@JoinTable(
-			joinColumns={@JoinColumn(name = "Project_projectId", referencedColumnName = "projectId")},
-			inverseJoinColumns={@JoinColumn(name = "projectSubcategoryList_subcategoryId", referencedColumnName = "subcategoryId")})
+			joinColumns={@JoinColumn(name = "project_projectId", referencedColumnName = "projectId")},
+			inverseJoinColumns={@JoinColumn(name = "subcategory_subcategoryId", referencedColumnName = "subcategoryId")})
 	@JsonIgnore
 	private List<Subcategory>	projectSubcategoryList;
 	@Column
