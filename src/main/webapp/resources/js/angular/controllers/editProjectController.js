@@ -3,8 +3,8 @@
 
 	var app= angular.module('sgpfc');
 
-	app.controller('editProjectController',['$scope', '$http', '$location', '$cookies', '$routeParams', 'postService',
-	                                        function ($scope, $http, $location, $cookies, $routeParams, postService) {
+	app.controller('editProjectController',['$scope', '$http', '$location', '$cookies', '$routeParams',
+	                                        function ($scope, $http, $location, $cookies, $routeParams) {
 
 		var projectId =$routeParams.projectId;
 		$scope.noEditOffer= false;

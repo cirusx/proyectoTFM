@@ -3,8 +3,8 @@
 
 	var app= angular.module('sgpfc');
 
-	app.controller('editOfferController',['$scope', '$http', '$location', '$cookies', '$routeParams', 'postService',
-	                                      function ($scope, $http, $location, $cookies, $routeParams, postService) {
+	app.controller('editOfferController',['$scope', '$http', '$location', '$cookies', '$routeParams',
+	                                      function ($scope, $http, $location, $cookies, $routeParams) {
 
 		var quarter1 = "1579413600000";
 		var quarter2 = "1589864400000";

@@ -3,8 +3,8 @@
 
 	var app= angular.module('sgpfc');
 
-	app.controller('createProjectController',['$scope', '$http', '$location', '$cookies', 'postService',
-	                                          function ($scope, $http, $location, $cookies, postService) {
+	app.controller('createProjectController',['$scope', '$http', '$location', '$cookies',
+	                                          function ($scope, $http, $location, $cookies) {
 
 		$http.get('http://localhost:8080/proyectoTFM/rest/users/students').then(function(students) {
 			$scope.students = students.data;

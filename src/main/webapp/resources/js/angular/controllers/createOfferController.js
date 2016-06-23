@@ -3,8 +3,8 @@
 
 	var app= angular.module('sgpfc');
 
-	app.controller('createOfferController',['$scope', '$http', '$location', '$cookies', 'postService',
-	                                        function ($scope, $http, $location, $cookies, postService) {
+	app.controller('createOfferController',['$scope', '$http', '$location', '$cookies',
+	                                        function ($scope, $http, $location, $cookies) {
 
 		$scope.limit = "0"; 
 		$scope.checkModel = {};
