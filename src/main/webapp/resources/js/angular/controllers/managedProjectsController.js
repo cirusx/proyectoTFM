@@ -48,7 +48,7 @@
 		$scope.deleteProject = function(projectId) {
 			$http.delete('http://localhost:8080/proyectoTFM/rest/projects/'+projectId).then(function(del) {
 				$scope.projectDelete = true;
-				$http.get('http://localhost:8080/proyectoTFM/rest/projects/').then(function(projects) {
+				$http.get('http://localhost:8080/proyectoTFM/rest/users/mymanagedprojects').then(function(projects) {
 
 					projects.data.forEach(function(project) {
 						$http.get('http://localhost:8080/proyectoTFM/rest/projects/subcategories'+'?projectId='+project.projectId).then(function(subcategories) {

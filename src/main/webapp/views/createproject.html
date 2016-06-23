@@ -30,7 +30,7 @@
 					<div class="help-block" role="alert">
 						<div ng-show="noTeacherOrLogged" class="alert alert-danger">No
 							se puede crear el proyecto (no registrado como profesor o
-							logeado)</div>
+							autenticado)</div>
 					</div>
 					<form id="createprojectform" name="createprojectform"
 						class="form-horizontal" role="form" ng-submit="createProject()">
@@ -111,7 +111,7 @@
 								<div class="input-group col-xs-12"
 									ng-class="{ 'has-error': createprojectform.student.$touched && createprojectform.student.$invalid }">
 									<select ng-model="project.projectStudent" name="student"
-										class="form-control selectpicker" data-live-search="true">
+										class="form-control selectpicker" data-live-search="true" required>
 										<option ng-repeat="student in students | orderBy: 'name'"
 											value="{{student.userId}}">{{student.name}}</option>
 									</select>

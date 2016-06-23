@@ -68,13 +68,14 @@
 		}
 
 		$scope.openOffer = function() {
+
 			if($cookies.get('user') == $scope.offer.teacher.email) {
-			$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/open').then(function(open) {
-				$scope.offer.offerClose = false;
-			}, function(err) {
-				console.error('ERR', err);
-				// err.status will contain the status code
-			});
+				$http.put('http://localhost:8080/proyectoTFM/rest/offers/'+offerId+'/open').then(function(open) {
+					$scope.offer.offerClose = false;
+				}, function(err) {
+					console.error('ERR', err);
+					// err.status will contain the status code
+				});
 			} else {
 				$scope.incorrectTeacher = true;
 			}
@@ -82,15 +83,15 @@
 
 		$scope.deleteOffer = function() {
 			if($cookies.get('user') == $scope.offer.teacher.email) {
-			$http.delete('http://localhost:8080/proyectoTFM/rest/offers/'+offerId).then(function(del) {
-				$scope.offerDelete = true;
-			}, function(err) {
-				console.error('ERR', err);
-				// err.status will contain the status code
-			});
-		} else {
-			$scope.incorrectTeacher = true;
-		}
+				$http.delete('http://localhost:8080/proyectoTFM/rest/offers/'+offerId).then(function(del) {
+					$scope.offerDelete = true;
+				}, function(err) {
+					console.error('ERR', err);
+					// err.status will contain the status code
+				});
+			} else {
+				$scope.incorrectTeacher = true;
+			}
 		}
 	}]);
 }());
