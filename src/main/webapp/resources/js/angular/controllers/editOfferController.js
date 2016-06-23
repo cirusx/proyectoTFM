@@ -115,20 +115,12 @@
 						function(offer){
 					$scope.offerEdited = true;
 					$scope.noEditOffer = false;
+					$scope.checkResults = [];
+					$scope.checkModel = {};
 					$('#confirmEditOfferModal').modal('show');
 					$('#confirmEditOfferModal').appendTo("body");
 					$location.path("/users/myoffers");
-					
-			/*		angular.element('#myModalShower').trigger('click');*/
-					
-					//$scope.posts.splice(0,0,offer);
-					/*delete $scope.offer;
-					$('#photofile').fileinput('clear');
-					$('#filepdf').fileinput('clear');
-					$scope.htmlVariable = "";
-					$scope.checkResults = [];
-					angular.element(document.querySelectorAll("#MyOfferSubcategories")).removeClass("active");		   			
-					$scope.createofferform.$setUntouched();*/
+	
 				},
 				function(){
 					$scope.noEditOffer = true;

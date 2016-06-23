@@ -70,6 +70,7 @@
 					$('#filedocumentation').fileinput('clear');
 					$('#filedraft').fileinput('clear');
 					$scope.checkResults = [];
+					$scope.checkModel = {};
 					angular.element(document.querySelectorAll("#MyProjectSubcategories")).removeClass("active");
 					$scope.createprojectform.$setUntouched();
 				},

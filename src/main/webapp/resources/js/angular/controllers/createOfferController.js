@@ -66,12 +66,12 @@
 						function(offer){
 					$scope.offerCreated = true;
 					$scope.noCreateOffer = false;
-					//$scope.posts.splice(0,0,offer);
 					delete $scope.offer;
 					$('#photofile').fileinput('clear');
 					$('#filepdf').fileinput('clear');
 					$scope.htmlVariable = "";
 					$scope.checkResults = [];
+					$scope.checkModel = {};
 					angular.element(document.querySelectorAll("#MyOfferSubcategories")).removeClass("active");		   			
 					$scope.createofferform.$setUntouched();
 				},

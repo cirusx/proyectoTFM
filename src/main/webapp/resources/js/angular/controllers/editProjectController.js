@@ -117,17 +117,13 @@
 						function(project){
 					$scope.projectEdited = true;
 					$scope.noEditProject = false;
+					$scope.checkResults = [];
+					$scope.checkModel = {};
+					
 					$('#confirmEditProjectModal').modal('show');
 					$('#confirmEditProjectModal').appendTo("body");
 					$location.path("/projects/mymanagedprojects");
 					
-					//$scope.posts.splice(0,0,offer);
-					/*delete $scope.project;
-					$('#filedocumentation').fileinput('clear');
-					$('#filedraft').fileinput('clear');
-					$scope.checkResults = [];
-					angular.element(document.querySelectorAll("#MyProjectSubcategories")).removeClass("active");
-					$scope.createprojectform.$setUntouched();*/
 				},
 				function(){
 					$scope.noEditProject = true;
