@@ -111,7 +111,10 @@
 			}
 			if(login & rol & !$scope.incorrectTeacher) {
 				$scope.project.projectTeacher = $scope.project.projectTeacher.userId;
-				$scope.project.projectStudent = $scope.project.projectStudent.userId;
+				if ($scope.project.projectStudent.userId != undefined){
+					$scope.project.projectStudent = $scope.project.projectStudent.userId;
+				}
+				
 				$scope.project.projectSubcategoryList= $scope.checkResults;
 				var fd = new FormData();
 				fd.append('id', $scope.project.projectId);

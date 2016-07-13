@@ -113,8 +113,8 @@
 									ng-class="{ 'has-error': editprojectform.student.$touched && editprojectform.student.$invalid }">
 									<select ng-model="project.projectStudent" name="student"
 										class="form-control selectpicker" data-live-search="true">
-										<option ng-selected="project.projectStudent.userId == {{student.userId}}" ng-repeat="student in students | orderBy: 'name'"
-											ng-value="{{student.userId}}">{{student.name}}</option>
+						 				<option ng-selected="project.projectStudent.userId == {{student.userId}}" ng-repeat="student in students | orderBy: 'name'"
+											ng-value="{{student.userId}}">{{student.name}}</option> 	
 									</select>
 								</div>
 								<div class="help-block"
